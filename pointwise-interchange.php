@@ -443,6 +443,20 @@
 		<!-- Pointwise Interchange -->
 	</div>
 		
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 col-xs-6" style="border: 1px solid red; height: 20px;">
+				Title
+			</div>
+			<div class="col-md-4 col-xs-6 col-md-push-4" style="border: 1px solid blue; height: 20px;">
+				Btn
+			</div>
+			<div class="col-md-4 col-xs-12 col-md-pull-4" style="border: 1px solid green; height: 20px;">
+				Form
+			</div>
+		</div>
+	</div>
+
 	<cms:set curr_date="<cms:date format='Y-m-d' />" scope='global' />
 
 	<div class="container-fluid">
@@ -452,7 +466,10 @@
 				<div class="gxcpl-card box">
 					<div class="gxcpl-card-header">
 						<div class="row">
-							<div class="col-md-2">
+
+							
+
+							<div class="col-md-3">
 								<h4>
 									<cms:pages masterpage="pointwise-interchange.php" limit="1" custom_field="interchange=<cms:gpc 'interchange' /> | to_ho=<cms:gpc 'to_ho' />">
 										<cms:set my_icp="<cms:gpc 'interchange' />" scope='global' />
@@ -477,7 +494,7 @@
 							<!-- Legend -->
 							<div class="gxcpl-ptop-20"></div>
 
-							<span class="col-md-1 pull-right" data-toggle="tooltip" data-placement="left" title="Click to know Table Legend">
+							<span class="col-md-1 pull-right" data-toggle="tooltip" data-placement="top" title="Table Legend">
 							    <a class="gxcpl-legend-outer" data-toggle="modal" data-target="#myModal">
 								  	<div class="gxcpl-legend">
 								    	<div class="gxcpl-legend-inner">

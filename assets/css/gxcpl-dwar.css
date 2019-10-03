@@ -977,8 +977,8 @@ p.addRow a{
 }
 @media screen and (max-width: 768px)  {
 	.gxcpl-legend-outer {
-		position: absolute;
-		bottom: 80px;
+		/*position: absolute;
+		bottom: 80px;*/
 	}
 	.gxcpl-modal-interchange, .gxcpl-modal-stable, 
 	.gxcpl-modal-schedule, .gxcpl-modal-signon{
