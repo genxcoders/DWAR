@@ -1,0 +1,203 @@
+					<!-- Section Title -->
+					<cms:embed 'ptic-title.html' />
+					<!-- Section Title -->
+
+					<!-- Table -->
+					<div class="col-md-12">
+						<!-- Card -->
+						<div class="gxcpl-card">
+							<!-- Body -->
+							<div class="gxcpl-card-body gxcpl-padding-15">								
+								<table class="gxcpl-table">
+									<thead>
+										<tr>
+											<th class="text-center">
+												Sr. No.
+											</th>
+											<th>
+												Station From
+											</th>
+											<th>
+												Station To
+											</th>
+											<th>
+												Load Name
+											</th>
+											<th>
+												Load L/E
+											</th>
+											<th>
+												Load Type
+											</th>
+											<th>
+												Load U
+											</th>
+											<th>
+												Loco No.
+											</th>
+											<th>
+												Load Locn
+											</th>
+											<th>
+												Status Time/Date
+											</th>
+											<th>
+												CMDT
+											</th>
+											<th>
+												Schedule
+											</th>
+											<th>
+												Departure
+											</th>
+											<th>
+												Sign-On
+											</th>
+											<th>
+												Action
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<cms:pages masterpage=k_template_name show_future_entries="1" paginate='1' limit='10' order='asc' >
+										<cms:no_results>
+										<tr>
+											<cms:if k_user_access_level gt '7'>
+												<td colspan="14" class="text-center">
+													- No Result -
+												</td>
+											</cms:if>
+										</tr>
+										</cms:no_results>
+										<tr>
+											<td>
+												<cms:show k_absolute_count />
+											</td>
+											<td>
+												<cms:if station_frm>
+													<cms:show station_frm />
+												<cms:else />
+													- NA -
+												</cms:if>
+											</td>
+											<td>
+												<cms:if station_to>
+													<cms:show station_to />
+												<cms:else />
+													- NA -
+												</cms:if>
+											</td>
+											<td>
+												<cms:if tr_name>
+													<cms:show tr_name />
+												<cms:else />
+													- NA -
+												</cms:if>
+											</td>
+											<td>
+												<cms:if load>
+													<cms:show load />
+												<cms:else />
+													- NA -
+												</cms:if>
+											</td>
+											<td>
+												<cms:if raketype >
+													<cms:show raketype />
+												<cms:else />
+													- NA -
+												</cms:if>
+											</td>
+											<td>
+												<cms:if load_unit >
+													<cms:show load_unit />
+												<cms:else />
+													- NA -
+												</cms:if>
+											</td>
+											<td>
+												<cms:if loco >
+													<cms:show loco />
+												<cms:else />
+													- NA -
+												</cms:if>
+											</td>
+											<td>
+												<cms:if location >
+													<cms:show location />
+												<cms:else />
+													- NA -
+												</cms:if>
+											</td>
+											<td>
+												<cms:if arrival_date && arrival_time >
+													<cms:show arrival_date />
+													<br>
+													<small><cms:show arrival_time /></small>
+												<cms:else />
+													- NA -
+												</cms:if>
+											</td>
+											<td>
+												<cms:if commodity >
+													<cms:show commodity />
+												<cms:else />
+													- NA -
+												</cms:if>
+											</td>
+											<td>
+												<cms:if schedule >
+													<cms:show schedule />
+												<cms:else />
+													- NA -
+												</cms:if>
+											</td>
+											<td>
+												<cms:if departure_date && departure_time >
+													<cms:show departure_date />
+													<br>
+													<small><cms:show departure_time /></small>
+												<cms:else />
+													- NA -
+												</cms:if>
+											</td>
+											<td>
+												<cms:if signon_date && signon_time >
+													<cms:show signon_date />
+													<br>
+													<small><cms:show signon_time /></small>
+												<cms:else />
+													- NA -
+												</cms:if>
+											</td>
+											<td class="text-center">
+												<!-- <cms:ignore> <a href="<cms:route_link 'edit_rfr' rt_id=k_page_id />" class="btn btn-primary btn-xs gxcpl-fw-700" data-toggle="tooltip" data-placement="top" title="EDIT">
+													<i class="fa fa-edit"></i>
+												</a> </cms:ignore> -->
+												<cms:popup_edit 'tr_name | load | raketype | load_unit | loco | location | arrival_date | arrival_time | commodity | schedule | departure_date | departure_time | signon_date | signon_time' link_text='<i class="fa fa-edit"></i>' />
+												<!-- <cms:if k_user_access_level gt '7'> -->
+													<a href="<cms:route_link 'delete_rfr' rt_id=k_page_id />" class="btn btn-danger btn-xs gxcpl-fw-700" data-toggle="tooltip" data-placement="top" title="DELETE">
+													<i class="fa fa-trash"></i>
+												</a>
+												<!-- </cms:if> -->
+											</td>
+										</tr>
+										</cms:pages>
+									</tbody>
+								</table>
+							</div>
+							<!-- Body -->
+							<!-- Pagination -->
+							<center>
+								<div class="btn-group gxcpl-fw-500" role="group">
+									<cms:pages show_future_entries="1" paginate='1' limit='10' >
+										<cms:paginator />
+									</cms:pages>
+								</div>
+							</center>
+							<!-- Pagination -->
+						</div>
+						<!-- Card -->
+						<div class="gxcpl-ptop-30"></div>
+					</div>
+					<!-- Table -->

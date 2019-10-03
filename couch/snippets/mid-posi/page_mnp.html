@@ -1,0 +1,1100 @@
+                                        <!-- <div class="row"> -->
+                                        <cms:pages masterpage="mid-position.php" id=rt_id>
+                                        <div class="col-md-12">
+                                            <table width="100%" border="1">
+                                                <tr>
+                                                    <th colspan="3"></th>
+                                                    <th class="text-center" colspan="16">RECEIPTS </th>
+                                                    <th class="text-center" colspan="16">DESPATCHES</th>
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-center">Dt</th>
+                                                    <th class="text-center" colspan="2">I/C</th>
+                                                    <th class="text-center" colspan="2">Train</th>
+                                                    <th class="text-center">Wgns</th>
+                                                    <th class="text-center" colspan="2">Train</th>
+                                                    <th class="text-center">Cog</th>
+                                                    <th class="text-center">TA</th>
+                                                    <th class="text-center">LA</th>
+                                                    <th class="text-center">D</th>
+                                                    <th class="text-center">Oth</th>
+                                                    <th class="text-center">AC</th>
+                                                    <th class="text-center">DSL</th>
+                                                    <th class="text-center">Ldd</th>
+                                                    <th class="text-center">Emp</th>
+                                                    <th class="text-center">MT</th>
+                                                    <th class="text-center">Shortfall</th>
+                                                    <th class="text-center" colspan="2">Train</th>
+                                                    <th class="text-center">Wgns</th>
+                                                    <th class="text-center" colspan="2">Train</th>
+                                                    <th class="text-center">Cog</th>
+                                                    <th class="text-center">TA</th>
+                                                    <th class="text-center">LA</th>
+                                                    <th class="text-center">D</th>
+                                                    <th class="text-center">Oth</th>
+                                                    <th class="text-center">AC</th>
+                                                    <th class="text-center">DSL</th>
+                                                    <th class="text-center">Ldd</th>
+                                                    <th class="text-center">Emp</th>
+                                                    <th class="text-center">MT</th>
+                                                    <th class="text-center">Shortfall</th>
+                                                    <th class="text-center">Inff</th>
+                                                    <th class="text-center">Spls</th>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-center" rowspan="11">
+                                                        <cms:date mdp_date format='d/m/Y' />
+                                                    </td>
+                                                    <th class="text-center">WCR</th>
+                                                    <th class="text-center">ET</th>
+                                                    <!-- ET Receipts -->
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_fc_et_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_fc_et_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_et_wgns />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_actual_et_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_actual_et_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_et_cog />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_et_ta />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_et_la />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_et_d />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_et_oth />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_et_ac />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_et_dsl />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_et_ldd />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_et_emp />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_et_mt />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_et_shortfall />
+                                                    </td>
+                                                    <!-- ET Receipts -->
+                                                    <!-- ET Despatches -->
+                                                    <td class="text-center">
+                                                        <cms:show dsph_fc_et_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_fc_et_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_et_wgns />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_actual_et_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_actual_et_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_et_cog />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_et_ta />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_et_la />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_et_d />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_et_oth />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_et_ac />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_et_dsl />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_et_ldd />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_et_emp />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_et_mt />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_et_shortfall />
+                                                    </td>
+                                                    <!-- ET Despatches -->
+                                                    <!-- Ineffective & Surplus -->
+                                                    <td class="text-center" rowspan="11">
+                                                        <cms:show ineffective />
+                                                    </td>
+                                                    <td class="text-center" rowspan="11">
+                                                        <cms:show surplus />
+                                                    </td>
+                                                    <!-- Ineffective & Surplus -->
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-center" rowspan="4">SECR</th>
+                                                    <th class="text-center">NGP</th>
+                                                    <!-- NGP Receipts -->
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_fc_ngp_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_fc_ngp_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_ngp_wgns />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_actual_ngp_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_actual_ngp_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_ngp_cog />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_ngp_ta />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_ngp_la />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_ngp_d />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_ngp_oth />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_ngp_ac />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_ngp_dsl />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_ngp_ldd />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_ngp_emp />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_ngp_mt />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_ngp_shortfall />
+                                                    </td>
+                                                    <!-- NGP Receipts -->
+                                                    <!-- NGP Despatches -->
+                                                    <td class="text-center">
+                                                        <cms:show dsph_fc_ngp_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_fc_ngp_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_ngp_wgns />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_actual_ngp_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_actual_ngp_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_ngp_cog />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_ngp_ta />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_ngp_la />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_ngp_d />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_ngp_oth />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_ngp_ac />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_ngp_dsl />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_ngp_ldd />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_ngp_emp />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_ngp_mt />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_ngp_shortfall />
+                                                    </td>
+                                                    <!-- NGP Despatches -->
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-center">GCC</th>
+                                                    <!-- GCC Receipts -->
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_fc_gcc_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_fc_gcc_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_gcc_wgns />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_actual_gcc_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_actual_gcc_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_gcc_cog />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_gcc_ta />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_gcc_la />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_gcc_d />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_gcc_oth />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_gcc_ac />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_gcc_dsl />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_gcc_ldd />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_gcc_emp />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_gcc_mt />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_gcc_shortfall />
+                                                    </td>
+                                                    <!-- GCC Receipts -->
+                                                    <!-- GCC Despatches -->
+                                                    <td class="text-center">
+                                                        <cms:show dsph_fc_gcc_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_fc_gcc_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_gcc_wgns />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_actual_gcc_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_actual_gcc_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_gcc_cog />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_gcc_ta />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_gcc_la />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_gcc_d />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_gcc_oth />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_gcc_ac />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_gcc_dsl />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_gcc_ldd />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_gcc_emp />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_gcc_mt />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_gcc_shortfall />
+                                                    </td>
+                                                    <!-- GCC Despatches -->
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-center">CWA</th>
+                                                    <!-- CWA Receipts -->
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_fc_cwa_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_fc_cwa_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_cwa_wgns />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_actual_cwa_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_actual_cwa_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_cwa_cog />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_cwa_ta />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_cwa_la />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_cwa_d />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_cwa_oth />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_cwa_ac />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_cwa_dsl />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_cwa_ldd />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_cwa_emp />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_cwa_mt />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_cwa_shortfall />
+                                                    </td>
+                                                    <!-- CWA Receipts -->
+                                                    <!-- CWA Despatches -->
+                                                    <td class="text-center">
+                                                        <cms:show dsph_fc_cwa_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_fc_cwa_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_cwa_wgns />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_actual_cwa_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_actual_cwa_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_cwa_cog />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_cwa_ta />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_cwa_la />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_cwa_d />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_cwa_oth />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_cwa_ac />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_cwa_dsl />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_cwa_ldd />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_cwa_emp />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_cwa_mt />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_cwa_shortfall />
+                                                    </td>
+                                                    <!-- CWA Despatches -->
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-center">CAF</th>
+                                                    <!-- CAF Receipts -->
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_fc_caf_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_fc_caf_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_caf_wgns />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_actual_caf_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_actual_caf_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_caf_cog />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_caf_ta />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_caf_la />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_caf_d />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_caf_oth />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_caf_ac />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_caf_dsl />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_caf_ldd />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_caf_emp />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_caf_mt />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_caf_shortfall />
+                                                    </td>
+                                                    <!-- CAF Receipts -->
+                                                    <!-- CWA Despatches -->
+                                                    <td class="text-center">
+                                                        <cms:show dsph_fc_caf_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_fc_caf_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_caf_wgns />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_actual_caf_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_actual_caf_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_caf_cog />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_caf_ta />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_caf_la />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_caf_d />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_caf_oth />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_caf_ac />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_caf_dsl />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_caf_ldd />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_caf_emp />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_caf_mt />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_caf_shortfall />
+                                                    </td>
+                                                    <!-- CWA Despatches -->
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-center" rowspan="2">SCR</th>
+                                                    <th class="text-center">BPQ</th>
+                                                     <!-- BPQ Receipts -->
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_fc_bpq_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_fc_bpq_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_bpq_wgns />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_actual_bpq_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_actual_bpq_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_bpq_cog />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_bpq_ta />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_bpq_la />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_bpq_d />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_bpq_oth />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_bpq_ac />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_bpq_dsl />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_bpq_ldd />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_bpq_emp />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_bpq_mt />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_bpq_shortfall />
+                                                    </td>
+                                                    <!-- BPQ Receipts -->
+                                                    <!-- BPQ Despatches -->
+                                                    <td class="text-center">
+                                                        <cms:show dsph_fc_bpq_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_fc_bpq_tns_2 /></td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_bpq_wgns />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_actual_bpq_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_actual_bpq_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_bpq_cog />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_bpq_ta />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_bpq_la />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_bpq_d />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_bpq_oth />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_bpq_ac />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_bpq_dsl />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_bpq_ldd />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_bpq_emp />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_bpq_mt />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_bpq_shortfall />
+                                                    </td>
+                                                    <!-- BPQ Despatches -->
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-center">PMKT</th>
+                                                    <!-- PMKT Receipts -->
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_fc_pmkt_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_fc_pmkt_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_pmkt_wgns />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_actual_pmkt_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_actual_pmkt_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_pmkt_cog />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_pmkt_ta />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_pmkt_la />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_pmkt_d />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_pmkt_oth />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_pmkt_ac />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_pmkt_dsl />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_pmkt_ldd />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_pmkt_emp />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_pmkt_mt />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_pmkt_shortfall />
+                                                    </td>
+                                                    <!-- PMKT Receipts -->
+                                                    <!-- PMKT Despatches -->
+                                                    <td class="text-center">
+                                                        <cms:show dsph_fc_pmkt_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_fc_pmkt_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_pmkt_wgns />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_actual_pmkt_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_actual_pmkt_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_pmkt_cog />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_pmkt_ta />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_pmkt_la />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_pmkt_d />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_pmkt_oth />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_pmkt_ac />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_pmkt_dsl />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_pmkt_ldd />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_pmkt_emp />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_pmkt_mt />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_pmkt_shortfall />
+                                                    </td>
+                                                    <!-- PMKT Despatches -->
+                                                </tr>
+                                                <tr>
+                                                    <th  class="text-center" rowspan="2">BSL</th>
+                                                    <th class="text-center">BD</th>
+                                                    <!-- BD Receipts -->
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_fc_bd_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_fc_bd_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_bd_wgns />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_actual_bd_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_actual_bd_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_bd_cog />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_bd_ta />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_bd_la />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_bd_d />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_bd_oth />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_bd_ac />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_bd_dsl />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_bd_ldd />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_bd_emp />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_bd_mt />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_bd_shortfall />
+                                                    </td>
+                                                    <!-- BD Receipts -->
+                                                    <!-- BD Despatches -->
+                                                    <td class="text-center">
+                                                        <cms:show dsph_fc_bd_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_fc_bd_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_bd_wgns />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_actual_bd_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_actual_bd_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_bd_cog />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_bd_ta />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_bd_la />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_bd_d />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_bd_oth />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_bd_ac />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_bd_dsl />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_bd_ldd />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_bd_emp />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_bd_mt />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_bd_shortfall />
+                                                    </td>
+                                                    <!-- BD Despatches -->
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-center">CNDB</th>
+                                                    <!-- CNDB Receipts -->
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_fc_cndb_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_fc_cndb_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_cndb_wgns />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_actual_cndb_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_actual_cndb_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_cndb_cog />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_cndb_ta />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_cndb_la />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_cndb_d />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_cndb_oth />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_cndb_ac />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_cndb_dsl />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_cndb_ldd />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_cndb_emp />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_cndb_mt />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show rcpt_cndb_shortfall />
+                                                    </td>
+                                                    <!-- CNDB Receipts -->
+                                                    <!-- CNDB Despatches -->
+                                                    <td class="text-center">
+                                                        <cms:show dsph_fc_cndb_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_fc_cndb_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_cndb_wgns />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_actual_cndb_tns_1 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_actual_cndb_tns_2 />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_cndb_cog />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_cndb_ta />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_cndb_la />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_cndb_d />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_cndb_oth />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_cndb_ac />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_cndb_dsl />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_cndb_ldd />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_cndb_emp />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_cndb_mt />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_cndb_shortfall />
+                                                    </td>
+                                                    <!-- CNDB Despatches -->
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-center" colspan="2">TOTAL</th>
+                                                    <!-- TOTAL Receipts -->
+                                                    <td class="text-center">
+                                                        <cms:show fc_tran1_total />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show fc_tran2_total />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show fc_wgns_total />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show fc_tran3_total />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show fc_tran4_total />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show cog_total />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show ta_total />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show la_total />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show d_total />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show oth_total />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show ac_total />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsl_total />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show ldd_total />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show emp_total />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show mt_total />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show shortfall_total />
+                                                    </td>
+                                                    <!-- TOTAL Receipts -->
+                                                    <!-- TOTAL Despatches -->
+                                                    <td class="text-center">
+                                                        <cms:show dsph_tran1_total />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_tran2_total />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_wgns_total />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_tran3_total />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_tran4_total />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_cog_total />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_ta_total />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_la_total />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_d_total />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_oth_total />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_ac_total />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_dsl_total />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_ldd_total />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_emp_total />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_mt_total />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <cms:show dsph_shortfall_total />
+                                                    </td>
+                                                    <!-- TOTAL Despatches -->
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-center" colspan="2">Stable Loads</th>
+                                                    <td colspan="16" style="padding-left: 10px;">
+                                                        <cms:show rcpt_stble_shortfall />
+                                                    </td>
+                                                    <td colspan="16" style="padding-left: 10px;">
+                                                        <cms:show dsph_stble_shortfall />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        </cms:pages>
+                                        <!-- </div> -->

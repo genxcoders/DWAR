@@ -1,0 +1,74 @@
+					<!-- Section Title -->
+					<cms:embed 'unit2-title.html' />
+					<!-- Section Title -->
+
+					<cms:set submit_success="<cms:get_flash 'submit_success' />" />
+				    <cms:if submit_success >
+				    	<div class="row">
+					    	<div class="col-md-12">
+					    		<div class="alert alert-success">
+					    			<strong>Success! </strong>Machine Units II updated successfully.
+					    		</div>
+					    	</div>
+					    </div>
+				    </cms:if>
+
+				    <cms:form
+				        masterpage=k_template_name
+				        mode='edit'
+				        page_id=rt_id
+				        enctype='multipart/form-data'
+				        method='post'
+				        anchor='0' >
+				        <cms:if k_success >
+				            <cms:db_persist_form
+				                _invalidate_cache='0'
+				                k_page_title="<cms:show frm_k_page_title />"
+				                k_page_name = "<cms:show k_page_title />"
+				            />
+				            <cms:if k_success >
+					            <cms:set_flash name='submit_success' value='1' />
+					            <cms:redirect url="<cms:route_link 'list_unit2' />" />
+					        </cms:if>
+				        </cms:if>
+
+				        <cms:if k_error >
+				            <div class="row">
+				            	<cms:each k_error >
+				            		<div class="col-md-4">
+				            			<div class="alert alert-danger">
+					                    	<cms:show item />
+					                    </div>
+				                	</div>
+				                </cms:each>
+				            </div>
+				        </cms:if>
+						<!-- <div class="row"> -->
+							<div class="col-md-12">
+								<div class="gxcpl-card">
+									<div class="gxcpl-card-body">
+										<div class="gxcpl-ptop-20"></div>
+										<div class="row">
+											<div class="col-md-10 col-md-offset-1">
+												<label>Machine</label>
+												<div class="gxcpl-ptop-5"></div>
+												<cms:input type="bound" class="gxcpl-input-text" name="machine_units2" />
+												<div class="gxcpl-ptop-30"></div>
+											</div>
+											<div class="col-md-10 col-md-offset-1">
+												<label>Machine Units II</label>
+												<div class="gxcpl-ptop-5"></div>
+												<cms:input type="bound" class="gxcpl-input-text" name="k_page_title" />
+											</div>
+										</div>
+										<div class="gxcpl-ptop-30"></div>
+									</div>
+									<div class="gxcpl-card-footer">
+										<button class="btn btn-danger btn-sm">
+											<i class="fa fa-save" aria-hidden="true"></i> UPDATE
+										</button>
+									</div>
+								</div>
+							</div>
+						<!-- </div> -->
+					</cms:form>

@@ -1,0 +1,140 @@
+			<cms:ignore>
+			<!-- Section Title -->
+			<cms:embed 'ncoal-title.html' />
+			<!-- Section Title -->
+			</cms:ignore>
+			<div class="col-md-12">
+				<div class="gxcpl-card"> 
+					<div class="gxcpl-card-body	gxcpl-scroll tableFixHead">
+						<table class="gxcpl-table" width="100%">
+							<thead>
+								<tr>
+									<th class="text-center">
+										Date
+									</th>
+									<th class="text-center">
+										Commodity
+									</th>
+									<th class="text-center">
+										Loading Point
+									</th>
+									<th class="text-center">
+										Full/Half
+									</th>
+									<th class="text-center">
+										No. of Units
+									</th>
+									<th class="text-center">
+										Stock
+									</th>
+									<th class="text-center">
+										Destination
+									</th>
+									<th>
+										Action
+									</th>
+								</tr>
+							</thead>
+							<cms:set yestdate="<cms:date return='yesterday' format='Y-m-d' />" scope='global' />
+							<tbody>
+								<cms:pages masterpage="non-coal.php" show_future_entries='1' order='asc' >
+								<cms:no_results>
+									<tr>
+										<cms:if k_user_access_level gt '7'>
+										<td colspan="9" class="text-center">
+											- No Result -
+										</td>
+										</cms:if>
+									</tr>
+								</cms:no_results>
+								<cms:if yestdate eq "<cms:date n_c_date format='Y-m-d' />" >
+								<tr>
+									<td class="text-center">
+										<cms:if n_c_date >
+											<cms:date n_c_date format='d/m/Y' />
+										<cms:else />
+											-NA-
+										</cms:if>
+								    </td>
+									<td class="text-center text-uppercase">
+										<cms:related_pages 'ncoal_cmdt'>
+											<cms:no_results>
+												-NA-
+											</cms:no_results>
+											<cms:show k_page_title />
+										</cms:related_pages>
+									</td>
+									<td class="text-center text-uppercase">
+										<cms:related_pages 'ncoal_ld_pt'>
+											<cms:no_results>
+												-NA-
+											</cms:no_results>
+											<cms:show k_page_title />
+										</cms:related_pages>
+									</td>
+									<td class="text-center">
+										<cms:show ncoal_h_f />
+									</td>
+									<td class="text-center">
+										<cms:show ncoal_units />
+									</td>
+									<td class="text-center text-uppercase">
+										<cms:related_pages 'ncoal_stock'>
+											<cms:no_results>
+												-NA-
+											</cms:no_results>
+											<cms:show k_page_title />
+										</cms:related_pages>
+									</td>
+									<td class="text-center">
+										<cms:show ncoal_dest />
+									</td>
+									<td class="text-center">
+										<cms:popup_edit 'n_c_date | ncoal_cmdt | ncoal_ld_pt | ncoal_h_f | ncoal_units | ncoal_stock | ncoal_dest' link_text="<i class='fa fa-edit'></i>" />
+
+										<a href="<cms:route_link 'delete_ncoal' rt_id=k_page_id />" class="gxcpl-fw-700" data-toggle="tooltip" data-placement="top" title="DELETE">
+											<i class="fa fa-trash"></i>
+										</a>
+									</td>
+								</tr> 
+								</cms:if>
+								</cms:pages>
+							</tbody>
+						</table>
+					</div>
+					<!-- Full/Half Total -->
+					<cms:set ncfhtotal='0' scope='global' />
+					<cms:pages masterpage='non-coal.php' >
+						<cms:if yestdate eq "<cms:date n_c_date format='Y-m-d' />" >
+							<cms:set ncfhtotal = "<cms:add ncfhtotal ncoal_h_f />" scope='global' />
+						</cms:if>
+					</cms:pages>    
+					<!-- Full/Half Total -->
+
+					<!-- No of Units Total  -->
+					<cms:set ncunttotal='0' scope='global' />
+					<cms:pages masterpage='non-coal.php' >
+						<cms:if yestdate eq "<cms:date n_c_date format='Y-m-d' />" >
+							<cms:set ncunttotal = "<cms:add ncunttotal ncoal_units />" scope='global' />
+						</cms:if>
+					</cms:pages>
+					<!-- No of Units Total  -->
+
+					<div class="gxcpl-card-footer" style="line-height: 24px; text-align: left;">
+						<div class="row">
+							<div class="col-md-1">
+							&nbsp;
+							</div>
+							<div class="col-md-5 text-right" style="margin-left: -16px;">
+								<strong>Total</strong>&nbsp;
+								<strong>F/H:</strong> <cms:show ncfhtotal />&nbsp;
+							</div>
+							<div class="col-md-1 text-right" style="margin-left: 50px;">
+								<strong>U:</strong> <cms:show ncunttotal />
+							</div>
+						</div>
+					</div>
+					<!-- Body -->
+				</div>
+			</div>
+

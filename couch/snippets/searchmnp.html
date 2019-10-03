@@ -1,0 +1,32 @@
+<div class="col-md-12" id="quick-search">
+	
+		<cms:form name="search" id="search" anchor='0' >
+			<cms:if k_success >
+				<cms:if frm_mdp_date!='dd/mm/yyyy' >
+					<cms:ignore><cms:set my_mdp_date= "<cms:date frm_mdp_date format='Y-m-d' />" scope='global' /></cms:ignore>
+					<cms:set my_search_str="<cms:concat my_search_str ' | mdp_date==' frm_mdp_date />"  scope='global'/>
+				</cms:if>
+			</cms:if>
+			<!-- Card -->
+			<div class="gxcpl-card">
+				<div class="gxcpl-card-header">
+					<label>Operating Performance of Date: </label>
+				</div>
+				<div class="gxcpl-card-body gxcpl-padding-15">
+					<cms:hide>
+						<cms:input type="datetime" name="mdp_date" />
+					</cms:hide>
+					<input type="date" name="mdp_date" id="mdp_date" class="gxcpl-input-text" style="width: auto;" />&nbsp;
+					<!-- <button class="btn btn-primary btn-xs gxcpl-fw-700" id="notesave" type='submit' name='submit'>
+						<i class="fa fa-search"></i> GO
+					</button> -->
+					<cms:input type="submit" value="Search" name="submit"/>
+					<div class="gxcpl-ptop-20"></div>
+					FRM-<cms:show frm_mdp_date />::STR-<cms:show my_search_str />::SET<cms:show my_mdp_date />
+				</div>
+			</div>
+			<!-- Card -->
+		</cms:form>
+	
+	<div class="gxcpl-ptop-20"></div>
+</div>

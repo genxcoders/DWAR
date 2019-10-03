@@ -1,0 +1,171 @@
+					<!-- Section Title -->
+					<cms:embed 'dtrgt-title.html' />
+					<!-- Section Title -->
+
+					<cms:set submit_success="<cms:get_flash 'submit_success' />" />
+	                <cms:if submit_success >
+	                    <div class="col-md-12">
+	                        <div class="alert alert-success gxcpl-shadow-2">
+	                            <strong>Success:</strong> Daily Target has been submitted.
+	                        </div>
+	                    </div>
+	                </cms:if>
+	                 <cms:form
+				        masterpage=k_template_name
+				        mode='edit'
+				        page_id=rt_id
+				        enctype='multipart/form-data'
+				        method='post'
+				        anchor='0'
+				    >
+				        <cms:if k_success >
+				            <cms:db_persist_form
+				                _invalidate_cache='0'
+				                k_page_title="<cms:show frm_k_page_title />"
+				                k_page_name = "<cms:random_name />"
+				            />
+				            <cms:if k_success >
+					            <cms:set_flash name='submit_success' value='1' />
+					            <cms:redirect url="<cms:route_link 'list_dtrgt' />" />
+					        </cms:if>
+				        </cms:if>
+
+				        <cms:if k_error >
+				            <div class="error">
+				                <cms:each k_error >
+				                    <br><cms:show item />
+				                </cms:each>
+				            </div>
+				        </cms:if>
+
+						 <cms:ignore>Checking Duplicate Entries</cms:ignore>
+
+	                    <div class="col-md-6 col-md-offset-3">
+	                        <div class="gxcpl-card">
+	                            <div class="gxcpl-card-header">
+	                                <div class="row">
+	                                    <div class="col-md-6">
+	                                        <h5 class="text-center"><strong>Target Month & Year:</strong><br><br><cms:input name="dt_date" type="bound" /></h5>
+	                                    </div>
+	                                    <div class="col-md-6">
+	                                        <h5 class="text-center"><strong>Today's Date:</strong><br><br><cms:date format="d/m/Y" /></h5>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                            <div class="gxcpl-card-body">
+	                                <table width="100%" class="gxcpl-table">
+	                                    <thead>
+	                                        <tr>
+	                                            <th class="text-center" style="padding-left: 10px;">Colliery</th>
+	                                            <th class="text-center" style="width: 50%;">Daily Target</th>
+	                                        </tr>
+	                                    </thead>
+	                                    <tbody>
+	                                        <tr class="text-center" style="border-top: 1px solid rgba(0,0,0,0.25);">
+	                                            <td style="padding-left: 10px;">MNSG</td>
+	                                            <td>
+	                                                <cms:input type='bound' class="gxcpl-input-text" name="mnsg" />
+	                                            </td>
+	                                        </tr>
+	                                        <tr class="text-center"> 
+	                                            <td class="text-center" style="padding-left: 10px;">MJSG</td>
+	                                            <td>
+	                                                <cms:input type='bound' class="gxcpl-input-text" name="mjsg" />
+	                                            </td>
+	                                        </tr>
+	                                        <tr class="text-center">
+	                                            <td style="padding-left: 10px;">CGM</td>
+	                                            <td>
+	                                                <cms:input type='bound' class="gxcpl-input-text" name="cgm" />
+	                                            </td>
+	                                        </tr>
+	                                        <tr class="text-center">
+	                                            <td style="padding-left: 10px;">Wani</td>
+	                                            <td>
+	                                                <cms:input type='bound' class="gxcpl-input-text" name="wani" />
+	                                            </td>
+	                                        </tr>
+	                                        <tr class="text-center">
+	                                            <td style="padding-left: 10px;">GSG</td>
+	                                            <td>
+	                                                <cms:input type='bound' class="gxcpl-input-text" name="gsg" />
+	                                            </td>
+	                                        </tr>
+	                                        <tr class="text-center">
+	                                            <td style="padding-left: 10px;">GGS</td>
+	                                            <td>
+	                                                <cms:input type='bound' class="gxcpl-input-text" name="ggs" />
+	                                            </td>
+	                                        </tr>
+	                                        <tr class="text-center">
+	                                            <td style="padding-left: 10px;">HLSG</td>
+	                                            <td>
+	                                                <cms:input type='bound' class="gxcpl-input-text" name="hlsg" />
+	                                            </td>
+	                                        </tr>
+	                                        <tr class="text-center">
+	                                            <td style="padding-left: 10px;">RYXG</td>
+	                                            <td>
+	                                                <cms:input type='bound' class="gxcpl-input-text" name="ryxg" />
+	                                            </td>
+	                                        </tr>
+	                                        <tr class="text-center">
+	                                            <td style="padding-left: 10px;">MBCB</td>
+	                                            <td>
+	                                                <cms:input type='bound' class="gxcpl-input-text" name="mbcb" />
+	                                            </td>
+	                                        </tr>
+	                                        <tr class="text-center">
+	                                            <td style="padding-left: 10px;">UMSG</td>
+	                                            <td>
+	                                                <cms:input type='bound' class="gxcpl-input-text" name="umsg" />
+	                                            </td>
+	                                        </tr>
+	                                        <tr class="text-center">
+	                                            <td style="padding-left: 10px;">RKSG</td>
+	                                            <td>
+	                                                <cms:input type='bound' class="gxcpl-input-text" name="rksg" />
+	                                            </td>
+	                                        </tr>
+	                                        <tr class="text-center">
+	                                            <td style="padding-left: 10px;">DCSG</td>
+	                                            <td>
+	                                                <cms:input type='bound' class="gxcpl-input-text" name="dcsg" />
+	                                            </td>
+	                                        </tr>
+	                                        <tr class="text-center">
+	                                            <td style="padding-left: 10px;">CSID</td>
+	                                            <td>
+	                                                <cms:input type='bound' class="gxcpl-input-text" name="csid" />
+	                                            </td>
+	                                        </tr>
+	                                        <tr class="text-center">
+	                                            <td style="padding-left: 10px;">HRG</td>
+	                                            <td>
+	                                                <cms:input type='bound' class="gxcpl-input-text" name="hrg" />
+	                                            </td>
+	                                        </tr>
+	                                        <tr class="text-center">
+	                                            <td style="padding-left: 10px;">HNWG</td>
+	                                            <td>
+	                                                <cms:input type='bound' class="gxcpl-input-text" name="hnwg" />
+	                                            </td>
+	                                        </tr>
+	                                    </tbody>
+	                                </table>
+	                            </div>
+	                                <div class="gxcpl-ptop-10"></div>
+	                                <div class="row">
+	                                    <div class="col-md-12">
+	                                        <center>
+	                                            <button class="btn btn-danger btn-sm">
+	                                                <i class="fa fa-floppy-o" aria-hidden="true"></i> UPDATE 
+	                                            </button>
+	                                        </center>
+	                                    </div>
+	                                </div>   
+	                            <div class="gxcpl-ptop-10"></div>
+	                        </div>
+	                    </div>
+					</cms:form>
+					<div class="gxcpl-ptop-50"></div>

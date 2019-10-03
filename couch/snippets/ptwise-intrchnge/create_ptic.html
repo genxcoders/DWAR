@@ -1,0 +1,203 @@
+					<!-- Section Title -->
+					<cms:embed 'ptic-title.html' />
+					<!-- Section Title -->
+
+					<cms:set submit_success="<cms:get_flash 'submit_success' />" />
+				    <cms:if submit_success >
+				    	<div class="row">
+					    	<div class="col-md-12">
+					    		<div class="alert alert-success">
+					    			<strong>Success! </strong>Pointwise Interchange created successfully.
+					    		</div>
+					    	</div>
+					    </div>
+				    </cms:if>
+
+				    <cms:form
+				        masterpage=k_template_name
+				        mode='create'
+				        enctype='multipart/form-data'
+				        method='post'
+				        anchor='0' >
+				        <cms:if k_success >
+				            <cms:db_persist_form
+				                _invalidate_cache='0'
+				                k_page_title="<cms:show frm_interchange />"
+				                k_page_name = "<cms:show k_page_title />"
+				            />
+				            <cms:if k_success >
+					            <cms:set_flash name='submit_success' value='1' />
+					            <cms:redirect url="<cms:route_link create_ptic.html />" />
+					        </cms:if>
+				        </cms:if>
+
+				        <cms:if k_error >
+				            <div class="row">
+				            	<cms:each k_error >
+				            		<div class="col-md-4">
+				            			<div class="alert alert-danger">
+					                    	<cms:show item />
+					                    </div>
+				                	</div>
+				                </cms:each>
+				            </div>
+				        </cms:if>
+						<div class="row">
+							<div class="col-md-12">
+								<!-- Card -->
+								<div class="gxcpl-card">
+									<!-- <div class="gxcpl-ptop-10"></div> -->
+									<!-- Body -->
+									<div class="gxcpl-card-body gxcpl-padding-15">
+										<div class="row">
+											<div class="col-md-6">
+												<label>Interchange</label>
+												<div class="gxcpl-ptop-5"></div>
+												<cms:input id="myselection" name="interchange" type="bound" class="gxcpl-input-text" />
+												<!-- <div class="gxcpl-ptop-10"></div> -->
+											</div>
+											<div class="col-md-1 col-md-offset-1">
+												<!-- <label>T/O</label>
+												<div class="gxcpl-ptop-5"></div>
+												<input type="radio" name="inlineradiooptions" value="option1" />
+											</div>
+											<div class="col-md-1">
+												<label>H/O</label>
+												<div class="gxcpl-ptop-5"></div>
+												<input type="radio" name="inlineradiooptions" value="option1" /> -->
+												<cms:input name="to_ho" type="bound" />
+											</div>
+										</div>
+										<!-- <div class="gxcpl-ptop-20"></div> -->
+									</div>
+									<!-- <div class="gxcpl-ptop-10"></div> -->
+									<div class="gxcpl-card-body gxcpl-padding-15">
+										<div class="row">
+											<!-- Manual Entry -->
+											<div class="col-md-10">
+												<h4 class="gxcpl-no-margin">
+													MANUAL ENTRY
+													<div class="gxcpl-ptop-10"></div>
+													<div class="gxcpl-divider-dark"></div>
+													<div class="gxcpl-ptop-10"></div>
+												</h4>
+												<div class="row">
+													<div class="col-md-12">
+														<div class="col-md-2">
+															<label>Train Name</label>
+															<div class="gxcpl-ptop-5"></div>
+															<cms:input class="gxcpl-input-text" name="tr_name" type="bound" />
+														</div>
+														<div class="col-md-2">
+															<label>Loco</label>
+															<div class="gxcpl-ptop-5"></div>
+															<cms:input class="gxcpl-input-text" name="loco" type="bound" />
+														</div>
+														<div class="col-md-2">
+															<label>Schedule</label>
+															<div class="gxcpl-ptop-5"></div>
+															<cms:input class="gxcpl-input-text" name="schedule" type="bound" />
+														</div>
+														<div class="col-md-2">
+															<label>Commodity</label>
+															<div class="gxcpl-ptop-5"></div>
+															<cms:input name="commodity" type="bound" class="gxcpl-input-text" />
+														</div>
+														<div class="col-md-2">
+															<label>Rake Type</label>
+															<div class="gxcpl-ptop-5"></div>
+															<cms:input name="raketype" type="bound" class="gxcpl-input-text" />
+														</div>
+														<div class="col-md-2">
+															<label>Location</label>
+															<div class="gxcpl-ptop-5"></div>
+															<cms:input name='location' type='bound' class='gxcpl-input-text' />
+														</div>
+													</div>
+												</div>
+												<div class="gxcpl-ptop-20"></div>
+												<div class="row">
+													<div class="col-md-3">
+														<center><label>Arrival</label></center>
+														<div class="gxcpl-ptop-5"></div>
+														<div class="col-md-7">	
+															<cms:input pattern="(0[1-9] 1[012])[- /.](0[1-9] [12][0-9]" class="gxcpl-input-text" name="arrival_date" placeholder="dd-mm-yyyy" type="text" />
+														</div>
+														<div class="col-md-5">	
+															<cms:input class="gxcpl-input-text" name="arrival_time" placeholder="00:00" type="text" />
+														</div>
+													</div>
+													<div class="col-md-3">
+														<center><label>Departure</label></center>
+														<div class="gxcpl-ptop-5"></div>
+														<div class="col-md-7">	
+															<cms:input class="gxcpl-input-text" name="departure_date" placeholder="dd-mm-yyyy" type="text" />
+														</div>
+														<div class="col-md-5">	
+															<cms:input class="gxcpl-input-text" name="departure_time" placeholder="00:00" type="text" />
+														</div>
+													</div>
+													<div class="col-md-3">
+														<center><label>Sign-On</label></center>
+														<div class="gxcpl-ptop-5"></div>
+														<div class="col-md-7">	
+															<cms:input class="gxcpl-input-text" name="signon_date" placeholder="dd-mm-yyyy" type="text" />
+														</div>
+														<div class="col-md-5">	
+															<cms:input class="gxcpl-input-text" name="signon_time" placeholder="00:00" type="text" />
+														</div>
+													</div>
+													<div class="col-md-3">
+														<div class="gxcpl-ptop-20"></div>
+														<div class="gxcpl-ptop-5"></div>
+														<cms:input name='load' type='bound' />
+													</div>
+													<!-- <div class="col-md-1">
+														<div class="gxcpl-ptop-20"></div>
+														<div class="gxcpl-ptop-5"></div>
+														<input type="radio" name="inlineRadioOptions" value="option1"> <strong>Load</strong>
+													</div>
+													<div class="col-md-2">
+														<div class="gxcpl-ptop-20"></div>
+														<div class="gxcpl-ptop-5"></div>
+														<input type="radio" name="inlineRadioOptions" value="option1"> 
+														<strong>Empty</strong>
+													</div> -->
+												</div>
+											</div>
+											<!-- Manual Entry -->
+											<!-- Upload XLS -->
+											<div class="col-md-2">
+												<h4 class="gxcpl-no-margin">
+													UPLOAD XLS
+													<div class="gxcpl-ptop-10"></div>
+													<div class="gxcpl-divider-dark"></div>
+													<div class="gxcpl-ptop-20"></div>
+												</h4>
+												<!-- <div class="gxcpl-ptop-20"></div> -->
+												<center>
+													<button type="submit" class="btn btn-primary btn-sm gxcpl-fw-700">BROWSE</button>
+												</center>
+												<div class="gxcpl-ptop-40"></div>
+												<center>
+													<button type="submit" class="btn btn-primary btn-sm gxcpl-fw-700">UPLOAD</button>
+												</center>
+											</div>
+											<!-- Upload XLS -->
+										</div>
+										<!-- <div class="gxcpl-ptop-30"></div> -->
+									</div>
+									<!-- Body -->
+									<!-- Footer -->
+									<div class="gxcpl-card-footer">
+										<button class="btn btn-danger btn-sm">
+											SAVE
+										</button>
+									</div>
+									<!-- Footer -->
+								</div>
+								<!-- Card -->
+								<div class="gxcpl-ptop-40"></div>
+							</div>
+						</div>
+					</cms:form>

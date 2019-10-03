@@ -1,0 +1,350 @@
+
+=======================[2019-03-20 13:54:04]=======================
+From: contact@yourdomain.com
+To: admin@gmail.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Subject: New Account Confirmation
+Message: 		                            Please click the following link to activate your account:
+		                            
+		                            Thanks,
+		                            Website Name
+		                        
+
+Delivery Success
+
+=======================[2019-03-20 15:21:39]=======================
+From: contact@yourdomain.com
+To: admin@gmail.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Subject: New Account Confirmation
+Message: 		                            Please click the following link to activate your account:
+		                            
+		                            Thanks,
+		                            Website Name
+		                        
+
+Delivery Success
+
+=======================[2019-05-02 15:14:20]=======================
+From: contact@yourdomain.com
+To: reachamanmittal@gmail.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Subject: New Account Confirmation
+Message: 		                            Please click the following link to activate your account:
+		                            
+		                            Thanks,
+		                            Website Name
+		                        
+
+Delivery Success
+
+=======================[2019-05-21 17:30:13]=======================
+From: contact@yourdomain.com
+To: coal@gmail.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Subject: New Account Confirmation
+Message: 		                            Please click the following link to activate your account:
+		                            
+		                            Thanks,
+		                            Website Name
+		                        
+
+Delivery Success
+
+=======================[2019-06-22 15:19:21]=======================
+From: contact@yourdomain.com
+To: admin.dwar@gmail.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Subject: New Account Confirmation
+Message: 		                            Please click the following link to activate your account:
+		                            
+		                            Thanks,
+		                            Website Name
+		                        
+
+Delivery Failed
+
+=======================[2019-06-22 15:25:16]=======================
+From: contact@yourdomain.com
+To: tset@gmail.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Subject: New Account Confirmation
+Message: 		                            Please click the following link to activate your account:
+		                            
+		                            Thanks,
+		                            Website Name
+		                        
+
+Delivery Failed
+
+=======================[2019-08-23 18:41:08]=======================
+From: contact@yourdomain.com
+To: aashish.h@genxcodes.in
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Subject: New Account Confirmation
+Message: 		                            Please click the following link to activate your account:
+		                            
+		                            Thanks,
+		                            Website Name
+		                        
+
+Delivery Failed
+
+=======================[2019-08-27 18:12:25]=======================
+From: contact@yourdomain.com
+To: user1@gmail.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Subject: New Account Confirmation
+Message: 		                            Please click the following link to activate your account:
+		                            
+		                            Thanks,
+		                            Website Name
+		                        
+
+Delivery Failed
+
+=======================[2019-08-28 14:25:35]=======================
+From: contact@yourdomain.com
+To: kalyani.k@gmail.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Subject: New Account Confirmation
+Message: 		                            Please click the following link to activate your account:
+		                            
+		                            Thanks,
+		                            Website Name
+		                        
+
+Delivery Failed
+
+=======================[2019-08-29 18:20:20]=======================
+From: contact@yourdomain.com
+To: user1@dwar.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Subject: New Account Confirmation
+Message: 		                            Please click the following link to activate your account:
+		                            
+		                            Thanks,
+		                            Website Name
+		                        
+
+Delivery Failed
+
+=======================[2019-09-03 14:44:31]=======================
+From: contact@yourdomain.com
+To: user1@dwar.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Subject: New Account Confirmation
+Message: 		                            Please click the following link to activate your account:
+		                            
+		                            Thanks,
+		                            Website Name
+		                        
+
+Delivery Failed
+
+=======================[2019-09-03 14:53:43]=======================
+From: contact@yourdomain.com
+To: user2@dwar.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Subject: New Account Confirmation
+Message: 		                            Please click the following link to activate your account:
+		                            
+		                            Thanks,
+		                            Website Name
+		                        
+
+Delivery Failed
+
+=======================[2019-09-03 18:38:02]=======================
+From: contact@yourdomain.com
+To: test1@dwar.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Subject: New Account Confirmation
+Message: 		                            Please click the following link to activate your account:
+		                            
+		                            Thanks,
+		                            Website Name
+		                        
+
+Delivery Failed
+
+=======================[2019-09-03 18:46:07]=======================
+From: contact@yourdomain.com
+To: test@test.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Subject: New Account Confirmation
+Message: 		                            Please click the following link to activate your account:
+		                            
+		                            Thanks,
+		                            Website Name
+		                        
+
+Delivery Failed
+
+=======================[2019-09-03 18:54:46]=======================
+From: contact@yourdomain.com
+To: test@mytest.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Subject: New Account Confirmation
+Message: 		                            Please click the following link to activate your account:
+		                            
+		                            Thanks,
+		                            Website Name
+		                        
+
+Delivery Failed
+
+=======================[2019-09-03 19:09:32]=======================
+From: contact@yourdomain.com
+To: mytest@dwar.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Subject: New Account Confirmation
+Message: 		                            Please click the following link to activate your account:
+		                            
+		                            Thanks,
+		                            Website Name
+		                        
+
+Delivery Failed
+
+=======================[2019-09-03 19:13:37]=======================
+From: contact@yourdomain.com
+To: testdwar@test.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Subject: New Account Confirmation
+Message: 		                            Please click the following link to activate your account:
+		                            
+		                            Thanks,
+		                            Website Name
+		                        
+
+Delivery Failed
+
+=======================[2019-09-03 19:16:52]=======================
+From: contact@yourdomain.com
+To: mytest1@gmail.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Subject: New Account Confirmation
+Message: 		                            Please click the following link to activate your account:
+		                            
+		                            Thanks,
+		                            Website Name
+		                        
+
+Delivery Failed
+
+=======================[2019-09-03 19:36:31]=======================
+From: contact@yourdomain.com
+To: asd@asd.asd
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Subject: New Account Confirmation
+Message: 		                            Please click the following link to activate your account:
+		                            
+		                            Thanks,
+		                            Website Name
+		                        
+
+Delivery Failed
+
+=======================[2019-09-05 18:04:59]=======================
+From: contact@yourdomain.com
+To: test5@dwar.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Subject: New Account Confirmation
+Message:                             Please click the following link to activate your account:
+                            
+                            Thanks,
+                            Website Name
+                        
+
+Delivery Failed
+
+=======================[2019-09-05 18:07:56]=======================
+From: contact@yourdomain.com
+To: test1@dwar.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Subject: New Account Confirmation
+Message:                             Please click the following link to activate your account:
+                            
+                            Thanks,
+                            Website Name
+                        
+
+Delivery Failed
+
+=======================[2019-09-05 18:09:43]=======================
+From: contact@yourdomain.com
+To: test2@dwar.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Subject: New Account Confirmation
+Message:                             Please click the following link to activate your account:
+                            
+                            Thanks,
+                            Website Name
+                        
+
+Delivery Failed
+
+=======================[2019-09-05 18:29:30]=======================
+From: contact@yourdomain.com
+To: mytest1@dwar.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Subject: New Account Confirmation
+Message:                             Please click the following link to activate your account:
+                            
+                            Thanks,
+                            Website Name
+                        
+
+Delivery Failed
+
+=======================[2019-09-05 18:30:49]=======================
+From: contact@yourdomain.com
+To: mytest1@dwar.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Subject: New Account Confirmation
+Message:                             Please click the following link to activate your account:
+                            
+                            Thanks,
+                            Website Name
+                        
+
+Delivery Failed
+
+=======================[2019-09-05 18:42:48]=======================
+From: contact@yourdomain.com
+To: test1@gmail.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Subject: New Account Confirmation
+Message:                             Please click the following link to activate your account:
+                            
+                            Thanks,
+                            Website Name
+                        
+
+Delivery Failed

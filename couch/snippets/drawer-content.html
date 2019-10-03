@@ -1,0 +1,339 @@
+<cms:set ipt_account_role="<cms:pages masterpage=k_user_template limit='1'><cms:related_pages 'ipt_role'><cms:show k_page_title /></cms:related_pages></cms:pages>" scope='global' />
+
+    <nav class="sidenav" data-sidenav data-sidenav-toggle="#sidenav-toggle">
+        <div class="gxcpl-drawer-card">
+            <div class="gxcpl-drawer-icon">
+                <img src="<cms:show k_site_link />assets/images/Railway.png" class="gxcpl-drawer-image">
+         
+                <cms:pages masterpage="users/index.php" id=k_user_id limit="1" >
+                    <div  style="color: #fff; padding-top: 10px; margin-left: 30px;">
+                        <h4><cms:show ipt_fname /> <cms:show ipt_lname /></h4>
+                        <h4><cms:show ipt_desig /></h4>
+                    </div>
+                </cms:pages>
+            </div>
+        </div>
+        <ul class="sidenav-menu">
+            <li>
+                <a href="<cms:link 'index.php' />" <cms:if k_template_name=='index.php'>class="active"</cms:if>>
+                    <span class="sidenav-link-icon">
+                        <i class="material-icons">dashboard</i>
+                    </span>
+                    <span class="sidenav-link-title">
+                        Dashboard
+                    </span>
+                </a>
+            </li>
+        </ul>
+        <div class="sidenav-header">
+            Interchange 
+        </div>
+        <ul class="sidenav-menu">
+            <li>
+               <a href="<cms:link 'pointwise-interchange.php' />" <cms:if k_template_name=='pointwise-interchange.php'>class="active"</cms:if>>
+                    <span class="sidenav-link-icon">
+                        <i class="material-icons">description</i>
+                    </span>
+                    <span class="sidenav-link-title">
+                        Entry Sheet
+                    </span>
+                </a>
+            </li>
+        </ul>
+        <ul class="sidenav-menu">
+            <li>
+               <a href="<cms:link 'ptwise-int-report.php' />" <cms:if k_template_name=='ptwise-int-report.php'>class="active"</cms:if>>
+                    <span class="sidenav-link-icon">
+                        <i class="material-icons">assignment</i>
+                    </span>
+                    <span class="sidenav-link-title">
+                        Interchange Report
+                    </span>
+                </a>
+            </li>
+            <li>
+               <a href="<cms:link 'stable-train.php' />" <cms:if k_template_name=='stable-train.php'>class="active"</cms:if>>
+                    <span class="sidenav-link-icon">
+                        <i class="material-icons">train</i>
+                    </span>
+                    <span class="sidenav-link-title">
+                        Stable Train
+                    </span>
+                </a>
+            </li>
+        </ul>
+        <div class="sidenav-header">
+            Coal & Non Coal 
+        </div>
+        <ul class="sidenav-menu">
+            <li>
+                <a href="javascript:;" data-sidenav-dropdown-toggle >
+                    <span class="sidenav-link-icon">
+                        <i class="material-icons">cloud_circle</i>
+                    </span>
+                    <span class="sidenav-link-title">Coal</span>
+                    <span class="sidenav-dropdown-icon show" data-sidenav-dropdown-icon>
+                        <i class="material-icons">arrow_drop_down</i>
+                    </span>
+                    <span class="sidenav-dropdown-icon" data-sidenav-dropdown-icon>
+                        <i class="material-icons">arrow_drop_up</i>
+                    </span>
+                </a>
+
+                <ul class="sidenav-dropdown" data-sidenav-dropdown>
+                    <li>
+                        <a href="<cms:link 'coal.php' />" <cms:if k_template_name=='coal.php'>class="active"</cms:if> >
+                            <span class="sidenav-link-icon">
+                                <i class="material-icons">description</i>
+                            </span>
+                            <span class="sidenav-link-subtitle">Entry Sheet</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<cms:link 'coal-pdf-report.php' />" <cms:if k_template_name=='coal-pdf-report.php'>class="active"</cms:if>>
+                            <span class="sidenav-link-icon">
+                                <i class="material-icons">assignment</i>
+                            </span>
+                            <span class="sidenav-link-subtitle">Coal Report 1</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<cms:link 'coal-report.php' />" <cms:if k_template_name=='coal-report.php'>class="active"</cms:if>>
+                            <span class="sidenav-link-icon">
+                                <i class="material-icons">assignment</i>
+                            </span>
+                            <span class="sidenav-link-subtitle">Coal Report 2</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<cms:link 'transportation-pdf-report.php' />" <cms:if k_template_name=='transportation-pdf-report.php'>class="active"</cms:if>>
+                            <span class="sidenav-link-icon">
+                                <i class="material-icons">assignment</i>
+                            </span>
+                            <span class="sidenav-link-subtitle">Transport Report 1</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<cms:link 'transport-report.php' />" <cms:if k_template_name=='transport-report.php'>class="active"</cms:if>>
+                            <span class="sidenav-link-icon">
+                                <i class="material-icons">assignment</i>
+                            </span>
+                            <span class="sidenav-link-subtitle">Transport Report 2</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="sidenav-menu">
+            <li>
+                <a href="javascript:;" data-sidenav-dropdown-toggle >
+                    <span class="sidenav-link-icon">
+                        <i class="material-icons">cloud_off</i>
+                    </span>
+                    <span class="sidenav-link-title">Non Coal</span>
+                    <span class="sidenav-dropdown-icon show" data-sidenav-dropdown-icon>
+                        <i class="material-icons">arrow_drop_down</i>
+                    </span>
+                    <span class="sidenav-dropdown-icon" data-sidenav-dropdown-icon>
+                        <i class="material-icons">arrow_drop_up</i>
+                    </span>
+                </a>
+
+                <ul class="sidenav-dropdown" data-sidenav-dropdown>
+                    <li>
+                        <a href="<cms:show k_site_link />non-coal.php?q=create" <cms:if k_template_name=='non-coal.php'>class="active"</cms:if> >
+                            <span class="sidenav-link-icon">
+                                <i class="material-icons">description</i>
+                            </span>
+                            <span class="sidenav-link-subtitle">Entry Sheet</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<cms:link 'non-coal-report.php' />" <cms:if k_template_name=='non-coal-report.php'>class="active"</cms:if>>
+                            <span class="sidenav-link-icon">
+                                <i class="material-icons">assignment</i>
+                            </span>
+                            <span class="sidenav-link-subtitle">Non-Coal Report</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div class="sidenav-header">
+            Midnight Position 
+        </div>
+        <ul class="sidenav-menu">
+            <li>
+                <a href="javascript:;" data-sidenav-dropdown-toggle>
+                    <span class="sidenav-link-icon">
+                        <i class="material-icons">watch_later</i>
+                    </span>
+                    <span class="sidenav-link-title">Midnight</span>
+                    <span class="sidenav-dropdown-icon show" data-sidenav-dropdown-icon>
+                        <i class="material-icons">arrow_drop_down</i>
+                    </span>
+                    <span class="sidenav-dropdown-icon" data-sidenav-dropdown-icon>
+                        <i class="material-icons">arrow_drop_up</i>
+                    </span>
+                </a>
+
+                <ul class="sidenav-dropdown" data-sidenav-dropdown>
+                    <li>
+                        <a href="#" <cms:if k_template_name=='mid-position.php'>class="active"</cms:if> >
+                            <span class="sidenav-link-icon">
+                                <i class="material-icons">schedule</i>
+                            </span>
+                            <span class="sidenav-link-subtitle">Midnight Position </span>
+                        </a>
+                    </li>
+                    <!-- <li>
+                        <a href="javascript:;"  class="active">
+                            <span class="sidenav-link-icon">
+                                <i class="material-icons">assignment</i>
+                            </span>
+                            <span class="sidenav-link-subtitle">POINTWISE INTERCHANGE REPORT</span>
+                        </a>
+                    </li> -->
+                </ul>
+            </li>
+        </ul>
+        <div class="sidenav-header">
+            Settings 
+        </div>
+        <ul class="sidenav-menu">
+            <li>
+                <a href="javascript:;" data-sidenav-dropdown-toggle >
+                    <span class="sidenav-link-icon">
+                        <i class="material-icons">settings_applications</i>
+                    </span>
+                    <span class="sidenav-link-title">Settings</span>
+                    <span class="sidenav-dropdown-icon show" data-sidenav-dropdown-icon>
+                        <i class="material-icons">arrow_drop_down</i>
+                    </span>
+                    <span class="sidenav-dropdown-icon" data-sidenav-dropdown-icon>
+                        <i class="material-icons">arrow_drop_up</i>
+                    </span>
+                </a>
+
+                <ul class="sidenav-dropdown" data-sidenav-dropdown>
+                    <cms:if k_user_access_level gt '4'>
+                    <li>
+                        <a href="<cms:link 'settings.php' />" <cms:if k_template_name=='settings.php'>class="active"</cms:if>>
+                            <span class="sidenav-link-subtitle">General Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<cms:link 'role.php' />" <cms:if k_template_name=='role.php'>class="active"</cms:if>>
+                            <span class="sidenav-link-subtitle">Role</span>
+                        </a>
+                    </li>   
+                    </cms:if>
+                    <li>
+                        <a href="<cms:link 'interchange.php' />" <cms:if k_template_name=='interchange.php'>class="active"</cms:if>>
+                            <span class="sidenav-link-subtitle">Interchange</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<cms:link 'commodity.php' />" <cms:if k_template_name=='commodity.php'>class="active"</cms:if>>
+                            <span class="sidenav-link-subtitle">Commodity</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<cms:link 'type.php' />" <cms:if k_template_name=='type.php'>class="active"</cms:if>>
+                            <span class="sidenav-link-subtitle">Rake Type</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<cms:link 'location.php' />" <cms:if k_template_name=='location.php'>class="active"</cms:if>>
+                            <span class="sidenav-link-subtitle">Location</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<cms:link 'stock.php' />" <cms:if k_template_name=='stock.php'>class="active"</cms:if>>
+                            <span class="sidenav-link-subtitle">Stock</span>
+                        </a>
+                    </li>
+                    <li>
+                         <a href="<cms:link 'bpc-type.php' />" <cms:if k_template_name=='bpc-type.php'>class="active"</cms:if>>
+                            <span class="sidenav-link-subtitle">BPC Type</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<cms:link 'reason-rejection.php' />" <cms:if k_template_name=='reason-rejection.php'>class="active"</cms:if>>
+                            <span class="sidenav-link-subtitle">Reason of Rejection</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<cms:link 'coal-type.php' />" <cms:if k_template_name=='coal-type.php'>class="active"</cms:if>>
+                            <span class="sidenav-link-subtitle">Coal Type</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<cms:link 'loading-pt.php' />" <cms:if k_template_name=='loading-pt.php'>class="active"</cms:if>>
+                            <span class="sidenav-link-subtitle">Loading Point & Daily Target</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<cms:link 'siding.php' />" <cms:if k_template_name=='siding.php'>class="active"</cms:if>>
+                            <span class="sidenav-link-subtitle">Siding</span>
+                        </a>
+                    </li>
+                    <li>
+                         <a href="<cms:link 'ncoal-commodity.php' />" <cms:if k_template_name=='ncoal-commodity.php'>class="active"</cms:if>>
+                            <span class="sidenav-link-subtitle">Non-Coal Commodity</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<cms:link 'ncoal-loading-pt.php' />" <cms:if k_template_name=='ncoal-loading-pt.php'>class="active"</cms:if>>
+                            <span class="sidenav-link-subtitle">Non-Coal Loading Point</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<cms:link 'ncoal-stock.php' />" <cms:if k_template_name=='ncoal-stock.php'>class="active"</cms:if>>
+                            <span class="sidenav-link-subtitle">Non-Coal Stock</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<cms:link 'section.php' />" <cms:if k_template_name=='section.php'>class="active"</cms:if>>
+                            <span class="sidenav-link-subtitle">Section</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<cms:link 'reason.php' />" <cms:if k_template_name=='reason.php'>class="active"</cms:if>>
+                            <span class="sidenav-link-subtitle">Reason & Category</span>
+                        </a>
+                    </li>
+                    <li>
+                         <a href="<cms:link 'machine.php' />" <cms:if k_template_name=='machine.php'>class="active"</cms:if>>
+                            <span class="sidenav-link-subtitle">Machine</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<cms:link 'cause-machine.php' />" <cms:if k_template_name=='cause-machine.php'>class="active"</cms:if>>
+                            <span class="sidenav-link-subtitle">Cause for Machine</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<cms:link 'machine-units.php' />" <cms:if k_template_name=='machine-units.php'>class="active"</cms:if>>
+                            <span class="sidenav-link-subtitle">Machine Units</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<cms:link 'machine-units2.php' />" <cms:if k_template_name=='machine-units2.php'>class="active"</cms:if>>
+                            <span class="sidenav-link-subtitle">Machine Units II</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<cms:link 'station-code.php' />" <cms:if k_template_name=='station-code.php'>class="active"</cms:if>>
+                            <span class="sidenav-link-subtitle">Station Code</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<cms:link 'station-name.php' />" <cms:if k_template_name=='station-name.php'>class="active"</cms:if>>
+                            <span class="sidenav-link-subtitle">Station Name</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>

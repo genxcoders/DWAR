@@ -1,0 +1,63 @@
+        <cms:form
+            masterpage=k_template_name 
+            mode='edit'
+            page_id=k_page_id
+            enctype="multipart/form-data"
+            anchor='0'
+            method='post'
+            id='csv_file_form'
+        >
+            <cms:if k_success >        
+
+                <cms:db_persist_form />
+
+                <cms:if k_success >
+
+                    <cms:pages show_future_entries='1' >
+                        <cms:show_securefile 'csv' >
+                            <cms:set uploaded_csv = file_id scope='global' />
+                        </cms:show_securefile>
+                    </cms:pages>
+
+                    <cms:if uploaded_csv >
+                        <cms:redirect "<cms:add_querystring k_template_link 'import=1' />" /> 
+                    <cms:else />
+                        <cms:redirect "<cms:show k_template_link />" /> 
+                    </cms:if>
+
+                </cms:if>
+
+            </cms:if>
+            <cms:if k_error >
+                <div class="col-md-12">
+                    <div class="alert alert-danger">
+                        <cms:each k_error >
+                            <cms:show item /><br>
+                        </cms:each>
+                    </div>
+                </div>  
+            </cms:if>
+            <div class="gxcpl-card">
+                <div class="gxcpl-card-header">
+                    <h4>
+                        <strong>
+                            CSV IMPORTER
+                        </strong>
+                    </h4>
+                </div>
+                <div class="gxcpl-card-body gxcpl-padding-10">
+                    <cms:hide>
+                        <cms:input name='csv' type="bound" />
+                    </cms:hide>
+                    <label for="csv_input">Attach CSV file</label>
+                    <div class="gxcpl-ptop-5"></div>
+                    <input name='f_csv' id="csv_input" style="/*display:none;*/" type="file" class="file-styled text-center" />
+                </div>
+                <div class="gxcpl-card-footer">
+                    <button class="btn btn-warning btn-md gxcpl-fc-21 gxcpl-fw-700" type="submit" form="csv_file_form" >
+                       <i class="fa fa-upload" aria-hidden="true"></i> Upload 
+                    </button>
+                </div>
+            </div>
+        </cms:form>
+        

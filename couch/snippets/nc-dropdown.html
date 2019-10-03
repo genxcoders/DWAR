@@ -1,0 +1,28 @@
+		<script type="text/javascript">	
+			var mealsByCategory = {<cms:pages masterpage='ncoal-commodity.php'>"<cms:show k_page_id />":{"loadingpoint":[<cms:reverse_related_pages 'commodity' masterpage='ncoal-loading-pt.php' >{"title":"<cms:show k_page_title />","name":"<cms:show k_page_name />","page_id":"<cms:show k_page_id />"}<cms:if "<cms:not k_paginated_bottom />" >,</cms:if></cms:reverse_related_pages>],"stock":[<cms:reverse_related_pages 'commodity_stock' masterpage='ncoal-stock.php' >{"title":"<cms:show k_page_title />","name":"<cms:show k_page_name />","page_id":"<cms:show k_page_id />"}<cms:if "<cms:not k_paginated_bottom />" >,</cms:if></cms:reverse_related_pages>]}<cms:if "<cms:not k_paginated_bottom />" >,</cms:if></cms:pages>}
+
+			function changeCat(value) 
+			{
+			    if (value.length == 0) 
+			    	document.getElementById("f_ncoal_ld_pt").innerHTML = "<option>Select Loading Point</option>";
+			    else 
+			    {
+			        var catOptions = "";
+			        for (var i = 0; i < mealsByCategory[value].loadingpoint.length; i++) {
+			        	catOptions += "<option value='"+ mealsByCategory[value].loadingpoint[i].page_id +"' >" + mealsByCategory[value].loadingpoint[i].title + "</option>";
+			        }
+				}
+			    document.getElementById("f_ncoal_ld_pt").innerHTML = catOptions;
+
+			     if (value.length == 0)
+			      	document.getElementById("f_ncoal_stock").innerHTML = "<option>Select Stock</option>";
+			    else 
+			    {
+			        var stockOptions = "";
+			       for (var i = 0; i < mealsByCategory[value].stock.length; i++) {
+			        	stockOptions += "<option value='"+ mealsByCategory[value].stock[i].page_id +"'>" + mealsByCategory[value].stock[i].title + "</option>";
+			        }
+				}
+			    document.getElementById("f_ncoal_stock").innerHTML = stockOptions;
+			}
+		</script>

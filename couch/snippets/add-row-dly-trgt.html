@@ -1,0 +1,23 @@
+		<script type="text/javascript">
+			// Add row 
+			$("#addrow").on("click", function () {
+		        counter = $('#myTable tr').length - 3;
+		        var newRow = $("<tr>");
+		        var cols = "";
+
+		        cols += '<td><select name="dtarget_lpoint[]"><option disabled selected value="">Select Loading Point</option><cms:pages masterpage="loading-pt.php"><option value="<cms:show k_page_id />"><cms:show k_page_title /></option></cms:pages></select></td>';
+		        cols += '<td><cms:input name="daily_target" type="text" class="gxcpl-input-text" /></td>';
+		        cols += '<td><input type="button" class="ibtnDel btn btn-danger btn-xs" value="Delete"></td>';
+		        newRow.append(cols);
+		        $("table.order-list").append(newRow);
+		        counter++;
+		    });
+
+		    $("table.order-list").on("click", ".ibtnDel", function (event) {
+		        $(this).closest("tr").remove();
+		        
+		        counter -= 1
+		        $('#addrow').attr('disabled', false).prop('value', "Add Row");
+		    });
+			// Add row
+		</script>

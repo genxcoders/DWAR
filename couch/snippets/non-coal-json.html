@@ -1,0 +1,26 @@
+{
+	<cms:pages masterpage='ncoal-commodity.php'>
+	"<cms:show k_page_title />": 
+	{
+		"loadingpoint":
+		[
+		 	<cms:reverse_related_pages 'commodity' masterpage='ncoal-loading-pt.php' >
+		 	{
+			 	"title":"<cms:show k_page_title />",
+		        "page_id":"<cms:show k_page_id />"
+		    }<cms:if "<cms:not k_paginated_bottom />" >,</cms:if>
+	        </cms:reverse_related_pages>
+	    	
+		],
+		"stock":
+		[
+	     	<cms:reverse_related_pages 'commodity_stock' masterpage='ncoal-stock.php' >
+	     	{
+			 	"title":"<cms:show k_page_title />",
+		        "page_id":"<cms:show k_page_id />"
+		    }<cms:if "<cms:not k_paginated_bottom />" >,</cms:if>
+	        </cms:reverse_related_pages>	
+	    ]
+	}<cms:if "<cms:not k_paginated_bottom />" >,</cms:if>
+	</cms:pages>
+}

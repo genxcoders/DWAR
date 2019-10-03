@@ -1,0 +1,113 @@
+<cms:no_cache />
+<cms:set mystart="<cms:gpc 'import' method='get' />" />
+
+<cms:set my_csv_file = "
+                        <cms:php>
+                            $old_path   = '<cms:show csv_file />';
+                            $site_link  = '<cms:show k_site_link />';
+                            $site_path  = '<cms:show k_site_path />';
+                            $new_path = str_replace($site_link, $site_path, $old_path);
+                            echo($new_path);
+                        </cms:php>
+                        "
+                        scope='global' />
+
+<cms:if "<cms:not_empty my_csv_file />" ><cms:else /><cms:abort "Let's upload file in CMS." /></cms:if>
+
+<cms:if mystart >
+    <cms:csv_reader file="<cms:show my_csv_file />"  paginate='1' limit=limit 
+                    prefix='csv_' use_cache='1' 
+                    has_header='1' delimiter=';'  
+                    enclosure='"'>
+          
+        <cms:if k_paginated_top >
+
+          <cms:if k_paginate_link_next > <script language="JavaScript" type="text/javascript"> var myVar; myVar = window.setTimeout( 'location.href="<cms:show k_paginate_link_next />";', <cms:mul delay '1000' /> ); </script> 
+            <button onclick="clearTimeout(myVar);">Stop</button>
+            <button onclick='location.href="<cms:add_querystring k_page_link 'import=0' />"'>Reset!</button>
+            <cms:else /> Done! </cms:if>
+          
+
+            <p><cms:show k_current_page /> / <cms:show k_total_pages /> pages (Total <cms:show k_total_records /> records. Showing <cms:show k_paginate_limit /> records per page). </hr>
+      
+                <style>
+                  th, td {text-align: center; padding:10px;} 
+                  th { background:#F3EEEF; color:#E4AAB2; font-style: normal; }
+
+                  tbody tr:nth-child(even) { background-color: #CEE4DC;  }
+                  tbody tr:nth-child(odd)  { background-color: #D7E6EA;  }
+                  .pagination a            { padding: 5px 10px;          }
+                </style>
+
+            <table border='0' cellspacing="2" >
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <cms:csv_headers>
+                          <cms-:if value ne '' && value ne '' >
+                            <th><cms:show value /></th>
+                          </cms-:if>
+                        </cms:csv_headers>    
+                    </tr>
+                </thead>
+                <tbody>
+        </cms:if>
+
+        <tr>
+            <td><cms:show k_current_record /></td>
+            <cms:csv_columns>
+                    <!-- convert to Camel Case-->
+                  <cms:put var="csv_<cms:show key />" 
+                           value="<cms:php>
+                                  $value = mb_convert_case(\"<cms:show value />\", MB_CASE_TITLE, 'UTF-8');
+                                  echo ($value);
+                                  </cms:php>" scope='parent' /> 
+                
+                <td><cms:show value /></td>
+            </cms:csv_columns>    
+          
+
+            <cms:ignore>DATABASE OPERATION</cms:ignore>
+                <cms:db_persist
+                      _auto_title                     = '0'
+                      _invalidate_cache               = '0'
+                      _masterpage                     = k_user_template
+                      _mode                           = 'create'
+
+                      k_page_title                    = csv_name
+                      extended_user_email             = "<cms:show csv_org />@gokat.no"
+                      extended_user_password          = "<cms:md5  csv_org />"
+                      extended_user_password_repeat   = "<cms:md5  csv_org />"
+                                
+                      website		                  = csv_website
+                      country                         = csv_country
+                      k_page_folder_id                = ''
+                                
+                >
+                    <cms:if k_error>
+                        <strong style="color:red;">ERROR:</strong> <cms:show k_error/>
+                        <cms:log "<cms:concat k_error ', ' csv_name ', ' csv_org '<br>' />" file='csv_error.log.html' />
+                    </cms:if>
+
+                    <cms:set new_company_id = k_last_insert_id scope='global' />
+                  
+                </cms:db_persist>
+
+            <!-- end database operation -->
+        </tr>
+
+        <cms:if k_paginated_bottom >  
+                    <tr><td colspan='<cms:show k_csv_header_count />' ></td></tr>
+                    <tr>
+                        <td colspan='<cms:show k_csv_header_count />'>
+                            <cms:paginator simple='1' prev_text='&larr; PREV' next_text ='NEXT &rarr;'  />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </cms:if>
+
+    </cms:csv_reader>    
+<cms:else/>
+    <button onclick='location.href="<cms:add_querystring k_page_link 'import=1' />"'>Start!</button>
+</cms:if>

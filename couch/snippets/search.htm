@@ -1,0 +1,47 @@
+<div class="col-md-12" id="quick-search">
+	<cms:pages masterpage='pointwise-interchange.php' limit='1' >
+	<cms:form name="quicksearch" id="quicksearch" anchor='0' >
+		<cms:if k_success >
+			<cms:if frm_arrival_date!='dd/mm/yyyy' >
+				<cms:set my_search_str="<cms:concat my_search_str ' | arrival_date==' frm_arrival_date />"  scope='global'/>
+			</cms:if>
+			<cms:if frm_interchange!='-' >
+				<cms:set my_search_str="<cms:concat my_search_str ' | interchange==' frm_interchange />"  scope='global'/>
+			</cms:if>
+		</cms:if>
+		<!-- Card -->
+		<div class="gxcpl-card">
+			<div class="gxcpl-card-header">
+				<div class="row gxcpl-padding-15">
+					<div class="col-md-4 col-md-offset-4">
+						<div class="row">
+							<div class="col-md-3 col-md-offset-1">
+								<label>DATE</label>
+							</div>
+							<div class="col-md-7">
+								<label>INTERCHANGE POINT</label>
+							</div>
+						</div>
+						<div class="input-group" name="refresh">
+							<cms:hide>
+								<cms:input type="datetime" name="arrival_date"/>
+							</cms:hide>
+							<input type="date" name="arrival_date" class="form-control" style="width: 38%; line-height: 1.42857143;" value="<cms:date "<cms:gpc 'arrival_date' method='get' />" format='Y-m-d' />" />
+
+							<cms:input class="form-control" style="width: 28%; border-left: 0px;" name='interchange' id='interchange' type='dropdown' opt_values="No Preference =- | <cms:pages masterpage='interchange.php' order='asc'><cms:show k_page_title /><cms:if '<cms:not k_paginated_bottom />'>|</cms:if></cms:pages>" />
+							
+							<cms:input class="btn btn-primary" id="notesave" type='submit' name='submit' disabled="disabled" value="SEARCH" />
+
+							<button type="reset" onclick="window.location.href='<cms:show k_site_link />ptwise-int-report.php';" class="btn btn-info gxcpl-fc-21 gxcpl-fw-700">
+			        			<i class="fa fa-refresh" aria-hidden="true"></i>
+			        		</button>
+						</div>
+					</div>
+				</div>	
+			</div>
+		</div>
+		<!-- Card -->
+		<div class="gxcpl-ptop-30"></div>
+	</cms:form>
+	</cms:pages>
+</div>

@@ -1,0 +1,169 @@
+<cms:no_cache />
+<cms:if k_template_name=='users/login.php' || k_template_name=='users/forgotpassword.php'>
+<cms:else />
+	<cms:if k_logged_out>
+		<cms:redirect "<cms:login_link />" />
+	</cms:if>
+</cms:if>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="description" content="Free Web tutorials">
+		<meta name="keywords" content="HTML,CSS,XML,JavaScript">
+		<meta name="author" content="John Doe">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		<cms:embed 'page-title.html' />
+		<!-- CSS -->
+		<cms:load_edit />
+		<link rel="stylesheet" type="text/css" href="<cms:show k_site_link />assets/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="<cms:show k_site_link />assets/css/font-awesome.css" />
+		<link rel="stylesheet" type="text/css" href="<cms:show k_site_link />assets/css/gxcpl-dwar.css" />
+		<link rel="stylesheet" href="<cms:show k_site_link />assets/css/normalize.min.css" type="text/css">
+		<link rel="stylesheet" href='<cms:show k_site_link />assets/css/material-icon.css' type='text/css'>
+		<link rel="stylesheet" href="<cms:show k_site_link />dist/sidenav.min.css" type="text/css">
+		<link rel="shortcut icon" type="image/png" href="<cms:get_custom_field 'ss_favicon' masterpage='globals.php' />" />
+		<!-- CSS -->
+		<script type="text/javascript" src="<cms:show k_site_link />assets/js/jquery-1.11.1.js"></script>
+		<cms:if k_template_name="coal.php" || k_template_name="daily-target.php" >
+		<link rel="stylesheet" href="<cms:show k_admin_link/>addons/repeatable/tablegear/tablegear.css?v=<cms:show k_cms_build />" type="text/css" media="screen"/>
+        <script type="text/javascript" src="<cms:show k_admin_link/>addons/repeatable/jquery-ui.min.js?v=<cms:show k_cms_build />"></script>
+        <script type="text/javascript" src="<cms:show k_admin_link/>addons/repeatable/tablegear/tablegear.js?v=<cms:show k_cms_build />"></script>
+    	</cms:if>
+    	<cms:if k_template_name="coal-pdf-report.php">
+    	<script type="text/javascript" src="assets/js/jspdf.debug.js"></script>
+		<script type="text/javascript" src="assets/js/html2canvas.js"></script>
+    	</cms:if>
+    	<cms:if k_template_name="ptwise-int-report.php" || k_template_name="stable-train.php" || k_template_name="coal-pdf.php" || k_template_name="transportation-pdf-report.php" || k_template_name="transportation-pdf.php" >
+    	<script src='build/pdfmake.min.js'></script>
+		<script src='build/vfs_fonts.js'></script>
+		<!-- <script src='pointwise-report.js'></script> -->
+		</cms:if>
+    	<style type="text/css">
+    		.disabled {
+			    background-color: #5bc0de;
+			    color: #fff;
+			    pointer-events:none;
+			    cursor:not-allowed;
+			    opacity:0.40;
+			}
+			<cms:if k_template_name=="users/login.php" >
+			body{
+				background: url(<cms:get_custom_field 'login_bckimg' masterpage='globals.php' />);
+				background-size: cover;
+				}
+			</cms:if>
+    	</style>
+	</head>
+	<body>
+		<cms:if k_template_name=="users/login.php" || k_template_name=="users/forgotpassword.php" || k_template_name=="coal-import.php" || k_template_name=="transport-import.php"|| k_template_name=="pointwise-import.php"|| k_template_name=="machine-import.php"|| k_template_name=="reason-import.php"|| k_template_name=="section-import.php" || k_template_name=="machine-unit-import.php" || k_template_name=="cause-machine-import.php" || k_template_name=="station-name-import.php" || k_template_name=="station-code-import.php">
+		<cms:else />
+			<!-- Nav -->
+			<div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
+			    <div class="container-fluid">
+			    	<!-- Drawer Content -->
+		    		<cms:embed 'drawer-content.html' />
+		    		<!-- Drawer Content -->
+		    		<!-- Menu Icon -->
+					<div class="col-md-1 pull-left">
+						<a href="javascript:;" class="toggle" id="sidenav-toggle">
+							<i class="material-icons">menu</i>
+						</a>
+					</div>
+					<!-- Menu Icon -->
+		    		<!-- Logout, Profile & Register Icon -->
+		    		<div class="col-md-1 dropdown pull-right">
+						<div class="row">
+							<div class="gxcpl-ptop-10"></div>
+							<div class="gxcpl-ptop-5"></div>
+							<cms:if k_user_access_level gt '4'>
+							<div class="col-md-2 col-xs-1 col-xs-offset-2">
+								<button class="btn btn-default dropdown-toggle" type="button" id="menu2" data-toggle="dropdown" style="background: transparent; border:1px solid transparent; color: #fff; margin-left: -20px;">
+									<i class="fa fa-user-plus fa-lg"></i>
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="menu2" style="background: #fff;" >
+									<li <cms:if k_template_name=='users/register.php'>class="active"</cms:if>>
+										<a href="<cms:show k_site_link />users/register.php">
+											<i class="fa fa-plus" aria-hidden="true"></i> Add User Account
+										</a>
+									</li>
+									<li class="divider"></li>
+									<li>
+										<a href="<cms:show k_site_link />user-list.php?id=<cms:show k_page_id />">
+											<i class="fa fa-users" aria-hidden="true"></i> User Account List
+										</a>
+									</li>
+								</ul>
+							</div>
+							</cms:if>
+							<div class="col-md-2 col-md-offset-1 col-xs-1">
+								<button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"  style="background: transparent; border:1px solid transparent; color: #fff;">
+									<i class="fa fa-user-circle fa-lg"></i><span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="background: #fff;" >
+									<li <cms:if k_template_name=='users/profile.php'>class="active"</cms:if>>
+										<a href="<cms:show k_site_link />users/profile.php">
+											<i class="fa fa-user" aria-hidden="true"></i> Profile
+										</a>
+									</li>
+									<li class="divider"></li>
+									<li>
+										<a href="<cms:logout_link redirect=k_site_link />">
+											<i class="fa fa-power-off" aria-hidden="true"></i> Logout
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- Logout, Profile & Register Icon -->
+					<cms:if k_template_name=='index.php'>
+						<div class="col-md-10 hidden-sm hidden-xs" style="color: #fff; display: none;">
+							<div class="gxcpl-ptop-5"></div>
+							<center><h4><strong></strong><br><small style="color: #fff;"></small></h4></center>
+						</div>
+						<div class="col-xs-7 hidden-lg hidden-md title" style="color: #fff; position: relative; bottom: 40px; left: 20px;">
+							<div class="gxcpl-ptop-5"></div>
+							<center><strong>Data-warehousing & Analysis of Reports </strong><br><small>Nagpur Division, Central Railway</small></center>
+						</div>
+					<cms:else />
+						<!-- DWAR  -->
+						<div class="col-md-10 hidden-sm hidden-xs" style="color: #fff;">
+							<div class="gxcpl-ptop-5"></div>
+							<center><h4><strong>Data-warehousing & Analysis of Reports </strong><br><small style="color: #fff;">Nagpur Division, Central Railway</small></h4></center>
+						</div>
+						<div class="col-xs-7 hidden-lg hidden-md title" style="color: #fff; position: relative; bottom: 40px; left: 20px;">
+							<div class="gxcpl-ptop-5"></div>
+							<center><strong>Data-warehousing & Analysis of Reports </strong><br><small>Nagpur Division, Central Railway</small></center>
+						</div>
+					</cms:if>
+					<!-- DWAR  -->
+			    </div>
+			</div>
+			<!-- Navbar -->
+			<div class="gxcpl-ptop-10"></div>
+			<cms:if k_template_name=='index.php'>
+			<!-- Site Title -->
+			<div class="container">
+				<div class="row hidden-sm hidden-xs">
+					<div class="col-md-2 col-sm-12 col-xs-12" >
+						<img src="<cms:get_custom_field 'ss_logo' masterpage='globals.php'  />" style="margin: auto; display: block; width: 100px;" />
+					</div>
+					<div class="col-md-8 col-sm-12 col-xs-12">
+						<h1 class="text-center gxcpl-fw-500 gxcpl-no-margin">
+							<cms:get_custom_field 'ss_ltitle' masterpage='globals.php'  />
+							<div class="gxcpl-ptop-5"></div>
+							<small><cms:get_custom_field 'ss_stitle' masterpage='globals.php'  /></small>
+						</h1>
+					</div>
+					<div class="col-md-2">
+						&nbsp;
+					</div>
+				</div>
+			</div>
+			<!-- Site Title -->
+			</cms:if>
+			<!-- Nav -->
+			</cms:if>
+		

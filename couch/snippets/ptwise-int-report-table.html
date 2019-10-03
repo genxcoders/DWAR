@@ -1,0 +1,215 @@
+								<cms:no_results>
+								<tr>
+									<td class="text-center" colspan='14'>
+										- No Data -
+									</td>
+								</tr>
+								</cms:no_results>
+								<tr style='border-bottom: 1px solid rgba(0,0,0,0.2);'>
+									
+									<td class="text-center <cms:if is_interchanged eq '1' >srintchge</cms:if> ">
+										
+									</td>
+									<td class="text-uppercase <cms:if is_stabled eq '1' >stable</cms:if> ">
+										<cms:if tr_name eq 'TA' || tr_name eq 'ta' || tr_name eq 'Ta' || tr_name eq 'tA'>
+											<cms:incr my_to_ta_count '1' />
+										</cms:if>
+										<cms:if tr_name eq 'LA' || tr_name eq 'la' || tr_name eq 'La' || tr_name eq 'lA'>
+											<cms:incr my_to_la_count '1' />
+										</cms:if>
+										<cms:show tr_name />
+									</td>
+									<td class="text-uppercase">
+										<cms:if loco>
+											<cms:each loco sep='+'>
+									
+												<cms:embed 'loco-conditions.html' />
+
+												<cms:if key eq '0' || key eq '1' >
+													<cms:if tr_name eq 'TA' || tr_name eq 'ta' || tr_name eq 'Ta' || tr_name eq 'tA'>
+														<cms:incr my_to_ta_loco_count '1' />
+													</cms:if>
+													<cms:if tr_name eq 'LA' || tr_name eq 'la' || tr_name eq 'La' || tr_name eq 'lA'>
+														<cms:incr my_to_la_loco_count '1' />
+													</cms:if>
+													<cms:if locolength eq '3'>
+														<cms:if (char_alpha eq 'D') || (char_alpha eq 'd') || (char_alpha eq '(D)') || (char_alpha eq '(d)') >
+															<cms:incr my_to_death_count '1' />
+															
+														<cms:else />
+															<cms:if is_interchanged eq '1'>
+																<cms:incr my_to_live_count '1' />
+															</cms:if>
+															<cms:if is_interchanged eq '1'>	
+																<cms:if three_number_fir_dig eq '2' || three_number_fir_dig eq '3' || three_number_fir_dig eq '4'>
+																	<cms:incr my_to_ac_count '1' />
+																	<cms:if key eq '0'>
+																		<cms:incr my_to_ac_actual_count '1' />
+																	</cms:if>
+																</cms:if>
+															</cms:if>
+															<cms:if three_number_fir_dig eq '1' || three_number_fir_dig eq '5' || three_number_fir_dig eq '7'>
+																<cms:if is_interchanged eq '1'>
+																	<cms:incr my_to_dsl_count '1' />
+																</cms:if>
+															</cms:if>
+															
+														</cms:if>
+														
+													<cms:else_if locolength eq '5' />
+														<cms:if (char_alpha eq 'D') || (char_alpha eq 'd') || (char_alpha eq '(D)') || (char_alpha eq '(d)') >
+															<cms:incr my_to_death_count '1' />
+														
+															
+														<cms:else />
+															<cms:if is_interchanged eq '1'>
+																<cms:incr my_to_live_count '1' />
+															</cms:if>
+															<cms:if is_interchanged eq '1'>	
+																<cms:if fir_dig eq '2' || fir_dig eq '3' || fir_dig eq '4'>
+																	<cms:incr my_to_ac_count '1' />
+																	<cms:if key eq '0'>
+																		<cms:incr my_to_ac_actual_count '1' />
+																		
+																	</cms:if>
+																</cms:if>
+															</cms:if>
+															<cms:if is_interchanged eq '1'>	
+																<cms:if fir_dig eq '1' || fir_dig eq '5' || fir_dig eq '7'>
+																	<cms:incr my_to_dsl_count '1' />
+																	<cms:if key eq '0'>
+																		<cms:incr my_to_dsl_actual_count '1' />
+																		
+																	</cms:if>							
+																</cms:if>
+															</cms:if>
+															<cms:ignore>
+															<!-- (Kalyani 22/08/2018 7:54pm)Ignore for testing becoz it show count 12 -->
+															<cms:if (fir_dig eq '1' || fir_dig eq '5' || fir_dig eq '7') || (three_number_fir_dig eq '1' || three_number_fir_dig eq '5' || three_number_fir_dig eq '7')>
+																<cms:if is_interchanged eq '1'>
+																	<cms:incr my_to_dsl_actual_count '1' />
+																</cms:if>
+															</cms:if>
+															</cms:ignore>
+														</cms:if>
+													<cms:else_if locolength />
+														<cms:if (char_alpha eq 'D') || (char_alpha eq 'd') || (char_alpha eq '(D)') || (char_alpha eq '(d)') >
+															<cms:incr my_to_death_count '1' />
+															
+															
+														<cms:else />
+															<cms:if is_interchanged eq '1'>
+																<cms:incr my_to_live_count '1' />
+															</cms:if>
+															<cms:if is_interchanged eq '1'>	
+																<cms:if three_number_fir_dig eq '2' || three_number_fir_dig eq '3' || three_number_fir_dig eq '4'>
+																	<cms:incr my_to_ac_count '1' />
+																	<cms:if key eq '0'>
+																		<cms:incr my_to_ac_actual_count '1' />
+																	</cms:if>
+																</cms:if>
+															</cms:if>
+															<cms:if is_interchanged eq '1'>
+																<cms:incr my_to_dsl_count '1' />
+															</cms:if>
+															
+														</cms:if>
+
+													</cms:if>
+												</cms:if>
+												<cms:show item /><br>
+											</cms:each>
+										<cms:else />
+											-NA-
+										</cms:if>
+									</td>
+									<td class="text-uppercase <cms:if sch_overdue eq '1'>sch_overdue</cms:if> ">
+										<cms:if schedule && schedule_date >
+											<cms:show schedule />
+											<cms:date schedule_date format='d-m' />
+										<cms:else />
+											-NA-
+										</cms:if>
+									</td>
+									<td>
+										<cms:set related_location="<cms:related_pages 'location'><cms:show k_page_title /></cms:related_pages>" />
+										<cms:if related_location>
+											<cms:show related_location />
+										<cms:else />
+											- NA -
+										</cms:if>
+									</td>
+									<td>
+										<cms:if arrival_time && arrival_date >
+											<cms:date arrival_time format='H:i' />
+										<cms:else />
+											-NA-
+										</cms:if> 
+											/ 
+										<cms:if departure_time && departure_date >
+											<cms:date departure_time format='H:i' /><br>
+										<cms:else />
+											-NA-
+										</cms:if>
+									</td>
+									<td <cms:if overdue eq '1'>class="overdue"</cms:if> >
+										<cms:if signon_time >
+											<cms:date signon_time format='H:i' />
+										<cms:else />
+											-NA-
+										</cms:if>
+									</td>
+									<td>
+										<div <cms:inline_edit 'remark' toolbar='custom'  /> >
+											<cms:if remark >
+												<cms:show remark />
+											<cms:else />
+												-NA-
+											</cms:if>
+										</div>
+									</td>
+									<td style="display: none;">
+										<cms:if stn_from >
+											<cms:show stn_from />
+										<cms:else />
+											-NA-
+										</cms:if>
+									</td>
+									<td style="display: none;">
+										<cms:if stn_to >
+											<cms:show stn_to />
+										<cms:else />
+											-NA-
+										</cms:if>
+									</td>
+									<td style="display: none;">
+										<cms:set related_commodity="<cms:related_pages 'commodity'><cms:show k_page_title /></cms:related_pages>" />
+										<cms:if related_commodity>
+											<cms:show related_commodity />
+										<cms:else />
+											- NA -
+										</cms:if>
+									</td>
+									<td style="display: none;">
+										<cms:set related_raketype="<cms:related_pages 'raketype'><cms:show k_page_title /></cms:related_pages>" />
+										<cms:if related_raketype>
+											<cms:show related_raketype />
+										<cms:else />
+											- NA -
+										</cms:if>
+									</td>
+									<td style="display: none;">
+										<cms:if load >
+											<cms:show load />
+										<cms:else />
+											-NA-
+										</cms:if>
+									</td>
+									<td style="display: none;">
+										<cms:if load_unit >
+											<cms:show load_unit />
+										<cms:else />
+											-NA-
+										</cms:if>
+									</td>
+								</tr>

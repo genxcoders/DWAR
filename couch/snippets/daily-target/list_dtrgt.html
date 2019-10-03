@@ -1,0 +1,88 @@
+					<!-- Section Title -->
+					<cms:embed 'dtrgt-title.html' />
+					<!-- Section Title -->
+
+					<!-- Table -->
+					<div class="col-md-12">
+						<!-- Card -->
+						<div class="gxcpl-card">
+							<!-- Body -->
+							<div class="gxcpl-card-body gxcpl-padding-15">
+								<table class="gxcpl-table ">
+									<thead>
+										<tr>
+											<th>
+												Sr. No.
+											</th>
+											<th>
+												Date
+											</th>
+											<th>
+												Colliery
+											</th>
+											<th>
+												Daily Target
+											</th>
+											<th class="text-center">
+												Action
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<cms:pages masterpage=k_template_name show_future_entries="1" paginate='1' limit='10' order='asc' >
+										<cms:no_results>
+										<tr>
+											<cms:if k_user_access_level gt '7'>
+												<td colspan="18" class="text-center">
+													- No Result -
+												</td>
+											</cms:if>
+										</tr>
+										</cms:no_results>
+										<tr>
+											<td>
+												<cms:show k_absolute_count />
+											</td>
+											<td>
+												<cms:date dt_date format='d/m/Y' />
+											</td>
+											<td>
+												<cms:show_repeatable 'daily_target_repeatable'>
+													<cms:show daily_target /><br>
+												</cms:show_repeatable>
+											</td>
+											<td>
+												<cms:show_repeatable 'daily_target_repeatable'>
+													<cms:show  daily_target_ldingpt /> 
+												</cms:show_repeatable>
+											</td>
+											<td class="text-center">
+												<a href="<cms:route_link 'edit_dtrgt' rt_id=k_page_id />" class="btn btn-primary btn-xs gxcpl-fw-700" data-toggle="tooltip" data-placement="top" title="EDIT">
+													<i class="fa fa-edit"></i>
+												</a>
+												<!-- <cms:if k_user_access_level gt '4'> -->
+													<a href="<cms:route_link 'delete_dtrgt' rt_id=k_page_id />" class="btn btn-danger btn-xs gxcpl-fw-700" data-toggle="tooltip" data-placement="top" title="DELETE">
+													<i class="fa fa-trash"></i>
+												</a>
+												<!-- </cms:if> -->
+											</td>
+										</tr>
+										</cms:pages>
+									</tbody>
+								</table>
+							</div>
+							<!-- Body -->
+							<!-- Pagination -->
+								<center>
+									<div class="btn-group gxcpl-fw-500" role="group">
+										<cms:pages show_future_entries="1" paginate='1' limit='10' >
+											<cms:paginator />
+										</cms:pages>
+									</div>
+								</center>
+								<!-- Pagination -->
+						</div>
+						<!-- Card -->
+						<div class="gxcpl-ptop-50"></div>
+					</div>
+					<!-- Table -->

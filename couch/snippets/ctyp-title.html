@@ -1,0 +1,24 @@
+					<div class="col-md-12">
+						<!-- List View -->
+						<cms:if k_matched_route='list_ctyp'>
+							<h4 class="gxcpl-no-margin">
+								COAL TYPE<small class="pull-right gxcpl-fw-500" style="height: 21px; line-height: 21px;"><a class="btn btn-danger btn-xs gxcpl-shadow-2 gxcpl-fw-700" type="button" style="margin-left: 30px;" href="<cms:route_link 'create_ctyp' />"><i class="fa fa-plus"></i> ADD COAL TYPE</a></small>
+							</h4>
+						<cms:else_if k_matched_route='create_ctyp' />
+							<h4 class="gxcpl-no-margin">
+								COAL TYPE: ADD
+							</h4>
+						<cms:else_if k_matched_route='edit_ctyp' />
+							<h4 class="gxcpl-no-margin">
+								COAL TYPE: UPDATE
+							</h4>
+						<cms:else_if k_matched_route='delete_ctyp' />
+							<h4 class="gxcpl-no-margin">
+								COAL TYPE: DELETE
+							</h4>
+						</cms:if>
+						<!-- List View -->
+						<div class="gxcpl-ptop-10"></div>
+						<div class="gxcpl-divider-dark"></div>
+						<div class="gxcpl-ptop-20"></div>
+					</div>

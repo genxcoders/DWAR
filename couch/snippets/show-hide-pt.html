@@ -1,0 +1,32 @@
+        <script type="text/javascript">
+			$('#icprdate,#interchange').on('change keyup',function(){
+				var date=$('#icprdate').val();
+				var selected = $('#interchange').val();
+				if(selected === '-' || date===""){
+				  $('#notesave').prop("disabled", true);
+				}
+				else if(selected != '' && date!="dd-mm-yyyy"){
+				  $('#notesave').prop("disabled",false);
+				}
+			});
+		</script>
+		<script type="text/javascript">
+            $(document).ready(function() {
+                $('#btnHide').click(function() {
+                    $('td:nth-child(9),th:nth-child(9)').hide();
+                    $('td:nth-child(10),th:nth-child(10)').hide();
+                    $('td:nth-child(11),th:nth-child(11)').hide();
+                    $('td:nth-child(12),th:nth-child(12)').hide();
+                    $('td:nth-child(13),th:nth-child(13)').hide();
+                    $('td:nth-child(14),th:nth-child(14)').hide();
+                });
+                $('#btnShow').click(function() {
+                    $('td:nth-child(9),th:nth-child(9)').show();
+                   	$('td:nth-child(10),th:nth-child(10)').show();
+                    $('td:nth-child(11),th:nth-child(11)').show();
+                    $('td:nth-child(12),th:nth-child(12)').show();
+                    $('td:nth-child(13),th:nth-child(13)').show();
+                    $('td:nth-child(14),th:nth-child(14)').show();
+                });
+            });
+        </script>

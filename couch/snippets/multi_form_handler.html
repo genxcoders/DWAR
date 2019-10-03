@@ -1,0 +1,63 @@
+<cms:php>
+   global $CTX;
+   if(!session_id()) @session_start();
+   $data = &$_SESSION['<cms:show k_cur_form />_<cms:show k_page_id />'];
+   if( !is_array($data) ){ $data = array(); }  
+   if( !is_array($data['post']) ){ $data = array(); }  
+   if( !is_array($data['field_values']) ){ $data = array(); }  
+   $total_pages = intval( $CTX->get('total_pages', 1) );
+   
+   if( !$CTX->get('k_submitted', 1) ){
+      $current_page = intval( $_POST['k_current_step'] );
+      if( $current_page>$total_pages ) $current_page = $total_pages;
+      if( $current_page<1 ) $current_page = 1;
+      
+      // Check if saved data available for current page
+      if( !isset($_POST['k_hid_<cms:show k_cur_form />']) ){ 
+         if( isset($data['post'][$current_page]) ){ $_POST = $data['post'][$current_page]; $_POST['k_step_back']=1; }
+      }
+      else{
+         if( isset($_POST['back']) && $current_page>1 ){ 
+            $current_page--;
+            if( isset($data['post'][$current_page]) ){ 
+                $_POST = $data['post'][$current_page];
+                $_POST['k_step_back']=1;
+            }
+         }
+      }
+      $CTX->set( 'k_current_step', $current_page );
+   }
+   else{
+      if( $CTX->get('k_success') && !$_POST['k_step_back'] ){
+         $current_page = intval( $CTX->get('k_current_step', 1) ) + 1;
+         
+         // Persist data
+         $data = &$_SESSION['<cms:show k_cur_form />_<cms:show k_page_id />'];
+         $data['post'][$current_page-1] = $_POST;
+         if( isset($data['post'][$current_page]) ){
+            $_POST = $data['post'][$current_page];
+         }
+         $html =<<<EOS
+         <cms:dump /> 
+EOS;
+         $regex = '/<LI><b>(frm_.+?)\: <\/b>(.*?)<\/LI>/is';
+         $cnt = preg_match_all( $regex, $html, $matches, PREG_SET_ORDER );
+         if( $cnt ){
+            foreach( $matches as $match ){
+               $data['field_values'][$match[1]] = $match[2];
+            }
+         }
+         $CTX->set( 'k_current_step', $current_page );
+         
+         // Uncomment the following line if saved data is to be discarded at final submission
+         //if( $current_page>$total_pages ){ $data=array(); }
+      }
+   }
+   
+   if( isset($data['field_values']) ){
+       foreach( $data['field_values'] as $k=>$v ){
+         $CTX->set( $k, $v );
+       }
+   }
+   echo "<input type='hidden' name='k_current_step' value='.$CTX->get( "k_current_step" ).' />";
+</cms:php>

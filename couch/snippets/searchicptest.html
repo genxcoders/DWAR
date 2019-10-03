@@ -1,0 +1,48 @@
+<div class="col-md-12" id="quick-search">
+	<cms:pages masterpage="test-pticp-form.php" limit='1' >
+	<cms:form name="quicksearch" id="quicksearch" anchor='0'>
+		<cms:if k_success >
+			<cms:if frm_interchange!='-' >
+				<cms:set my_search_str="<cms:concat my_search_str ' | interchange==' frm_interchange />"  scope='global'/>
+				<cms:set my_icp=frm_interchange scope='global' />
+			</cms:if>
+			
+			<cms:if frm_to_ho!='-' >
+				<cms:set my_search_str="<cms:concat my_search_str ' | to_ho==' frm_to_ho />"  scope='global'/>
+				<cms:set my_toho=frm_to_ho scope='global' />
+			</cms:if>
+
+			<cms:if frm_today_yesterday!='-' >
+				<cms:set my_search_str="<cms:concat my_search_str ' | today_yesterday==' frm_today_yesterday />"  scope='global'/>
+				<cms:set my_today_yesterday=frm_today_yesterday scope='global' />
+			</cms:if>
+
+		</cms:if>
+
+		<!-- <div class="col-md-12"> -->
+    		<div class="gxcpl-card">
+    			<div class="gxcpl-card-header">
+    				<div class="row gxcpl-padding-15">
+    					<div class="col-md-3">
+    						<h4 class="gxcpl-no-margin">SELECT INTERCHANGE & TYPE</h4>
+    					</div>
+    					<div class="col-md-2">
+				            <cms:input class="gxcpl-input-text" name='interchange' type='dropdown' opt_values="No Preference =- | <cms:pages masterpage='interchange.php' order='asc'><cms:show k_page_title /><cms:if '<cms:not k_paginated_bottom />'>|</cms:if></cms:pages>" onchange="ChooseICP(this)" />
+						</div>
+						<div class="col-md-2 icp_react" id="icp_react" >
+							<cms:input type="radio" name="to_ho" opt_values='T/O=0 | H/O=1' opt_selected='' class="_react" />
+						</div>
+						<div class="col-md-2 icp_today_yesterday" id="icp_today_yesterday" >
+							<cms:input type="radio" name="today_yesterday" opt_values="Today=<cms:date format='Y-m-d' /> | Yesterday=<cms:date return='yesterday' format='Y-m-d'/>" opt_selected='' />
+						</div>
+						<div class="col-md-1">
+							<cms:input class="btn btn-primary" type='submit' name='submit' value="ENTER" />
+						</div>
+    				</div>
+    			</div>
+    		</div>
+    		<div class="gxcpl-ptop-30"></div>
+    	<!-- </div> -->
+	</cms:form>
+	</cms:pages>
+</div>

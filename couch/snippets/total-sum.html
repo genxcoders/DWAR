@@ -1,0 +1,688 @@
+		<script type="text/javascript">
+			// Receipt Trains 1 LHS
+			$(document).ready(function(){
+				$(".rcpt-tr-1").each(function() {
+					$(this).keyup(function(){
+						calculateSum();
+					});
+				});
+			});
+			function calculateSum() {
+				var sum = 0;
+				$(".rcpt-tr-1").each(function() {
+					if(!isNaN(this.value) && this.value.length!=0) {
+						sum += parseFloat(this.value);
+					}
+				});
+				$("#f_fc_tran1_total").html(sum.toFixed(2));
+				document.getElementById('f_fc_tran1_total').value = sum;
+			}
+			// Receipt Trains 1 LHS
+			// Receipt Trains 2 RHS
+			$(document).ready(function(){
+				$(".rcpt-tr-2").each(function() {
+					$(this).keyup(function(){
+						calculateSum1();
+					});
+				});
+			});
+			function calculateSum1() {
+				var sum = 0;
+				$(".rcpt-tr-2").each(function() {
+					if(!isNaN(this.value) && this.value.length!=0) {
+						sum += parseFloat(this.value);
+					}
+				});
+				$("#f_fc_tran2_total").html(sum.toFixed(2));
+				document.getElementById('f_fc_tran2_total').value = sum;
+			}
+			// Receipt Trains 2 RHS
+			// Receipt Wagons
+			$(document).ready(function(){
+				$(".rcpt-wgns").each(function() {
+					$(this).keyup(function(){
+						calculateSum2();
+					});
+				});
+			});
+			function calculateSum2() {
+				var sum = 0;
+				$(".rcpt-wgns").each(function() {
+					if(!isNaN(this.value) && this.value.length!=0) {
+						sum += parseFloat(this.value);
+					}
+				});
+				$("#f_fc_wgns_total").html(sum.toFixed(2));
+				document.getElementById('f_fc_wgns_total').value = sum;
+			}
+			// Receipt Wagons
+			// Receipt Trains 3 LHS
+			$(document).ready(function(){
+				$(".rcpt-tr-3").each(function() {
+					$(this).keyup(function(){
+						calculateSum3();
+					});
+				});
+			});
+			function calculateSum3() {
+				var sum = 0;
+				$(".rcpt-tr-3").each(function() {
+					if(!isNaN(this.value) && this.value.length!=0) {
+						sum += parseFloat(this.value);
+					}
+				});
+				$("#f_fc_tran3_total").html(sum.toFixed(2));
+				document.getElementById('f_fc_tran3_total').value = sum;
+			}
+			// Receipt Trains 3 LHS
+			// Receipt Trains 4 RHS
+			$(document).ready(function(){
+				$(".rcpt-tr-4").each(function() {
+					$(this).keyup(function(){
+						calculateSum4();
+					});
+				});
+			});
+			function calculateSum4() {
+				var sum = 0;
+				$(".rcpt-tr-4").each(function() {
+					if(!isNaN(this.value) && this.value.length!=0) {
+						sum += parseFloat(this.value);
+					}
+				});
+				$("#f_fc_tran4_total").html(sum.toFixed(2));
+				document.getElementById('f_fc_tran4_total').value = sum;
+			}
+			// Receipt Trains 4 RHS
+			// Receipt Cog
+			$(document).ready(function(){
+				$(".rcpt_cog").each(function() {
+					$(this).keyup(function(){
+						calculateSum5();
+					});
+				});
+			});
+			function calculateSum5() {
+				var sum = 0;
+				$(".rcpt_cog").each(function() {
+					if(!isNaN(this.value) && this.value.length!=0) {
+						sum += parseFloat(this.value);
+					}
+				});
+				$("#f_cog_total").html(sum.toFixed(2));
+				document.getElementById('f_cog_total').value = sum;
+			}
+			// Receipt Cog
+			// Receipt TA
+			$(document).ready(function(){
+				$(".rcpt_ta").each(function() {
+					$(this).keyup(function(){
+						calculateSum6();
+					});
+				});
+			});
+			function calculateSum6() {
+				var sum = 0;
+				$(".rcpt_ta").each(function() {
+					if(!isNaN(this.value) && this.value.length!=0) {
+						sum += parseFloat(this.value);
+					}
+				});
+				$("#f_ta_total").html(sum.toFixed(2));
+				document.getElementById('f_ta_total').value = sum;
+			}
+			// Receipt TA
+			// Receipt LA
+			$(document).ready(function(){
+				$(".rcpt_la").each(function() {
+					$(this).keyup(function(){
+						calculateSum7();
+					});
+				});
+			});
+			function calculateSum7() {
+				var sum = 0;
+				$(".rcpt_la").each(function() {
+					if(!isNaN(this.value) && this.value.length!=0) {
+						sum += parseFloat(this.value);
+					}
+				});
+				$("#f_la_total").html(sum.toFixed(2));
+				document.getElementById('f_la_total').value = sum;
+			}
+			// Receipt LA
+			// Receipt D
+			$(document).ready(function(){
+				$(".rcpt_d").each(function() {
+					$(this).keyup(function(){
+						calculateSum8();
+					});
+				});
+			});
+			function calculateSum8() {
+				var sum = 0;
+				$(".rcpt_d").each(function() {
+					if(!isNaN(this.value) && this.value.length!=0) {
+						sum += parseFloat(this.value);
+					}
+				});
+				$("#f_d_total").html(sum.toFixed(2));
+				document.getElementById('f_d_total').value = sum;
+			}
+			// Receipt D
+			// Receipt Oth
+			$(document).ready(function(){
+				$(".rcpt_oth").each(function() {
+					$(this).keyup(function(){
+						calculateSum9();
+					});
+				});
+			});
+			function calculateSum9() {
+				var sum = 0;
+				$(".rcpt_oth").each(function() {
+					if(!isNaN(this.value) && this.value.length!=0) {
+						sum += parseFloat(this.value);
+					}
+				});
+				$("#f_oth_total").html(sum.toFixed(2));
+				document.getElementById('f_oth_total').value = sum;
+			}
+			// Receipt Oth
+			// Receipt AC
+			$(document).ready(function(){
+				$(".rcpt_ac").each(function() {
+					$(this).keyup(function(){
+						calculateSum10();
+					});
+				});
+			});
+			function calculateSum10() {
+				var sum = 0;
+				$(".rcpt_ac").each(function() {
+					if(!isNaN(this.value) && this.value.length!=0) {
+						sum += parseFloat(this.value);
+					}
+				});
+				$("#f_ac_total").html(sum.toFixed(2));
+				document.getElementById('f_ac_total').value = sum;
+			}
+			// Receipt AC
+			// Receipt DSL
+			$(document).ready(function(){
+				$(".rcpt_dsl").each(function() {
+					$(this).keyup(function(){
+						calculateSum11();
+					});
+				});
+			});
+			function calculateSum11() {
+				var sum = 0;
+				$(".rcpt_dsl").each(function() {
+					if(!isNaN(this.value) && this.value.length!=0) {
+						sum += parseFloat(this.value);
+					}
+				});
+				$("#f_dsl_total").html(sum.toFixed(2));
+				document.getElementById('f_dsl_total').value = sum;
+			}
+			// Receipt DSL
+			// Receipt Ldd
+			$(document).ready(function(){
+				$(".rcpt_ldd").each(function() {
+					$(this).keyup(function(){
+						calculateSum12();
+					});
+				});
+			});
+			function calculateSum12() {
+				var sum = 0;
+				$(".rcpt_ldd").each(function() {
+					if(!isNaN(this.value) && this.value.length!=0) {
+						sum += parseFloat(this.value);
+					}
+				});
+				$("#f_ldd_total").html(sum.toFixed(2));
+				document.getElementById('f_ldd_total').value = sum;
+			}
+			// Receipt Ldd
+			// Receipt Emp
+			$(document).ready(function(){
+				$(".rcpt_emp").each(function() {
+					$(this).keyup(function(){
+						calculateSum13();
+					});
+				});
+			});
+			function calculateSum13() {
+				var sum = 0;
+				$(".rcpt_emp").each(function() {
+					if(!isNaN(this.value) && this.value.length!=0) {
+						sum += parseFloat(this.value);
+					}
+				});
+				$("#f_emp_total").html(sum.toFixed(2));
+				document.getElementById('f_emp_total').value = sum;
+			}
+			// Receipt Emp
+			// Receipt MT
+			$(document).ready(function(){
+				$(".rcpt_mt").each(function() {
+					$(this).keyup(function(){
+						calculateSum14();
+					});
+				});
+			});
+			function calculateSum14() {
+				var sum = 0;
+				$(".rcpt_mt").each(function() {
+					if(!isNaN(this.value) && this.value.length!=0) {
+						sum += parseFloat(this.value);
+					}
+				});
+				$("#f_mt_total").html(sum.toFixed(2));
+				document.getElementById('f_mt_total').value = sum;
+			}
+			// Receipt MT
+
+			// Despatches Train 1
+			$(document).ready(function(){
+				$(".dsph-tr-1").each(function() {
+					$(this).keyup(function(){
+						calculateSum15();
+					});
+				});
+			});
+			function calculateSum15() {
+				var sum = 0;
+				$(".dsph-tr-1").each(function() {
+					if(!isNaN(this.value) && this.value.length!=0) {
+						sum += parseFloat(this.value);
+					}
+				});
+				$("#f_dsph_tran1_total").html(sum.toFixed(2));
+				document.getElementById('f_dsph_tran1_total').value = sum;
+			}
+			// Despatches Train 1
+			// Despatches Train 2
+			$(document).ready(function(){
+				$(".dsph-tr-2").each(function() {
+					$(this).keyup(function(){
+						calculateSum16();
+					});
+				});
+			});
+			function calculateSum16() {
+				var sum = 0;
+				$(".dsph-tr-2").each(function() {
+					if(!isNaN(this.value) && this.value.length!=0) {
+						sum += parseFloat(this.value);
+					}
+				});
+				$("#f_dsph_tran2_total").html(sum.toFixed(2));
+				document.getElementById('f_dsph_tran2_total').value = sum;
+			}
+			// Despatches Train 2
+			// Despatches Wagons
+			$(document).ready(function(){
+				$(".dsph-wgns").each(function() {
+					$(this).keyup(function(){
+						calculateSum17();
+					});
+				});
+			});
+			function calculateSum17() {
+				var sum = 0;
+				$(".dsph-wgns").each(function() {
+					if(!isNaN(this.value) && this.value.length!=0) {
+						sum += parseFloat(this.value);
+					}
+				});
+				$("#f_dsph_wgns_total").html(sum.toFixed(2));
+				document.getElementById('f_dsph_wgns_total').value = sum;
+			}
+			// Despatches Wagons
+			// Despatches Train 3
+			$(document).ready(function(){
+				$(".dsph-tr-3").each(function() {
+					$(this).keyup(function(){
+						calculateSum18();
+					});
+				});
+			});
+			function calculateSum18() {
+				var sum = 0;
+				$(".dsph-tr-3").each(function() {
+					if(!isNaN(this.value) && this.value.length!=0) {
+						sum += parseFloat(this.value);
+					}
+				});
+				$("#f_dsph_tran3_total").html(sum.toFixed(2));
+				document.getElementById('f_dsph_tran3_total').value = sum;
+			}
+			// Despatches Train 3
+			// Despatches Train 4
+			$(document).ready(function(){
+				$(".dsph-tr-4").each(function() {
+					$(this).keyup(function(){
+						calculateSum19();
+					});
+				});
+			});
+			function calculateSum19() {
+				var sum = 0;
+				$(".dsph-tr-4").each(function() {
+					if(!isNaN(this.value) && this.value.length!=0) {
+						sum += parseFloat(this.value);
+					}
+				});
+				$("#f_dsph_tran4_total").html(sum.toFixed(2));
+				document.getElementById('f_dsph_tran4_total').value = sum;
+			}
+			// Despatches Train 4
+			// Despatches Cog
+			$(document).ready(function(){
+				$(".dsph-cog").each(function() {
+					$(this).keyup(function(){
+						calculateSum20();
+					});
+				});
+			});
+			function calculateSum20() {
+				var sum = 0;
+				$(".dsph-cog").each(function() {
+					if(!isNaN(this.value) && this.value.length!=0) {
+						sum += parseFloat(this.value);
+					}
+				});
+				$("#f_dsph_cog_total").html(sum.toFixed(2));
+				document.getElementById('f_dsph_cog_total').value = sum;
+			}
+			// Despatches Cog
+			// Despatches TA
+			$(document).ready(function(){
+				$(".dsph-ta").each(function() {
+					$(this).keyup(function(){
+						calculateSum21();
+					});
+				});
+			});
+			function calculateSum21() {
+				var sum = 0;
+				$(".dsph-ta").each(function() {
+					if(!isNaN(this.value) && this.value.length!=0) {
+						sum += parseFloat(this.value);
+					}
+				});
+				$("#f_dsph_ta_total").html(sum.toFixed(2));
+				document.getElementById('f_dsph_ta_total').value = sum;
+			}
+			// Despatches TA
+			// Despatches LA
+			$(document).ready(function(){
+				$(".dsph-la").each(function() {
+					$(this).keyup(function(){
+						calculateSum22();
+					});
+				});
+			});
+			function calculateSum22() {
+				var sum = 0;
+				$(".dsph-la").each(function() {
+					if(!isNaN(this.value) && this.value.length!=0) {
+						sum += parseFloat(this.value);
+					}
+				});
+				$("#f_dsph_la_total").html(sum.toFixed(2));
+				document.getElementById('f_dsph_la_total').value = sum;
+			}
+			// Despatches LA
+			// Despatches D
+			$(document).ready(function(){
+				$(".dsph-d").each(function() {
+					$(this).keyup(function(){
+						calculateSum23();
+					});
+				});
+			});
+			function calculateSum23() {
+				var sum = 0;
+				$(".dsph-d").each(function() {
+					if(!isNaN(this.value) && this.value.length!=0) {
+						sum += parseFloat(this.value);
+					}
+				});
+				$("#f_dsph_d_total").html(sum.toFixed(2));
+				document.getElementById('f_dsph_d_total').value = sum;
+			}
+			// Despatches D
+			// Despatches Oth
+			$(document).ready(function(){
+				$(".dsph-oth").each(function() {
+					$(this).keyup(function(){
+						calculateSum24();
+					});
+				});
+			});
+			function calculateSum24() {
+				var sum = 0;
+				$(".dsph-oth").each(function() {
+					if(!isNaN(this.value) && this.value.length!=0) {
+						sum += parseFloat(this.value);
+					}
+				});
+				$("#f_dsph_oth_total").html(sum.toFixed(2));
+				document.getElementById('f_dsph_oth_total').value = sum;
+			}
+			// Despatches Oth
+			// Despatches AC
+			$(document).ready(function(){
+				$(".dsph-ac").each(function() {
+					$(this).keyup(function(){
+						calculateSum25();
+					});
+				});
+			});
+			function calculateSum25() {
+				var sum = 0;
+				$(".dsph-ac").each(function() {
+					if(!isNaN(this.value) && this.value.length!=0) {
+						sum += parseFloat(this.value);
+					}
+				});
+				$("#f_dsph_ac_total").html(sum.toFixed(2));
+				document.getElementById('f_dsph_ac_total').value = sum;
+			}
+			// Despatches AC
+			// Despatches DSL
+			$(document).ready(function(){
+				$(".dsph-dsl").each(function() {
+					$(this).keyup(function(){
+						calculateSum26();
+					});
+				});
+			});
+			function calculateSum26() {
+				var sum = 0;
+				$(".dsph-dsl").each(function() {
+					if(!isNaN(this.value) && this.value.length!=0) {
+						sum += parseFloat(this.value);
+					}
+				});
+				$("#f_dsph_dsl_total").html(sum.toFixed(2));
+				document.getElementById('f_dsph_dsl_total').value = sum;
+			}
+			// Despatches DSL
+			// Despatches Ldd
+			$(document).ready(function(){
+				$(".dsph-ldd").each(function() {
+					$(this).keyup(function(){
+						calculateSum27();
+					});
+				});
+			});
+			function calculateSum27() {
+				var sum = 0;
+				$(".dsph-ldd").each(function() {
+					if(!isNaN(this.value) && this.value.length!=0) {
+						sum += parseFloat(this.value);
+					}
+				});
+				$("#f_dsph_ldd_total").html(sum.toFixed(2));
+				document.getElementById('f_dsph_ldd_total').value = sum;
+			}
+			// Despatches Ldd
+			// Despatches Emp
+			$(document).ready(function(){
+				$(".dsph-emp").each(function() {
+					$(this).keyup(function(){
+						calculateSum28();
+					});
+				});
+			});
+			function calculateSum28() {
+				var sum = 0;
+				$(".dsph-emp").each(function() {
+					if(!isNaN(this.value) && this.value.length!=0) {
+						sum += parseFloat(this.value);
+					}
+				});
+				$("#f_dsph_emp_total").html(sum.toFixed(2));
+				document.getElementById('f_dsph_emp_total').value = sum;
+			}
+			// Despatches Emp
+			// Despatches MT
+			$(document).ready(function(){
+				$(".dsph-mt").each(function() {
+					$(this).keyup(function(){
+						calculateSum29();
+					});
+				});
+			});
+			function calculateSum29() {
+				var sum = 0;
+				$(".dsph-mt").each(function() {
+					if(!isNaN(this.value) && this.value.length!=0) {
+						sum += parseFloat(this.value);
+					}
+				});
+				$("#f_dsph_mt_total").html(sum.toFixed(2));
+				document.getElementById('f_dsph_mt_total').value = sum;
+			}
+			// Despatches MT
+
+			// Forecast Rakes  
+				$(document).ready(function(){
+					$(".fc_rake").each(function() {
+						$(this).keyup(function(){
+							calculateSum30();
+						});
+					});
+				});
+				function calculateSum30() {
+					var sum = 0;
+					$(".fc_rake").each(function() {
+						if(!isNaN(this.value) && this.value.length!=0) {
+							sum += parseFloat(this.value);
+						}
+					});
+					$("#f_total_fc_rake").html(sum.toFixed(2));
+					document.getElementById('f_total_fc_rake').value = sum;
+				}
+				// Forecast Rakes  
+				// Forecast Wagons  
+				$(document).ready(function(){
+					$(".fc_wgns").each(function() {
+						$(this).keyup(function(){
+							calculateSum31();
+						});
+					});
+				});
+				function calculateSum31() {
+					var sum = 0;
+					$(".fc_wgns").each(function() {
+						if(!isNaN(this.value) && this.value.length!=0) {
+							sum += parseFloat(this.value);
+						}
+					});
+					$("#f_total_fc_wgn").html(sum.toFixed(2));
+					document.getElementById('f_total_fc_wgn').value = sum;
+				}
+				// Forecast Wagons
+				// Loading Rakes 
+				$(document).ready(function(){
+					$(".ld_rake").each(function() {
+						$(this).keyup(function(){
+							calculateSum32();
+						});
+					});
+				});
+				function calculateSum32() {
+					var sum = 0;
+					$(".ld_rake").each(function() {
+						if(!isNaN(this.value) && this.value.length!=0) {
+							sum += parseFloat(this.value);
+						}
+					});
+					$("#f_total_ld_rake").html(sum.toFixed(2));
+					document.getElementById('f_total_ld_rake').value = sum;
+				}
+				// Loading Rakes 
+				// Loading Wagons 
+				$(document).ready(function(){
+					$(".ld_wgns").each(function() {
+						$(this).keyup(function(){
+							calculateSum33();
+						});
+					});
+				});
+				function calculateSum33() {
+					var sum = 0;
+					$(".ld_wgns").each(function() {
+						if(!isNaN(this.value) && this.value.length!=0) {
+							sum += parseFloat(this.value);
+						}
+					});
+					$("#f_total_ld_wgn").html(sum.toFixed(2));
+					document.getElementById('f_total_ld_wgn').value = sum;
+				}
+				// Loading Wagons
+				// Rejection
+				$(document).ready(function(){
+					$(".rejct").each(function() {
+						$(this).keyup(function(){
+							calculateSum34();
+						});
+					});
+				});
+				function calculateSum34() {
+					var sum = 0;
+					$(".rejct").each(function() {
+						if(!isNaN(this.value) && this.value.length!=0) {
+							sum += parseFloat(this.value);
+						}
+					});
+					$("#f_total_rejc").html(sum.toFixed(2));
+					document.getElementById('f_total_rejc').value = sum;
+				}
+				// Rejection
+				// Todays' Forecast
+				$(document).ready(function(){
+					$(".tdays_fc").each(function() {
+						$(this).keyup(function(){
+							calculateSum35();
+						});
+					});
+				});
+				function calculateSum35() {
+					var sum = 0;
+					$(".tdays_fc").each(function() {
+						if(!isNaN(this.value) && this.value.length!=0) {
+							sum += parseFloat(this.value);
+						}
+					});
+					$("#f_total_tdays_fc").html(sum.toFixed(2));
+					document.getElementById('f_total_tdays_fc').value = sum;
+				}
+				// Todays' Forecast
+		</script>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+		<form>
+			<input type="radio" name="my_toho" id=
+			'my_to' />TO
+			<input type="radio" name="my_toho" id='my_ho' />HO <br>
+			Input1:<input type="text" name="input1" />
+			Input2:<input type="text" name="input2" /><br>
+			Save filled value in HO<input type="checkbox" name="check" id="toggle"  />
+			<select name="type" id="type" disabled>
+	            <option value="general">General</option>
+	            <option value="employee">employee</option>
+	            <option value="student">student</option>
+	        </select><br>
+	        <input type="submit" value="Submit">
+		</form>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.js"></script>
+		<script type="text/javascript">
+			$('#toggle').click(function () {
+			    //check if checkbox is checked
+			    if ($(this).is(':checked')) {
+			        
+			        $('#type').removeAttr('disabled'); //enable input
+			        
+			    } else {
+			        $('#type').attr('disabled', true); //disable input
+			    }
+			});
+		</script>
+	</body>
+</html>

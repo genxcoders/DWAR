@@ -1,0 +1,29 @@
+<div class="col-md-12" id="quick-search">
+	<cms:pages masterpage="coal.php" limit="1" >
+		<cms:form name="quicksearch" id="quicksearch" anchor='0'>
+			<cms:if k_success >
+				<cms:if tdate!= 'dd/mm/yyyy' >
+					<cms:set my_search_str="<cms:concat my_search_str ' | tdate==' frm_tdate />"  scope='global'/>
+				</cms:if>
+			</cms:if>
+			<!-- Card -->
+			<div class="gxcpl-card">
+				<div class="gxcpl-card-header">
+					<div class="row">
+						<div class="col-md-4">
+							&nbsp;
+						</div>
+						<div class="col-md-2">
+							<h4>Search Report From Date</h4>
+						</div>
+						<div class="col-md-2">
+							&nbsp;
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="gxcpl-ptop-50"></div>
+			<!-- Card -->
+		</cms:form>
+	</cms:pages>
+</div>

@@ -1,0 +1,118 @@
+					<!-- Section Title -->
+					<cms:embed 'ncoal-title.html' />
+					<!-- Section Title -->
+					<cms:set submit_success="<cms:get_flash 'submit_success' />" />
+				    <cms:if submit_success >
+				    	<div class="col-md-12">
+				    		<div class="alert alert-success">
+				    			<strong>Success! </strong>Non Coal created successfully.
+				    		</div>
+				    	</div>
+				    </cms:if>
+					<cms:form
+						masterpage=k_template_name
+					    mode='create'
+					    enctype='multipart/form-data'
+					    anchor='0'
+					    method="post"
+					>
+					<cms:if k_success >
+			            <cms:db_persist_form
+			                _invalidate_cache='0'
+			                k_page_title="<cms:show frm_ncoal_dest /> <cms:show frm_ncoal_h_f /> <cms:date n_c_date format='Y-m-d' />"
+			                k_page_name="<cms:show k_page_title />"
+			            />
+			            <cms:if k_success >
+				            <cms:set_flash name='submit_success' value='1' />
+				            <cms:redirect url="<cms:route_link 'create_ncoal' />" />
+				        </cms:if>
+			        </cms:if>
+
+			        <cms:if k_error >
+	            		<div class="col-md-12">
+	            			<div class="alert alert-danger">
+	            				<cms:each k_error >
+		                    		<cms:show item /><br>
+		                    	</cms:each>
+		                    </div>
+	                	</div>
+			        </cms:if>
+			        <!-- Non-Coal -->
+			        <div class="col-md-12">
+						<!-- Card -->
+						<div class="gxcpl-card">
+							<!-- Body -->
+							<div class="gxcpl-card-body gxcpl-padding-15">
+								<div class="row">
+									<div class="col-md-12">
+										<!-- Chaining Dropdown -->
+										<div class="col-md-2">
+											<label>Date *</label>
+											<div class="gxcpl-ptop-5"></div>
+											<cms:hide>
+												<cms:input name="n_c_date" type="bound" />
+											</cms:hide>
+											<input type="date" name="f_n_c_date" class="gxcpl-input-text" value="<cms:date return='yesterday' format='Y-m-d' />" style="width: auto !important;" />
+											<div class="gxcpl-ptop-10"></div>
+										</div>
+										<div class="col-md-2">
+											<label>Commodity *</label>
+											<div class="gxcpl-ptop-5"></div>
+											<cms:hide>
+												<cms:input name="ncoal_cmdt" type="bound" />
+											</cms:hide>
+											<select name="f_ncoal_cmdt" id="meal" class="gxcpl-input-text text-uppercase" onChange="changeCat(this.value);" style="width: auto;">
+											    <option value="" disabled selected>Select</option>
+											    <cms:pages masterpage='ncoal-commodity.php'>
+											    <option value="<cms:show k_page_id />"><cms:show k_page_title /></option>
+											    </cms:pages>
+											</select>
+										</div>
+										<div class="col-md-2">
+											<label>Loading point *</label>
+											<div class="gxcpl-ptop-5"></div>
+											<cms:hide>
+												<cms:input name="ncoal_ld_pt" type="bound" />
+											</cms:hide>
+											<select name="f_ncoal_ld_pt" id="f_ncoal_ld_pt" class="gxcpl-input-text" style="width: auto">
+											    <option value="<cms:show k_page_id />" disabled selected>Select
+											    </option>
+											</select>
+										</div>
+										<!-- Chaining Dropdown -->
+										<div class="col-md-1">
+											<label>Full/Half *</label>
+											<div class="gxcpl-ptop-5"></div>
+											<cms:input type="bound" name="ncoal_h_f" />
+										</div>
+										<div class="col-md-2">
+											<label>No. of Units *</label>
+											<div class="gxcpl-ptop-5"></div>
+											<cms:input class="gxcpl-input-text" type="bound" name="ncoal_units" />
+										</div>
+										<div class="col-md-2">
+											<label>Stock *</label>
+											<div class="gxcpl-ptop-5"></div>
+											<cms:input name="ncoal_stock" type="bound" id="f_ncoal_stock" class="gxcpl-input-text" style="width: auto !important;" />
+										</div>
+										<div class="col-md-1">
+											<label>Desti *</label>
+											<div class="gxcpl-ptop-5"></div>
+											<cms:input class="gxcpl-input-text" type="bound" name="ncoal_dest" />
+											<div class="gxcpl-ptop-50"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- Body -->
+							<!-- Footer -->
+							<div class="gxcpl-card-footer">
+								<button class="btn btn-danger btn-sm">
+									<i class="fa fa-floppy-o" aria-hidden="true"></i> SAVE
+								</button>
+							</div>
+							<!-- Footer -->
+						</div>
+					</div>
+					<!-- Card -->
+					</cms:form>

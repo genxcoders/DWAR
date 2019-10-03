@@ -1,0 +1,24 @@
+					<div class="col-md-12">
+						<!-- List View -->
+						<cms:if k_matched_route='list_lctn'>
+							<h4 class="gxcpl-no-margin">
+								LOCATION<small class="pull-right gxcpl-fw-500" style="height: 21px; line-height: 21px;"><a class="btn btn-danger btn-xs gxcpl-shadow-2 gxcpl-fw-700" type="button" style="margin-left: 30px;" href="<cms:route_link 'create_lctn' />"><i class="fa fa-plus"></i> ADD LOCATION</a></small>
+							</h4>
+						<cms:else_if k_matched_route='create_lctn' />
+							<h4 class="gxcpl-no-margin">
+								LOCATION: ADD
+							</h4>
+						<cms:else_if k_matched_route='edit_lctn' />
+							<h4 class="gxcpl-no-margin">
+								LOCATION: UPDATE
+							</h4>
+						<cms:else_if k_matched_route='delete_lctn' />
+							<h4 class="gxcpl-no-margin">
+								LOCATION: DELETE
+							</h4>
+						</cms:if>
+						<!-- List View -->
+						<div class="gxcpl-ptop-10"></div>
+						<div class="gxcpl-divider-dark"></div>
+						<div class="gxcpl-ptop-20"></div>
+					</div>

@@ -1,0 +1,19 @@
+.gxcpl-input-text {
+	border: 0px solid transparent;
+	border-bottom: 1px solid rgba(0,0,0,0.23);
+	width: 100%;
+	transition: border-bottom 0.3s ease;
+	/*padding: 2px 4px;*/
+	height: 24px;
+}
+.gxcpl-input-text:focus, .gxcpl-input-select:focus {
+	border-bottom: 1px solid #D32F2F;
+	transition: border-bottom 0.3s ease;
+}
+.gxcpl-input-select {
+	border: 0px solid transparent;
+	border-bottom: 1px solid rgba(0,0,0,0.23);
+	transition: border-bottom 0.3s ease;
+	height: 22px;
+	width: 100%;
+}

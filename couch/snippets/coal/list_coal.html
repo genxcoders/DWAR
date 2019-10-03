@@ -1,0 +1,374 @@
+					<!-- Section Title -->
+					<cms:embed 'coal-title.html' />
+					<!-- Section Title -->
+
+					<!-- Table -->
+					<div class="col-md-12">
+						<!-- Card -->
+						<div class="gxcpl-card">
+							<!-- Body -->
+							<div class="gxcpl-card-body	gxcpl-padding-15">
+								<table class="gxcpl-table" width="100%" >
+									<thead>
+										<tr>
+										    <th class="text-center" rowspan="2">Sr No</th>
+										    <th class="text-center" rowspan="2">Date</th>
+										    <th class="text-center" rowspan="2">Ld Pt</th>
+										    <th class="text-center" rowspan="2">F/H</th>
+										    <th class="text-center" rowspan="2">Units</th>
+										    <th class="text-center" rowspan="2">Stock</th>
+										    <th class="text-center" rowspan="2">Desti</th>
+										    <th class="text-center" rowspan="2">Type</th>
+										    <th class="text-center" colspan="3">Rejection</th>
+										    <th class="text-center" colspan="4">BPC Particulars</th>
+										    <th class="text-center" colspan="2">Last Unldg. Pt.</th>
+										    <th class="text-center" rowspan="2">Remark</th>
+										    <th class="text-center" rowspan="2">Action</th>
+									  	</tr>
+									  	<tr>	
+										    <th class="text-center">No Wgn</th>
+										    <th class="text-center">Sr Reject Wgn</th>
+										    <th class="text-center">Reason of Rejection</th>
+										    <th class="text-center">Type</th>
+										    <th class="text-center">Stn</th>
+										    <th class="text-center">Date</th>
+										    <th class="text-center">%age</th>
+										    <th class="text-center">Stn</th>
+										    <th class="text-center">Wagons</th>
+										</tr>
+										<cms:ignore>
+										<tr>
+											<th class="text-center" rowspan="2">Sr No</th>
+											<th class="text-center" rowspan="2">Ld Pt</th>
+											<th class="text-center" rowspan="2">F/H</th>
+											<th class="text-center" rowspan="2">Units</th>
+											<th class="text-center" rowspan="2">Stock</th>
+											<th class="text-center" rowspan="2">Desti</th>
+											<th class="text-center" rowspan="2">Type</th>
+											<th class="text-center" colspan="3">Rejection</th>
+											<th class="text-center" rowspan="2">Type</th>
+											<th class="text-center" rowspan="2">Stn</th>
+											<th class="text-center" rowspan="2">Date</th>
+											<th class="text-center" rowspan="2">%age</th>
+											<th class="text-center" rowspan="2">Stn</th>
+											<th class="text-center" rowspan="2">Wagons</th>
+											<th class="text-center" rowspan="2">Siding</th>
+											<th class="text-center" rowspan="2">Tons</th>
+											<td class="text-center" rowspan="2">Remark</td>
+											<th class="text-center" rowspan="2">Action</th>
+										</tr>
+										<tr>
+											<th class="text-center">No Wgn</th>
+											<th class="text-center">Sr Reject Wgn</th>
+											<th class="text-center">Reason of Rejection</th>
+										</tr>
+										</cms:ignore>
+									</thead>
+									
+									<tbody>
+										<cms:pages masterpage='coal.php' show_future_entries="1" paginate='1' limit='10' order='asc' >
+                                        <cms:no_results>
+                                        <tr>
+                                            <cms:if k_user_access_level gt '7'>
+                                                <td colspan="19" class="text-center">
+                                                    - No Result -
+                                                </td>
+                                            </cms:if>
+                                        </tr>
+                                        </cms:no_results>
+                                        <tr>
+										    <td class="text-center">
+										    	<cms:show k_absolute_count />
+										    </td>
+										    <td class="text-center">
+												<cms:if tdate >
+													<cms:date tdate format='d-m-Y' />
+												<cms:else />
+													-NA-
+												</cms:if>
+										    </td>
+										    <td class="text-center">
+										    	<cms:if ld_pnt>
+													<cms:show ld_pnt />
+												<cms:else />
+													- NA -
+												</cms:if>
+										    </td>
+										    <td class="text-center">
+										    	<cms:if half_full >
+													<cms:show half_full />
+												<cms:else />
+													-NA-
+												</cms:if>
+										    </td>
+										    <td class="text-center">
+										    	<cms:if no_unit >
+													<cms:show no_unit />
+												<cms:else />
+													-NA-
+												</cms:if>
+										    </td>
+										    <td class="text-center">
+										    	<cms:if (stock=='-')>
+													-NA-
+												<cms:else />
+													<cms:show stock />
+												</cms:if>
+										    </td>
+										    <td class="text-center">
+										    	<cms:if desti >
+													<cms:show desti />
+												<cms:else />
+													-NA-
+												</cms:if>
+										    </td>
+										    <td class="text-center">
+										    	<cms:if (coal_type=='-')>
+													-NA-
+												<cms:else />
+													<cms:show coal_type />
+												</cms:if>
+										    </td>
+										    <td class="text-center">
+										    	<cms:if no_wgn_rjct >
+                                                    <cms:show no_wgn_rjct />
+                                                <cms:else />
+                                                    -NA-
+                                                </cms:if>
+										    </td>
+										    <td class="text-center">
+										    	<cms:show_repeatable 'my_repeatable'>
+													<cms:if sr_no_rjct_wgn >
+	                                                    <cms:show sr_no_rjct_wgn />
+	                                                <cms:else />
+	                                                    -NA-
+	                                                </cms:if><br>
+												</cms:show_repeatable>
+										    </td>
+										    <td class="text-center">
+										    	<cms:show_repeatable 'my_repeatable'>
+													<cms:if (resn_rjct=='-')>
+	                                                    -NA-
+	                                                <cms:else />
+	                                                    <cms:show resn_rjct />
+	                                                </cms:if><br>
+												</cms:show_repeatable>
+										    </td>
+										    <td class="text-center">
+										    	<cms:if (bpc_type=='-') >
+													-NA-
+												<cms:else />
+													<cms:show bpc_type />
+												</cms:if>
+										    </td>
+										    <td class="text-center">
+										    	<cms:if bpc_stn >
+													<cms:show bpc_stn />
+												<cms:else />
+													-NA-
+												</cms:if>
+										    </td>
+										    <td class="text-center">
+										    	<cms:if brkdt >
+													<cms:date brkdt format="d-m-y" />
+												<cms:else />
+													-NA-
+												</cms:if>
+										    </td>
+										    <td class="text-center">
+										    	<cms:if percentage >
+													<cms:show percentage />
+												<cms:else />
+													-NA-
+												</cms:if>
+										    </td>
+										    <td class="text-center">
+										    	<cms:if unld_stn >
+													<cms:show unld_stn />
+												<cms:else />
+													-NA-
+												</cms:if>
+										    </td>
+										    <td class="text-center">
+												<cms:if no_wagons >
+													<cms:show no_wagons />
+												<cms:else />
+													-NA-
+												</cms:if>
+											</td>
+											<td class="text-center">
+												<cms:if colremrk >
+													<cms:show colremrk />
+												<cms:else />
+													-NA-
+												</cms:if>
+											</td>
+										    <td class="text-center">
+												<a href="<cms:route_link 'edit_coal' rt_id=k_page_id />" class="btn btn-primary btn-xs gxcpl-fw-700" data-toggle="tooltip" data-placement="top" title="EDIT">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                                <!-- <cms:if k_user_access_level gt '7'> -->
+                                                <a href="<cms:route_link 'delete_coal' rt_id=k_page_id />" class="btn btn-danger btn-xs gxcpl-fw-700" data-toggle="tooltip" data-placement="top" title="DELETE">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                                <!-- </cms:if> -->
+											</td>
+										</tr>
+                                        <cms:ignore>
+                                        <tr>
+											<td class="text-center">
+												<cms:show k_absolute_count />
+											</td>
+											<td class="text-center">
+												<cms:if ld_pnt>
+													<cms:show ld_pnt />
+												<cms:else />
+													- NA -
+												</cms:if>
+											</td>
+											<td class="text-center">
+												<cms:if hlf_ful >
+													<cms:show hlf_ful />
+												<cms:else />
+													-NA-
+												</cms:if>
+											</td>
+											<td class="text-center">
+												<cms:if no_unit >
+													<cms:show no_unit />
+												<cms:else />
+													-NA-
+												</cms:if>
+											</td>
+											<td class="text-center">
+												<cms:if (stock=='-')>
+													-NA-
+												<cms:else />
+													<cms:show stock />
+												</cms:if>
+											</td>
+											<td class="text-center">
+												<cms:if desti >
+													<cms:show desti />
+												<cms:else />
+													-NA-
+												</cms:if>
+											</td>
+											<td class="text-center">
+												<cms:if (coal_type=='-')>
+													-NA-
+												<cms:else />
+													<cms:show coal_type />
+												</cms:if>
+											</td>
+											<td class="text-center">
+												<cms:if no_wgn_rjct >
+                                                    <cms:show no_wgn_rjct />
+                                                <cms:else />
+                                                    -NA-
+                                                </cms:if>
+	                                        </td>
+	                                        <td class="text-center">
+												<cms:show_repeatable 'my_repeatable'>
+													<cms:if sr_no_rjct_wgn >
+	                                                    <cms:show sr_no_rjct_wgn />
+	                                                <cms:else />
+	                                                    -NA-
+	                                                </cms:if><br>
+												</cms:show_repeatable>
+	                                        </td>
+	                                        <td class="text-center">
+												<cms:show_repeatable 'my_repeatable'>
+													<cms:if (resn_rjct=='-')>
+	                                                    -NA-
+	                                                <cms:else />
+	                                                    <cms:show resn_rjct />
+	                                                </cms:if><br>
+												</cms:show_repeatable>
+	                                        </td>
+											<td class="text-center">
+												<cms:if (bpc_type=='-') >
+													-NA-
+												<cms:else />
+													<cms:show bpc_type />
+												</cms:if>
+											</td>
+											<td class="text-center">
+												<cms:if bpc_stn >
+													<cms:show bpc_stn />
+												<cms:else />
+													-NA-
+												</cms:if>
+											</td>
+											<td class="text-center">
+												<cms:if brkdt >
+													<cms:date brkdt format="d-m-y" />
+												<cms:else />
+													-NA-
+												</cms:if>
+											</td>
+											<td class="text-center">
+												<cms:if percentage >
+													<cms:show percentage />
+												<cms:else />
+													-NA-
+												</cms:if>
+											</td>
+											<td class="text-center">
+												<cms:if unld_stn >
+													<cms:show unld_stn />
+												<cms:else />
+													-NA-
+												</cms:if>
+											</td>
+											<td class="text-center">
+												<cms:if no_wagons >
+													<cms:show no_wagons />
+												<cms:else />
+													-NA-
+												</cms:if>
+											</td>
+											<td class="text-center">
+												<cms:if (siding=='-') >
+													-NA-
+												<cms:else />
+													<cms:show siding />
+												</cms:if>
+											</td>
+											<td class="text-center">
+												<cms:if tons >
+													<cms:show tons />
+												<cms:else />
+													-NA-
+												</cms:if>
+											</td>
+											<td class="text-center">
+												<a href="<cms:route_link 'edit_coal' rt_id=k_page_id />" class="btn btn-primary btn-xs gxcpl-fw-700" data-toggle="tooltip" data-placement="top" title="EDIT">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                                <!-- <cms:if k_user_access_level gt '7'> -->
+                                                <a href="<cms:route_link 'delete_coal' rt_id=k_page_id />" class="btn btn-danger btn-xs gxcpl-fw-700" data-toggle="tooltip" data-placement="top" title="DELETE">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                                <!-- </cms:if> -->
+											</td>
+										</tr>
+										</cms:ignore>
+										</cms:pages>
+									</tbody>
+								</table>
+							</div>
+							<!-- Body -->
+							<!-- Pagination -->
+							<center>
+								<div class="btn-group gxcpl-fw-500" role="group">
+									<cms:pages show_future_entries="1" paginate='1' limit='10' >
+										<cms:paginator />
+									</cms:pages>
+								</div>
+							</center>
+							<!-- Pagination -->
+						</div>
+						<!-- Card -->
+					</div>
+					<!-- Table -->

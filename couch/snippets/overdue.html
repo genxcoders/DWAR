@@ -1,0 +1,76 @@
+								<cms:ignore>
+								(<cms:show k_absolute_count />)<br>
+ 								Train name::<cms:show tr_name /><br>
+ 								nowdate::<cms:date nowdate format='Y-m-d' /><br>
+ 								signon date::<cms:date signondate format='Y-m-d' /> <br>
+ 								nowdate::<cms:date nowtime format='H:i' /><br>
+ 								signon time::<cms:show signontime /> <br>
+ 								minus::<cms:sub nowtime signontime />::GE::<cms:show entry_diff /><br><br>
+								</cms:ignore>
+
+ 								<cms:set nowdate="<cms:date format='Y-m-d' />" scope='global' /> 
+ 								
+								<cms:set signontime="<cms:date signon_time format='H:i' />" scope='global' /> 
+								<cms:set signondate="<cms:date signon_date format='Y-m-d' />" scope='global' />
+
+								<cms:set nowtime="<cms:date format='H:i' />" scope='global' />
+
+ 								<cms:set minus_time="<cms:php>echo abs(<cms:sub nowtime signontime />);</cms:php>" scope='global' />
+
+ 								<cms:php>
+                                    global $CTX;
+                                    global $pday;
+                                    global $today;
+
+                                    $pday = new DateTime(date($CTX->get('signondate')));
+                                    $today = new DateTime(date($CTX->get('nowdate')));
+                                    
+                                    $dayz = $pday->diff($today)->days;
+                                    $CTX->set( 'pday', $pday, 'global' );
+                                    $CTX->set( 'today', $today, 'global' );
+                                    $CTX->set( 'dayz', $dayz, 'global' );
+                                </cms:php>
+ 								
+ 								<cms:ignore>
+ 								<cms:if (dayz eq '0')>
+ 									<cms:if (minus_time ge "<cms:show entry_diff />")>
+										<cms:set overdue='1' scope='global' />
+									<cms:else />
+										<cms:set overdue='0' scope='global' />
+									</cms:if>
+								<cms:else_if dayz gt '0' />
+									Days::<cms:show dayz /> | Minus Time::<cms:show minus_time /> | DIFF::<cms:show entry_diff /><br>
+									<cms:if (minus_time ge "<cms:show entry_diff />")>
+										<cms:set overdue='1' scope='global' />			
+									<cms:else />
+										<cms:set overdue='0' scope='global' />	
+									</cms:if>
+								</cms:if>
+								</cms:ignore>
+
+								<cms:if (minus_time ge "<cms:show entry_diff />")>
+									<cms:if dayz eq '0'>
+										<cms:set overdue='1' scope='global' />	
+									<cms:else_if dayz gt '0' />
+										<cms:set overdue='1' scope='global' />
+									</cms:if>
+								<cms:else_if (minus_time lt "<cms:show entry_diff />") />
+									<cms:if dayz eq '0'>
+										<cms:set overdue='0' scope='global' />
+									<cms:else_if dayz gt '0' />
+										<cms:set overdue='1' scope='global' />
+									</cms:if>
+								</cms:if>
+							
+								<cms:ignore>Setting Sign On time to calculate if the row is changing color</cms:ignore>
+
+								<cms:ignore>Setting schedule to calculate if the row is changing color</cms:ignore>
+
+								<cms:set schdate ="<cms:date schedule_date format='Y-m-d' />" scope='global' />
+								<cms:if (schdate lt nowdate) >
+									<cms:set sch_overdue='1' scope='global' />
+								<cms:else />
+									<cms:set sch_overdue='0' scope='global' />
+								</cms:if> 
+
+								<cms:ignore>Setting schedule to calculate if the row is changing color</cms:ignore>

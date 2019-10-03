@@ -1,0 +1,53 @@
+								<cms:php>
+									// Set the value of each loco 
+									$string = '<cms:show item />';
+									// Set the value of each loco 
+
+									// Global Variable Declaration for cms:php
+									global $new_string;
+									global $number;
+									global $fir_dig;
+									global $locolength;
+									// Global Variable Declaration for cms:php
+
+									// Find D
+									$new_string = preg_replace("/[^A-Za-z?!\s]/","", $string);
+									// Find D
+
+									// Convert item to Number, i.e. remove D
+									$number = (int) $string;
+									// Convert item to Number, i.e. remove D
+
+									// Find first digit from 5digit loco number
+									$fir_dig = substr($string, -5, 1);
+									// Find first digit from 5digit loco number
+
+									// Find Loco number length
+									$locolength = strlen($number);
+									// Find Loco number length
+								</cms:php>
+								<cms:set char_alpha="<cms:php>global $new_string; echo $new_string;</cms:php>" scope='global' />
+								<cms:set number="<cms:php>global $number; echo $number;</cms:php>" scope="global" />
+								<cms:set fir_dig="<cms:php>global $fir_dig; echo $fir_dig;</cms:php>" scope="global" />	
+								<cms:set locolength="<cms:php>global $locolength; echo $locolength;</cms:php>" scope="global" />
+
+								<cms:if key eq '0'>
+							    	<cms:set key_zero ="<cms:show item />" scope='global' />
+								</cms:if>
+
+								<cms:if key eq '1'>
+							    	<cms:set key_one ="<cms:show item />" scope='global' />
+								</cms:if>
+								
+								<cms:if locolength eq '3'>
+								    <cms:php>
+								    global $three_number_fir_dig;
+									$three_dig_string = '<cms:show key_zero />';
+									$three_number = (int) $three_dig_string;
+									$three_number_fir_dig = substr($three_number, -5, 1);
+									</cms:php>
+									<cms:set three_number_fir_dig="<cms:php>global $three_number_fir_dig; echo $three_number_fir_dig;</cms:php>" scope="global" />
+								</cms:if>
+
+
+								

@@ -1,0 +1,292 @@
+					<!-- Section Title -->
+					<cms:embed 'dtrgt-title.html' />
+					<!-- Section Title -->
+
+					<cms:set submit_success="<cms:get_flash 'submit_success' />" />
+	                <cms:if submit_success >
+	                    <div class="col-md-12">
+	                        <div class="alert alert-success gxcpl-shadow-2">
+	                            <strong>Success:</strong> Daily Target has been submitted.
+	                        </div>
+	                    </div>
+	                </cms:if>
+	                <cms:form 
+	                    masterpage='daily-target.php'
+	                    mode='create'
+	                    enctype='multipart/form-data'
+	                    method='post'
+	                    anchor='0'
+	                    >
+	                    <cms:ignore>Checking Duplicate Entries</cms:ignore>
+	                    <cms:set my_template_name = 'daily-target.php' />
+	                    <cms:set my_page_title="<cms:date dt_date format='m' />_<cms:date dt_date format='Y' />" />
+	                    
+	                    <cms:php>
+	                        global $CTX, $FUNCS;
+	                        $name = $FUNCS->get_clean_url( "<cms:show my_page_title />" );
+	                        $CTX->set( 'my_page_name', $name ); 
+	                    </cms:php>
+	                    
+	                    <cms:set my_page_id='' 'global' />
+	                    <cms:pages masterpage=my_template_name page_name=my_page_name limit='1' show_future_entries='1'>
+	                        <cms:set my_page_id=k_page_id  'global' />
+	                    </cms:pages>
+	                    
+	                    <cms:if my_page_id=''>
+	                        <cms:if k_success >
+
+	                            <cms:db_persist_form
+	                                _invalidate_cache='0'
+	                                _auto_title='1'
+	                                k_page_title = "<cms:date dt_date format='m' />_<cms:date dt_date format='Y' />"
+	                                dtarget_lpoint = "<cms:show frm_dtarget_lpoint />"
+	                                dt_date = "<cms:date dt_date format='Y-m-d' />"
+	                            />
+
+	                            <cms:if k_success >
+	                                <cms:set_flash name='submit_success' value='1' />
+	                                <cms:redirect k_page_link />
+	                            </cms:if>
+	                        </cms:if>
+
+	                        <cms:if k_error >
+	                            <div class="col-md-12">
+	                                <div class="alert alert-danger gxcpl-shadow-2">
+	                                    <cms:each k_error >
+	                                        <div class="alert alert-danger">
+	                                            <cms:show item />
+	                                        </div>
+	                                    </cms:each>
+	                                </div>
+	                            </div>
+	                        </cms:if>
+	                    <cms:else />
+	                    	<cms:if k_error >
+		                        <div class="col-md-12" >
+		                            <div class="alert alert-danger gxcpl-shadow-2">
+		                                <strong>ERROR:</strong> Daily target is already set. To edit please <a href="<cms:route_link 'dt_edit' rt_id=k_page_id />">click here</a>!
+		                            </div>
+		                        </div>
+		                    </cms:if>
+	                    </cms:if>
+
+						 <cms:ignore>Checking Duplicate Entries</cms:ignore>
+
+	                    <div class="col-md-6 col-md-offset-3">
+	                        <div class="gxcpl-card">
+	                            <div class="gxcpl-card-header">
+	                                <div class="row">
+	                                    <div class="col-md-6">
+	                                        <h5 class="text-center"><strong>Target Month & Year:</strong><br><br><cms:input name="dt_date" type="bound" /></h5>
+	                                    </div>
+	                                    <div class="col-md-6">
+	                                        <h5 class="text-center"><strong>Today's Date:</strong><br><br><cms:date format="d/m/Y" /></h5>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                            <div class="gxcpl-card-body">
+	                            	<cms:ignore>
+	                              <!--   <table width="100%" class="gxcpl-table">
+	                                    <thead>
+	                                        <tr>
+	                                            <th class="text-center" style="padding-left: 10px;">Colliery</th>
+	                                            <th class="text-center" style="width: 50%;">Daily Target</th>
+	                                        </tr>
+	                                    </thead>
+	                                    <tbody>
+	                                        <tr class="text-center" style="border-top: 1px solid rgba(0,0,0,0.25);">
+	                                            <td style="padding-left: 10px;">MNSG</td>
+	                                            <td>
+	                                                <cms:input type='bound' class="gxcpl-input-text" name="mnsg" />
+	                                            </td>
+	                                        </tr>
+	                                        <tr class="text-center"> 
+	                                            <td class="text-center" style="padding-left: 10px;">MJSG</td>
+	                                            <td>
+	                                                <cms:input type='bound' class="gxcpl-input-text" name="mjsg" />
+	                                            </td>
+	                                        </tr>
+	                                        <tr class="text-center">
+	                                            <td style="padding-left: 10px;">CGM</td>
+	                                            <td>
+	                                                <cms:input type='bound' class="gxcpl-input-text" name="cgm" />
+	                                            </td>
+	                                        </tr>
+	                                        <tr class="text-center">
+	                                            <td style="padding-left: 10px;">Wani</td>
+	                                            <td>
+	                                                <cms:input type='bound' class="gxcpl-input-text" name="wani" />
+	                                            </td>
+	                                        </tr>
+	                                        <tr class="text-center">
+	                                            <td style="padding-left: 10px;">GSG</td>
+	                                            <td>
+	                                                <cms:input type='bound' class="gxcpl-input-text" name="gsg" />
+	                                            </td>
+	                                        </tr>
+	                                        <tr class="text-center">
+	                                            <td style="padding-left: 10px;">GGS</td>
+	                                            <td>
+	                                                <cms:input type='bound' class="gxcpl-input-text" name="ggs" />
+	                                            </td>
+	                                        </tr>
+	                                        <tr class="text-center">
+	                                            <td style="padding-left: 10px;">HLSG</td>
+	                                            <td>
+	                                                <cms:input type='bound' class="gxcpl-input-text" name="hlsg" />
+	                                            </td>
+	                                        </tr>
+	                                        <tr class="text-center">
+	                                            <td style="padding-left: 10px;">RYXG</td>
+	                                            <td>
+	                                                <cms:input type='bound' class="gxcpl-input-text" name="ryxg" />
+	                                            </td>
+	                                        </tr>
+	                                        <tr class="text-center">
+	                                            <td style="padding-left: 10px;">MBCB</td>
+	                                            <td>
+	                                                <cms:input type='bound' class="gxcpl-input-text" name="mbcb" />
+	                                            </td>
+	                                        </tr>
+	                                        <tr class="text-center">
+	                                            <td style="padding-left: 10px;">UMSG</td>
+	                                            <td>
+	                                                <cms:input type='bound' class="gxcpl-input-text" name="umsg" />
+	                                            </td>
+	                                        </tr>
+	                                        <tr class="text-center">
+	                                            <td style="padding-left: 10px;">RKSG</td>
+	                                            <td>
+	                                                <cms:input type='bound' class="gxcpl-input-text" name="rksg" />
+	                                            </td>
+	                                        </tr>
+	                                        <tr class="text-center">
+	                                            <td style="padding-left: 10px;">DCSG</td>
+	                                            <td>
+	                                                <cms:input type='bound' class="gxcpl-input-text" name="dcsg" />
+	                                            </td>
+	                                        </tr>
+	                                        <tr class="text-center">
+	                                            <td style="padding-left: 10px;">CSID</td>
+	                                            <td>
+	                                                <cms:input type='bound' class="gxcpl-input-text" name="csid" />
+	                                            </td>
+	                                        </tr>
+	                                        <tr class="text-center">
+	                                            <td style="padding-left: 10px;">HRG</td>
+	                                            <td>
+	                                                <cms:input type='bound' class="gxcpl-input-text" name="hrg" />
+	                                            </td>
+	                                        </tr>
+	                                        <tr class="text-center">
+	                                            <td style="padding-left: 10px;">HNWG</td>
+	                                            <td>
+	                                                <cms:input type='bound' class="gxcpl-input-text" name="hnwg" />
+	                                            </td>
+	                                        </tr>
+	                                    </tbody>
+	                                </table>
+	                            	<cms:input type='bound' name='daily_target_repeatable' />
+	                            	
+	                            	<table>
+	                            		<thead>
+	                            			<tr>
+	                            				<th>
+	                            					Colliery
+	                            				</th>
+	                            				<th>
+	                            					Daily Target
+	                            				</th>
+	                            				<th>
+	                            					Remove
+	                            				</th>
+	                            			</tr>
+	                            		</thead>
+	                            		<tbody>
+	                            			<tr>
+	                            				<td>
+	                            					<cms:hide>
+		                            					<cms:input type="bound" name="dtarget_lpoint" class="gxcpl-input-text" />
+		                            				</cms:hide>
+	                            					<select name="dtarget_lpoint[]">
+	                            						<option disabled selected value="">Select Loading Point</option>
+	                            						<cms:pages masterpage="loading-pt.php">
+	                            						<option value="<cms:show k_page_id />">
+	                            							<cms:show k_page_title />
+	                            						</option>
+	                            						</cms:pages>
+	                            					</select>
+	                            					<div class="gxcpl-ptop-10"></div>
+	                            				</td>
+	                            				<td>
+	                            					<cms:input name="daily_target" type="bound" class="gxcpl-input-text" />
+	                            					<div class="gxcpl-ptop-10"></div>
+	                            				</td>
+	                            				<td>
+	                            					<button type="button" class="btn btn-danger btn-xs disabled">
+														<i class="fa fa-times"></i>
+													</button>
+	                            				</td>
+	                            			</tr>
+	                            			<tr>
+		                            			<div class="col-md-12">
+													<button id="addrow" type="button" class="btn btn-default btn-xs">
+														<i class="fa fa-plus"></i> Add Product
+													</button>
+													<div class="gxcpl-ptop-20"></div>
+												</div>
+											</tr>
+	                            		</tbody>
+	                            	</table> -->
+								</cms:ignore>
+	                            	<div class="gxcpl-ptop-50"></div>
+
+	                            	<table id="id=" myTable"" class="order-list">
+								    	<thead>
+									    	<tr>
+									            <td colspan="5" style="text-align: left;">
+									                <input type="button" id="addrow" value="Add Row" />
+									            </td>
+									        </tr>
+									        <tr>
+									            <td>Item</td>
+									            <td>Stock</td>
+									        </tr>
+									    </thead>
+									    <tbody>
+									        <tr>
+									        	<td>
+													<cms:hide>
+												        <cms:input type='checkbox' name='dtarget_lpoint' />
+												    </cms:hide>
+													<select name="dtarget_lpoint[]" class="gxcpl-input-text" style="width: auto;">
+														<option disabled selected value="">Select Loading Point</option>
+														<cms:pages masterpage='loading-pt.php'>
+															<option id="<cms:show k_page_id />" value="<cms:show k_page_id />"><cms:show k_page_title /></option>
+														</cms:pages>
+													</select>
+												</td>
+												<td>
+													<cms:input name="daily_target" type="bound" class="gxcpl-input-text" />
+												</td>
+									            <td>
+									            	<a class="deleteRow"></a>
+									            </td>
+									        </tr>
+									    </tbody>
+									</table> 	
+	                            </div>
+                                <div class="gxcpl-ptop-10"></div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <center>
+                                            <button class="btn btn-danger btn-sm">
+                                                <i class="fa fa-floppy-o" aria-hidden="true"></i> SAVE 
+                                            </button>
+                                        </center>
+                                    </div>
+                                </div>   
+	                            <div class="gxcpl-ptop-10"></div>
+	                        </div>
+	                    </div>
+					</cms:form>
