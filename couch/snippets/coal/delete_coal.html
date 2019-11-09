@@ -1,4 +1,6 @@
-					
+				<cms:set from_date="<cms:gpc 'from_date' method='get' />" scope="global" />
+				<cms:set to_date="<cms:gpc 'to_date' method='get' />" scope="global" />
+					<cms:set my_redirect_url="<cms:gpc 'url' method='get' />" scope="global" />
 					<!-- COAL -->
 					<div class="container">
 						<div class="row">
@@ -18,8 +20,17 @@
 			                    <cms:if k_success>
 			                        <cms:db_delete_form />
 			                        <cms:if k_success>
+			                        <cms:if my_redirect_url eq 'coal-report.php'>
+			                        	<cms:redirect url="
+			                            <cms:add_querystring my_redirect_url 
+				                            "from_date=<cms:show frm_date />
+											&to_date=<cms:show to_date />
+											&submit=&k_hid_search=search&nc=1" />
+		                           	 	" />
+			                        <cms:else />
 			                            <cms:redirect url="coal.php" /> 
 			                        </cms:if>
+			                    	</cms:if>
 			                    </cms:if>
 			                    <div class="row">
 									<div class="col-md-12">
@@ -35,9 +46,10 @@
 				                                <div class="gxcpl-card-footer">
 			                                    	<center>
 				                                    	<cms:input name='submit' type="submit" class="btn btn-danger btn-xs gxcpl-fw-700 gxcpl-shadow-2" value="CONFIRM DELETE" />
-				                                        <button class="btn btn-default btn-xs gxcpl-fw-700 gxcpl-shadow-2" type="button" onclick="window.location.href='coal.php';">
-				                                            CANCEL
-				                                        </button>
+				                                        
+				                                        <a href="<cms:if my_redirect_url eq 'coal-report.php' ><cms:show k_site_link />coal-report.php?from_date=<cms:show from_date />&to_date=<cms:show to_date />&submit=Search&k_hid_search=search&nc=1<cms:else />coal.php</cms:if>" class="btn btn-default btn-xs gxcpl-fw-700 gxcpl-shadow-2" type="button">
+				                                    		CANCEL
+				                                    	</a>
 				                                    </center>
 				                                    <div class="gxcpl-ptop-5"></div>
 			                                    </div>

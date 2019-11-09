@@ -17,7 +17,7 @@
 	</cms:config_list_view> 
 
 </cms:template>
-
+<cms:ignore>
 <cms:if ipt_account_role=='90'>
 	 <label for="f_admin_only_permissions11">
         <input type="checkbox" name="f_admin_only_permissions[]" id="f_admin_only_permissions11" value="pointwise-interchange.php" checked="checked"><span class="ctrl-option"></span>Pointwise Interchange                
@@ -26,4 +26,5 @@
         <input type="checkbox" name="f_admin_only_permissions[]" id="f_admin_only_permissions12" value="interchange.php" checked="checked"><span class="ctrl-option"></span>Interchange                
     </label>
 </cms:if>
+</cms:ignore>
 <?php COUCH::invoke(); ?>

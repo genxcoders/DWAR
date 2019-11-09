@@ -5,9 +5,18 @@
 								LOADING POINT<small class="pull-right gxcpl-fw-500" style="height: 21px; line-height: 21px;"><a class="btn btn-danger btn-xs gxcpl-shadow-2 gxcpl-fw-700" type="button" style="margin-left: 30px;" href="<cms:route_link 'create_lpt' />"><i class="fa fa-plus"></i> ADD LOADING POINT</a></small>
 							</h4>
 						<cms:else_if k_matched_route='create_lpt' />
-							<h4 class="gxcpl-no-margin">
-								LOADING POINT: ADD
-							</h4>
+							<div class="row">
+								<div class="col-md-6">
+									<h4 class="gxcpl-no-margin">
+										LOADING POINT: ADD
+									</h4>
+								</div>
+								<div class="col-md-1 col-md-offset-5">
+									<a href="<cms:route_link 'list_lpt' />" class="btn btn-danger" type="button" data-toggle="tooltip" data-placement="top" title="LIST VIEW" >
+										<i class="fa fa-list" aria-hidden="true"></i>
+									</a>
+								</div>
+							</div>
 						<cms:else_if k_matched_route='edit_lpt' />
 							<h4 class="gxcpl-no-margin">
 								LOADING POINT: UPDATE

@@ -2,14 +2,13 @@
 <cms:template title="Coal Report" clonable='1' parent='_coal_' order="3" />
 <cms:embed 'header.html' />
 <div class="container-fluid">
-	<div class="gxcpl-ptop-50"></div>
 	<h4 class="gxcpl-no-margin">
-		GENERATE COAL REPORT
+		LOADING REPORT
 	</h4>
 	<!-- List View -->
 	<div class="gxcpl-ptop-10"></div>
 	<div class="gxcpl-divider-dark"></div>
-	<div class="gxcpl-ptop-20"></div>
+	<div class="gxcpl-ptop-10"></div>
 	
 	<cms:embed 'searchcoal.html' />
 	
@@ -24,14 +23,22 @@
 			
 			<!-- Body -->
 			<div class="gxcpl-card-header">
-				<h4>COAL REPORT FROM <cms:date "<cms:gpc 'from_date' method='get' />" format='d/m/Y' /> TO <cms:date "<cms:gpc 'to_date' method='get' />" format='d/m/Y' /></h4>
+				<div class="row">
+					<div class="col-md-4 col-xs-12">
+						<h5 class="gxcpl-no-margin">
+							<strong>COAL REPORT FROM <cms:date "<cms:gpc 'from_date' method='get' />" format='d-m-Y' /> TO <cms:date "<cms:gpc 'to_date' method='get' />" format='d-m-Y' /></strong>
+						</h5>
+					 <div class="gxcpl-ptop-5"></div>
+					</div>
+					<div class="col-md-3 col-md-offset-5 col-xs-12 text-center" id="buttons"></div>
+				</div>
 			</div>
 			
-			<div class="gxcpl-card-body	scroll" style="overflow-x: auto;">
-				<table class="gxcpl-table" width="100%">
+			<div class="gxcpl-card-body tableFixHead gxcpl-padding-15" style="overflow-x: auto;">
+				<table class="display table table-bordered gxcpl-table-hover" id="example3" style="width: 100% ! important;">
 					<thead>
 						<tr>
-							<th class="text-center" rowspan="2">Sr No</th>
+							<!-- <th rowspan="2">Sr No</th> -->
 							<th class="text-center" rowspan="2">Dt</th>
 							<th class="text-center" rowspan="2">Ld Pt</th>
 							<th class="text-center" rowspan="2">F/H</th>
@@ -40,183 +47,192 @@
 							<th class="text-center" rowspan="2">Desti</th>
 							<th class="text-center" rowspan="2">Type</th>
 							<th class="text-center" colspan="3">Rejection</th>
-							<th class="text-center" colspan="4">BPC Particulars</th>
-							<th class="text-center" colspan="2">Last Unldg. Pt.</th>
+							<th class="text-center" colspan="3">BPC Particulars</th>
+							<th class="text-center" colspan="3">Last Unldg. Pt.</th>
 							<th class="text-center" rowspan="2">Remark</th>
-							<!-- <th class="text-center" rowspan="2">Action</th> -->
+							<th class="text-center" rowspan="2">Action</th>
 						</tr>
-						
-						<tr>	
-							<th class="text-center">No. Wgn</th>
-							<th class="text-center">Sr No.</th>
-							<th class="text-center">Reason</th>
-							<th class="text-center">Type</th>
-							<th class="text-center">Stn</th>
-							<th class="text-center">Dt</th>
-							<th class="text-center">%age</th>
-							<th class="text-center">Stn</th>
-							<th class="text-center">Wgns</th>
+						<tr>
+							<th class="text-center" style="position: sticky; top: 34.6px;">No. Wgn</th>
+							<th class="text-center" style="position: sticky; top: 34.5px;">Sr No.</th>
+							<th class="text-center" style="position: sticky; top: 34.5px;">Reason</th>
+							<th class="text-center" style="position: sticky; top: 34.5px;">Type</th>
+							<th class="text-center" style="position: sticky; top: 34.5px;">Stn</th>
+							<th class="text-center" style="position: sticky; top: 34.5px;">Dt</th>
+							<th class="text-center" style="position: sticky; top: 34.5px;">%</th>
+							<th class="text-center" style="position: sticky; top: 34.5px;">Stn</th>
+							<th class="text-center" style="position: sticky; top: 34.5px;">Wgns</th>
 						</tr>
 					</thead>
 					<cms:set fhtotal='0' scope='global' />
 					<cms:set unttotal='0' scope='global' />
 					<tbody>
-						<cms:pages masterpage='coal.php' show_future_entries="1" custom_field="<cms:show my_search_str />" >
-							<cms:no_results>
-								<tr>
-									<cms:if k_user_access_level gt '7'>
-									<td colspan="18" class="text-center">
-										- No Result - 
-									</td>
+						<cms:pages masterpage='coal.php' show_future_entries="1" custom_field="<cms:show my_search_str />" orderby="tdate" order="asc">
+						<cms:no_results>
+							<tr>
+								<cms:if k_user_access_level gt '7'>
+								<td colspan="18" class="text-center">
+									- No Result - 
+								</td>
+								</cms:if>
+							</tr>
+						</cms:no_results>
+						
+							<tr>
+								<td>
+									<cms:date tdate format='d/m/Y' />
+								</td>
+								<td class="text-center">
+									<cms:related_pages 'loading_point'>
+										<cms:no_results>
+											-NA-
+										</cms:no_results>
+										<cms:show k_page_title />
+									</cms:related_pages>
+								</td>
+								<td class="text-center">
+									<cms:if hlf_ful >
+										<cms:show hlf_ful />
+									<cms:else />
+										-NA-
 									</cms:if>
-								</tr>
-							</cms:no_results>
+								</td>
+								<td class="text-center">
+									<cms:if no_unit >
+										<cms:show no_unit />
+									<cms:else />
+										-NA-
+									</cms:if>
+								</td>
+								<td class="text-center">
+									<cms:if stock = '-' >
+										-NA-
+									<cms:else />
+										<cms:show stock />
+									</cms:if>
+								</td>
+								<td class="text-center">
+									<cms:if desti >
+										<cms:show desti />
+									<cms:else />
+										-NA-
+									</cms:if>
+								</td>
+								<td class="text-center">
+									<cms:if coal_type = '-'>
+										-NA-
+									<cms:else />
+										<cms:show coal_type />
+									</cms:if>
+								</td>
+								<td class="text-center">
+									<cms:if no_wgn_rjct >
+										<cms:show no_wgn_rjct />
+									<cms:else />
+										-NA-
+									</cms:if>
+								</td>
+								<td class="text-center">
+									<cms:show_repeatable 'my_repeatable'>
+										<cms:if sr_no_rjct_wgn >
+											<cms:show sr_no_rjct_wgn />
+										<cms:else />
+											-NA-
+										</cms:if><br>
+									</cms:show_repeatable>
+								</td>
+								<td class="text-center">
+									<cms:show_repeatable 'my_repeatable'>
+										<cms:if resn_rjct = '-'>
+											-NA-
+										<cms:else />
+											<cms:show resn_rjct />
+										</cms:if><br>
+									</cms:show_repeatable>
+								</td>
+								<td class="text-center">
+									<cms:if bpc_type = '-' >
+										-NA-
+									<cms:else />
+										<cms:show bpc_type />
+									</cms:if>
+								</td>
+								<td class="text-center">
+									<cms:if bpc_stn >
+										<cms:show bpc_stn />
+									<cms:else />
+										-NA-
+									</cms:if>
+								</td>
+								<td class="text-center">
+									<cms:if brkdt >
+										<cms:date brkdt format="d/m/Y" />
+									<cms:else />
+										-NA-
+									</cms:if>
+								</td>
+								<td class="text-center">
+									<cms:if percentage >
+										<cms:show percentage />
+									<cms:else />
+										-NA-
+									</cms:if>
+								</td>
+								<td class="text-center">
+									<cms:if unld_stn >
+										<cms:show unld_stn />
+									<cms:else />
+										-NA-
+									</cms:if>
+								</td>
+								<td class="text-center">
+									<cms:if no_wagons >
+										<cms:show no_wagons />
+									<cms:else />
+										-NA-
+									</cms:if>
+								</td>
+								<td class="text-center">
+									<cms:if colremrk >
+										<cms:show colremrk />
+									<cms:else />
+										-NA-
+									</cms:if>
+								</td>
+								<td class="text-center">
+									<cms:popup_edit 'tdate | loading_point | hlf_ful | no_unit | stock | desti | coal_type | colremrk | no_wgn_rjct | my_repeatable | bpc_type | bpc_stn | brkdt | percentage | unld_stn | no_wagons' link_text="<i class='fa fa-edit'></i>" />			
+									<a href="<cms:add_querystring "<cms:route_link 'delete_coal' rt_id=k_page_id />" "url=coal-report.php&from_date=2019-10-01&to_date=2019-10-01&submit=Search&k_hid_search=search&nc=1" />" class="gxcpl-fw-700" data-toggle="tooltip" data-placement="top" title="DELETE">
+										<i class="fa fa-trash"></i>
+									</a>
+								</td>
+							</tr>
 							
-								<tr>
-									<td class="text-center">
-										<cms:show k_absolute_count />
-									</td>
-									<td>
-										<cms:date tdate format='d/m/Y' />
-									</td>
-									<td class="text-center">
-										<cms:related_pages 'loading_point'>
-											<cms:no_results>
-												-NA-
-											</cms:no_results>
-											<cms:show k_page_title />
-										</cms:related_pages>
-									</td>
-									<td class="text-center">
-										<cms:if hlf_ful >
-											<cms:show hlf_ful />
-										<cms:else />
-											-NA-
-										</cms:if>
-									</td>
-									<td class="text-center">
-										<cms:if no_unit >
-											<cms:show no_unit />
-										<cms:else />
-											-NA-
-										</cms:if>
-									</td>
-									<td class="text-center">
-										<cms:if stock = '-' >
-											-NA-
-										<cms:else />
-											<cms:show stock />
-										</cms:if>
-									</td>
-									<td class="text-center">
-										<cms:if desti >
-											<cms:show desti />
-										<cms:else />
-											-NA-
-										</cms:if>
-									</td>
-									<td class="text-center">
-										<cms:if coal_type = '-'>
-											-NA-
-										<cms:else />
-											<cms:show coal_type />
-										</cms:if>
-									</td>
-									<td class="text-center">
-										<cms:if no_wgn_rjct >
-											<cms:show no_wgn_rjct />
-										<cms:else />
-											-NA-
-										</cms:if>
-									</td>
-									<td class="text-center">
-										<cms:show_repeatable 'my_repeatable'>
-											<cms:if sr_no_rjct_wgn >
-												<cms:show sr_no_rjct_wgn />
-											<cms:else />
-												-NA-
-											</cms:if><br>
-										</cms:show_repeatable>
-									</td>
-									<td class="text-center">
-										<cms:show_repeatable 'my_repeatable'>
-											<cms:if resn_rjct = '-'>
-												-NA-
-											<cms:else />
-												<cms:show resn_rjct />
-											</cms:if><br>
-										</cms:show_repeatable>
-									</td>
-									<td class="text-center">
-										<cms:if bpc_type = '-' >
-											-NA-
-										<cms:else />
-											<cms:show bpc_type />
-										</cms:if>
-									</td>
-									<td class="text-center">
-										<cms:if bpc_stn >
-											<cms:show bpc_stn />
-										<cms:else />
-											-NA-
-										</cms:if>
-									</td>
-									<td class="text-center">
-										<cms:if brkdt >
-											<cms:date brkdt format="d/m/Y" />
-										<cms:else />
-											-NA-
-										</cms:if>
-									</td>
-									<td class="text-center">
-										<cms:if percentage >
-											<cms:show percentage />
-										<cms:else />
-											-NA-
-										</cms:if>
-									</td>
-									<td class="text-center">
-										<cms:if unld_stn >
-											<cms:show unld_stn />
-										<cms:else />
-											-NA-
-										</cms:if>
-									</td>
-									<td class="text-center">
-										<cms:if no_wagons >
-											<cms:show no_wagons />
-										<cms:else />
-											-NA-
-										</cms:if>
-									</td>
-									<td class="text-center">
-										<cms:if colremrk >
-											<cms:show colremrk />
-										<cms:else />
-											-NA-
-										</cms:if>
-									</td>
-								</tr>
-								
-								<cms:set fhtotal = "<cms:add fhtotal hlf_ful />" scope='global' />
+							<cms:set fhtotal = "<cms:add fhtotal hlf_ful />" scope='global' />
 
-								<cms:set unttotal = "<cms:add unttotal no_unit />" scope='global' />
+							<cms:set unttotal = "<cms:add unttotal no_unit />" scope='global' />
 						</cms:pages>
+						<tr>
+							<td colspan="2"><strong>TOTAL</strong></td>
+							<td style="display: none;"></td>
+							<td><strong><cms:show fhtotal /></strong></td>
+							<td><strong><cms:show unttotal /></strong></td>
+							<td colspan="14"></td>
+							<td style="display: none;"></td>
+							<td style="display: none;"></td>
+							<td style="display: none;"></td>
+							<td style="display: none;"></td>
+							<td style="display: none;"></td>
+							<td style="display: none;"></td>
+							<td style="display: none;"></td>
+							<td style="display: none;"></td>
+							<td style="display: none;"></td>
+							<td style="display: none;"></td>
+							<td style="display: none;"></td>
+							<td style="display: none;"></td>
+							<td style="display: none;"></td>
+						</tr>
 					</tbody>
 				</table>
-			</div>
-
-			<div class="gxcpl-card-footer" style="line-height: 24px; text-align: left;">
-				<div class="row">
-					<div class="col-md-1">
-					&nbsp;
-					</div>
-					<div class="col-md-2 text-right" style="margin-left: -30px;">
-						<strong>Total</strong>
-						<strong>F/H:</strong> <cms:show fhtotal />
-						<strong>U:</strong> <cms:show unttotal />
-					</div>
-				</div>
 			</div>
 			<!-- Body -->
 		</div>

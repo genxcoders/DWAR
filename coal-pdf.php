@@ -44,7 +44,7 @@
 				pageOrientation:'potrait',
 				content: [
 					{
-						text: 'COAL LOADING PERFORMANCE ON DATE: <cms:date return="yesterday" format="d/m/Y" />', 
+						text: 'COAL LOADING PERFORMANCE ON DATE: <cms:date return="yesterday" format="d-m-Y" />', 
 						bold: true,
 						style: 'subheader'
 					},
@@ -120,7 +120,7 @@
 										colSpan: 2, 
 										style: 'textCenter',
 										bold: true,
-										text:'<cms:date return="yesterday" format="d/m/Y" />'
+										text:'<cms:date return="yesterday" format="d-m-Y" />'
 									}, 
 									{}, 
 									{
@@ -132,7 +132,7 @@
 										colSpan: 4, 
 										style: 'textCenter',
 										bold: true,
-										text:'<cms:date return="yesterday" format="d/m/Y" />'
+										text:'<cms:date return="yesterday" format="d-m-Y" />'
 									}, 
 									{},
 									{},
@@ -146,7 +146,7 @@
 										colSpan: 4, 
 										style: 'textCenter',
 										bold: true,
-										text:'<cms:date return="yesterday" format="d/m/Y" />'
+										text:'<cms:date return="yesterday" format="d-m-Y" />'
 									}, 
 									{},
 									{},

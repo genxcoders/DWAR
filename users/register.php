@@ -144,7 +144,7 @@
 											<div class="gxcpl-ptop-10"></div>
 										</div>
 										<!-- Mobile No -->
-
+										<cms:ignore>
 										<!-- Mobile No -->
 										<div class="col-md-12">
 											<label>Permissions</label>
@@ -157,6 +157,7 @@
 											asd
 											<cms:templatelist name='admin_only_permissions' help='1' />
 										</div>
+										</cms:ignore>
 
 										<!-- Password -->
 										<div class="col-md-6">

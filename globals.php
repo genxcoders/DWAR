@@ -20,11 +20,11 @@
 		<cms:editable name="dwar_reason_rejection" label="Reason For Rejection - Page Title" type="text" group="dwar" order="5" />
 		<cms:editable name="dwar_type" label="Type - Page Title" type="text" group="dwar" order="6" />
 		<cms:editable name="dwar_bpc_type" label="BPC Type - Page Title" type="text" group="dwar" order="7" />
-		<cms:editable name="dwar_ptinterchange" label="Pointwise Interchange - Page Title" type="text" group="dwar" order="8" />
-		<cms:editable name="dwar_ptinterchange_report" label="Pointwise Interchange Report - Page Title" type="text" group="dwar" order="9" />
-		<cms:editable name="dwar_coal" label="Coal - Page Title" type="text" group="dwar" order="10" />
-		<cms:editable name="dwar_coal_report" label="Coal Report - Page Title" type="text" group="dwar" order="11" />
-		<cms:editable name="dwar_transport_report" label="Transport Report - Page Title" type="text" group="dwar" order="12" />
+		<cms:editable name="dwar_ptinterchange" label="Interchange Entry Form - Page Title" type="text" group="dwar" order="8" />
+		<cms:editable name="dwar_ptinterchange_report" label="Interchange Report - Page Title" type="text" group="dwar" order="9" />
+		<cms:editable name="dwar_coal" label="Coal Entry Form - Page Title" type="text" group="dwar" order="10" />
+		<cms:editable name="dwar_coal_report" label="Coal Report 2 - Page Title" type="text" group="dwar" order="11" />
+		<cms:editable name="dwar_transport_report" label="Transport Report 2 - Page Title" type="text" group="dwar" order="12" />
 		<cms:editable name="dwar_settings" label="Settings - Page Title" type="text" group="dwar" order="13" />
 		<cms:editable name="dwar_interchange" label="Interchange - Page Title" type="text" group="dwar" order="14" />
 		<cms:editable name="dwar_location" label="Location - Page Title" type="text" group="dwar" order="15" />
@@ -37,9 +37,12 @@
 		<cms:editable name="dwar_ncoal_stock" label="Non Coal Stock - Page Title" type="text" group="dwar" order="22" />
 		<cms:editable name="dwar_ncoal_report" label="Non Coal Report - Page Title" type="text" group="dwar" order="23" />
 		<cms:editable name="dwar_stable_train" label="Stable Train - Page Title" type="text" group="dwar" order="24" />
-		<cms:editable name="dwar_coal_pdf_report" label="Coal PDF Report - Page Title" type="text" group="dwar" order="25" />
-		<cms:editable name="dwar_transportation_pdf_report" label="Transportation PDF Report - Page Title" type="text" group="dwar" order="26" />
-<!-- Page Title -->
+		<cms:editable name="dwar_coal_pdf_report" label="Coal Report 1 - Page Title" type="text" group="dwar" order="25" />
+		<cms:editable name="dwar_transportation_pdf_report" label="Transportation Report 1 - Page Title" type="text" group="dwar" order="26" />
+		<cms:editable name="dwar_pdd_report" label="PDD Report - Page Title" type="text" group="dwar" order="27" />
+		<cms:editable name="dwar_pdd_avg_report" label="PDD Average Report - Page Title" type="text" group="dwar" order="28" />
+		<cms:editable name="dwar_search_train" label="Search Train - Page Title" type="text" group="dwar" order="29" />
+	<!-- Page Title -->
 </cms:template>
 
 

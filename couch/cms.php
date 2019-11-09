@@ -328,7 +328,9 @@
 
             if( defined('K_IS_MY_TEST_MACHINE') ){
                 $html .= "\n<!-- in: ".k_timer_stop()." -->\n";
+                // $html .= "\n<p> in: ".k_timer_stop()." </p>\n";
                 $html .= "\n<!-- Queries: ".$DB->queries." -->\n";
+                // $html .= "\n<p> Queries: ".$DB->queries." </p>\n";
             }
 
             header( $content_type_header );

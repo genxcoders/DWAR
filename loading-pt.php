@@ -31,14 +31,6 @@
 			<!-- Loading Point -->
 
 		</div>
-		<div class="row">
-			<cms:pages folder=k_folder_name >
-				<div class="col-md-3">
-					<cms:show k_count />. <cms:show k_page_title /> (<cms:show k_page_foldertitle />)
-				</div>
-			</cms:pages>
-		</div>
-		<div class="gxcpl-ptop-50"></div>
 	</div>
 	<!-- Content Here -->
 	<div class="gxcpl-ptop-50"></div>

@@ -1,0 +1,109 @@
+<script type="text/javascript">
+		<cms:if k_template_name=="ptwise-int-report.php">
+			$(document).ready(function() {
+				$.fn.DataTable.ext.pager.numbers_length = 5;
+			    $('#to').DataTable({
+			    	"scrollY":        "60vh",
+			        "scrollCollapse": true,
+			        "paging":         false,
+			        "ordering": false,
+			        "info":     true,
+			    });
+			} );
+
+			$(document).ready(function() {
+				$.fn.DataTable.ext.pager.numbers_length = 5;
+			    $('#ho').DataTable({
+			    	"scrollY":        "60vh",
+			        "scrollCollapse": true,
+			        "paging":         false,
+			        "ordering": false,
+			        "info":     true,
+			    });
+			} );
+
+			$(document).ready(function() {
+			    $('#example').DataTable( {
+			        dom: 'Bfrtip',
+			        buttons: [
+			            'HIDE'
+			        ]
+			    } );
+			} );
+		<cms:else />
+			$(document).ready(function() {
+				$.fn.DataTable.ext.pager.numbers_length = 5;
+			    $('#example').DataTable({
+			    	"scrollY":        "60vh",
+			        "scrollCollapse": true,
+			        "paging":         false,
+			        "ordering": false,
+			        "info":     true,
+			    });
+			} );
+		</cms:if>
+		</script>
+		<cms:if k_template_name=="testing/test.php">
+		<!-- https://stackoverflow.com/questions/38958077/jquery-datatables-export-pdf-cuts-off-columns -->
+
+		<!-- https://stackoverflow.com/questions/35642802/datatables-export-pdf-with-100-width -->
+		<!-- https://datatables.net/forums/discussion/44398/need-the-table-formatted-pdf-with-borders -->
+		<script type="text/javascript">
+			$(document).ready(function() {
+			    $('#example1').DataTable( {
+			    	  scrollY: "60vh",
+			          scrollCollapse: true,
+			    	  paging:  false,
+				      ordering: false,
+				      info: true,
+			    	dom: 'Bfrtip',
+				         buttons: {
+						    buttons: [{
+						      extend: 'print',
+						      text: '<i class="fa fa-print"></i> Print',
+						      title: $('h5').text(),
+						      exportOptions: {
+						        columns: ':not(.no-print)'
+						      },
+						      footer: true,
+						      autoPrint: true
+						    }, 
+						    {
+						      paging:  false,
+						      ordering: false,
+						      info: true,
+						      extend: 'pdfHtml5',
+						      orientation: 'landscape',
+						      text: '<i class="fa fa-file-pdf-o"></i> PDF',
+						      title: $('h5').text(),
+						     customize: function(doc) {
+		                        console.log(doc.content)
+		                         doc.styles.title = {
+	                                color: 'black',
+	                                fontSize: '12',
+	                                bold: true,
+	                                alignment: 'center'
+	                            }
+	                            
+		                    	//pageMargins [left, top, right, bottom] 
+          						doc.pageMargins = [ 300, 0, 300, 0 ];
+		                       doc.content[1].table.widths = [90, 70, 70];
+		                     },  
+		                    
+						      footer: true
+						    },
+						    {
+						      extend: 'excel',
+						      text: '<i class="fa fa-file-excel-o"></i> Excel',
+						      title: $('h5').text(),
+						      exportOptions: {
+				                    columns: [ 0, 1 ]
+				                },
+						      footer: true
+						    },]
+						}
+				} );
+			} );
+
+		</script>
+		</cms:if>

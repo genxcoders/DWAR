@@ -1,5 +1,5 @@
-/*
-	Date: February 16, 2019
+
+	/*Date: February 16, 2019
 	Client: Central Railway DWAR
 
 	INDEX:
@@ -20,10 +20,10 @@
 	15.Data Cards
 	16.Paginator 
 	17.Dashboard
-	18.Drawer-Content
+	18.Drawer-Content*/
 
 
-*/
+
 
 /* Font */
 /*@import url('https://fonts.googleapis.com/css?family=Raleway:400,500,700');*/
@@ -50,6 +50,8 @@
 .gxcpl-heading-color {
 	color: blue !important;
 }
+
+.gxcpl-pointer {cursor: pointer;}
 
 /* Font */
 .gxcpl-position{
@@ -347,6 +349,14 @@ img.gxcpl-login-logo {
 	height: 24px;
 }
 
+.gxcpl-inline-text {
+	border: 0px solid transparent;
+	/*border-bottom: 1px solid rgba(0,0,0,0.23);*/
+	width: 100%;
+	transition: border-bottom 0.3s ease;
+	height: 24px;
+}
+
 .typeahead, .typeahead1 {
 	border: 0px solid transparent;
 	border-bottom: 1px solid rgba(0,0,0,0.23);
@@ -356,11 +366,20 @@ img.gxcpl-login-logo {
 	height: 24px;
 }
 
-.gxcpl-input-text:focus, .gxcpl-input-select:focus, #f_ncoal_stock:focus, .typeahead:focus, .typeahead1:focus {
-	border-bottom: 1px solid #D32F2F;
-	transition: border-bottom 0.3s ease;
-	outline-width: 0;
+.gxcpl-input-text:focus, .gxcpl-inline-text:focus, .gxcpl-input-select:focus, #f_ncoal_stock:focus, .typeahead:focus, .typeahead1:focus {
+	border-bottom: 1px solid #D32F2F ! important;
+	transition: border-bottom 0.3s ease ! important;
+	outline-width: 0 ! important;
 }
+
+button.gxcpl-inline-btn {
+	opacity: 0;
+}
+
+input.gxcpl-inline-text:focus + button.gxcpl-inline-btn {
+	opacity: 1;
+}
+
 .gxcpl-input-select, #f_location, #f_raketype, 
 #f_commodity, #f_desti, #f_loading_point, #f_commodity_stock,
 #f_ncoal_cmdt, #f_machine, #f_machine_units2, #f_section, 
@@ -392,7 +411,6 @@ img.gxcpl-login-logo {
 	overflow-y: scroll;
 }
 
-
 .gxcpl-table {
 	border: 0px solid transparent;
 	width: 100%;
@@ -408,7 +426,7 @@ img.gxcpl-login-logo {
 /*.gxcpl-table > tbody > tr:last-child {
 	border-bottom: 1px solid rgba(0,0,0,0.35);
 }*/
-.gxcpl-table > tbody > tr:hover {
+.gxcpl-table-hover > tbody > tr:hover {
 	background-color: rgba(0,0,0,0.15);
 	color: rgba(0,0,0,0.75);
 }
@@ -431,7 +449,7 @@ img.gxcpl-login-logo {
 
 .tableFixHead th,
 .tableFixHead td {
-  padding: 8px 16px;
+  padding: 8px;
 }
 
 .tableFixHead th {
@@ -454,18 +472,32 @@ td.stable {
 	color: #212121;
 }
 td.today_interchange{
-	border-left: 5px solid #008aff;
+	border-left: 5px solid #008aff! important;
 }
 td.srintchge {
 	width: 8%;
 	background-color: #a2cef4;
 	color: #212121;
 }
+td.nosrintchge {
+	width: 8%;
+	background-color: #a2cef4;
+	color: #a2cef4;
+}
 tr.highlight {
 	background-color: rgba(0,0,0,0.15);
 }
 tr.highlight-total {
 	background-color: rgba(0,0,0,0.27);
+}
+td.gxcpl-over60{
+	background-color: #ffaa5c;
+}
+td.gxcpl-over120{
+	background-color: #f77;
+}
+td.gxcpl-less-60{
+	background: #ffff69;
 }
 /* Auto number table rows */
 table#ho, table#to, table#pt-icp {
@@ -479,7 +511,21 @@ table#ho tbody tr td:first-child::before, table#to tbody tr td:first-child::befo
 	min-width: 1em;
 	margin-right: 0.5em;
 }
+.pagination {
+	margin: 0;
+}
 /* Auto number table rows */
+
+/* Anchor Overlay for Index page Card */
+.overlay {
+	position: absolute;
+	background: transparent;
+	left: 0;
+	right: 0;
+	height: 17.2px;
+	text-align: center;
+}
+/* Anchor Overlay for Index page Card */
 /* Table */
 
 /* Data Cards */
@@ -507,7 +553,7 @@ table#ho tbody tr td:first-child::before, table#to tbody tr td:first-child::befo
 	width: 100%; 
 	height: auto; 
 	border-radius: 0px 0px 2px 2px; 
-	line-height: 40px; 
+	line-height: 50px; 
 	/*border-top: 1px solid rgba(0,0,0,0.25); */
 	text-align: center; 
 	padding: 10px;
@@ -683,22 +729,86 @@ div.pagination span.page_disabled {
 /* Dashboard Content */
 .gxcpl-dashboard-box{
 	height: 196px;
-	max-height: 220px;
+	min-height: 250px;
+	height: auto;
 	/*padding: 2px;*/
 	transition: all 0.2s ease;
 }
-.gxcpl-dashboard-box:hover {
+.gxcpl-dashboard-box:hover{
 	background-color: #D32F2F;
-	color: #ffffff;
+	color: #ffffff !important;
 	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 	transition: all 0.2s ease;
 }
 .gxcpl-dashboard-box-card{
 	width: 100%;
-	border-bottom: 1px solid rgba(0,0,0,0.25);
-	padding: 6px 0px;
+	/*border-bottom: 1px solid rgba(0,0,0,0.25);*/
+	/*padding: 6px 0px;*/
 }
-
+.gxcpl-dashboard-box:hover .gxcpl-dashboard-box-card a {
+	color: #ffffff !important;
+}
+.gxcpl-dashboard-box-card-header {
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	border-bottom: 1px solid rgba(0,0,0,0.25);
+}
+.gxcpl-dashboard-box-card-body {
+	width: 100%;
+	padding: 5px 10px;
+	height: 70px;
+	border-bottom: 1px solid rgba(0,0,0,0.25);
+}
+.gxcpl-dashboard-box-card-footer {
+	width: 100%;
+	height: 150px;
+	padding: 5px 10px;
+}
+.gxcpl-dashboard-box-card-footer-extended {
+	width: 100%;
+}
+.gxcpl-dashboard-box-card-footer-extended > .panel {
+    margin-bottom: 20px;
+    border: 0px solid transparent;
+    border-radius: 0px;
+    background-color: #757474;
+    color: #fff;
+    border-top: 1px solid rgba(0,0,0,0.25);
+    box-shadow: none;
+}
+.panel-default > .panel-heading {
+    background-color: transparent !important;
+    border-color: transparent !important;
+}
+.panel-heading {
+	border-radius: 0px;
+	cursor: pointer;
+}
+.panel-title {
+	font-size: 13px;
+	color: #fff !important;
+}
+.gxcpl-dashboard-box:hover .panel-title > a {
+	color: #fff !important;
+}
+.panel-heading .accordion-toggle:after {
+    /* symbol for "opening" panels */
+    float: right;        /* adjust as needed */
+    color: #fff;         /* adjust as needed */
+    font-family: FontAwesome;
+	content: "\f0d7";
+	display: inline-block;
+	padding-right: 3px;
+	vertical-align: middle;
+	font-weight: 900;
+	z-index: 999;
+}
+.panel-heading .accordion-toggle.collapsed:after {
+    /* symbol for "collapsed" panels */
+    content: "\f0d8";    /* adjust as needed, taken from bootstrap.css */
+    color: #fff;
+}
 /*@media screen and (max-width: 591px) {
 	.gxcpl-dashboard-box{
 		height: 250px;
@@ -756,7 +866,10 @@ div.pagination span.page_disabled {
 #f_arrival_time_min, #f_departure_date_day, #f_departure_date_month,
 #f_departure_date_year,#f_departure_time_hour, #f_departure_time_min,
 #f_signon_date_day, #f_signon_date_month, #f_signon_date_year,
-#f_signon_time_hour, #f_signon_time_min{
+#f_signon_time_hour, #f_signon_time_min, #f_aq_arrival_time_hour,
+#f_aq_arrival_time_min, #f_aq_departure_time_hour, #f_aq_departure_time_min,
+#f_gnq_arrival_time_hour, #f_gnq_arrival_time_min, #f_gnq_departure_time_hour,
+#f_gnq_departure_time_min{
 	border: 0px solid transparent;
 	border-bottom: 1px solid rgba(0,0,0,0.23);
 	/*width: 50px;*/
@@ -766,7 +879,10 @@ div.pagination span.page_disabled {
 #f_schedule_date_month, #f_arrival_date_month, #f_arrival_time_hour, 
 #f_arrival_time_min, #f_departure_date_month, #f_departure_time_hour, 
 #f_departure_time_min, #f_signon_date_month, #f_signon_time_hour,
-#f_signon_time_min {
+#f_signon_time_min, #f_aq_arrival_time_hour,
+#f_aq_arrival_time_min, #f_aq_departure_time_hour, #f_aq_departure_time_min,
+#f_gnq_arrival_time_hour, #f_gnq_arrival_time_min, #f_gnq_departure_time_hour,
+#f_gnq_departure_time_min {
 	height: 24px;
 }
 
@@ -775,7 +891,9 @@ div.pagination span.page_disabled {
 #f_arrival_time_min:focus, #f_departure_date_day:focus, #f_departure_date_month:focus,
 #f_departure_date_year:focus,#f_departure_time_hour:focus, #f_departure_time_min:focus,
 #f_signon_date_day:focus, #f_signon_date_month:focus, #f_signon_date_year:focus,
-#f_signon_time_hour:focus, #f_signon_time_min:focus{
+#f_signon_time_hour:focus, #f_signon_time_min:focus, #f_aq_arrival_time_hour:focus,
+#f_aq_arrival_time_min:focus, #f_aq_departure_time_hour:focus, #f_aq_departure_time_min:focus,
+#f_gnq_arrival_time_min:focus, #f_gnq_departure_time_hour:focus, #f_gnq_departure_time_min:focus{
 	border-bottom: 1px solid #D32F2F;
 	transition: border-bottom 0.3s ease;
 }
@@ -904,12 +1022,13 @@ p.addRow a{
 }
 /* text-center-special */
 /*Legend*/
+
 .gxcpl-legend-outer {
 	width: 44px;
 	height: 44px;
 	position: absolute;
 	/*bottom: -30px; */
-	right: 30px;
+	right: 5px;
 	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 	border: 1px solid rgba(0,0,0,0.05);
 	border: radius: 4px;
@@ -946,7 +1065,15 @@ p.addRow a{
 .gxcpl-modal-interchange{
 	border:1px solid #dddddcb3; 
 	height: 30px; 
-	background: #a2cef4; 
+	background: #9ecdf4; 
+	margin:auto; 
+	display: block; 
+	width: 47%;
+}
+.gxcpl-modal-todayf{
+	border:1px solid #dddddcb3; 
+	height: 30px; 
+	background: #2b93ec; 
 	margin:auto; 
 	display: block; 
 	width: 47%;
@@ -975,16 +1102,75 @@ p.addRow a{
 	display: block; 
 	width: 47%;
 }
+.gxcpl-modal-over60{
+	border:1px solid #dddddcb3; 
+	height: 30px; 
+	background: #ffaa5c; 
+	margin-left: 25px;
+	display: block; 
+	width: 47%;
+}
+.gxcpl-modal-over120{
+	border:1px solid #dddddcb3; 
+	height: 30px; 
+	background: #f77; 
+	margin:auto; 
+	display: block; 
+	width: 47%;
+}
+.gxcpl-modal-less60{
+	border:1px solid #dddddcb3; 
+	height: 30px; 
+	background: #ffff69;
+	margin-left: 25px;
+	display: block; 
+	width: 47%;
+}
+.gxcpl-modal-lg{
+	width: 98%;
+}
 @media screen and (max-width: 768px)  {
 	.gxcpl-legend-outer {
-		/*position: absolute;
-		bottom: 80px;*/
+		position: absolute;
+		right: 3px;
 	}
 	.gxcpl-modal-interchange, .gxcpl-modal-stable, 
-	.gxcpl-modal-schedule, .gxcpl-modal-signon{
+	.gxcpl-modal-schedule, .gxcpl-modal-signon, 
+	.gxcpl-modal-todayf, .gxcpl-modal-over60,
+	.gxcpl-modal-over120, .gxcpl-modal-less60 {
 		margin:auto;  
 		width: 100%;
 	}
 }
+@media screen and (min-width: 320px) and (max-width: 768px)  {
+	.gxcpl-legend-int{
+		position: absolute;
+		bottom: 108px;
+		left: 300px;
+		padding-top: 20px;
+	}
+}
 /*Modal*/
 /*Legend*/
+/*Datables Print, Excel & PDF Button*/
+.buttons-print {
+  	background-color: #337ab7;
+  	color: white;
+  	font-weight: 700;
+}
+.buttons-excel {
+  	background-color: #5cb85c;
+  	color: white;
+  	font-weight: 700;
+}
+.buttons-pdf {
+  	background-color: #d9534f;
+  	color: white;
+  	font-weight: 700;
+}
+.buttons-colvis {
+ 	background-color: #5bc0de;
+   	color: white;
+   	font-weight: 700;
+}
+/*Datables Print, Excel & PDF Button*/

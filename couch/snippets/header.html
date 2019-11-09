@@ -1,11 +1,12 @@
-<cms:no_cache />
 <cms:if k_template_name=='users/login.php' || k_template_name=='users/forgotpassword.php'>
 <cms:else />
 	<cms:if k_logged_out>
 		<cms:redirect "<cms:login_link />" />
 	</cms:if>
 </cms:if>
+<cms:no_cache />
 <!DOCTYPE html>
+<cms:set start="<cms:php>echo $time_start = microtime(true); </cms:php>" />
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -15,7 +16,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 		<cms:embed 'page-title.html' />
 		<!-- CSS -->
+		<cms:if "<cms:not k_template_name=='index.php' />">
 		<cms:load_edit />
+		</cms:if>
 		<link rel="stylesheet" type="text/css" href="<cms:show k_site_link />assets/css/bootstrap.css" />
 		<link rel="stylesheet" type="text/css" href="<cms:show k_site_link />assets/css/font-awesome.css" />
 		<link rel="stylesheet" type="text/css" href="<cms:show k_site_link />assets/css/gxcpl-dwar.css" />
@@ -24,7 +27,7 @@
 		<link rel="stylesheet" href="<cms:show k_site_link />dist/sidenav.min.css" type="text/css">
 		<link rel="shortcut icon" type="image/png" href="<cms:get_custom_field 'ss_favicon' masterpage='globals.php' />" />
 		<!-- CSS -->
-		<script type="text/javascript" src="<cms:show k_site_link />assets/js/jquery-1.11.1.js"></script>
+		<script type="text/javascript" src="<cms:show k_site_link />assets/js/jquery.js"></script>
 		<cms:if k_template_name="coal.php" || k_template_name="daily-target.php" >
 		<link rel="stylesheet" href="<cms:show k_admin_link/>addons/repeatable/tablegear/tablegear.css?v=<cms:show k_cms_build />" type="text/css" media="screen"/>
         <script type="text/javascript" src="<cms:show k_admin_link/>addons/repeatable/jquery-ui.min.js?v=<cms:show k_cms_build />"></script>
@@ -34,11 +37,16 @@
     	<script type="text/javascript" src="assets/js/jspdf.debug.js"></script>
 		<script type="text/javascript" src="assets/js/html2canvas.js"></script>
     	</cms:if>
-    	<cms:if k_template_name="ptwise-int-report.php" || k_template_name="stable-train.php" || k_template_name="coal-pdf.php" || k_template_name="transportation-pdf-report.php" || k_template_name="transportation-pdf.php" >
+
+    	<link rel="stylesheet" type="text/css" href="<cms:show k_site_link />assets/DataTables/datatables.css"/>
+
+    	<cms:if k_template_name="ptwise-int-report.php" || k_template_name="stable-train.php" || k_template_name="coal-pdf.php" || k_template_name="transportation-pdf-report.php" || k_template_name="transportation-pdf.php" || k_template_name="pdd-report.php">
     	<script src='build/pdfmake.min.js'></script>
 		<script src='build/vfs_fonts.js'></script>
 		<!-- <script src='pointwise-report.js'></script> -->
 		</cms:if>
+
+
     	<style type="text/css">
     		.disabled {
 			    background-color: #5bc0de;
@@ -56,7 +64,7 @@
     	</style>
 	</head>
 	<body>
-		<cms:if k_template_name=="users/login.php" || k_template_name=="users/forgotpassword.php" || k_template_name=="coal-import.php" || k_template_name=="transport-import.php"|| k_template_name=="pointwise-import.php"|| k_template_name=="machine-import.php"|| k_template_name=="reason-import.php"|| k_template_name=="section-import.php" || k_template_name=="machine-unit-import.php" || k_template_name=="cause-machine-import.php" || k_template_name=="station-name-import.php" || k_template_name=="station-code-import.php">
+		<cms:if k_template_name=="users/login.php" || k_template_name=="users/forgotpassword.php" || k_template_name=="machine-import.php"|| k_template_name=="reason-import.php"|| k_template_name=="section-import.php" || k_template_name=="machine-unit-import.php" || k_template_name=="cause-machine-import.php" || k_template_name=="station-name-import.php" || k_template_name=="station-code-import.php">
 		<cms:else />
 			<!-- Nav -->
 			<div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
@@ -157,7 +165,7 @@
 							<small><cms:get_custom_field 'ss_stitle' masterpage='globals.php'  /></small>
 						</h1>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-2" style="display: none;">
 						&nbsp;
 					</div>
 				</div>

@@ -1,0 +1,7 @@
+Datables Link
+<!-- https://stackoverflow.com/questions/38958077/jquery-datatables-export-pdf-cuts-off-columns -->
+
+<!-- https://stackoverflow.com/questions/35642802/datatables-export-pdf-with-100-width -->
+<!-- https://datatables.net/forums/discussion/44398/need-the-table-formatted-pdf-with-borders -->
+
+<!-- https://datatables.net/forums/discussion/54749/how-can-we-provide-page-border-in-pdf -->

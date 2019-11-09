@@ -1,0 +1,41 @@
+<div class="col-md-4 col-md-offset-4" id="quick-search">
+	<cms:pages masterpage='coal.php' folder=k_folder_name limit="1">
+		<cms:form name="quicksearch" id="quicksearch" anchor='0' >
+		<cms:reverse_related_pages 'loading_point' masterpage='coal.php'>
+			<cms:if k_success >
+				<cms:if frm_tdate!='dd/mm/yyyy' >
+					<cms:set my_search_str="<cms:concat my_search_str ' | tdate==' frm_tdate />"  scope='global'/>
+				</cms:if>
+				<cms:set my_tdate = "<cms:gpc 'tdate' method='get' />" scope="global" />
+			</cms:if>
+		</cms:reverse_related_pages>
+			<!-- Card -->
+			<div class="gxcpl-card">
+				<div class="gxcpl-card-header">
+					<div class="row">
+						<div class="col-md-12 col-sm-6">
+							<h4 class="gxcpl-no-margin text-center">LOADING SUMMARY DATEWISE REPORT</h4>
+						</div>
+					</div>
+				</div>
+				<div class="gxcpl-card-body">
+					<div class="row gxcpl-padding-15">
+						<div class="col-md-4 col-md-offset-2">
+							<div class="input-group">
+								<cms:hide>
+									<cms:input type="datetime" name="tdate"/>
+								</cms:hide>
+								<input type="date" name="tdate" id="tdate" class="form-control" style="width: 100%; line-height: 1.42857143;"  value="<cms:date "<cms:gpc 'tdate' method='get' />" format='Y-m-d' />" />
+								<span class="input-group-btn">
+									<cms:input class="btn btn-primary" id="notesave" type='submit' name='submit' value="SEARCH" />
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Card -->
+		</cms:form>
+	</cms:pages>
+	<div class="gxcpl-ptop-30"></div>
+</div>

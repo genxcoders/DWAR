@@ -1,5 +1,6 @@
 <?php require_once( 'couch/cms.php' ); ?>
 <cms:template title="Coal" clonable='1' routable='1' parent='_coal_' order='1' >
+	<cms:config_list_view  searchable='1' />
 	<!-- Editable -->
 	<cms:editable name='dt_ldpt' type='row'>
 		<cms:editable name="tdate" label="Loading Date" type="datetime" allow_time='0' required="1" class="col-md-6" format="Y-m-d" order="1" />
@@ -9,15 +10,15 @@
 		</cms:ignore>
 	</cms:editable>
 	<cms:editable name='hfl_nfunts' type='row'>
-		<cms:editable name='hlf_ful' label='Full Half' type='radio' opt_values='1 | 0.5' required="1"  class="col-md-6" order="3" />
+		<cms:editable name='hlf_ful' label='Full Half Rake' type="text" required="1" class="col-md-6" order="3" />
 		<cms:editable name="no_unit" label="No of Units" type="text" required="1" class="col-md-6" order="4" validator='integer' />
 	</cms:editable>
 	<cms:editable name='stk_dest' type='row'>
-		<cms:editable name="stock" label="Stock" type="dropdown" opt_values="Select =- | <cms:pages masterpage='stock.php' order='asc' ><cms:show k_page_title /><cms:if '<cms:not k_paginated_bottom />' >|</cms:if></cms:pages>" opt_selected ='BOXN' required="1" class="col-md-6" order="5" />
+		<cms:editable name="stock" label="Stock" type="dropdown" required="1" opt_values="Select =- | <cms:pages masterpage='stock.php' order='asc' ><cms:show k_page_title /><cms:if '<cms:not k_paginated_bottom />' >|</cms:if></cms:pages>" opt_selected ='BOXN' class="col-md-6" order="5" />
 		<cms:editable name="desti" label="Destination" type="text" required="1" class="col-md-6" order="6" validator='alpha' />
 	</cms:editable>
 	<cms:editable name='typ_rmk' type='row'>
-		<cms:editable name="coal_type" label="Coal Type" type="dropdown" opt_values="Select =- | <cms:pages masterpage='coal-type.php' order='asc' ><cms:show k_page_title /><cms:if '<cms:not k_paginate_bottom />' >|</cms:if></cms:pages>" opt_selected ='WCL FSA' required="1" class="col-md-6" order="7" />
+		<cms:editable name="coal_type" label="Coal Type" type="dropdown" required="1" opt_values="Select =- | <cms:pages masterpage='coal-type.php' order='asc' ><cms:show k_page_title /><cms:if '<cms:not k_paginate_bottom />' >|</cms:if></cms:pages>" opt_selected ='WCL FSA' class="col-md-6" order="7" />
 		<cms:editable name="colremrk" label="Remark" type="text" class="col-md-6" order="8" />
 	</cms:editable>
 	<cms:editable name='typ_rmk' type='row'>
@@ -56,14 +57,13 @@
 <cms:embed 'header.html' />
 	<!-- Content Here -->
 	<div class="container-fluid">
-		<div class="gxcpl-ptop-50"></div>
 		<h4 class="gxcpl-no-margin">
 			COAL & TRANSPORTATION
 		</h4>
 		<!-- List View -->
 		<div class="gxcpl-ptop-10"></div>
 		<div class="gxcpl-divider-dark"></div>
-		<div class="gxcpl-ptop-20"></div>
+		<div class="gxcpl-ptop-10"></div>
 		<cms:match_route debug='0' />
 		<cms:if k_matched_route=='delete_coal'>
 			<cms:embed "coal/<cms:show k_matched_route />.html" />
@@ -121,7 +121,7 @@
 				<!-- Card -->
 				<div class="gxcpl-card">
 					<div class="gxcpl-card-header ">
-						<h4 class="gxcpl-position gxcpl-heading-color">LOADING</h4>
+						<h4 class="gxcpl-position gxcpl-heading-color gxcpl-no-margin">LOADING</h4>
 					</div>
 					<!-- Body -->
 					<div class="gxcpl-card-body">
@@ -148,7 +148,7 @@
 										<div class="col-md-1">
 											<label>F/H *</label>
 											<div class="gxcpl-ptop-5"></div>
-											<cms:input type="bound" name="hlf_ful" />
+											<cms:input type="bound" name="hlf_ful" class="gxcpl-input-text" />
 											<div class="gxcpl-ptop-10"></div>
 										</div>
 										<div class="col-md-2">
@@ -190,13 +190,13 @@
 						<div class="gxcpl-padding">
 							<div class="row">
 								<div class="col-md-4 gxcpl-heading-color">
-									<h4>Rejection</h4>
+									<h4 class="gxcpl-no-margin">Rejection</h4>
 								</div>
 								<div class="col-md-5 gxcpl-heading-color">
-									<h4>BPC Particulars</h4>
+									<h4 class="gxcpl-no-margin">BPC Particulars</h4>
 								</div>	
 								<div class="col-md-3 gxcpl-heading-color">
-									<h4>Last Unloading Point</h4>
+									<h4 class="gxcpl-no-margin">Last Unloading Point</h4>
 								</div>
 							</div>
 						</div>
@@ -274,7 +274,7 @@
 					</div>
 					<!-- Body -->
 					<!-- Card Footer -->
-					<div class="gxcpl-card-footer" style="">
+					<div class="gxcpl-card-footer gxcpl-no-padding" style="">
 						<button class="btn btn-danger btn-sm">
 							<i class="fa fa-floppy-o"></i> SAVE
 						</button>
@@ -282,7 +282,7 @@
 					<!-- Card Footer -->
 				</div>
 				<!-- Card -->
-				<div class="gxcpl-ptop-30"></div>
+				<div class="gxcpl-ptop-10"></div>
 			</div>
 			</cms:form>
 			<!-- Coal -->
@@ -342,7 +342,7 @@
 					<!-- Card -->
 					<div class="gxcpl-card">
 						<div class="gxcpl-card-header">
-							<h4>TRANSPORTATION</h4>
+							<h4 class="gxcpl-no-margin">TRANSPORTATION</h4>
 						</div>
 
 						<!-- Body -->
@@ -366,7 +366,7 @@
 											<div class="col-md-4" >
 												<label>Siding</label>
 												<div class="gxcpl-ptop-5"></div>
-												<cms:input type="bound" name="siding" class="gxcpl-input-select" style="width: auto !important;" />
+												<cms:input type="bound" name="siding" />
 												<div class="gxcpl-ptop-10"></div>
 											</div>
 
@@ -388,7 +388,7 @@
 						<!-- Body -->
 
 						<!-- Card Footer -->
-						<div class="gxcpl-card-footer">
+						<div class="gxcpl-card-footer gxcpl-no-padding">
 							<button class="btn btn-danger btn-sm">
 								<i class="fa fa-floppy-o"></i> SAVE
 							</button>
@@ -400,107 +400,8 @@
 				</div>
 			</cms:form>
 			<!-- Card -->
-			<cms:ignore>
-			<!-- CSV COAL IMPORTER -->
-			<div class="gxcpl-ptop-10"></div>
-			<div class="col-md-3">
-				<div class="gxcpl-card">
-					<div class="gxcpl-card-body">
-						<h5 class="text-center" style="padding-top: 8px;">CSV Coal Importer</h5>
-					</div>
-					<div class="gxcpl-ptop-20"></div>
-					<div class="gxcpl-card-body">
-						<center>
-							<!-- Button trigger modal -->
-							<button type="button" class="btn btn-primary btn-sm gxcpl-fc-white gxcpl-fw-700" data-toggle="modal" data-target="#myModal" data-keyboard="false" data-backdrop="static">
-								<i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload CSV
-							</button>
-							<div class="gxcpl-ptop-20"></div>
-							<!-- Modal -->
-							<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-							  	<div class="modal-dialog" role="document">
-							    	<div class="modal-content">
-							      		<div class="modal-header">
-							        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							        			<span aria-hidden="true">&times;</span>
-							        		</button>
-							        		<h4 class="modal-title" id="myModalLabel">
-							        			CSV COAL IMPORTER
-							        		</h4>
-							      		</div>
-									    <div class="modal-body" style="background: #ebebeb;">
-									       	<iframe class="embed-responsive-item" width="500" height="360" frameborder="0" name="reload" src="<cms:show k_site_link />/coal-import.php" allowfullscreen>
-									        </iframe>
-									    </div>
-							      		<div class="modal-footer">
-							        		<button type="button" onclick="refreshIframe();" class="btn btn-danger gxcpl-fc-21 gxcpl-fw-700" data-dismiss="modal">
-							        			<i class="fa fa-times" aria-hidden="true"></i> Close
-							        		</button>
-							        		<button type="button" onclick="refreshIframe();" class="btn btn-info gxcpl-fc-21 gxcpl-fw-700">
-							        			<i class="fa fa-refresh" aria-hidden="true"></i> Refresh
-							        		</button>
-							      		</div>
-							    	</div>
-							  	</div>
-							</div>
-						</center>
-					</div>
-				</div>
-				<div class="gxcpl-ptop-10"></div>
-			</div>
-			<!-- CSV COAL IMPORTER -->
-
-			<!-- CSV Transport IMPORTER -->
-			<div class="gxcpl-ptop-10"></div>
-			<div class="col-md-3">
-				<div class="gxcpl-card">
-					<div class="gxcpl-card-body">
-						<h5 class="text-center" style="padding-top: 8px;">CSV Transport Importer</h5>
-					</div>
-					<div class="gxcpl-ptop-20"></div>
-					<div class="gxcpl-card-body">
-						<center>
-							<!-- Button trigger modal -->
-							<button type="button" class="btn btn-primary btn-sm gxcpl-fc-white gxcpl-fw-700" data-toggle="modal" data-target="#myModal1" data-keyboard="false" data-backdrop="static">
-							 	<i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload CSV
-							</button>
-							<div class="gxcpl-ptop-20"></div>
-							<!-- Modal -->
-							<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
-							  	<div class="modal-dialog" role="document">
-							    	<div class="modal-content">
-							      		<div class="modal-header">
-							        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							        			<span aria-hidden="true">&times;</span>
-							        		</button>
-							        		<h4 class="modal-title" id="myModalLabel1">
-							        			CSV TRANSPORTATION IMPORTER
-							        		</h4>
-							      		</div>
-									    <div class="modal-body" style="background: #ebebeb;">
-									       	<iframe class="embed-responsive-item" width="500" height="360" frameborder="0" name="reload1" src="<cms:show k_site_link />/transport-import.php" allowfullscreen>
-									        </iframe>
-									    </div>
-							      		<div class="modal-footer">
-							        		<button type="button" onclick="refreshIframe1();" class="btn btn-danger gxcpl-fc-21 gxcpl-fw-700" data-dismiss="modal">
-							        			<i class="fa fa-times" aria-hidden="true"></i> Close
-							        		</button>
-							        		<button type="button" onclick="refreshIframe1();" class="btn btn-info gxcpl-fc-21 gxcpl-fw-700">
-							        			<i class="fa fa-refresh" aria-hidden="true"></i> Refresh
-							        		</button>
-							      		</div>
-							    	</div>
-							  	</div>
-							</div>
-						</center>
-					</div>
-				</div>
-			</div>
-			<!-- CSV Transport IMPORTER -->
-			</cms:ignore>
 		</div>
 		<!-- Transportation -->
-		<div class="gxcpl-ptop-30"></div>
 		<div class="row">
 			<!-- Table -->
 			<!-- Coal Table -->
@@ -511,11 +412,39 @@
 
 					<!-- Body -->
 					<div class="gxcpl-card-header">
-						<h4>COAL</h4>
+						<h4 class="gxcpl-no-margin">COAL</h4>
 					</div>
 
-					<div class="gxcpl-card-body	gxcpl-scroll">
+					<div class="gxcpl-card-body	gxcpl-scroll" style="overflow-x: auto;">
 						<table class="gxcpl-table" width="100%">
+							<thead>
+								<tr>
+									<th class="text-center" rowspan="2">Dt</th>
+									<th class="text-center" rowspan="2">Ld Pt</th>
+									<th class="text-center" rowspan="2">F/H</th>
+									<th class="text-center" rowspan="2">Units</th>
+									<th class="text-center" rowspan="2">Stock</th>
+									<th class="text-center" rowspan="2">Desti</th>
+									<th class="text-center" rowspan="2">Type</th>
+									<th class="text-center" colspan="3">Rejection</th>
+									<th class="text-center" colspan="3">BPC Particulars</th>
+									<th class="text-center" colspan="3">Last Unldg. Pt.</th>
+									<th class="text-center" class="text-center" rowspan="2">Remark</th>
+									<th class="text-center" rowspan="2">Action</th>
+								</tr>
+								<tr>
+									<th class="text-center">No. Wgn</th>
+									<th class="text-center">Sr No.</th>
+									<th class="text-center">Reason</th>
+									<th class="text-center">Type</th>
+									<th class="text-center">Stn</th>
+									<th class="text-center">Dt</th>
+									<th class="text-center">%</th>
+									<th class="text-center">Stn</th>
+									<th class="text-center">Wgns</th>
+								</tr>
+							</thead>
+							<cms:ignore>
 							<thead>
 								<tr>
 									<th class="text-center" rowspan="2">Dt</th>
@@ -544,7 +473,7 @@
 									<th class="text-center">Wgns</th>
 								</tr>
 							</thead>
-
+							</cms:ignore>
 							<tbody>
 								<cms:set yestdate="<cms:date return='yesterday' format='Y-m-d' />" scope='global' />
 
@@ -552,9 +481,9 @@
 									<cms:no_results>
 										<tr>
 											<cms:if k_user_access_level gt '7'>
-												<td colspan="19" class="text-center">
-													- No Result -
-												</td>
+											<td colspan="18" class="text-center">
+												- No Result - 
+											</td>
 											</cms:if>
 										</tr>
 									</cms:no_results>
@@ -674,13 +603,60 @@
 												-NA-
 											</cms:if>
 										</td>
-										<td class="text-center">
-											<cms:if colremrk >
-												<cms:show colremrk />
-											<cms:else />
-												-NA-
-											</cms:if>
+										<td>
+											<div id="colremrk" <cms:inline_edit 'colremrk' toolbar='custom' /> >
+												<cms:if colremrk >
+													<cms:set strip_text = "<cms:php>global $text;echo strip_tags('<cms:show colremrk />');</cms:php>" />
+													<cms:show strip_text />
+												<cms:else />
+													-NA-
+												</cms:if>
+											</div>
 										</td>
+										<cms:ignore>
+										<td>
+											<cms:set submit_success="<cms:get_flash 'submit_success' />" />
+										    <cms:form
+										        masterpage=k_template_name
+										        mode='edit'
+										        page_id=k_page_id
+										        enctype='multipart/form-data'
+										        method='post'
+										        anchor='0'
+										        >
+
+										        <cms:if k_success >
+
+										            <cms:check_spam email=frm_email />
+
+										            <cms:db_persist_form
+										                _invalidate_cache='0'
+										                _auto_title='1'
+										            />
+
+										            <cms:set_flash name='submit_success' value='1' />
+										            <cms:redirect url="coal.php" /> 
+										        </cms:if>
+
+										        <cms:if k_error >
+										            <div class="error">
+										                <cms:each k_error >
+										                    <br><cms:show item />
+										                </cms:each>
+										            </div>
+										        </cms:if>
+
+										        <cms:if colremrk eq ''>
+										        	<cms:input type='bound' name='colremrk' placeholder='-NA-' class="gxcpl-inline-text" autocomplete="off" />
+										        <cms:else />
+										        	<cms:input type='bound' name='colremrk' class="gxcpl-inline-text" autocomplete="off" />
+										    	</cms:if>
+										    	<button type="submit" class="btn btn-warning btn-xs gxcpl-inline-btn" onclick="alert('Success: Remark has been saved!')">
+										    		UPDATE
+										    	</button>
+										    </cms:form>
+										</td>
+										</cms:ignore>
 										<td>
 											<cms:popup_edit 'tdate | loading_point | hlf_ful | no_unit | stock | desti | coal_type | colremrk | no_wgn_rjct | my_repeatable | bpc_type | bpc_stn | brkdt | percentage | unld_stn | no_wagons' link_text="<i class='fa fa-edit'></i>" />
 														
@@ -712,7 +688,7 @@
 						</cms:pages>
 					<!-- No of Units Total  -->
 
-					<div class="gxcpl-card-footer" style="line-height: 24px; text-align: left;">
+					<div class="gxcpl-card-footer gxcpl-no-padding" style="line-height: 24px; text-align: left;">
 						<div class="row">
 							<div class="col-md-1">
 								&nbsp;
@@ -735,16 +711,15 @@
 			<div class="col-md-3">
 				<div class="gxcpl-card">
 					<div class="gxcpl-card-header">
-						<h4>TRANSPORTATION</h4>
+						<h4 class="gxcpl-no-margin">TRANSPORTATION</h4>
 					</div>
-					<div class="gxcpl-card-body	tableFixHead">
+					<div class="gxcpl-card-body	tableFixHead" style="overflow-x: auto;">
 						<table class="gxcpl-table" width="100%" >
 							<thead>
 								<tr>
 									<th class="text-center" rowspan="2" style="padding: 0;">Dt</th>
 									<th class="text-center" rowspan="2" style="padding: 0;">Siding</th>
 									<th class="text-center" rowspan="2" style="padding: 0;">Tons</th>
-									<th class="text-center" rowspan="2" style="padding: 0;">Action</th>
 								</tr>
 							</thead>
 								<cms:set tontotal='0' scope='global' />
@@ -754,7 +729,7 @@
 								<cms:no_results>
 									<tr>
 										<cms:if k_user_access_level gt '7'>
-											<td colspan="5" class="text-center">
+											<td colspan="3" class="text-center">
 												- No Result -
 											</td>
 										</cms:if>
@@ -775,15 +750,63 @@
 											</cms:related_pages>
 										</td>
 										<td class="text-center" style="padding: 0;">
-											<cms:if tons >
-												<cms:show tons />
-											<cms:else />
-												-NA-
-											</cms:if>
+											<div id="tons" <cms:inline_edit 'tons' toolbar='custom' /> >
+												<cms:if tons >
+													<cms:set strip_text = "<cms:php>global $text;echo strip_tags('<cms:show tons />');</cms:php>" />
+													<cms:show strip_text />
+												<cms:else />
+													-NA-
+												</cms:if>
+											</div>
 										</td>
+										<cms:ignore>
+										<td>
+											<cms:set submit_success="<cms:get_flash 'submit_success' />" />
+										    <cms:form
+										        masterpage='transport.php'
+										        mode='edit'
+										        page_id=k_page_id
+										        enctype='multipart/form-data'
+										        method='post'
+										        anchor='0'
+										        >
+
+										        <cms:if k_success >
+
+										            <cms:check_spam email=frm_email />
+
+										            <cms:db_persist_form
+										                _invalidate_cache='0'
+										                _auto_title='1'
+										            />
+
+										            <cms:set_flash name='submit_success' value='1' />
+										            <cms:redirect url="coal.php" /> 
+										        </cms:if>
+
+										        <cms:if k_error >
+										            <div class="error">
+										                <cms:each k_error >
+										                    <br><cms:show item />
+										                </cms:each>
+										            </div>
+										        </cms:if>
+
+										        <cms:if tons eq ''>
+										        	<cms:input type='bound' name='tons' placeholder='-NA-' class="gxcpl-inline-text" autocomplete="off" />
+										        <cms:else />
+										        	<cms:input type='bound' name='tons' class="gxcpl-inline-text" autocomplete="off" />
+										    	</cms:if>
+										    	<button type="submit" class="btn btn-warning btn-xs gxcpl-inline-btn" onclick="alert('Success: Tons has been saved!')">
+										    		UPDATE
+										    	</button>
+										    </cms:form>
+										</td>
+										
 										<td class="text-center" style="padding: 0;" >
 											<cms:popup_edit ' siding | tons | transdate' link_text="<i class='fa fa-edit'></i>" />
 										</td>	
+										</cms:ignore>
 									</tr>
 									<cms:set tontotal = "<cms:add tontotal tons />" scope='global' />
 								</cms:if>
@@ -792,7 +815,7 @@
 						</table>
 					</div>
 
-					<div class="gxcpl-card-footer" style="line-height: 25px;">
+					<div class="gxcpl-card-footer gxcpl-no-padding" style="line-height: 25px;">
 						<div class="row">
 							<div class="col-md-11 col-md-offset-1 text-center">
 								<strong>Total Tons:</strong>
@@ -800,16 +823,14 @@
 							</div>
 						</div>
 					</div>
-
 				</div>
+				<div class="gxcpl-ptop-30"></div>
 			</div>
-
+			
 			<!-- Transportation Table -->
 		</div>
 		</cms:if>
-
 	</div>
-	<div class="gxcpl-ptop-50"></div>
 	<div class="gxcpl-ptop-50"></div>
 <!-- Content Here -->
 <cms:embed 'footer.html' />

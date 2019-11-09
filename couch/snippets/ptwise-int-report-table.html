@@ -1,13 +1,13 @@
 								<cms:no_results>
 								<tr>
-									<td class="text-center" colspan='14'>
+									<td class="text-center" colspan='15'>
 										- No Data -
 									</td>
 								</tr>
 								</cms:no_results>
 								<tr style='border-bottom: 1px solid rgba(0,0,0,0.2);'>
 									
-									<td class="text-center <cms:if is_interchanged eq '1' >srintchge</cms:if> ">
+									<td class="text-center <cms:if (tr_name eq 'TA' || tr_name eq 'ta' || tr_name eq 'Ta' || tr_name eq 'tA' || tr_name eq 'LA' || tr_name eq 'la' || tr_name eq 'La' || tr_name eq 'lA') && (is_interchanged eq '1') >nosrintchge<cms:else_if is_interchanged eq '1' />srintchge</cms:if> ">
 										
 									</td>
 									<td class="text-uppercase <cms:if is_stabled eq '1' >stable</cms:if> ">
@@ -123,13 +123,7 @@
 											-NA-
 										</cms:if>
 									</td>
-									<td class="text-uppercase <cms:if sch_overdue eq '1'>sch_overdue</cms:if> ">
-										<cms:if schedule && schedule_date >
-											<cms:show schedule />
-											<cms:date schedule_date format='d-m' />
-										<cms:else />
-											-NA-
-										</cms:if>
+									<td class="text-uppercase <cms:if (loco eq 'NA') || (loco eq 'na') || (loco eq 'Na') || (loco eq 'nA') ><cms:else_if sch_overdue eq '1' />sch_overdue</cms:if>"><cms:if schedule && schedule_date ><cms:show schedule /> <cms:date schedule_date format='d-m' /><cms:else />-NA-</cms:if>
 									</td>
 									<td>
 										<cms:set related_location="<cms:related_pages 'location'><cms:show k_page_title /></cms:related_pages>" />
@@ -139,34 +133,73 @@
 											- NA -
 										</cms:if>
 									</td>
+									<cms:if my_icp eq 'NGP'>
 									<td>
-										<cms:if arrival_time && arrival_date >
-											<cms:date arrival_time format='H:i' />
-										<cms:else />
-											-NA-
-										</cms:if> 
-											/ 
-										<cms:if departure_time && departure_date >
-											<cms:date departure_time format='H:i' /><br>
-										<cms:else />
-											-NA-
-										</cms:if>
+										<cms:if arrival_time && arrival_date ><cms:date arrival_time format='H:i' /><cms:else />-NA-</cms:if>/<cms:if departure_time && departure_date ><cms:date departure_time format='H:i' /><br><cms:else />-NA-</cms:if>
 									</td>
-									<td <cms:if overdue eq '1'>class="overdue"</cms:if> >
+									<td>
+										<cms:if aq_arrival_time && aq_arrival_date ><cms:date aq_arrival_time format='H:i' /><cms:else />-NA-</cms:if>/<cms:if aq_departure_time && aq_departure_date ><cms:date aq_departure_time format='H:i' /><br><cms:else />-NA-</cms:if>
+									</td>
+									<cms:set sot = "<cms:date signon_time format='H:i' />" scope="global" />
+									<td class="<cms:if (sot eq '00:00') || (loco eq 'NA') || (loco eq 'na') || (loco eq 'Na') || (loco eq 'nA')><cms:else_if overdue eq '1' />overdue</cms:if>" >
 										<cms:if signon_time >
 											<cms:date signon_time format='H:i' />
 										<cms:else />
 											-NA-
 										</cms:if>
 									</td>
+									<td class="<cms:if (minutes ge '60') && (is_interchanged eq '1') ><cms:if (minutes ge '120') && (is_interchanged eq '1') >gxcpl-over120<cms:else_if is_interchanged eq '1' />gxcpl-over60</cms:if><cms:else_if (minutes lt '60') && (is_interchanged eq '1') />gxcpl-less-60</cms:if>">
+										<cms:if is_interchanged eq '1'><cms:show minutes /><cms:else />-NA-</cms:if>
+									</td>
 									<td>
-										<div <cms:inline_edit 'remark' toolbar='custom'  /> >
-											<cms:if remark >
-												<cms:show remark />
-											<cms:else />
-												-NA-
-											</cms:if>
-										</div>
+										<cms:set submit_success="<cms:get_flash 'submit_success' />" />
+									    <cms:form
+									        masterpage=k_template_name
+									        mode='edit'
+									        page_id=k_page_id
+									        enctype='multipart/form-data'
+									        method='post'
+									        anchor='0'
+									        >
+
+									        <cms:if k_success >
+
+									            <cms:check_spam email=frm_email />
+
+									            <cms:db_persist_form
+									                _invalidate_cache='0'
+									                _auto_title='1'
+									            />
+
+									            <cms:set_flash name='submit_success' value='1' />
+									            <cms:redirect url="
+						                           	<cms:add_querystring my_redirect_url 
+							                            "arrival_date=<cms:date arrival_date format="Y-m-d" />
+							                            &interchange=<cms:show interchange />
+							                            &submit=SEARCH
+							                            &k_hid_quicksearch=quicksearch
+							                            &nc=1" />
+					                           	 	" />
+						                        " />
+									        </cms:if>
+
+									        <cms:if k_error >
+									            <div class="error">
+									                <cms:each k_error >
+									                    <br><cms:show item />
+									                </cms:each>
+									            </div>
+									        </cms:if>
+
+									        <cms:if remark eq ''>
+									        	<cms:input type='bound' name='remark' placeholder='-NA-' class="gxcpl-inline-text" autocomplete="off" />
+									        <cms:else />
+									        	<cms:input type='bound' name='remark' class="gxcpl-inline-text"  autocomplete="off" />
+									    	</cms:if>
+									    	<button type="submit" class="btn btn-warning btn-xs gxcpl-inline-btn" onclick="alert('Success: Remark has been saved!')">
+									    		UPDATE
+									    	</button>
+									    </cms:form>
 									</td>
 									<td style="display: none;">
 										<cms:if stn_from >
@@ -212,4 +245,247 @@
 											-NA-
 										</cms:if>
 									</td>
+									<td class="text-center">
+										<cms:popup_edit "interchange | today_yesterday |is_stabled | tr_name | loco | schedule | schedule_date | arrival_date | arrival_time | departure_date | departure_time | aq_arrival_date | aq_arrival_time | aq_departure_date | aq_departure_time | signon_date | signon_time | raketype | load | load_unit | commodity | location | stn_to | stn_from |  to_ho | is_interchanged | today_interchange | remark" link_text="<i class='fa fa-edit'></i>" />
+
+										<a href="<cms:route_link 'delete_ptic' rt_id=k_page_id />&url=ptwise-int-report.php&arrival_date=<cms:date arrival_date format="Y-m-d" />&interchange=<cms:show interchange />">
+											<i class="fa fa-trash"></i>
+										</a>
+									</td>
+									<cms:else_if my_icp eq 'GCC' />
+									<td>
+										<cms:if arrival_time && arrival_date ><cms:date arrival_time format='H:i' /><cms:else />-NA-</cms:if>/<cms:if departure_time && departure_date ><cms:date departure_time format='H:i' /><br><cms:else />-NA-</cms:if>
+									</td>
+									<td>
+										<cms:if gnq_arrival_time && gnq_arrival_date ><cms:date gnq_arrival_time format='H:i' /><cms:else />-NA-</cms:if>/<cms:if gnq_departure_time && gnq_departure_date ><cms:date gnq_departure_time format='H:i' /><br><cms:else />-NA-</cms:if>
+									</td>
+									<cms:set sot = "<cms:date signon_time format='H:i' />" scope="global" />
+									<td class="<cms:if (sot eq '00:00') || (loco eq 'NA') || (loco eq 'na') || (loco eq 'Na') || (loco eq 'nA')><cms:else_if overdue eq '1' />overdue</cms:if>" >
+										<cms:if signon_time >
+											<cms:date signon_time format='H:i' />
+										<cms:else />
+											-NA-
+										</cms:if>
+									</td>
+									<td class="<cms:if (minutes ge '60') && (is_interchanged eq '1') ><cms:if (minutes ge '120') && (is_interchanged eq '1') >gxcpl-over120<cms:else_if is_interchanged eq '1' />gxcpl-over60</cms:if><cms:else_if (minutes lt '60') && (is_interchanged eq '1') />gxcpl-less-60</cms:if>">
+										<cms:if is_interchanged eq '1'><cms:show minutes /><cms:else />-NA-</cms:if>
+									</td>
+									<td>
+										<cms:set submit_success="<cms:get_flash 'submit_success' />" />
+									    <cms:form
+									        masterpage=k_template_name
+									        mode='edit'
+									        page_id=k_page_id
+									        enctype='multipart/form-data'
+									        method='post'
+									        anchor='0'
+									        >
+
+									        <cms:if k_success >
+
+									            <cms:check_spam email=frm_email />
+
+									            <cms:db_persist_form
+									                _invalidate_cache='0'
+									                _auto_title='1'
+									            />
+
+									            <cms:set_flash name='submit_success' value='1' />
+									            <cms:redirect url="
+						                           	<cms:add_querystring my_redirect_url 
+							                            "arrival_date=<cms:date arrival_date format="Y-m-d" />
+							                            &interchange=<cms:show interchange />
+							                            &submit=SEARCH
+							                            &k_hid_quicksearch=quicksearch
+							                            &nc=1" />
+					                           	 	" />
+						                        " /> 
+									        </cms:if>
+
+									        <cms:if k_error >
+									            <div class="error">
+									                <cms:each k_error >
+									                    <br><cms:show item />
+									                </cms:each>
+									            </div>
+									        </cms:if>
+
+									        <cms:if remark eq ''>
+									        	<cms:input type='bound' name='remark' placeholder='-NA-' class="gxcpl-inline-text" autocomplete="off" />
+									        <cms:else />
+									        	<cms:input type='bound' name='remark' class="gxcpl-inline-text"  autocomplete="off" />
+									    	</cms:if>
+									    	<button type="submit" class="btn btn-warning btn-xs gxcpl-inline-btn" onclick="alert('Success: Remark has been saved!')">
+									    		UPDATE
+									    	</button>
+									    </cms:form>
+									</td>
+									<td style="display: none;">
+										<cms:if stn_from >
+											<cms:show stn_from />
+										<cms:else />
+											-NA-
+										</cms:if>
+									</td>
+									<td style="display: none;">
+										<cms:if stn_to >
+											<cms:show stn_to />
+										<cms:else />
+											-NA-
+										</cms:if>
+									</td>
+									<td style="display: none;">
+										<cms:set related_commodity="<cms:related_pages 'commodity'><cms:show k_page_title /></cms:related_pages>" />
+										<cms:if related_commodity>
+											<cms:show related_commodity />
+										<cms:else />
+											- NA -
+										</cms:if>
+									</td>
+									<td style="display: none;">
+										<cms:set related_raketype="<cms:related_pages 'raketype'><cms:show k_page_title /></cms:related_pages>" />
+										<cms:if related_raketype>
+											<cms:show related_raketype />
+										<cms:else />
+											- NA -
+										</cms:if>
+									</td>
+									<td style="display: none;">
+										<cms:if load >
+											<cms:show load />
+										<cms:else />
+											-NA-
+										</cms:if>
+									</td>
+									<td style="display: none;">
+										<cms:if load_unit >
+											<cms:show load_unit />
+										<cms:else />
+											-NA-
+										</cms:if>
+									</td>
+									<td class="text-center">
+										<cms:popup_edit "interchange | today_yesterday |is_stabled | tr_name | loco | schedule | schedule_date | arrival_date | arrival_time | departure_date | departure_time | gnq_arrival_date | gnq_arrival_time | gnq_departure_date | gnq_departure_time | signon_date | signon_time | raketype | load | load_unit | commodity | location | stn_to | stn_from |  to_ho | is_interchanged | today_interchange | remark" link_text="<i class='fa fa-edit'></i>" />
+
+										<a href="<cms:route_link 'delete_ptic' rt_id=k_page_id />&url=ptwise-int-report.php&arrival_date=<cms:date arrival_date format="Y-m-d" />&interchange=<cms:show interchange />">
+											<i class="fa fa-trash"></i>
+										</a>
+									</td>
+									<cms:else />
+									<td>
+										<cms:if arrival_time && arrival_date ><cms:date arrival_time format='H:i' /><cms:else />-NA-</cms:if>/<cms:if departure_time && departure_date ><cms:date departure_time format='H:i' /><br><cms:else />-NA-</cms:if>
+									</td>
+									<cms:set sot = "<cms:date signon_time format='H:i' />" scope="global" />
+									<td class="<cms:if (sot eq '00:00') || (loco eq 'NA') || (loco eq 'na') || (loco eq 'Na') || (loco eq 'nA')><cms:else_if overdue eq '1' />overdue</cms:if>" >
+										<cms:if signon_time >
+											<cms:date signon_time format='H:i' />
+										<cms:else />
+											-NA-
+										</cms:if>
+									</td>
+									<td class="<cms:if (minutes ge '60') && (is_interchanged eq '1') ><cms:if (minutes ge '120') && (is_interchanged eq '1') >gxcpl-over120<cms:else_if is_interchanged eq '1' />gxcpl-over60</cms:if><cms:else_if (minutes lt '60') && (is_interchanged eq '1') />gxcpl-less-60</cms:if>">
+										<cms:if is_interchanged eq '1'><cms:show minutes /><cms:else />-NA-</cms:if>
+									</td>
+									<td>
+										<cms:set submit_success="<cms:get_flash 'submit_success' />" />
+									    <cms:form
+									        masterpage=k_template_name
+									        mode='edit'
+									        page_id=k_page_id
+									        enctype='multipart/form-data'
+									        method='post'
+									        anchor='0'
+									        >
+
+									        <cms:if k_success >
+
+									            <cms:check_spam email=frm_email />
+
+									            <cms:db_persist_form
+									                _invalidate_cache='0'
+									                _auto_title='1'
+									            />
+
+									            <cms:set_flash name='submit_success' value='1' />
+									            <cms:redirect url="
+						                           	<cms:add_querystring my_redirect_url 
+							                            "arrival_date=<cms:date arrival_date format="Y-m-d" />
+							                            &interchange=<cms:show interchange />
+							                            &submit=SEARCH
+							                            &k_hid_quicksearch=quicksearch
+							                            &nc=1" />
+					                           	 	" />
+						                        " /> 
+									        </cms:if>
+
+									        <cms:if k_error >
+									            <div class="error">
+									                <cms:each k_error >
+									                    <br><cms:show item />
+									                </cms:each>
+									            </div>
+									        </cms:if>
+
+									        <cms:if remark eq ''>
+									        	<cms:input type='bound' name='remark' placeholder='-NA-' class="gxcpl-inline-text" autocomplete="off" />
+									        <cms:else />
+									        	<cms:input type='bound' name='remark' class="gxcpl-inline-text"  autocomplete="off" />
+									    	</cms:if>
+									    	<button type="submit" class="btn btn-warning btn-xs gxcpl-inline-btn" onclick="alert('Success: Remark has been saved!')">
+									    		UPDATE
+									    	</button>
+									    </cms:form>
+									</td>
+									<td style="display: none;">
+										<cms:if stn_from >
+											<cms:show stn_from />
+										<cms:else />
+											-NA-
+										</cms:if>
+									</td>
+									<td style="display: none;">
+										<cms:if stn_to >
+											<cms:show stn_to />
+										<cms:else />
+											-NA-
+										</cms:if>
+									</td>
+									<td style="display: none;">
+										<cms:set related_commodity="<cms:related_pages 'commodity'><cms:show k_page_title /></cms:related_pages>" />
+										<cms:if related_commodity>
+											<cms:show related_commodity />
+										<cms:else />
+											- NA -
+										</cms:if>
+									</td>
+									<td style="display: none;">
+										<cms:set related_raketype="<cms:related_pages 'raketype'><cms:show k_page_title /></cms:related_pages>" />
+										<cms:if related_raketype>
+											<cms:show related_raketype />
+										<cms:else />
+											- NA -
+										</cms:if>
+									</td>
+									<td style="display: none;">
+										<cms:if load >
+											<cms:show load />
+										<cms:else />
+											-NA-
+										</cms:if>
+									</td>
+									<td style="display: none;">
+										<cms:if load_unit >
+											<cms:show load_unit />
+										<cms:else />
+											-NA-
+										</cms:if>
+									</td>
+									<td class="text-center">
+										<cms:popup_edit "interchange | today_yesterday |is_stabled | tr_name | loco | schedule | schedule_date | arrival_date | arrival_time |  departure_date | departure_time | signon_date | signon_time | raketype | load | load_unit | commodity | location | stn_to | stn_from |  to_ho | is_interchanged | today_interchange | remark" link_text="<i class='fa fa-edit'></i>" />
+
+										<a href="<cms:route_link 'delete_ptic' rt_id=k_page_id />&url=ptwise-int-report.php&arrival_date=<cms:date arrival_date format="Y-m-d" />&interchange=<cms:show interchange />">
+											<i class="fa fa-trash"></i>
+										</a>
+									</td>
+									</cms:if>
 								</tr>

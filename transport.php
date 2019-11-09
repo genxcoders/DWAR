@@ -1,11 +1,12 @@
 <?php require_once( 'couch/cms.php' ); ?>
-<cms:template title="Transportation" clonable='1' routable='1' parent='_coal_' order='2' >
+<cms:template title="Transportation" clonable='1' searchable='1' routable='1' parent='_coal_' order='2' >
 	<cms:editable name="siding" label="Siding" type="relation" has="one" required="1" masterpage="siding.php" order="1" /> 
 	<cms:editable name="tons" label="Tons" type="text" validator='non_negative_integer' order="2" />
 	<cms:editable name="transdate" label="Date" required="1" type="datetime" order="3" />
 	<cms:route name='delete_trans' path='{:id}/delete' >
 	    <cms:route_validators id='non_zero_integer' />
 	</cms:route>
+	<cms:config_list_view searchable='1' />
 </cms:template>
 <cms:embed 'header.html' />
 	<div class="container-fluid">
@@ -77,7 +78,7 @@
 					<!-- Card -->
 					<div class="gxcpl-card">
 						<div class="gxcpl-card-header">
-							<h4>TRANSPORTATION</h4>
+							<h4 class="gxcpl-no-margin">TRANSPORTATION</h4>
 						</div>
 						
 						<!-- Body -->
@@ -123,7 +124,7 @@
 						<!-- Body -->
 						
 						<!-- Footer -->
-						<div class="gxcpl-card-footer">
+						<div class="gxcpl-card-footer gxcpl-no-padding">
 							<button class="btn btn-danger btn-sm">
 								SAVE
 							</button>
@@ -140,7 +141,7 @@
 			<div class="col-md-3">
 				<div class="gxcpl-card">
 					<div class="gxcpl-card-header">
-						<h4>TRANSPORTATION</h4>
+						<h4 class=" gxcpl-no-margin">TRANSPORTATION</h4>
 					</div>
 					<div class="gxcpl-card-body	tableFixHead">
 						<table class="gxcpl-table" width="100%" >
@@ -204,7 +205,7 @@
 						</table>
 					</div>
 
-					<div class="gxcpl-card-footer" style="line-height: 25px;">
+					<div class="gxcpl-card-footer gxcpl-no-padding" style="line-height: 25px;">
 						<div class="row">
 							<div class="col-md-9 text-right">
 								<strong>Total Tons:</strong>

@@ -1,0 +1,69 @@
+<div class="col-md-5 col-md-offset-4 col-xs-12" id="quick-search">
+	<cms:pages masterpage="pointwise-interchange.php" limit="1" >
+		<cms:form name="search" id="search" anchor='0' >
+			<cms:if k_success >
+				<cms:if frm_from_date != 'dd/mm/yyyy' >
+					<cms:set my_search_str="<cms:concat my_search_str ' arrival_date >= ' frm_from_date ' 00:00:00' />"  scope='global'/>
+					<cms:set my_start_on=frm_from_date scope="global" />
+				</cms:if>
+				<cms:if frm_to_date != 'dd/mm/yyyy' >
+					<cms:set my_search_str="<cms:concat my_search_str ' | arrival_date <= ' frm_to_date ' 23:59:59' />"  scope='global'/>
+					<cms:set my_stop_on=frm_to_date scope="global" />
+				</cms:if>
+				<cms:if frm_interchange!='-' >
+				<cms:set my_search_str="<cms:concat my_search_str ' | interchange==' frm_interchange />"  scope='global'/>
+				<cms:set my_interchange=frm_interchange scope="global" />
+			</cms:if> 
+			</cms:if>
+
+			<div class="gxcpl-card">
+				<div class="gxcpl-card-body gxcpl-padding-10">
+					<div class="row">
+						<div class="col-md-3 col-xs-6 text-center">
+							<div class="row">
+								<div class="col-md-12">
+									<strong>From Date</strong>
+									<div class="gxcpl-ptop-5"></div>
+									<cms:input type="date" name="from_date" class="gxcpl-input-text" style="width: auto; line-height: 1.42857143;" value="<cms:date "<cms:gpc 'from_date' method='get' />" format='Y-m-d' />" />
+									<div class="gxcpl-ptop-10"></div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 col-xs-6 text-center">
+							<div class="row">
+								<div class="col-md-12">
+									<strong>To Date</strong>
+									<div class="gxcpl-ptop-5"></div>
+									<cms:input type="date" name="to_date" class="gxcpl-input-text" style="width: auto; line-height: 1.42857143;" value="<cms:date "<cms:gpc 'to_date' method='get' />" format='Y-m-d' />" />
+									<div class="gxcpl-ptop-10"></div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 col-xs-6 text-center">
+							<div class="row">
+								<div class="col-md-12">
+									<strong>Interchange</strong>
+									<div class="gxcpl-ptop-5"></div>
+									<cms:input class="gxcpl-input-text" name='interchange' id='interchange' type='dropdown' opt_values="No Preference =- | <cms:pages masterpage='interchange.php' order='asc'><cms:show k_page_title /><cms:if '<cms:not k_paginated_bottom />'>|</cms:if></cms:pages>"  style="width: auto;" />
+									<div class="gxcpl-ptop-10"></div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2 col-xs-6 text-center">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="gxcpl-ptop-10"></div>
+									<cms:input type="submit" name="submit" class="btn btn-primary" value="SEARCH" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</cms:form>
+	</cms:pages>
+</div>
+<div class="gxcpl-ptop-50"></div>
+<div class="gxcpl-ptop-50"></div>
+<div class="gxcpl-ptop-50"></div>
+<div class="gxcpl-ptop-40"></div>

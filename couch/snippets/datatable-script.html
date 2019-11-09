@@ -1,0 +1,433 @@
+<!-- pt-icp -->
+<script type="text/javascript">
+	<cms:if k_template_name=="ptwise-int-report.php">
+	<cms:pages masterpage="ptwise-int-report.php" >
+	$(document).ready(function() {
+		 var table = $('#to').DataTable({
+			scrollY: "60vh",
+			scrollCollapse: true,
+			scrollX: true,
+			paging:  false,
+			ordering: false,
+			info: true,
+			dom: 'Bfrtip',
+			buttons: [ 'columnsToggle' ],
+				buttons: [{
+					className: 'btn gxcpl-fw-700 btn-sm',
+					extend: 'excel',
+					text: '<i class="fa fa-file-excel-o"></i> Excel',
+					title: '<cms:show my_icp />- TAKEN OVER <cms:date my_arr_date format="d-m-Y" />',
+					<cms:if my_icp eq 'NGP' || my_icp eq 'GCC' >
+					exportOptions: {
+						columns: [1, 2, 3, 5, 6],
+					},
+					<cms:else />
+					exportOptions: {
+						columns: [1, 2, 3, 5],
+					},
+					</cms:if >
+					footer: true
+				},]
+		});	
+	 	table.buttons().container().appendTo($('#excel_to'));
+	});
+
+	$(document).ready(function() {
+		 var table = $('#ho').DataTable( {
+			scrollY: "60vh",
+			scrollCollapse: true,
+			paging:  false,
+			scrollX: true,
+			ordering: false,
+			info: true,
+			dom: 'Bfrtip',
+				buttons: [{
+					className: 'btn gxcpl-fw-700 btn-sm',
+					extend: 'excel',
+					text: '<i class="fa fa-file-excel-o"></i> Excel',
+					title: '<cms:show my_icp />- HANDED OVER <cms:date my_arr_date format="d-m-Y" />',
+					<cms:if my_icp eq 'NGP' || my_icp eq 'GCC' >
+					exportOptions: {
+						columns: [1, 2, 3, 5, 6],
+					},
+					<cms:else />
+					exportOptions: {
+						columns: [1, 2, 3, 5],
+					},
+					</cms:if >
+					footer: true
+				},]
+		});	
+		table.buttons().container().appendTo($('#excel_ho'));
+	});
+	</cms:pages>
+	</cms:if>
+	<cms:if k_template_name=="pointwise-dash.php">
+	$(document).ready(function() {
+		$.fn.DataTable.ext.pager.numbers_length = 5;
+			$('#pt-icp').DataTable({
+				"scrollY": "60vh",
+				"scrollCollapse": true,
+				"scrollX": true,
+				"paging": false,
+				"ordering": false,
+				"info": true,
+			});
+		});
+	</cms:if>
+</script>
+<cms:if k_template_name=="pdd-avg-report.php">
+	<script type="text/javascript">
+		$(document).ready(function() {
+			// $('#example1 tbody td[colspan]').wrapInner( '<span/>' ).append( '&nbsp;' );
+			var table = $('#example1').DataTable( {
+				scrollY: "60vh",
+				scrollCollapse: true,
+				scrollX: true,
+				paging:  false,
+				ordering: false,
+				info: true,
+				dom: 'Bfrtip',
+					buttons: {
+						buttons: [{
+							paging:  false,
+							ordering: false,
+							info: true,
+							extend: 'pdfHtml5',
+							orientation: 'landscape',
+							text: '<i class="fa fa-file-pdf-o"></i> PDF',
+							title: $('h5').text(),
+							customize: function(doc) {
+								console.log(doc.content)
+									doc.styles.title = {
+										color: 'black',
+										fontSize: '12',
+										bold: true,
+										alignment: 'left'
+									},
+
+
+									//pageMargins [left, top, right, bottom] 
+									doc.pageMargins = [ 300, 20, 300, 0 ];
+									doc.content[1].table.widths = [90, 70, 70];
+									var objLayout = {};
+									objLayout['hLineWidth'] = function(i) { return .5; };
+									objLayout['vLineWidth'] = function(i) { return .5; };
+									objLayout['hLineColor'] = function(i) { return '#aaa'; };
+									objLayout['vLineColor'] = function(i) { return '#aaa'; };
+									objLayout['paddingLeft'] = function(i) { return 4; };
+									objLayout['paddingRight'] = function(i) { return 4; };
+									doc.content[1].layout = objLayout;
+
+									// body.push([{text: 'header', colSpan: 2, alignment: 'center'}, {}]);
+							},  
+
+							footer: true
+						},
+						{
+							extend: 'excel',
+							text: '<i class="fa fa-file-excel-o"></i> Excel',
+							title: $('h5').text(),
+							exportOptions: {
+								columns: ':not(.no-print)'
+							},
+							footer: true
+						},]
+					}
+			});
+			table.buttons().container().appendTo($('#buttons'));
+		});
+	</script>
+</cms:if>
+<cms:if k_template_name=="pdd-report.php">
+	<script type="text/javascript">
+		$(document).ready(function() {
+			// $('#example1 tbody td[colspan]').wrapInner( '<span/>' ).append( '&nbsp;' );
+			var table = $('#example0').DataTable( {
+				scrollY: "60vh",
+				scrollCollapse: true,
+				scrollX: true,
+				paging:  false,
+				ordering: false,
+				info: true,
+				className: "text-uppercase",
+				dom: 'Bfrtip',
+					buttons: {
+						buttons: [{
+							paging:  false,
+							ordering: false,
+							info: true,
+							uppercase: true,
+							extend: 'pdfHtml5',
+							orientation: 'landscape',
+							text: '<i class="fa fa-file-pdf-o"></i> PDF',
+							title: $('h5').text(),
+							customize: function(doc) {
+								console.log(doc.content)
+									doc.styles.title = {
+										color: 'black',
+										fontSize: '12',
+										bold: true,
+										alignment: 'left',
+									},
+
+									//pageMargins [left, top, right, bottom] 
+									doc.pageMargins = [ 20, 0, 0, 0 ];
+									doc.content[1].table.widths = [50, 90, 100, 60, 60, 60, 60, 60, 60, 120];
+									
+									doc.content[1].table.uppercase = true;
+									var objLayout = {};
+									objLayout['hLineWidth'] = function(i) { return .5; };
+									objLayout['vLineWidth'] = function(i) { return .5; };
+									objLayout['hLineColor'] = function(i) { return '#aaa'; };
+									objLayout['vLineColor'] = function(i) { return '#aaa'; };
+									objLayout['paddingLeft'] = function(i) { return 4; };
+									objLayout['paddingRight'] = function(i) { return 4; };
+									doc.content[1].layout = objLayout;
+
+									// body.push([{text: 'header', colSpan: 2, alignment: 'center'}, {}]);
+							},  
+
+							footer: true
+						},
+						{
+							extend: 'excel',
+							text: '<i class="fa fa-file-excel-o"></i> Excel',
+							title: $('h5').text(),
+							exportOptions: {
+								columns: ':not(.no-print)'
+							},
+							footer: true
+						},]
+					}
+			});
+			table.buttons().container().appendTo($('#buttons'));
+		});
+	</script>
+</cms:if>
+<cms:if k_template_name=="stable-train.php">
+	<script type="text/javascript">
+		$(document).ready(function() {
+			// $('#example1 tbody td[colspan]').wrapInner( '<span/>' ).append( '&nbsp;' );
+			var table = $('#example2').DataTable( {
+				scrollY: "60vh",
+				scrollCollapse: true,
+				scrollX: true,
+				paging:  false,
+				ordering: false,
+				info: true,
+				dom: 'Bfrtip',
+					buttons: {
+						buttons: [{
+							paging:  false,
+							ordering: false,
+							info: true,
+							extend: 'pdfHtml5',
+							orientation: 'landscape',
+							text: '<i class="fa fa-file-pdf-o"></i> PDF',
+							title: $('h5').text(),
+							exportOptions: {
+								columns: [0, 1, 2, 3, 4, 5, 6]
+							},
+							
+							customize: function(doc) {
+								console.log(doc.content)
+									doc.styles.title = {
+										color: 'black',
+										fontSize: '12',
+										bold: true,
+										alignment: 'left',
+									},
+
+									//pageMargins [left, top, right, bottom] 
+									doc.defaultStyle.alignment = 'center';   
+									doc.pageMargins = [ 150, 30, 0, 0 ];
+									// doc.defaultStyle.textuppercase = 'true';
+									doc.content[1].table.widths = [50, 90, 100, 60, 60, 60, 60, 60, 60, 120];
+
+							          // trainname = table.column(1).data().toArray();
+							          // for (var i = 0; i < trainname.length; i++) {
+							          //   console.log(trainname);
+							          //     doc.content[1].table.body[i+1][1].defaultStyle.transform  = 'uppercase';
+							           
+							          // }
+									
+									var objLayout = {};
+									objLayout['hLineWidth'] = function(i) { return .5; };
+									objLayout['vLineWidth'] = function(i) { return .5; };
+									objLayout['hLineColor'] = function(i) { return '#aaa'; };
+									objLayout['vLineColor'] = function(i) { return '#aaa'; };
+									objLayout['paddingLeft'] = function(i) { return 4; };
+									objLayout['paddingRight'] = function(i) { return 4; };
+									doc.content[1].layout = objLayout;
+
+									// body.push([{text: 'header', colSpan: 2, alignment: 'center'}, {}]);
+							},  
+							footer: true
+						},
+						{
+							extend: 'excel',
+							text: '<i class="fa fa-file-excel-o"></i> Excel',
+							title: $('h5').text(),
+							exportOptions: {
+								columns: [0, 1, 2, 3, 4, 5, 6]
+							},
+							footer: true
+						},]
+					}
+			});
+			table.buttons().container().appendTo($('#buttons'));
+		});
+	</script>
+</cms:if>
+<cms:if k_template_name=="coal-report.php">
+	<script type="text/javascript">
+		$(document).ready(function() {
+			// $('#example1 tbody td[colspan]').wrapInner( '<span/>' ).append( '&nbsp;' );
+			var table = $('#example3').DataTable( {
+				scrollY: "60vh",
+				scrollCollapse: true,
+				scrollX: true,
+				paging:  false,
+				ordering: false,
+				info: true,
+				dom: 'Bfrtip',
+					buttons: {
+						buttons: [{
+							paging:  false,
+							ordering: false,
+							info: true,
+							extend: 'pdfHtml5',
+							orientation: 'landscape',
+							pageSize: 'A4',
+							text: '<i class="fa fa-file-pdf-o"></i> PDF',
+							title: $('h5').text(),
+							fontSize: '10',
+							exportOptions: {
+								columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+							},
+							customize: function(doc) {
+								console.log(doc.content)
+									doc.styles.title = {
+										color: 'black',
+										fontSize: '12',
+										bold: true,
+										alignment: 'left'
+									},
+
+
+									//pageMargins [left, top, right, bottom] 
+									doc.pageMargins = [ 5, 30, 30, 20 ];
+									doc.content[1].table.widths = [55, 35, 20, 30, 40, 40, 50, 25, 60, 60, 30, 30, 55, 25, 40, 30, 60];
+									var objLayout = {};
+									objLayout['hLineWidth'] = function(i) { return .5; };
+									objLayout['vLineWidth'] = function(i) { return .5; };
+									objLayout['hLineColor'] = function(i) { return '#aaa'; };
+									objLayout['vLineColor'] = function(i) { return '#aaa'; };
+									objLayout['paddingLeft'] = function(i) { return 4; };
+									objLayout['paddingRight'] = function(i) { return 4; };
+									doc.content[1].layout = objLayout;
+
+									// body.push([{text: 'header', colSpan: 2, alignment: 'center'}, {}]);
+							},  
+
+							footer: true
+						},
+						{
+							extend: 'excel',
+							text: '<i class="fa fa-file-excel-o"></i> Excel',
+							title: $('h5').text(),
+							exportOptions: {
+								columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+							},
+							footer: true
+						},]
+					}
+			});
+			table.buttons().container().appendTo($('#buttons'));
+		});
+	</script>
+</cms:if>
+<cms:if k_template_name=="transport-report.php">
+	<script type="text/javascript">
+		$(document).ready(function() {
+			// $('#example1 tbody td[colspan]').wrapInner( '<span/>' ).append( '&nbsp;' );
+			var table = $('#example4').DataTable( {
+				scrollY: "60vh",
+				scrollCollapse: true,
+				scrollX: true,
+				paging:  false,
+				ordering: false,
+				info: true,
+				dom: 'Bfrtip',
+					buttons: {
+						buttons: [{
+							paging:  false,
+							ordering: false,
+							info: true,
+							extend: 'pdfHtml5',
+							orientation: 'landscape',
+							pageSize: 'A4',
+							text: '<i class="fa fa-file-pdf-o"></i> PDF',
+							title: $('h5').text(),
+							fontSize: '10',
+							exportOptions: {
+								columns: [0, 1, 2, 3],
+							},
+							customize: function(doc) {
+								console.log(doc.content)
+									doc.styles.title = {
+										color: 'black',
+										fontSize: '12',
+										bold: true,
+										alignment: 'left'
+									},
+
+
+									//pageMargins [left, top, right, bottom] 
+									doc.pageMargins = [ 300, 30, 30, 20 ];
+									doc.content[1].table.widths = [40, 70, 50, 60];
+									var objLayout = {};
+									objLayout['hLineWidth'] = function(i) { return .5; };
+									objLayout['vLineWidth'] = function(i) { return .5; };
+									objLayout['hLineColor'] = function(i) { return '#aaa'; };
+									objLayout['vLineColor'] = function(i) { return '#aaa'; };
+									objLayout['paddingLeft'] = function(i) { return 4; };
+									objLayout['paddingRight'] = function(i) { return 4; };
+									doc.content[1].layout = objLayout;
+
+									// body.push([{text: 'header', colSpan: 2, alignment: 'center'}, {}]);
+							},  
+
+							footer: true
+						},
+						{
+							extend: 'excel',
+							text: '<i class="fa fa-file-excel-o"></i> Excel',
+							title: $('h5').text(),
+							exportOptions: {
+								columns: [0, 1, 2, 3],
+							},
+							footer: true
+						},]
+					}
+			});
+			table.buttons().container().appendTo($('#buttons'));
+		});
+	</script>
+	
+</cms:if>
+<cms:if k_template_name=="pointwise-interchange.php" >
+<script type="text/javascript">
+	$(document).ready( function (){
+		$('#pt-icp').DataTable({
+			"scrollY": "60vh",
+			"scrollCollapse": true,
+			"scrollX": true,
+			"paging": false,
+			"ordering": false,
+			"info": true,
+		});
+	});
+</script>
+</cms:if>

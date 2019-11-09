@@ -1,17 +1,16 @@
 <?php require_once( '../couch/cms.php' ); ?>
-    <cms:template title='Import Testing' >
+    <cms:template title='Import Testing For Transportation' clonable='1' parent='_coal_' >
         <cms:editable name='csv' required='0' allowed_ext='csv' max_size='2000000' type='securefile' label='CSV' />
     </cms:template>
-
-    <cms:set my_csv_to_import="<cms:show_securefile 'csv' ><cms:securefile_link file_id physical_path='1' /></cms:show_securefile>" scope="global" />
-
+<cms:embed 'header.html' />
+    <cms:set my_csv_file="<cms:pages limit='1'><cms:show_securefile 'csv'><cms:securefile_link file_id physical_path='1' /></cms:show_securefile></cms:pages>" scope='global' /> 
     <cms:set mystart="<cms:gpc 'import' method='get' />" />
     
     <cms:if mystart >
         
 
         <cms:csv_reader 
-            file="<cms:show k_admin_path />addons/csv/123.csv" 
+            file=my_csv_file
             paginate='1'
             limit='100'
             prefix='_'
@@ -34,20 +33,24 @@
                         var myVar;
                         myVar = window.setTimeout( 'location.href="<cms:show k_paginate_link_next />";', 1000 );
                     </script>
-                    <button onclick="clearTimeout(myVar);">Stop</button>
+                    <center>
+                        <button class="btn btn-danger gxcpl-fw-700" onclick="clearTimeout(myVar);">
+                            <i class="fa fa-ban" aria-hidden="true"></i> Stop Uploading CSV
+                        </button>
+                    </center>
                 <cms:else />
-                    Done!    
+                    <h4 class="text-center">Uploaded <strong><cms:show k_total_records /></strong> records.</h4>    
                 </cms:if>
                 
-                <h3><cms:show k_current_page /> / <cms:show k_total_pages /> pages (Total <cms:show k_total_records /> records. Showing <cms:show k_paginate_limit /> records per page)</hr>
+                <h3 class="text-center"><cms:show k_current_page /> / <cms:show k_total_pages /> pages (Total <cms:show k_total_records /> records. Showing <cms:show k_paginate_limit /> records per page)</hr>
                 
-                
-                <table border='0'>
+                <div class="gxcpl-ptop-20"></div>
+                <table style="margin-left: 25%; width: 50%;" border='1'>
                     <thead>
                         <tr>
-                            <th>No.</th>
+                            <th class="text-center">No.</th>
                             <cms:csv_headers>
-                                <th><cms:show value /></th>
+                                <th class="text-center"><cms:show value /></th>
                             </cms:csv_headers>    
                         </tr>
                     </thead>
@@ -74,7 +77,7 @@
                         _masterpage       = 'transport.php'
                         _mode             = 'create'
 
-                        k_page_title      = "<cms:if _col_1><cms:date _col_1 format='Y-m-d' /><cms:else />0000/00/00</cms:if> <cms:pages masterpage='siding.php' page_title=_col_2 limit='1' ><cms:show k_page_title /></cms:pages> <cms:if _col_3 eq ''>NA<cms:else /><cms:show _col_3 /></cms:if>"
+                        k_page_title      = "<cms:date _col_1 format='Y-m-d' /> <cms:pages masterpage='siding.php' page_title=_col_2 limit='1' ><cms:show k_page_title /></cms:pages> <cms:if _col_3 eq ''>NA<cms:else /><cms:show _col_3 /></cms:if>"
                         k_page_name       = "<cms:show k_page_title />"
 
                         transdate         = "<cms:date _col_1 format='Y-m-d' />"
@@ -108,26 +111,28 @@
         </cms:csv_reader>    
     <cms:else/>
         <cms:form masterpage=k_template_name 
-                    mode='edit'
-                    page_id=k_page_id
-                    enctype="multipart/form-data"
-                    method='post'
-                    anchor='0'
-                    id='csv_file_form'
-                    >
+            mode='create'
+            enctype="multipart/form-data"
+            method='post'
+            anchor='0'
+            id='csv_file_form'
+            >
             <cms:if k_success >        
 
-                <cms:db_persist_form />
+                <cms:db_persist_form
+                    _invalidate_cache='0'
+                    _auto_title='1'
+                />
 
                 <cms:if k_success >
                     
                     <cms:pages show_future_entries='1' >
                         <cms:show_securefile 'csv' >
-                            <cms:set uploaded_csv = file_id scope='global' />
+                            <cms:set my_csv_to_import="<cms:securefile_link file_id />" scope="global" />
                         </cms:show_securefile>
                     </cms:pages>
                     
-                    <cms:if uploaded_csv >
+                    <cms:if my_csv_to_import >
                         <cms:redirect "<cms:add_querystring k_template_link 'import=1' />" /> 
                     <cms:else />
                         <cms:redirect "<cms:show k_template_link />" /> 
@@ -135,22 +140,24 @@
                     
                 </cms:if>
                 
-                
-                
             </cms:if>
 
             <cms:if k_error >
                 <font color='red'><cms:each k_error ><cms:show item /><br /></cms:each></font>
             </cms:if>
-            
-            <label for="csv_input" >Attach CSV file</label>
+
+            <cms:hide>
                 <cms:input name='csv' type="bound" />
+            </cms:hide>
             
-                
+            <label for="csv_input" class="text-center" >Attach CSV file</label>
+            <input name='f_csv' id="csv_input" style="/*display:none;*/" type="file" class="file-styled" placeholder="" />    
             
         </cms:form>
-        <button onclick='location.href="<cms:add_querystring k_page_link 'import=1' />"'>Start!</button>
+        
+        <button class="btn btn-primary" type="submit" form="csv_file_form" >Start Uploading CSV<i class="icon-arrow-right14 position-right"></i></button>
     </cms:if>
-
-
+<div class="gxcpl-ptop-50"></div>
+<div class="gxcpl-ptop-50"></div>
+<cms:embed 'footer.html' />
 <?php COUCH::invoke(); ?>

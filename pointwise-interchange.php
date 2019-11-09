@@ -33,9 +33,9 @@
 		<cms:editable name="location" label="Location" type="relation" masterpage='location.php' order_dir='asc' has='one' required="1" class="col-md-6" order="9" />
 	</cms:editable>
 	<cms:editable name='arr_depr' type='row'>
-		<cms:editable name="arrival_date" label="Arrival Date" type="datetime" fields_separator="/" format='Y-m-d' class="col-md-4" order="10" />
+		<cms:editable name="arrival_date" label="Arrival Date" type="datetime" fields_separator="/" format='Y-m-d' required="1" class="col-md-4" order="10" />
 		<cms:editable name="arrival_time" label="Arrival Time" type="datetime" allow_time='1' am_pm='0' only_time='1' show_labels="0" minute_steps="1" class="col-md-2" order="11" />
-		<cms:editable name="departure_date" label="Departure Date" format='Y/m/d' show_labels="0" fields_separator="-" default_time='@current' allow_time='0' type="datetime" class="col-md-4" order="12" />
+		<cms:editable name="departure_date" label="Departure Date" format='Y-m-d' show_labels="0" fields_separator="-" default_time='@current' allow_time='0' type="datetime" class="col-md-4" order="12" />
 		<cms:editable name="departure_time" label="Departure Time" type="datetime" show_labels="0" allow_time='1' am_pm='0' only_time='1' minute_steps="1" class="col-md-2" order="13" />
 	</cms:editable>
 	<cms:editable name='sng_le' type='row'>
@@ -77,16 +77,39 @@
         </cms:if>
     </cms:func>
     <cms:editable name='today_interchange' label="Today's Interchange" type='checkbox' opt_values='YES=1'  order="26" />
-   
+
+    <!-- AQ Arrival -->
+   	<cms:editable name='aq_arrival_date' label="AQ Arrival Date" type='datetime' format='Y-m-d' show_labels="0" default_time='@current' allow_time='0' order="27" class="col-md-3" />
+   	<cms:editable name="aq_arrival_time" label="AQ Arrival Time" type='datetime' show_labels="0" allow_time='1' am_pm='0' only_time='1' minute_steps="1" order="28" class="col-md-3" />
+   	<!-- AQ Arrival -->
+
+   	<!-- AQ Departure -->
+   	<cms:editable name='aq_departure_date' label="AQ Departure Date" type='datetime' format='Y-m-d' show_labels="0" default_time='@current' allow_time='0' order="29" class="col-md-3" />
+   	<cms:editable name="aq_departure_time" label="AQ Departure Time" type='datetime' show_labels="0" allow_time='1' am_pm='0' only_time='1' minute_steps="1" order="30" class="col-md-3" />
+   	<!-- AQ Departure -->
+
+   	<!-- GNQ Arrival -->
+   	<cms:editable name='gnq_arrival_date' label="GNQ Arrival Date" type='datetime' format='Y-m-d' show_labels="0" default_time='@current' allow_time='0' order="31" class="col-md-3" />
+   	<cms:editable name="gnq_arrival_time" label="GNQ Arrival Time" type='datetime' show_labels="0" allow_time='1' am_pm='0' only_time='1' minute_steps="1" order="32" class="col-md-3" />
+   	<!-- GNQ Arrival -->
+
+   	<!-- GNQ Departure -->
+   	<cms:editable name='gnq_departure_date' label="GNQ Departure Date" type='datetime' format='Y-m-d' show_labels="0" default_time='@current' allow_time='0' order="33" class="col-md-3" />
+   	<cms:editable name="gnq_departure_time" label="GNQ Departure Time" type='datetime' show_labels="0" allow_time='1' am_pm='0' only_time='1' minute_steps="1" order="34" />
+   	<!-- GNQ Departure -->
+
 	<!-- Route -->
+	<cms:route name='edit_ptic' path='{:id}/edit' >
+    	<cms:route_validators id='non_zero_integer' />
+	</cms:route>
 	<cms:route name='delete_ptic' path='{:id}/delete' >
 	    <cms:route_validators id='non_zero_integer' />
 	</cms:route>
 	<!-- Route -->
 	<!-- Editable -->
 </cms:template>
+<cms:no_cache />
 <cms:embed 'header.html' />
-
     <!-- Content Here -->
 	<div class="container-fluid">
 		<!-- <div class="gxcpl-ptop-50"></div> -->
@@ -125,7 +148,12 @@
 		        name='manual-entry'
 		        id="to_ho_pt_icp_form"
 		    >
+		    	<!-- Set For Year is less than current year -->
+			    <cms:set my_dep_date = "<cms:date frm_departure_date format='Y-m-d' />" scope="global" />
+				<cms:set my_curr_date = "<cms:date format='Y-m-d' />" scope="global" />
+				<!-- Set For Year is less than current year -->
 		        <cms:if k_success >
+		        <cms:if my_dep_date le my_curr_date>
 		            <cms:db_persist_form
 		                _invalidate_cache='0'
 		                k_page_title="<cms:show frm_interchange />_<cms:show my_toho />_<cms:show frm_tr_name />_<cms:date frm_arrival_date format='Y-m-d' />"
@@ -135,6 +163,7 @@
 		                entry_diff = "<cms:pages masterpage='settings.php' limit='1' ><cms:show diff /></cms:pages>"
 		                select_type = "Yes"
 		            />
+		        </cms:if>
 	              	<cms:if k_success >
 		                
 	              		<cms:if frm_select_type eq 'Yes'> 
@@ -174,6 +203,15 @@
 							    today_interchange  		= 	"<cms:show frm_today_interchange />"
 							    k_page_id               =   "<cms:add '<cms:show k_last_insert_id />' '1' />"
 							    entry_diff 				=	"<cms:pages masterpage='settings.php' limit='1' ><cms:show diff /></cms:pages>"
+							    aq_arrival_date 		=	"<cms:date frm_aq_arrival_date format='Y-m-d' />"
+							    aq_arrival_time 		=	"<cms:date frm_aq_arrival_time format='1970-01-01 H:i:00' />"
+							    aq_departure_date 		=	"<cms:date frm_aq_departure_date format='Y-m-d' />"
+							    aq_departure_time 		=	"<cms:date frm_aq_departure_time format='1970-01-01 H:i:00' />"
+							    gnq_arrival_date 		=	"<cms:date frm_gnq_arrival_date format='Y-m-d' />"
+							    gnq_arrival_time 		=	"<cms:date frm_gnq_arrival_time format='1970-01-01 H:i:00' />"
+							    gnq_departure_date 		=	"<cms:date frm_gnq_departure_date format='Y-m-d' />"
+							    gnq_departure_time 		=	"<cms:date frm_gnq_departure_time format='1970-01-01 H:i:00' />"
+
 							>
 
 							    <cms:if k_error >
@@ -200,7 +238,8 @@
 	                    </div>
 	            	</div>
 		        </cms:if>
-		        <div class="col-md-10">
+		         (<cms:show my_dep_date />::<cms:show my_curr_date />)
+		        <div class="col-md-12">
 	        		<div class="gxcpl-card">
 	        			<div class="gxcpl-card-header">
 	        				<h4 class="gxcpl-no-margin">MANUAL ENTRY</h4> 
@@ -252,63 +291,466 @@
 									<cms:input name='location' type='bound' class='gxcpl-input-text' />
 									<div class="gxcpl-ptop-10"></div>
 		        				</div>
-		        				<div class="col-md-3 col-sm-12 col-xs-12 text-center-special">
-		        					<label>Arrival</label>
-		        					<div class="row">
-			        					<div class="col-md-12 col-sm-12 col-xs-12">
-			        						<cms:hide>
-												<cms:input type="bound" id="arprdate" name="arrival_date" />
-											</cms:hide>
-											<input type="date" class="gxcpl-input-text" name="f_arrival_date" value="<cms:date format='Y-m-d' />" style="width: auto;" />
-											<cms:input class="gxcpl-input-text input select" name="arrival_time" type="bound" />
-											<div class="gxcpl-ptop-10"></div>
+		        				<!-- NGP GCC Condition for TO -->
+		        				<cms:if (my_icp='NGP') && (my_toho='0') >
+		        					<div class="col-md-2 col-sm-12 col-xs-12 text-center-special">
+			        					<label>NGP Arrival</label>
+			        					<div class="row">
+				        					<div class="col-md-12 col-sm-12 col-xs-12">
+				        						<cms:hide>
+													<cms:input type="bound" name="arrival_date" />
+												</cms:hide>
+												<input type="date" class="gxcpl-input-text" name="f_arrival_date" value="<cms:date format='Y-m-d' />" style="width: auto;" />
+												<cms:input class="gxcpl-input-text input select" name="arrival_time" type="bound" />
+												<div class="gxcpl-ptop-10"></div>
+											</div>
 										</div>
-									</div>
-		        				</div>
-		        				<div class="col-md-3 col-sm-12 col-xs-12 text-center-special">
-		        					<label>Departure</label>
-		        					<div class="row">
-		        						<div class="col-md-12 col-sm-12 col-xs-12">
-		        							<cms:hide>
-												<cms:input name="departure_date" type="bound" id="dptprdate" />
-											</cms:hide>
-											<input class="gxcpl-input-text" name="f_departure_date" type="date" value="<cms:date format='Y-m-d' />" style="width: auto;" />
-											<cms:input class="gxcpl-input-text" name="departure_time" type="bound" />
-											<div class="gxcpl-ptop-10"></div>
+			        				</div>
+			        				<div class="col-md-2 col-sm-12 col-xs-12 text-center-special">
+			        					<label>NGP Departure</label>
+			        					<div class="row">
+			        						<div class="col-md-12 col-sm-12 col-xs-12">
+			        							<cms:hide>
+													<cms:input name="departure_date" type="bound" />
+												</cms:hide>
+												<input class="gxcpl-input-text" name="f_departure_date" type="date" value="<cms:date format='Y-m-d' />" style="width: auto;" />
+												<cms:input class="gxcpl-input-text" name="departure_time" type="bound" />
+												<div class="gxcpl-ptop-10"></div>
+											</div>
 										</div>
-									</div>
-		        				</div> 
-		        				<div class="col-md-3 col-sm-12 col-xs-12 text-center-special">
+			        				</div>
+			        				<div class="col-md-2 col-sm-12 col-xs-12 text-center-special">
+			        					<label>AQ Arrival</label>
+			        					<div class="row">
+				        					<div class="col-md-12 col-sm-12 col-xs-12">
+				        						<cms:hide>
+													<cms:input type="bound" name="aq_arrival_date" />
+												</cms:hide>
+												<input type="date" class="gxcpl-input-text" name="f_aq_arrival_date" value="<cms:date format='Y-m-d' />" style="width: auto;" />
+												<cms:input class="gxcpl-input-text input select" name="aq_arrival_time" type="bound" />
+												<div class="gxcpl-ptop-10"></div>
+											</div>
+										</div>
+			        				</div>
+			        				<div class="col-md-2 col-sm-12 col-xs-12 text-center-special">
+			        					<label>AQ Departure</label>
+			        					<div class="row">
+			        						<div class="col-md-12 col-sm-12 col-xs-12">
+			        							<cms:hide>
+													<cms:input name="aq_departure_date" type="bound" />
+												</cms:hide>
+												<input class="gxcpl-input-text" name="f_aq_departure_date" type="date" value="<cms:date format='Y-m-d' />" style="width: auto;" />
+												<cms:input class="gxcpl-input-text" name="aq_departure_time" type="bound" />
+												<div class="gxcpl-ptop-10"></div>
+											</div>
+										</div>
+			        				</div>
+			        				<div class="col-md-2 col-sm-12 col-xs-12 text-center-special">
 	        						<label>Sign On *</label>
-	        						<div class="row">
-		        						<div class="col-md-12 col-sm-12 col-xs-12">
-		        							<cms:hide>
-		        								<cms:input class="gxcpl-input-text" name="signon_date" type="bound"  />
-		        							</cms:hide>
-											<input class="gxcpl-input-text" name="f_signon_date" type="date" value="<cms:date format='Y-m-d' />" style="width: auto;" />
-											<cms:input class="gxcpl-input-text" name="signon_time" type="bound" />
-											<div class="gxcpl-ptop-10"></div>
-										</div>	
-									</div>
-		        				</div>
-		        				<div class="col-md-1 col-sm-6 col-xs-6 text-center-special">
-		        					<label>Load</label>
-		        					<div class="row">
-		        						<div class="col-md-12">
-											<cms:input name='load' type='bound' />
-											<div class="gxcpl-ptop-10"></div>
+		        						<div class="row">
+			        						<div class="col-md-12 col-sm-12 col-xs-12">
+			        							<cms:hide>
+			        								<cms:input class="gxcpl-input-text" name="signon_date" type="bound"  />
+			        							</cms:hide>
+												<input class="gxcpl-input-text" name="f_signon_date" type="date" value="<cms:date format='Y-m-d' />" style="width: auto;" />
+												<cms:input class="gxcpl-input-text" name="signon_time" type="bound" />
+												<div class="gxcpl-ptop-10"></div>
+											</div>	
 										</div>
-									</div>
-		        				</div>
-		        				<div class="col-md-2 col-sm-6 col-xs-6">
-		        					<label>Remark</label>
-		        					<div class="row">
-		        						<div class="col-md-12">
-											<cms:input name='remark' class="gxcpl-input-text" type='bound' />
-											<div class="gxcpl-ptop-10"></div>
+			        				</div>
+			        				<div class="col-md-1 col-sm-6 col-xs-6 text-center-special">
+			        					<label>Load</label>
+			        					<div class="row">
+			        						<div class="col-md-12">
+												<cms:input name='load' type='bound' />
+												<div class="gxcpl-ptop-10"></div>
+											</div>
 										</div>
-									</div>
-		        				</div>
+			        				</div>
+			        				<div class="col-md-1 col-sm-6 col-xs-6">
+			        					<label>Remark</label>
+			        					<div class="row">
+			        						<div class="col-md-12">
+												<cms:input name='remark' class="gxcpl-input-text" type='bound' />
+												<div class="gxcpl-ptop-10"></div>
+											</div>
+										</div>
+			        				</div>
+								<cms:else_if (my_icp='GCC') && (my_toho='0') />
+			        				<div class="col-md-2 col-sm-12 col-xs-12 text-center-special">
+			        					<label>GCC Arrival</label>
+			        					<div class="row">
+				        					<div class="col-md-12 col-sm-12 col-xs-12">
+				        						<cms:hide>
+													<cms:input type="bound" id="arprdate" name="arrival_date" />
+												</cms:hide>
+												<input type="date" class="gxcpl-input-text" name="f_arrival_date" value="<cms:date format='Y-m-d' />" style="width: auto;" />
+												<cms:input class="gxcpl-input-text input select" name="arrival_time" type="bound" />
+												<div class="gxcpl-ptop-10"></div>
+											</div>
+										</div>
+			        				</div>
+			        				<div class="col-md-2 col-sm-12 col-xs-12 text-center-special">
+			        					<label>GCC Departure</label>
+			        					<div class="row">
+			        						<div class="col-md-12 col-sm-12 col-xs-12">
+			        							<cms:hide>
+													<cms:input name="departure_date" type="bound" id="dptprdate" />
+												</cms:hide>
+												<input class="gxcpl-input-text" name="f_departure_date" type="date" value="<cms:date format='Y-m-d' />" style="width: auto;" />
+												<cms:input class="gxcpl-input-text" name="departure_time" type="bound" />
+												<div class="gxcpl-ptop-10"></div>
+											</div>
+										</div>
+			        				</div>
+			        				<div class="col-md-2 col-sm-12 col-xs-12 text-center-special">
+			        					<label>GNQ Arrival</label>
+			        					<div class="row">
+				        					<div class="col-md-12 col-sm-12 col-xs-12">
+				        						<cms:hide>
+													<cms:input type="bound" name="gnq_arrival_date" />
+												</cms:hide>
+												<input type="date" class="gxcpl-input-text" name="f_gnq_arrival_date" value="<cms:date format='Y-m-d' />" style="width: auto;" />
+												<cms:input class="gxcpl-input-text input select" name="gnq_arrival_time" type="bound" />
+												<div class="gxcpl-ptop-10"></div>
+											</div>
+										</div>
+			        				</div>
+			        				<div class="col-md-2 col-sm-12 col-xs-12 text-center-special">
+			        					<label>GNQ Departure</label>
+			        					<div class="row">
+			        						<div class="col-md-12 col-sm-12 col-xs-12">
+			        							<cms:hide>
+													<cms:input name="gnq_departure_date" type="bound" />
+												</cms:hide>
+												<input class="gxcpl-input-text" name="f_gnq_departure_date" type="date" value="<cms:date format='Y-m-d' />" style="width: auto;" />
+												<cms:input class="gxcpl-input-text" name="gnq_departure_time" type="bound" />
+												<div class="gxcpl-ptop-10"></div>
+											</div>
+										</div>
+			        				</div>
+			        				<div class="col-md-2 col-sm-12 col-xs-12 text-center-special">
+	        						<label>Sign On *</label>
+		        						<div class="row">
+			        						<div class="col-md-12 col-sm-12 col-xs-12">
+			        							<cms:hide>
+			        								<cms:input class="gxcpl-input-text" name="signon_date" type="bound"  />
+			        							</cms:hide>
+												<input class="gxcpl-input-text" name="f_signon_date" type="date" value="<cms:date format='Y-m-d' />" style="width: auto;" />
+												<cms:input class="gxcpl-input-text" name="signon_time" type="bound" />
+												<div class="gxcpl-ptop-10"></div>
+											</div>	
+										</div>
+			        				</div>
+			        				<div class="col-md-1 col-sm-6 col-xs-6 text-center-special">
+			        					<label>Load</label>
+			        					<div class="row">
+			        						<div class="col-md-12">
+												<cms:input name='load' type='bound' />
+												<div class="gxcpl-ptop-10"></div>
+											</div>
+										</div>
+			        				</div>
+			        				<div class="col-md-1 col-sm-6 col-xs-6">
+			        					<label>Remark</label>
+			        					<div class="row">
+			        						<div class="col-md-12">
+												<cms:input name='remark' class="gxcpl-input-text" type='bound' />
+												<div class="gxcpl-ptop-10"></div>
+											</div>
+										</div>
+			        				</div>
+			        			<cms:else_if my_toho eq '0' />
+			        				<div class="col-md-3 col-sm-12 col-xs-12 text-center-special">
+			        					<label>Arrival</label>
+			        					<div class="row">
+				        					<div class="col-md-12 col-sm-12 col-xs-12">
+				        						<cms:hide>
+													<cms:input type="bound" name="arrival_date" />
+												</cms:hide>
+												
+												<input type="date" class="gxcpl-input-text" name="f_arrival_date" value="<cms:date format='Y-m-d' />" style="width: auto;" />
+												
+												<cms:input class="gxcpl-input-text input select" name="arrival_time" type="bound" />
+												<div class="gxcpl-ptop-10"></div>
+											</div>
+										</div>
+			        				</div>
+			        				<div class="col-md-3 col-sm-12 col-xs-12 text-center-special">
+			        					<label>Departure</label>
+			        					<div class="row">
+			        						<div class="col-md-12 col-sm-12 col-xs-12">
+			        							<cms:hide>
+													<cms:input name="departure_date" type="bound" />
+												</cms:hide>
+												<input class="gxcpl-input-text" name="f_departure_date" type="date" value="<cms:date format='Y-m-d' />" style="width: auto;" />
+												<cms:input class="gxcpl-input-text" name="departure_time" type="bound" />
+												<div class="gxcpl-ptop-10"></div>
+											</div>
+										</div>
+			        				</div>
+			        				<div class="col-md-3 col-sm-12 col-xs-12 text-center-special">
+		        						<label>Sign On *</label>
+		        						<div class="row">
+			        						<div class="col-md-12 col-sm-12 col-xs-12">
+			        							<cms:hide>
+			        								<cms:input class="gxcpl-input-text" name="signon_date" type="bound"  />
+			        							</cms:hide>
+												<input class="gxcpl-input-text" name="f_signon_date" type="date" value="<cms:date format='Y-m-d' />" style="width: auto;" />
+												<cms:input class="gxcpl-input-text" name="signon_time" type="bound" />
+												<div class="gxcpl-ptop-10"></div>
+											</div>	
+										</div>
+			        				</div>
+			        				<div class="col-md-1 col-sm-6 col-xs-6 text-center-special">
+			        					<label>Load</label>
+			        					<div class="row">
+			        						<div class="col-md-12">
+												<cms:input name='load' type='bound' />
+												<div class="gxcpl-ptop-10"></div>
+											</div>
+										</div>
+			        				</div>
+			        				<div class="col-md-2 col-sm-6 col-xs-6">
+			        					<label>Remark</label>
+			        					<div class="row">
+			        						<div class="col-md-12">
+												<cms:input name='remark' class="gxcpl-input-text" type='bound' />
+												<div class="gxcpl-ptop-10"></div>
+											</div>
+										</div>
+			        				</div>
+			        			</cms:if>
+			        			<!-- NGP GCC Condition for TO -->
+			        			<!-- NGP GCC Condition for HO -->
+		        				<cms:if (my_icp='NGP') && (my_toho='1') >
+			        				<div class="col-md-2 col-sm-12 col-xs-12 text-center-special">
+			        					<label>AQ Arrival</label>
+			        					<div class="row">
+				        					<div class="col-md-12 col-sm-12 col-xs-12">
+				        						<cms:hide>
+													<cms:input type="bound" name="aq_arrival_date" />
+												</cms:hide>
+												<input type="date" class="gxcpl-input-text" name="f_aq_arrival_date" value="<cms:date format='Y-m-d' />" style="width: auto;" />
+												<cms:input class="gxcpl-input-text input select" name="aq_arrival_time" type="bound" />
+												<div class="gxcpl-ptop-10"></div>
+											</div>
+										</div>
+			        				</div>
+			        				<div class="col-md-2 col-sm-12 col-xs-12 text-center-special">
+			        					<label>AQ Departure</label>
+			        					<div class="row">
+			        						<div class="col-md-12 col-sm-12 col-xs-12">
+			        							<cms:hide>
+													<cms:input name="aq_departure_date" type="bound" />
+												</cms:hide>
+												<input class="gxcpl-input-text" name="f_aq_departure_date" type="date" value="<cms:date format='Y-m-d' />" style="width: auto;" />
+												<cms:input class="gxcpl-input-text" name="aq_departure_time" type="bound" />
+												<div class="gxcpl-ptop-10"></div>
+											</div>
+										</div>
+			        				</div>
+			        				<div class="col-md-2 col-sm-12 col-xs-12 text-center-special">
+			        					<label>NGP Arrival</label>
+			        					<div class="row">
+				        					<div class="col-md-12 col-sm-12 col-xs-12">
+				        						<cms:hide>
+													<cms:input type="bound" name="arrival_date" />
+												</cms:hide>
+												<input type="date" class="gxcpl-input-text" name="f_arrival_date" value="<cms:date format='Y-m-d' />" style="width: auto;" />
+												<cms:input class="gxcpl-input-text input select" name="arrival_time" type="bound" />
+												<div class="gxcpl-ptop-10"></div>
+											</div>
+										</div>
+			        				</div>
+			        				<div class="col-md-2 col-sm-12 col-xs-12 text-center-special">
+			        					<label>NGP Departure</label>
+			        					<div class="row">
+			        						<div class="col-md-12 col-sm-12 col-xs-12">
+			        							<cms:hide>
+													<cms:input name="departure_date" type="bound" />
+												</cms:hide>
+												<input class="gxcpl-input-text" name="f_departure_date" type="date" value="<cms:date format='Y-m-d' />" style="width: auto;" />
+												<cms:input class="gxcpl-input-text" name="departure_time" type="bound" />
+												<div class="gxcpl-ptop-10"></div>
+											</div>
+										</div>
+			        				</div>
+			        				<div class="col-md-2 col-sm-12 col-xs-12 text-center-special">
+	        						<label>Sign On *</label>
+		        						<div class="row">
+			        						<div class="col-md-12 col-sm-12 col-xs-12">
+			        							<cms:hide>
+			        								<cms:input class="gxcpl-input-text" name="signon_date" type="bound"  />
+			        							</cms:hide>
+												<input class="gxcpl-input-text" name="f_signon_date" type="date" value="<cms:date format='Y-m-d' />" style="width: auto;" />
+												<cms:input class="gxcpl-input-text" name="signon_time" type="bound" />
+												<div class="gxcpl-ptop-10"></div>
+											</div>	
+										</div>
+			        				</div>
+			        				<div class="col-md-1 col-sm-6 col-xs-6 text-center-special">
+			        					<label>Load</label>
+			        					<div class="row">
+			        						<div class="col-md-12">
+												<cms:input name='load' type='bound' />
+												<div class="gxcpl-ptop-10"></div>
+											</div>
+										</div>
+			        				</div>
+			        				<div class="col-md-1 col-sm-6 col-xs-6">
+			        					<label>Remark</label>
+			        					<div class="row">
+			        						<div class="col-md-12">
+												<cms:input name='remark' class="gxcpl-input-text" type='bound' />
+												<div class="gxcpl-ptop-10"></div>
+											</div>
+										</div>
+			        				</div>
+								<cms:else_if (my_icp='GCC') && (my_toho='1') />
+			        				<div class="col-md-2 col-sm-12 col-xs-12 text-center-special">
+			        					<label>GNQ Arrival</label>
+			        					<div class="row">
+				        					<div class="col-md-12 col-sm-12 col-xs-12">
+				        						<cms:hide>
+													<cms:input type="bound" name="gnq_arrival_date" />
+												</cms:hide>
+												<input type="date" class="gxcpl-input-text" name="f_gnq_arrival_date" value="<cms:date format='Y-m-d' />" style="width: auto;" />
+												<cms:input class="gxcpl-input-text input select" name="gnq_arrival_time" type="bound" />
+												<div class="gxcpl-ptop-10"></div>
+											</div>
+										</div>
+			        				</div>
+			        				<div class="col-md-2 col-sm-12 col-xs-12 text-center-special">
+			        					<label>GNQ Departure</label>
+			        					<div class="row">
+			        						<div class="col-md-12 col-sm-12 col-xs-12">
+			        							<cms:hide>
+													<cms:input name="gnq_departure_date" type="bound" />
+												</cms:hide>
+												<input class="gxcpl-input-text" name="f_gnq_departure_date" type="date" value="<cms:date format='Y-m-d' />" style="width: auto;" />
+												<cms:input class="gxcpl-input-text" name="gnq_departure_time" type="bound" />
+												<div class="gxcpl-ptop-10"></div>
+											</div>
+										</div>
+			        				</div>
+			        				<div class="col-md-2 col-sm-12 col-xs-12 text-center-special">
+			        					<label>GCC Arrival</label>
+			        					<div class="row">
+				        					<div class="col-md-12 col-sm-12 col-xs-12">
+				        						<cms:hide>
+													<cms:input type="bound" id="arprdate" name="arrival_date" />
+												</cms:hide>
+												<input type="date" class="gxcpl-input-text" name="f_arrival_date" value="<cms:date format='Y-m-d' />" style="width: auto;" />
+												<cms:input class="gxcpl-input-text input select" name="arrival_time" type="bound" />
+												<div class="gxcpl-ptop-10"></div>
+											</div>
+										</div>
+			        				</div>
+			        				<div class="col-md-2 col-sm-12 col-xs-12 text-center-special">
+			        					<label>GCC Departure</label>
+			        					<div class="row">
+			        						<div class="col-md-12 col-sm-12 col-xs-12">
+			        							<cms:hide>
+													<cms:input name="departure_date" type="bound" id="dptprdate" />
+												</cms:hide>
+												<input class="gxcpl-input-text" name="f_departure_date" type="date" value="<cms:date format='Y-m-d' />" style="width: auto;" />
+												<cms:input class="gxcpl-input-text" name="departure_time" type="bound" />
+												<div class="gxcpl-ptop-10"></div>
+											</div>
+										</div>
+			        				</div>
+			        				<div class="col-md-2 col-sm-12 col-xs-12 text-center-special">
+	        						<label>Sign On *</label>
+		        						<div class="row">
+			        						<div class="col-md-12 col-sm-12 col-xs-12">
+			        							<cms:hide>
+			        								<cms:input class="gxcpl-input-text" name="signon_date" type="bound"  />
+			        							</cms:hide>
+												<input class="gxcpl-input-text" name="f_signon_date" type="date" value="<cms:date format='Y-m-d' />" style="width: auto;" />
+												<cms:input class="gxcpl-input-text" name="signon_time" type="bound" />
+												<div class="gxcpl-ptop-10"></div>
+											</div>	
+										</div>
+			        				</div>
+			        				<div class="col-md-1 col-sm-6 col-xs-6 text-center-special">
+			        					<label>Load</label>
+			        					<div class="row">
+			        						<div class="col-md-12">
+												<cms:input name='load' type='bound' />
+												<div class="gxcpl-ptop-10"></div>
+											</div>
+										</div>
+			        				</div>
+			        				<div class="col-md-1 col-sm-6 col-xs-6">
+			        					<label>Remark</label>
+			        					<div class="row">
+			        						<div class="col-md-12">
+												<cms:input name='remark' class="gxcpl-input-text" type='bound' />
+												<div class="gxcpl-ptop-10"></div>
+											</div>
+										</div>
+			        				</div>
+			        			<cms:else_if my_toho eq '1' />
+			        				<div class="col-md-3 col-sm-12 col-xs-12 text-center-special">
+			        					<label>Arrival</label>
+			        					<div class="row">
+				        					<div class="col-md-12 col-sm-12 col-xs-12">
+				        						<cms:hide>
+													<cms:input type="bound" name="arrival_date" />
+												</cms:hide>
+												<input type="date" class="gxcpl-input-text" name="f_arrival_date" value="<cms:date format='Y-m-d' />" style="width: auto;" />
+												<cms:input class="gxcpl-input-text input select" name="arrival_time" type="bound" />
+												<div class="gxcpl-ptop-10"></div>
+											</div>
+										</div>
+			        				</div>
+			        				<div class="col-md-3 col-sm-12 col-xs-12 text-center-special">
+			        					<label>Departure</label>
+			        					<div class="row">
+			        						<div class="col-md-12 col-sm-12 col-xs-12">
+			        							<cms:hide>
+													<cms:input name="departure_date" type="bound" />
+												</cms:hide>
+												<input class="gxcpl-input-text" name="f_departure_date" type="date" value="<cms:date format='Y-m-d' />" style="width: auto;" />
+												<cms:input class="gxcpl-input-text" name="departure_time" type="bound" />
+												<div class="gxcpl-ptop-10"></div>
+											</div>
+										</div>
+			        				</div>
+			        				<div class="col-md-3 col-sm-12 col-xs-12 text-center-special">
+		        						<label>Sign On *</label>
+		        						<div class="row">
+			        						<div class="col-md-12 col-sm-12 col-xs-12">
+			        							<cms:hide>
+			        								<cms:input class="gxcpl-input-text" name="signon_date" type="bound"  />
+			        							</cms:hide>
+												<input class="gxcpl-input-text" name="f_signon_date" type="date" value="<cms:date format='Y-m-d' />" style="width: auto;" />
+												<cms:input class="gxcpl-input-text" name="signon_time" type="bound" />
+												<div class="gxcpl-ptop-10"></div>
+											</div>	
+										</div>
+			        				</div>
+			        				<div class="col-md-1 col-sm-6 col-xs-6 text-center-special">
+			        					<label>Load</label>
+			        					<div class="row">
+			        						<div class="col-md-12">
+												<cms:input name='load' type='bound' />
+												<div class="gxcpl-ptop-10"></div>
+											</div>
+										</div>
+			        				</div>
+			        				<div class="col-md-2 col-sm-6 col-xs-6">
+			        					<label>Remark</label>
+			        					<div class="row">
+			        						<div class="col-md-12">
+												<cms:input name='remark' class="gxcpl-input-text" type='bound' />
+												<div class="gxcpl-ptop-10"></div>
+											</div>
+										</div>
+			        				</div>
+			        			</cms:if>
+			        			<!-- NGP GCC Condition for HO -->
 		        			</div>
 		        			<div class="row gxcpl-padding">
 		        				<div class="col-md-2 col-sm-6 col-xs-6">
@@ -393,68 +835,9 @@
 	        		<div class="gxcpl-ptop-10"></div>
 	        	</div>
         	</cms:form>
-        	<!-- CSV Pointwise Interchange IMPORTER -->
-			<div class="col-md-2">
-				<div class="gxcpl-card">
-					<div class="gxcpl-card-header">
-						<h4 class="gxcpl-no-margin">CSV IMPORTER</h4>
-					</div>
-					<div class="gxcpl-card-body gxcpl-padding-15">
-						<center>
-							<!-- Button trigger modal -->
-							<button type="button" class="btn btn-primary btn-sm gxcpl-fc-white gxcpl-fw-700" data-toggle="modal" data-target="#myModal1" data-keyboard="false" data-backdrop="static">
-								<i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload CSV
-							</button>
-							<!-- Modal -->
-							<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
-							  	<div class="modal-dialog" role="document">
-							    	<div class="modal-content">
-							      		<div class="modal-header">
-							        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							        			<span aria-hidden="true">&times;</span>
-							        		</button>
-							        		<h4 class="modal-title" id="myModalLabel1">
-							        			CSV POINTWISE INTERCHANGE IMPORTER
-							        		</h4>
-							      		</div>
-									    <div class="modal-body" style="background: #ebebeb;">
-									       	<iframe class="embed-responsive-item" width="500" height="360" frameborder="0" name="pointwise" src="<cms:show k_site_link />/pointwise-import.php" allowfullscreen>
-									        </iframe>
-									    </div>
-							      		<div class="modal-footer">
-							        		<button type="button" onclick="refreshIframept();" class="btn btn-danger gxcpl-fc-21 gxcpl-fw-700" data-dismiss="modal">
-							        			<i class="fa fa-times" aria-hidden="true"></i> Close
-							        		</button>
-							        		<button type="button" onclick="refreshIframept();" class="btn btn-info gxcpl-fc-21 gxcpl-fw-700">
-							        			<i class="fa fa-refresh" aria-hidden="true"></i> Refresh
-							        		</button>
-							      		</div>
-							    	</div>
-							  	</div>
-							</div>
-						</center>
-					</div>
-				</div>
-				<div class="gxcpl-ptop-10"></div>
-			</div>
-			<!-- CSV Pointwise Interchange IMPORTER -->
         	</cms:if>
 		</div>
 		<!-- Pointwise Interchange -->
-	</div>
-		
-	<div class="container">
-		<div class="row">
-			<div class="col-md-4 col-xs-6" style="border: 1px solid red; height: 20px;">
-				Title
-			</div>
-			<div class="col-md-4 col-xs-6 col-md-push-4" style="border: 1px solid blue; height: 20px;">
-				Btn
-			</div>
-			<div class="col-md-4 col-xs-12 col-md-pull-4" style="border: 1px solid green; height: 20px;">
-				Form
-			</div>
-		</div>
 	</div>
 
 	<cms:set curr_date="<cms:date format='Y-m-d' />" scope='global' />
@@ -464,12 +847,10 @@
 			<div class="col-md-12 ">
 				<cms:if (my_icp != '-') && (my_toho != '') >
 				<div class="gxcpl-card box">
-					<div class="gxcpl-card-header">
+					<div class="gxcpl-card-header gxcpl-no-margin">
 						<div class="row">
-
-							
-
-							<div class="col-md-3">
+							<!-- Title -->
+							<div class="col-md-4 col-xs-6">
 								<h4>
 									<cms:pages masterpage="pointwise-interchange.php" limit="1" custom_field="interchange=<cms:gpc 'interchange' /> | to_ho=<cms:gpc 'to_ho' />">
 										<cms:set my_icp="<cms:gpc 'interchange' />" scope='global' />
@@ -483,151 +864,337 @@
 									</cms:pages>
 								</h4>
 							</div>
-							<!-- Search -->
-							<div class="col-md-4">
-								<div class="gxcpl-ptop-10"></div>
-								<label class="text-uppercase">Search Trains</label>
-								<input type="text" class="typeahead" placeholder="Search using Train Name or Loco Number...">
-								<div class="gxcpl-ptop-10"></div>
-							</div>
-							<!-- Search -->
-							<!-- Legend -->
-							<div class="gxcpl-ptop-20"></div>
-
-							<span class="col-md-1 pull-right" data-toggle="tooltip" data-placement="top" title="Table Legend">
-							    <a class="gxcpl-legend-outer" data-toggle="modal" data-target="#myModal">
-								  	<div class="gxcpl-legend">
-								    	<div class="gxcpl-legend-inner">
-									      	<div class="gxcpl-legend-interchange"></div>
-									      	<div class="gxcpl-legend-stable"></div>
-								    	</div>
-									    <div class="gxcpl-legend-inner">
-									      	<div class="gxcpl-legend-schedule"></div>
-									      	<div class="gxcpl-legend-signon"></div>
-								    	</div>
-								  	</div>
-								</a>
-								<!-- Legend Box -->
-
-								<!-- Legend Modal -->
-								<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-									<div class="modal-dialog" role="document">
-										<div class="modal-content">
-								    	<div class="modal-header">
-									        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-									        <h4 class="modal-title" id="myModalLabel">LEGEND</h4>
-									    </div>
-									    <div class="modal-body">
-											<div class="row gxcpl-padding-5 gxcpl-no-margin">
-												<div class="col-md-6 col-sm-12 col-xs-12 gxcpl-modal-interchange text-center">
-													<div class="gxcpl-ptop-5"></div>
-													<strong>TRAIN INTERCHANGE</strong>
-												</div>
-												<div class="col-md-6 col-sm-12 col-xs-12 gxcpl-modal-stable text-center">
-													<div class="gxcpl-ptop-5"></div>
-													<strong>STABLE TRAIN</strong>
-												</div>
-												<div class="gxcpl-ptop-50"></div>
-												<div class="col-md-6 col-sm-12 col-xs-12 gxcpl-modal-schedule text-center">
-													<div class="gxcpl-ptop-5"></div>
-													<strong>SCHEDULE OVERDUE</strong>
-												</div>							
-												<div class="col-md-6 col-sm-12 col-xs-12 gxcpl-modal-signon text-center">
-													<div class="gxcpl-ptop-5"></div>
-													<strong>SIGN ON OVERDUE</strong>
-												</div>
-											</div>
-										</div>
-										<div class="modal-footer">
-									        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-									    </div>
-								    </div>
-								  </div>
-								</div>
+							<!-- Title -->
+							<!-- Show/Hide Button -->
+							<div class="col-md-2 col-md-offset-5 col-xs-8 btn-group" role="group">
+								<button id="btnShowip" class="btn btn-danger gxcpl-fw-700" type="button">
+									<i class="fa fa-eye" aria-hidden="true"></i> SHOW
+								</button>
+								<button id="btnHideip" class="btn btn-primary gxcpl-fw-700" type="button">
+									<i class="fa fa-eye-slash" aria-hidden="true"></i> HIDE
+								</button>
 								
-								<!-- Legend Modal -->
-							</span>
-							<!-- Legend -->	
+							</div>
+							<!-- Show/Hide Button -->
+							<!-- Legend -->
+							<div class="col-md-1 col-xs-4">
+								<span class="col-md-1 pull-right" data-toggle="tooltip" data-placement="top" title="Table Legend">
+								    <cms:embed 'legend.html' />
+								</span>
+								<div class="gxcpl-ptop-50"></div>
+							</div>
+							<!-- Legend -->
 						</div>
 					</div>
-					<div class="gxcpl-card-body tableFixHead gxcpl-scroll" style="overflow-x: auto;">
-						<table class="gxcpl-table userTbl" id="pt-icp" >
+					<div class="gxcpl-card-body tableFixHead gxcpl-padding-15" style="overflow-x: auto;">
+						<table class="display table table-bordered gxcpl-table-hover" id="pt-icp" style="width: 100% !important;">
 							<thead>
 								<tr>
-									<th class="text-center">
+									<th width="2%;" class="text-center">
 										S. No	
 									</th>
-									<th>
+									<th width="4%;">
 										Train
 									</th>
-									<th>
-										Loco No
+									<th width="4%;">
+										Loco
 									</th>
-									<th>
-										Sch
+									<th width="6%;">
+										Schedule
 									</th>
-									<th>
-										Arrival
+									<cms:if (my_icp eq 'NGP') && (my_toho eq '0') >
+									<th width="4%;">
+										NGP Arr
 									</th>
-									<th>
-										Departure
+									<th width="6%;">
+										NGP Dep
 									</th>
-									<th>
+									<th width="4%;">
+										AQ Arr
+									</th>
+									<th width="4%;">
+										AQ Dep
+									</th>
+									<th width="4%;">
 										Sign On
 									</th>
-									<th>
+									<th width="1%;">
 										Location
 									</th>
-									<th>
+									<th width="6%;" style="display: none;">
 										Type
 									</th>
-									<th>
+									<th width="4%;" style="display: none;">
 										L/E
 									</th>
-									<th>
+									<th width="4%;" style="display: none;">
 										Unit/s
 									</th>
-									<th>
+									<th width="6%;" style="display: none;">
 										CMDT
 									</th>
-									<th>
+									<th width="6%;" style="display: none;">
 										To
 									</th>
-									<th>
+									<th width="6%;" style="display: none;">
 										From
 									</th>
-									<th style="z-index: 99;">
+									<th width="7%;" style="z-index: 99;">
 										Remark
 									</th>
-									<th>
+									<th width="4%;" class="text-center">
 										Action
 									</th>
+									<cms:else_if (my_icp eq 'GCC') && (my_toho eq '0')  />
+									<th width="4%;">
+										GCC Arr
+									</th>
+									<th width="4%;">
+										GCC Dep
+									</th>
+									<th width="4%;">
+										GNQ Arr
+									</th>
+									<th width="4%;">
+										GNQ Dep
+									</th>
+									<th width="4%;">
+										Sign On
+									</th>
+									<th width="1%;">
+										Location
+									</th>
+									<th width="6%;" style="display: none;">
+										Type
+									</th>
+									<th width="4%;" style="display: none;">
+										L/E
+									</th>
+									<th width="4%;" style="display: none;">
+										Unit/s
+									</th>
+									<th width="6%;" style="display: none;">
+										CMDT
+									</th>
+									<th width="6%;" style="display: none;">
+										To
+									</th>
+									<th width="6%;" style="display: none;">
+										From
+									</th>
+									<th width="7%;" style="z-index: 99;">
+										Remark
+									</th>
+									<th width="4%;" class="text-center">
+										Action
+									</th>
+									<cms:else_if my_toho eq '0' />
+									<th width="4%;">
+										Arrival
+									</th>
+									<th width="4%;">
+										Departure
+									</th>
+									<th width="4%;">
+										Sign On
+									</th>
+									<th width="1%;">
+										Location
+									</th>
+									<th width="6%;" style="display: none;">
+										Type
+									</th>
+									<th width="4%;" style="display: none;">
+										L/E
+									</th>
+									<th width="4%;" style="display: none;">
+										Unit/s
+									</th>
+									<th width="6%;" style="display: none;">
+										CMDT
+									</th>
+									<th width="6%;" style="display: none;">
+										To
+									</th>
+									<th width="6%;" style="display: none;">
+										From
+									</th>
+									<th width="7%;" style="z-index: 99;">
+										Remark
+									</th>
+									<th width="4%;" class="text-center">
+										Action
+									</th>
+									</cms:if>
+									<cms:if (my_icp eq 'NGP') && (my_toho eq '1') >
+									<th width="4%;">
+										AQ Arr
+									</th>
+									<th width="4%;">
+										AQ Dep
+									</th>
+									<th width="4%;">
+										NGP Arr
+									</th>
+									<th width="4%;">
+										NGP Dep
+									</th>
+									<th width="4%;">
+										Sign On
+									</th>
+									<th width="1%;">
+										Location
+									</th>
+									<th width="6%;" style="display: none;">
+										Type
+									</th>
+									<th width="4%;" style="display: none;">
+										L/E
+									</th>
+									<th width="4%;" style="display: none;">
+										Unit/s
+									</th>
+									<th width="6%;" style="display: none;">
+										CMDT
+									</th>
+									<th width="6%;" style="display: none;">
+										To
+									</th>
+									<th width="6%;" style="display: none;">
+										From
+									</th>
+									<th width="7%;" style="z-index: 99;">
+										Remark
+									</th>
+									<th width="4%;" class="text-center">
+										Action
+									</th>
+									<cms:else_if (my_icp eq 'GCC') && (my_toho eq '1')  />
+									<th width="4%;">
+										GNQ Arr
+									</th>
+									<th width="4%;">
+										GNQ Dep
+									</th>
+									<th width="4%;">
+										GCC Arr
+									</th>
+									<th width="4%;">
+										GCC Dep
+									</th>
+									<th width="4%;">
+										Sign On
+									</th>
+									<th width="1%;">
+										Location
+									</th>
+									<th width="6%;" style="display: none;">
+										Type
+									</th>
+									<th width="4%;" style="display: none;">
+										L/E
+									</th>
+									<th width="4%;" style="display: none;">
+										Unit/s
+									</th>
+									<th width="6%;" style="display: none;">
+										CMDT
+									</th>
+									<th width="6%;" style="display: none;">
+										To
+									</th>
+									<th width="6%;" style="display: none;">
+										From
+									</th>
+									<th width="7%;" style="z-index: 99;">
+										Remark
+									</th>
+									<th width="4%;" class="text-center">
+										Action
+									</th>
+									<cms:else_if my_toho eq '1' />
+									<th width="4%;">
+										Arr
+									</th>
+									<th width="4%;">
+										Dep
+									</th>
+									<th width="4%;">
+										Sign On
+									</th>
+									<th width="1%;">
+										Location
+									</th>
+									<th width="6%;" style="display: none;">
+										Type
+									</th>
+									<th width="4%;" style="display: none;">
+										L/E
+									</th>
+									<th width="4%;" style="display: none;">
+										Unit/s
+									</th>
+									<th width="6%;" style="display: none;">
+										CMDT
+									</th>
+									<th width="6%;" style="display: none;">
+										To
+									</th>
+									<th width="6%;" style="display: none;">
+										From
+									</th>
+									<th width="7%;" style="z-index: 99;">
+										Remark
+									</th>
+									<th width="4%;" class="text-center">
+										Action
+									</th>
+									</cms:if>
 								</tr>
 							</thead>	
 							<tbody>
+								<cms:if my_toho eq '1'>
+								<!-- Not Today's Interchange But Interchange with arrival date-->
+								<cms:pages masterpage="pointwise-interchange.php" order='asc' orderby='arrival_date' custom_field="is_interchanged='1' | to_ho=<cms:show my_toho /> | interchange=<cms:gpc 'interchange' method='get' /> | arrival_date=<cms:date my_today_yesterday format='Y-m-d' /> | today_interchange<>1 " show_future_entries='1'>
+									<cms:embed 'overdue.html' />	
+									<cms:set arr_inter_ho ="<cms:show k_total_records />" scope='global' />
+									<cms:embed 'point-wise-intr.html' />	
+								</cms:pages>
+								<!-- Not Today's Interchange But Interchange with arrival date-->
+
+								<!-- Interchange & today interchange with arrival date-->
+								<cms:pages masterpage="pointwise-interchange.php" order='asc' orderby='arrival_date' custom_field="is_interchanged='1' | to_ho=<cms:show my_toho /> | interchange=<cms:gpc 'interchange' method='get' /> | arrival_date=<cms:date my_today_yesterday format='Y-m-d' /> | today_interchange=1 " show_future_entries='1'>
+									<cms:embed 'overdue.html' />	
+									<cms:set tdy_arr_inter_ho ="<cms:show k_total_records />" scope='global' />
+									<cms:embed 'point-wise-intr.html' />	
+								</cms:pages>
+								<!-- Interchange & today interchange with arrival date-->
+
+								<!-- Not Interchange but today interchange with arrival date-->
+								<cms:pages masterpage="pointwise-interchange.php" order='asc' orderby='arrival_date' custom_field="is_interchanged<>1 | to_ho=<cms:show my_toho /> | interchange=<cms:gpc 'interchange' method='get' /> | arrival_date=<cms:date my_today_yesterday format='Y-m-d' /> | today_interchange=1" show_future_entries='1'>
+									<cms:embed 'overdue.html' />	
+									<cms:set arr_nt_inter_ho ="<cms:show k_total_records />" scope='global' />
+									<cms:embed 'point-wise-intr.html' />
+								</cms:pages>
+								<!-- Not Interchange but today interchange with arrival date-->
+
+								<!-- Not Interchange but today interchange with no arrival date-->
+								<cms:pages masterpage="pointwise-interchange.php" order='asc' orderby='arrival_date' custom_field="is_interchanged<>1 | to_ho=<cms:show my_toho /> | interchange=<cms:gpc 'interchange' method='get' /> | arrival_date!=<cms:date my_today_yesterday format='Y-m-d' /> | today_interchange=1" show_future_entries='1'>
+									<cms:embed 'overdue.html' />	
+									<cms:set nt_inter_ho ="<cms:show k_total_records />" scope='global' />
+									<cms:embed 'point-wise-intr.html' />
+								</cms:pages>
+								<!-- Not Interchange but today interchange with no arrival date-->
+
+								<cms:else_if my_toho eq '0' />
 								<!-- Interchange with arrival date-->
 								<cms:pages masterpage="pointwise-interchange.php" order='asc' orderby='arrival_date' custom_field="is_interchanged='1' | to_ho=<cms:show my_toho /> | interchange=<cms:gpc 'interchange' method='get' /> | arrival_date=<cms:date my_today_yesterday format='Y-m-d' /> " show_future_entries='1'>
 									<cms:embed 'overdue.html' />	
-									<cms:set arr_inter ="<cms:show k_total_records />" scope='global' />
+									<cms:set arr_inter_to ="<cms:show k_total_records />" scope='global' />
 									<cms:embed 'point-wise-intr.html' />	
 								</cms:pages>
 								<!-- Interchange with arrival date-->
-
-								<!-- Not Interchange(today interchange) with arrival date-->
-								<cms:pages masterpage="pointwise-interchange.php" order='asc' orderby='arrival_date' custom_field="is_interchanged<>1 | to_ho=<cms:show my_toho /> | interchange=<cms:gpc 'interchange' method='get' /> | arrival_date=<cms:date my_today_yesterday format='Y-m-d' /> | today_interchange=1" show_future_entries='1'>
-									<cms:embed 'overdue.html' />	
-									<cms:set arr_nt_inter ="<cms:show k_total_records />" scope='global' />
-									<cms:embed 'point-wise-intr.html' />
-								</cms:pages>
-								<!-- Not Interchange(today interchange) with arrival date-->
-								<!-- Not Interchange(today interchange) -->
-								<cms:pages masterpage="pointwise-interchange.php" order='asc' orderby='arrival_date' custom_field="is_interchanged<>1 | to_ho=<cms:show my_toho /> | interchange=<cms:gpc 'interchange' method='get' /> | arrival_date!=<cms:date my_today_yesterday format='Y-m-d' /> | today_interchange=1" show_future_entries='1'>
-									<cms:embed 'overdue.html' />	
-									<cms:set nt_inter ="<cms:show k_total_records />" scope='global' />	
-									<cms:embed 'point-wise-intr.html' />
-								</cms:pages>
-								<!-- Not Interchange(today interchange) -->
-
+								</cms:if>
 								<!-- Not Interchange with arrival date-->
 								<cms:pages masterpage="pointwise-interchange.php" order='asc' orderby='arrival_date' custom_field="is_interchanged<>1 | to_ho=<cms:show my_toho /> | interchange=<cms:gpc 'interchange' method='get' /> | arrival_date=<cms:date my_today_yesterday format='Y-m-d' /> | today_interchange<>1" show_future_entries='1'>
 									<cms:embed 'overdue.html' />	
@@ -635,41 +1202,42 @@
 									<cms:embed 'point-wise-intr.html' />
 								</cms:pages>
 								<!-- Not Interchange with arrival date-->
-								<!-- Not Interchange -->
+
+								<!-- Not Interchange with no arrival date-->
 								<cms:pages masterpage="pointwise-interchange.php" order='asc' orderby='arrival_date' custom_field="is_interchanged<>1 | to_ho=<cms:show my_toho /> | interchange=<cms:gpc 'interchange' method='get' /> | arrival_date!=<cms:date my_today_yesterday format='Y-m-d' /> | today_interchange<>1" show_future_entries='1'>
 									<cms:embed 'overdue.html' />	
 									<cms:set nt_inter ="<cms:show k_total_records />" scope='global' />	
 									<cms:embed 'point-wise-intr.html' />
 								</cms:pages>
-								<!-- Not Interchange -->
+								<!-- Not Interchange with no arrival date-->
 							</tbody>
 						</table>
 					</div>
 					<cms:if my_toho eq '0'>
-					<div class="gxcpl-card-footer" style="line-height: 24px; text-align: left;">
-						<strong>Forecasted:</strong><cms:add arr_inter "<cms:add arr_nt_inter "<cms:add nt_inter arr_ho_inter />" />" />
+					<div class="gxcpl-card-body gxcpl-padding-10" style="line-height: 24px; text-align: left;">
+						<strong>Forecasted:</strong><cms:add arr_inter_to "<cms:add arr_nt_inter nt_inter />" />
 						<br>
 
-						<cms:ignore>
-							<!-- <cms:set abs_count="<cms:pages masterpage='pointwise-interchange.php' custom_field="interchange=<cms:gpc 'interchange' method='get' /> | arrival_date=<cms:gpc 'arrival_date' method='get' /> | <cms:gpc 'to_ho' method='get'  /> | to_ho=0 " order='asc' orderby='arrival_time' count_only='1' />" scope='global' />
-							<strong>Forecasted: </strong><cms:show abs_count />
-							<br> -->
-						</cms:ignore>
-						<strong>Already Interchanged: </strong><cms:pages masterpage='pointwise-interchange.php' custom_field="interchange=<cms:gpc 'interchange' method='get' /> | arrival_date=<cms:date my_today_yesterday format='Y-m-d' /> | <cms:gpc 'to_ho' method='get'  /> | is_interchanged=1 | to_ho=0 " order='asc' orderby='arrival_time' count_only='1' />
+						<strong>Already Interchanged: </strong><cms:pages masterpage='pointwise-interchange.php' custom_field="interchange=<cms:gpc 'interchange' method='get' /> | arrival_date=<cms:date my_today_yesterday format='Y-m-d' /> | <cms:gpc 'to_ho' method='get'  /> | is_interchanged=1 | to_ho=0 | tr_name<>TA | tr_name<>ta | tr_name<>Ta | tr_name<>tA | tr_name<>LA | tr_name<>la | tr_name<>La | tr_name<>lA" order='asc' orderby='arrival_time' count_only='1' />
+						<br>				
+					</div>
+					<cms:else_if my_toho eq '1' />
+					<div class="gxcpl-card-body gxcpl-padding-10" style="line-height: 24px; text-align: left;">
+						<strong>Forecasted:</strong><cms:add tdy_arr_inter_ho "<cms:add arr_nt_inter_ho nt_inter_ho />" />
 						<br>
-						<cms:ignore>
-							<!-- Interchange count when is_interchanged is not set
-							<cms:pages masterpage='pointwise-interchange.php' custom_field="interchange=<cms:show my_icp /> | arrival_date=<cms:date curr_date format='Y-m-d' /> | to_ho=0" order='desc' orderby='arrival_time' count_only='1' /> -->
-						</cms:ignore>
+
+						<strong>Already Interchanged: </strong><cms:pages masterpage='pointwise-interchange.php' custom_field="interchange=<cms:gpc 'interchange' method='get' /> | arrival_date=<cms:date my_today_yesterday format='Y-m-d' /> | <cms:gpc 'to_ho' method='get'  /> | is_interchanged=1 | to_ho=1 | tr_name<>TA | tr_name<>ta | tr_name<>Ta | tr_name<>tA | tr_name<>LA | tr_name<>la | tr_name<>La | tr_name<>lA " order='asc' orderby='departure_time' count_only='1' />
+						<br>				
 					</div>
 					</cms:if>
 				</div>
 				</cms:if>
-				<div class="gxcpl-ptop-50"></div>
+				<div class="gxcpl-ptop-30"></div>
 			</div>
 		</div>
 	</div>
 	<!-- Content Here -->
 	<div class="gxcpl-ptop-50"></div>
+	<div class="modal fade emp-details" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"></div>
 <cms:embed 'footer.html' />
 <?php COUCH::invoke( K_IGNORE_CONTEXT ); ?>

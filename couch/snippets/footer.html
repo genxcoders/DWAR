@@ -1,16 +1,18 @@
-	
-		<cms:if k_template_name=="users/login.php" || k_template_name=="users/forgotpassword.php" || k_template_name=="coal-import.php" || k_template_name=="transport-import.php"|| k_template_name=="pointwise-import.php"|| k_template_name=="machine-import.php"|| k_template_name=="reason-import.php"|| k_template_name=="section-import.php" || k_template_name=="machine-unit-import.php" || k_template_name=="cause-machine-import.php" || k_template_name=="station-name-import.php" || k_template_name=="station-code-import.php">
+		<p>Page generated in: <cms:sub "<cms:php>echo $time_start = microtime(true);</cms:php>" start /></p>
+		<div class="gxcpl-ptop-50"></div>
+		<cms:if k_template_name=="users/login.php" || k_template_name=="users/forgotpassword.php" || k_template_name=="machine-import.php" || k_template_name=="reason-import.php"|| k_template_name=="section-import.php" || k_template_name=="machine-unit-import.php" || k_template_name=="cause-machine-import.php" || k_template_name=="station-name-import.php" || k_template_name=="station-code-import.php">
 		<cms:else />
 		<footer class="gxcpl-width-100 gxcpl-fc-white text-center">	
 			<small>&copy; <cms:get_custom_field 'copyright' masterpage="globals.php" /> 
 				<a class="gxcpl-fc-white" href="https://www.gxcpl.com/">Powered by GXCPL</a>
 			</small>
 		</footer>
-		</cms:if>
+		</cms:if>		
 		<!-- Scripts -->
 		<script src="<cms:show k_site_link />dist/sidenav.min.js"></script>
 		 <script>$('[data-sidenav]').sidenav();</script>
 		<script type="text/javascript" src="<cms:show k_site_link />assets/js/bootstrap.js"></script>
+		<script type="text/javascript" src="<cms:show k_site_link />assets/DataTables/datatables.js"></script>
 		<cms:ignore>
 		<!-- For Open close nav -->
 		<!-- <script>
@@ -27,7 +29,8 @@
 		<!-- Tooltip -->
 		<script type="text/javascript">
 			$(function () {
-				$('[data-toggle="tooltip"]').tooltip()
+				// Set Tooltip to be above all elements
+				$('[data-toggle="tooltip"]').tooltip({ container: 'body' })
 			})
 		</script>
 		<!-- Tooltip -->
@@ -157,42 +160,6 @@
 			<!-- When value is > 0 then disable input -->
 		</cms:if>
 
-		<!-- Search Typeahead -->
-		<script>
-			$(document).ready(function(){
-			    $('.typeahead').on('keyup',function(){
-			        var searchTerm = $(this).val().toLowerCase();
-			        $('.userTbl tbody tr').each(function(){
-			            var lineStr = $(this).text().toLowerCase();
-			            if(lineStr.indexOf(searchTerm) === -1){
-			                $(this).hide();
-			            }else{
-			                $(this).show();
-			            }
-			        });
-			    });
-			});
-		</script>
-		<!-- Search Typeahead -->
-
-		<!-- Search Typeahead -->
-		<script>
-			$(document).ready(function(){
-			    $('.typeahead1').on('keyup',function(){
-			        var searchTerm = $(this).val().toLowerCase();
-			        $('.rpttbl tbody tr').each(function(){
-			            var lineStr = $(this).text().toLowerCase();
-			            if(lineStr.indexOf(searchTerm) === -1){
-			                $(this).hide();
-			            }else{
-			                $(this).show();
-			            }
-			        });
-			    });
-			});
-		</script>
-		<!-- Search Typeahead -->
-
 		<cms:if k_template_name=='non-coal.php'>
 			<!-- Dependent Dropdown -->
 			<cms:embed "nc-dropdown.html" />
@@ -210,10 +177,14 @@
 			<cms:embed "total-sum.html" />
 			<!-- Real time Total -->
 		</cms:if>
-
-		<cms:if k_template_name=="ptwise-int-report.php">
+		<cms:if k_template_name=="ptwise-int-report.php" >
 			<!-- Show/ Hide Button -->
 			<cms:embed "show-hide-pt.html" />
+			<!-- Show/ Hide Button -->
+		</cms:if>
+		<cms:if k_template_name=="pointwise-interchange.php" >
+			<!-- Show/ Hide Button -->
+			<cms:embed "show-hide-pt-entry.html" />
 			<!-- Show/ Hide Button -->
 		</cms:if>
 		
@@ -235,53 +206,34 @@
 			// Generate PDF with fresh data
 		</script>
 		</cms:if>
-		<cms:ignore>
-		<!-- <cms:if k_template_name=='ptwise-int-report.php' >
-		<script>
-			function downloadCSV(csv, filename) {
-			    var csvFile;
-			    var downloadLink;
+		<!-- DataTables  -->
+		<cms:embed "datatable-script.html" />
+		<!-- DataTables  -->
 
-			    // CSV file
-			    csvFile = new Blob([csv], {type: "text/csv"});
-
-			    // Download link
-			    downloadLink = document.createElement("a");
-
-			    // File name
-			    downloadLink.download = filename;
-
-			    // Create a link to the file
-			    downloadLink.href = window.URL.createObjectURL(csvFile);
-
-			    // Hide download link
-			    downloadLink.style.display = "none";
-
-			    // Add the link to DOM
-			    document.body.appendChild(downloadLink);
-
-			    // Click download link
-			    downloadLink.click();
-			}
-
-			function exportTableToCSV(filename) {
-			    var csv = [];
-				var rows = document.querySelectorAll("table tr");
-				
-			    for (var i = 0; i < rows.length; i++) {
-					var row = [], cols = rows[i].querySelectorAll("td, th");
-					
-			        for (var j = 0; j < cols.length; j++) 
-			            row.push(cols[j].innerText);
-			        
-					csv.push(row.join(","));		
-				}
-
-			    // Download CSV file
-			    downloadCSV(csv.join("\n"), filename);
-			}
+		<!-- Edit Popup -->
+		<script type="text/javascript">
+		$("button#view-emp").click(function(e) {
+			var page_id = $(this).data('id');
+		    e.preventDefault();
+		    $.ajax({
+		        type: "GET",
+		        url: "<cms:show k_site_link />edit-ptic-modal.php",
+		       	data: {page_id:page_id},
+		        success: function(result) {
+		            // alert('ok'+result);
+		            // setTimeout(function() {
+					//     $(".emp-details").modal('show').html(result);
+					// }, 2000);
+		            $(".emp-details").modal('show').html(result);
+		        },
+		        error: function(result) {
+		            alert('error');
+		        }
+		    });
+		});
 		</script>
-		</cms:if> -->
-		</cms:ignore>
+		<!-- Edit Popup -->
+
 	</body>
+
 </html>

@@ -1,0 +1,104 @@
+									<tr>
+										<td class="text-center <cms:if (to_ho eq '1')><cms:if ((is_interchanged eq '1') && (today_interchange eq '1')) >srintchge today_interchange<cms:else_if today_interchange eq '1' />today_interchange<cms:else_if is_interchanged eq '1' />srintchge</cms:if><cms:else_if (to_ho eq '0') /><cms:if is_interchanged eq '1'>srintchge</cms:if></cms:if> ">	
+										</td>
+										<td>
+											<cms:show interchange />
+											<cms:if to_ho eq '0'>
+												TO
+											<cms:else_if to_ho eq '1' />
+												HO
+											</cms:if>
+										</td>
+										<td class="text-uppercase <cms:if is_stabled eq '1' >stable</cms:if> ">
+											<cms:if tr_name>
+												<cms:show tr_name />
+											<cms:else />
+												- NA -
+											</cms:if>
+										</td>
+										<td>
+											<cms:if loco >
+												<cms:each loco sep='+' >
+													<cms:show item /><br>
+												</cms:each>
+											<cms:else />
+												-NA-
+											</cms:if>
+										</td>
+										<td class="text-uppercase <cms:if (loco eq 'NA') || (loco eq 'na') || (loco eq 'Na') || (loco eq 'nA') ><cms:else_if sch_overdue eq '1' />sch_overdue</cms:if> ">
+											<cms:if schedule && schedule_date >
+												<cms:show schedule /> <cms:date schedule_date format='d-m' />
+												<br>
+											<cms:else />
+												-NA-
+											</cms:if>
+										</td>
+										<td>
+											<cms:if arrival_time >
+												<cms:date arrival_time format="H:i" />
+											<cms:else />
+												- NA -
+											</cms:if>/<cms:if (to_ho eq '0')>
+												<cms:if departure_time >
+													<cms:date departure_time format="H:i" />
+												<cms:else />
+													- NA -
+												</cms:if>
+											<cms:else_if (to_ho eq '1') />
+												<cms:if (departure_date ne '') >
+													<cms:if (departure_time ne '') >
+														<cms:date departure_time format='H:i' />
+													<cms:else_if (departure_time eq '' ) />
+														-NA-
+													</cms:if>
+												</cms:if>
+											</cms:if>
+										</td>
+										<cms:set sot = "<cms:date signon_time format='H:i' />" scope="global" />
+										<td width="6%" class="<cms:if (sot eq '00:00') || (loco eq 'NA') || (loco eq 'na') || (loco eq 'Na') || (loco eq 'nA') >
+												<cms:else_if (to_ho eq '0') />
+													<cms:if overdue eq '1' >overdue
+												</cms:if>
+												<cms:else_if (to_ho eq '1')/>
+												<cms:if (is_interchanged ne '1') && ( overdue eq '1') >overdue
+												</cms:if>
+											</cms:if>">
+											<cms:if signon_time >
+												<cms:date signon_time format='H:i' />
+											<cms:else />
+												-NA-
+											</cms:if>
+										</td>
+										<td>
+											<cms:set related_location="<cms:related_pages 'location'><cms:show k_page_title /></cms:related_pages>" />
+											<cms:if related_location>
+												<cms:show related_location />
+											<cms:else />
+												- NA -
+											</cms:if>
+										</td>
+										<td>
+											<cms:set related_raketype="<cms:related_pages 'raketype'><cms:show k_page_title /></cms:related_pages>" />
+											<cms:if related_raketype>
+												<cms:show related_raketype />
+											<cms:else />
+												- NA -
+											</cms:if>
+										</td>
+										<td>
+											<div id="remark" <cms:inline_edit 'remark' toolbar='custom' /> >
+												<cms:if remark >
+													<cms:set strip_text = "<cms:php>global $text;echo strip_tags('<cms:show remark />');</cms:php>" />
+													<cms:show strip_text />
+												<cms:else />
+													-NA-
+												</cms:if>
+											</div>
+										</td>
+										<td>
+											<cms:popup_edit "interchange | today_yesterday |is_stabled | tr_name | loco | schedule | schedule_date | arrival_date | arrival_time | departure_time | signon_date | signon_time | raketype | load | load_unit | commodity | location | stn_to | stn_from |  to_ho | is_interchanged | today_interchange | remark" link_text="<i class='fa fa-edit'></i>" />
+											<a href="<cms:route_link 'delete_ptic' rt_id=k_page_id />&url=pointwise-dash.php">
+											<i class="fa fa-trash"></i>
+										</a>
+										</td>
+									</tr>

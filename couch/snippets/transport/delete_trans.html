@@ -1,3 +1,5 @@
+<cms:set from_date="<cms:gpc 'from_date' method='get' />" scope="global" />
+<cms:set to_date="<cms:gpc 'to_date' method='get' />" scope="global" />
 
 					<!-- COAL -->
 					<div class="container">
@@ -18,7 +20,12 @@
 		                    <cms:if k_success>
 		                        <cms:db_delete_form />
 		                        <cms:if k_success>
-		                            <cms:redirect url="coal.php" /> 
+		                            <cms:redirect url="transport-report.php?
+										from_date=<cms:show from_date />
+										&to_date=<cms:show to_date />
+										&submit=Search
+										&k_hid_search=search
+										&nc=1" /> 
 		                        </cms:if>
 		                    </cms:if>
 		                    <!-- <div class="row"> -->
@@ -28,14 +35,14 @@
 										<!-- Delete -->
 											<div class="gxcpl-card-body">
 			                                    <div class="text-center">
-			                                        Are you sure you want to delete <strong>"<cms:show siding /> <cms:show tons /> <cms:date tdate format="d/m/Y" />"</strong> transportation?
+			                                        Are you sure you want to delete <strong>"<cms:pages masterpage='siding.php' page_title=_col_2 limit='1' ><cms:show k_page_title /></cms:pages> <cms:date tdate format="d/m/Y" /> <cms:show tons />"</strong> transportation?
 			                                        <div class="gxcpl-ptop-20"></div>
 			                                    </div>
 			                                </div>
 			                                <div class="gxcpl-card-footer">
 		                                    	<center>
 			                                    	<cms:input name='submit' type="submit" class="btn btn-danger btn-xs gxcpl-fw-700 gxcpl-shadow-2" value="CONFIRM DELETE" />
-			                                        <button class="btn btn-default btn-xs gxcpl-fw-700 gxcpl-shadow-2" type="button" onclick="window.location.href='coal.php';">
+			                                        <button class="btn btn-default btn-xs gxcpl-fw-700 gxcpl-shadow-2" type="button" onclick="window.location.href='transport-report.php?from_date=<cms:show from_date />&to_date=<cms:show to_date />&submit=Search&k_hid_search=search&nc=1'">
 			                                            CANCEL
 			                                        </button>
 			                                    </center>

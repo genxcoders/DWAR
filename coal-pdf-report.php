@@ -1,21 +1,27 @@
 <?php require_once( 'couch/cms.php' ); ?>
 <cms:template title="Coal PDF Report" parent='_coal_' order='6' />
 	<cms:embed 'header.html' />
+	<cms:embed 'searchldsummary.html' />
+	
+	<cms:set my_coal_date_cy = "<cms:gpc 'tdate' method='get' />" scope="global" />
+	<cms:set my_coal_date_ly = "<cms:date my_coal_date_cy return='-365 days' format='d-m-Y' />" scope="global" />
+	CY:<cms:show my_coal_date_cy /><br>LY:<cms:show my_coal_date_ly />
+
+	<cms:if my_search_str eq my_coal_date_cy >
+
+	<cms:else />
 		<div class="container-fluid">
 			<div class="row">
-				<div class="gxcpl-ptop-50"></div>
 				<div class="col-md-12">
 					<div class="gxcpl-card">
 						<div class="gxcpl-card-header">
-							<h4>COAL LOADING PERFORMANCE ON DATE 
-								<strong><cms:date return='yesterday' format="d/m/Y" /></strong>
+							<h4 class="gxcpl-no-margin">COAL LOADING PERFORMANCE ON DATE 
+								<strong><cms:date my_coal_date_cy format="d-m-Y" /></strong>
 							</h4>
-
 						</div>
 						<div class="gxcpl-card-body" id="template_invoice">
-							<div id="customers" style="padding: 2%;">
-							
-							    <table width="100%" border="1">
+							<div id="customers" style="padding: 2%; overflow-x: auto;">
+							    <table class="gxcpl-table-hover" width="100%" border="1">
 							    	<thead>
 									  	<tr>
 										    <th rowspan="4" class="text-center">Head</th>
@@ -24,21 +30,21 @@
 										    <th rowspan="4" class="text-center">Daily Target</th>
 										    <th colspan="3" class="text-center">Day</th>
 										    <th colspan="5" class="text-center">Month Upto</th>
-										    <th colspan="5" class="text-center">1 April Upto</th>
+										    <th colspan="5" class="text-center">1<sup>st</sup> April Upto</th>
 									  	</tr>
 									  	<cms:set sum_total='0' scope='global' />
 									  	
 									  	<tr>
 										    <th colspan="2" class="text-center">
-										    	<cms:date return='yesterday' format="d/m/Y" />
+										    	<cms:date my_coal_date_cy format="d-m-Y" />
 										    </th>
 										    <th class="text-center">Variation</th>
 										    <th colspan="4" class="text-center">
-										    	<cms:date return='yesterday' format="d/m/Y" />
+										    	<cms:date my_coal_date_cy format="d-m-Y" />
 										    </th>
 										    <th class="text-center">Variation</th>
 										    <th colspan="4" class="text-center">
-										    	<cms:date return='yesterday' format="d/m/Y" />
+										    	<cms:date my_coal_date_cy format="d-m-Y" />
 										    </th>
 										    <th class="text-center">Variation</th>
 									  	</tr>
@@ -71,20 +77,20 @@
 										<cms:set my_daily_target_total = '0' scope='global' />
 
 										<!-- This month Range -->
-										<cms:set cy_current_day = "<cms:date format='d' />" scope="global" />
+										<cms:set cy_current_day = "<cms:date my_coal_date_cy format='d' />" scope="global" />
 										<cms:set cy_first_day = "<cms:date return='first day of this month' format='d' />" scope="global" />
 										<cms:set cy_day_range = "<cms:sub cy_current_day cy_first_day />" scope="global" />
 										<!-- This month Range -->
 
 										<!-- Last year month Range -->
-										<cms:set ly_current_day = "<cms:date return='-365 days' format='d' />" scope="global" />
+										<cms:set ly_current_day = "<cms:date my_coal_date_ly format='d' />" scope="global" />
 										<cms:set ly_first_day = "<cms:date return='first day of this month last year' format='d' />" scope="global" />
 										<cms:set ly_day_range = "<cms:sub ly_current_day ly_first_day />" scope="global" />
 										<!-- This month Range -->	
 
 										<!-- This year Range from april to current month -->
 										<cms:set apr_cy = "<cms:date 'first day of april this year' format='Y-m-d' />" />
-										<cms:set cur_mtn_cy = "<cms:date format='Y-m-d' />" />
+										<cms:set cur_mtn_cy = "<cms:date my_coal_date_cy format='Y-m-d' />" />
 										<cms:php>
 											global $CTX;
 											$from_date_cy = new DateTime(date($CTX->get('apr_cy')));
@@ -96,7 +102,7 @@
 
 										<!-- Last year Range from april to current month of last year -->
 										<cms:set apr_ly = "<cms:date 'first day of april last year' format='Y-m-d' />" />
-										<cms:set cur_mtn_ly = "<cms:date '-365 days' format='Y-m-d' />" />
+										<cms:set cur_mtn_ly = "<cms:date my_coal_date_ly format='Y-m-d' />" />
 										<cms:php>
 											global $CTX;
 											$from_date_ly = new DateTime(date($CTX->get('apr_ly')));
@@ -153,7 +159,7 @@
 
 											<!-- Day CY -->
 											<cms:set my_cy_load_total='0' scope='global' />
-											<cms:reverse_related_pages 'loading_point' masterpage='coal.php' custom_field="tdate=<cms:date return='yesterday' format='Y-m-d' />">
+											<cms:reverse_related_pages 'loading_point' masterpage='coal.php' custom_field="tdate=<cms:date my_coal_date_cy format='Y-m-d' />">
 											<cms:set my_cy_load_total = "<cms:add my_cy_load_total hlf_ful />" scope="global" />
 											</cms:reverse_related_pages>
 											<td class="text-center">
@@ -164,7 +170,7 @@
 
 											<!-- Day LY -->
 											<cms:set my_ly_load_total='0' scope='global' />
-											<cms:reverse_related_pages 'loading_point' masterpage='coal.php' custom_field="tdate=<cms:date return='-366 days' format='Y-m-d' />">
+											<cms:reverse_related_pages 'loading_point' masterpage='coal.php' custom_field="tdate=<cms:date my_coal_date_ly format='Y-m-d' />">
 											<cms:set my_ly_load_total = "<cms:add my_ly_load_total hlf_ful />" scope="global" />
 											</cms:reverse_related_pages>
 											<td class="text-center">
@@ -189,11 +195,12 @@
 											<!-- monthly this year CY -->
 											<td class="text-center">
 												<cms:set my_cy_monthly_load = "0" scope="global" />
-												<cms:reverse_related_pages 'loading_point' masterpage='coal.php' custom_field="tdate >= <cms:date return='first day of this month' format='Y-m-d' /> | tdate < <cms:date format='Y-m-d' />">
+												<cms:reverse_related_pages 'loading_point' masterpage='coal.php' custom_field="tdate >= <cms:date return='first day of this month' format='Y-m-d 23:59:00' /> | tdate < <cms:date my_coal_date_cy format='Y-m-d 23:59:00' />">
 													<cms:set my_cy_monthly_load = "<cms:add my_cy_monthly_load hlf_ful />" scope="global" />
 												</cms:reverse_related_pages>
 												<cms:show my_cy_monthly_load />
 											</td>
+											
 											<!-- monthly this year CY -->
 
 											<!-- monthly this year CY average -->
@@ -1375,7 +1382,7 @@
 						                	<!-- Variation Day Total -->
 						                	<td class="text-center" style="padding: 5px 10px;">
 						                		<cms:set add_days_variation = "<cms:add percent_grand_total re_booking_variation e_auction_variation ckni_variation mlsw_variation melg_variation />" scope="global" />
-						                		<strong><cms:show add_days_variation /></strong>
+						                		<strong><cms:number_format add_days_variation decimal_precision="2" /></strong>
 						                	</td>
 						                	<!-- Variation Day Total -->
 
@@ -1624,41 +1631,11 @@
 						</div> -->
 						</cms:ignore>
 					</div>
+					<div class="gxcpl-ptop-30"></div>
 				</div>
 			</div>
 		</div>
-		<cms:ignore>
-		<!-- <script type="text/javascript">
-
-			$(document).ready(function() {
-			  $(".report").click(function() {
-			    var doc = new jsPDF("l", "pt", "a3"),
-			    source = $("#template_invoice")[0],
-			    margins = {
-			      top: 20,
-			      bottom: 20,
-			      left: 20,
-			      width: 10
-			    };
-			    doc.fromHTML(
-			      source, // HTML string or DOM elem ref.
-			      margins.left, // x coord
-			      margins.top, {
-			        // y coord
-			        width: margins.width // max width of content on PDF
-			      },
-			      function(dispose) {
-			        // dispose: object with X, Y of the last line add to the PDF
-			        //          this allow the insertion of new lines after html
-			        doc.save("Test.pdf");
-			      },
-			      margins
-			    );
-			  });
-			});
-		</script> -->
-		</cms:ignore>
-		<div class="gxcpl-ptop-50"></div>
+	</cms:if>
 		<div class="gxcpl-ptop-50"></div>
 	<cms:embed 'footer.html' />
 <?php COUCH::invoke(); ?>

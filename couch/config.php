@@ -174,3 +174,7 @@
 
         // 99c. Footer content (Company name and link)
         //define( 'K_ADMIN_FOOTER', '<a href="http://www.yourcompany.com">COMPANY NAME</a>' );
+
+//Show seconds and queries: 
+   //cms.php, line 340.
+    define( 'K_IS_MY_TEST_MACHINE', 0 );

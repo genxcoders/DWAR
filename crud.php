@@ -9,7 +9,7 @@
 	<cms:route name='delete_crud' path='{:id}/delete' >
 	    <cms:route_validators id='non_zero_integer' />
 	</cms:route>
-<!-- Custom Routes -->
+	<!-- Custom Routes -->
 </cms:template>
 <cms:embed 'header.html' />
 

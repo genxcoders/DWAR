@@ -1,5 +1,6 @@
 <?php require_once( 'couch/cms.php' ); ?>
 <cms:template title="Siding" clonable='1' routable='1' parent='_sid_' order='1' dynamic_folders='1' folder_masterpage='coal-area.php' >
+<cms:editable name="transdate" label="Date" required="1" type="datetime" format="d-m-Y"  allow_time='0' order="1" />
 <!-- Siding: Custom Routes -->
 	<cms:route name='list_sid' path='' />
 	<cms:route name='create_sid' path='create' />
@@ -17,18 +18,15 @@
 	<div class="container">
 		<div class="row">
 			<div class="gxcpl-ptop-30"></div>
-
 			<!-- Section Divider -->
 			<div class="gxcpl-ptop-10"></div>
 			<!-- <div class="gxcpl-divider-dark"></div> -->
 			<div class="gxcpl-ptop-10"></div>
 			<!-- Section Divider -->
-
 			<!-- Siding -->
 			<cms:match_route debug='0' />
 			<cms:embed "siding/<cms:show k_matched_route />.html" />
 			<!-- Siding -->
-
 		</div>
 		<div class="row">
 			<cms:pages folder=k_folder_name >

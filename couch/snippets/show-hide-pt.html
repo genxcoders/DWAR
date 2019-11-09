@@ -10,23 +10,86 @@
 				}
 			});
 		</script>
-		<script type="text/javascript">
+        <cms:if my_icp eq 'NGP' || my_icp eq 'GCC' >
+        <script type="text/javascript">
             $(document).ready(function() {
-                $('#btnHide').click(function() {
-                    $('td:nth-child(9),th:nth-child(9)').hide();
+                $('#btnHide_to').click(function() {
+                    $('td:nth-child(11),th:nth-child(11)').hide();
+                    $('td:nth-child(12),th:nth-child(12)').hide();
+                    $('td:nth-child(13),th:nth-child(13)').hide();
+                    $('td:nth-child(14),th:nth-child(14)').hide();
+                    $('td:nth-child(15),th:nth-child(15)').hide();
+                    $('td:nth-child(16),th:nth-child(16)').hide();
+                });
+                $('#btnShow_to').click(function() {
+                    $('td:nth-child(11),th:nth-child(11)').show();
+                    $('td:nth-child(12),th:nth-child(12)').show();
+                    $('td:nth-child(13),th:nth-child(13)').show();
+                    $('td:nth-child(14),th:nth-child(14)').show();
+                    $('td:nth-child(15),th:nth-child(15)').show();
+                    $('td:nth-child(16),th:nth-child(16)').show();
+                });
+            });
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#btnHide_ho').click(function() {
                     $('td:nth-child(10),th:nth-child(10)').hide();
                     $('td:nth-child(11),th:nth-child(11)').hide();
                     $('td:nth-child(12),th:nth-child(12)').hide();
                     $('td:nth-child(13),th:nth-child(13)').hide();
                     $('td:nth-child(14),th:nth-child(14)').hide();
+                    $('td:nth-child(15),th:nth-child(15)').hide();
                 });
-                $('#btnShow').click(function() {
-                    $('td:nth-child(9),th:nth-child(9)').show();
-                   	$('td:nth-child(10),th:nth-child(10)').show();
+                $('#btnShow_ho').click(function() {
+                    $('td:nth-child(10),th:nth-child(10)').show();
                     $('td:nth-child(11),th:nth-child(11)').show();
                     $('td:nth-child(12),th:nth-child(12)').show();
                     $('td:nth-child(13),th:nth-child(13)').show();
                     $('td:nth-child(14),th:nth-child(14)').show();
+                    $('td:nth-child(15),th:nth-child(15)').show();
                 });
             });
         </script>
+        <cms:else />
+    		<script type="text/javascript">
+                $(document).ready(function() {
+                    $('#btnHide_to').on("click", function() {
+                        $('td:nth-child(10),th:nth-child(10)').hide();
+                        $('td:nth-child(11),th:nth-child(11)').hide();
+                        $('td:nth-child(12),th:nth-child(12)').hide();
+                        $('td:nth-child(13),th:nth-child(13)').hide();
+                        $('td:nth-child(14),th:nth-child(14)').hide();
+                        $('td:nth-child(15),th:nth-child(15)').hide();
+                    });
+                    $('#btnShow_to').on("click", function() {
+                       	$('td:nth-child(10),th:nth-child(10)').show();
+                        $('td:nth-child(11),th:nth-child(11)').show();
+                        $('td:nth-child(12),th:nth-child(12)').show();
+                        $('td:nth-child(13),th:nth-child(13)').show();
+                        $('td:nth-child(14),th:nth-child(14)').show();
+                        $('td:nth-child(15),th:nth-child(15)').show();
+                    });
+                });
+            </script>
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $('#btnHide_ho').click(function() {
+                        $('td:nth-child(9),th:nth-child(9)').hide();
+                        $('td:nth-child(10),th:nth-child(10)').hide();
+                        $('td:nth-child(11),th:nth-child(11)').hide();
+                        $('td:nth-child(12),th:nth-child(12)').hide();
+                        $('td:nth-child(13),th:nth-child(13)').hide();
+                        $('td:nth-child(14),th:nth-child(14)').hide();
+                    });
+                    $('#btnShow_ho').click(function() {
+                        $('td:nth-child(9),th:nth-child(9)').show();
+                        $('td:nth-child(10),th:nth-child(10)').show();
+                        $('td:nth-child(11),th:nth-child(11)').show();
+                        $('td:nth-child(12),th:nth-child(12)').show();
+                        $('td:nth-child(13),th:nth-child(13)').show();
+                        $('td:nth-child(14),th:nth-child(14)').show();
+                    });
+                });
+            </script>
+        </cms:if>

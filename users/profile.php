@@ -35,11 +35,9 @@
             <cms:if k_logged_in>
                 <cms:pages masterpage=k_user_template >
                     <cms:set my_user_id = "<cms:show k_user_id />" scope='global' />
-                    <cms:show my_user_id />
+                    
                 </cms:pages>
             </cms:if> 
-            <cms:dump_all />
-            <cms:ignore>
             <cms:form 
             masterpage=k_user_template 
             mode='edit'
@@ -157,7 +155,6 @@
                     </div>
                 </div>
             </cms:form>
-            </cms:ignore>
             <div class="gxcpl-ptop-50"></div>  
         </div>
     </div>

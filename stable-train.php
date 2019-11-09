@@ -3,38 +3,29 @@
 <cms:embed 'header.html' />
 	<div class="container-fluid"> 
 		<div class="row">
-			<div class="gxcpl-ptop-30"></div>
 			<!-- Section Title -->
 			<div class="col-md-12">
 				<h4 class="gxcpl-no-margin">
 					STABLE TRAINS REPORT
 					<div class="gxcpl-ptop-10"></div>
 					<div class="gxcpl-divider-dark"></div>
-					<div class="gxcpl-ptop-20"></div>
+					<div class="gxcpl-ptop-10"></div>
 				</h4>
 			</div>
 			<div class="col-md-12">
 				<div class="gxcpl-card">
 					<div class="gxcpl-card-header">
 						<div class="row">
-							<div class="col-md-2">
-								<h4>STABLE TRAINS</h4>
+							<div class="col-md-2 col-xs-5">
+								<h5 class="gxcpl-no-margin">
+									<strong>STABLE TRAINS</strong>
+								</h5>
 							</div>
-							<!-- Search -->
-							<div class="col-md-4">
-								<div class="gxcpl-ptop-10"></div>
-								<input type="text" class="typeahead" placeholder="Search using Train Name or Loco Number...">
-								<div class="gxcpl-ptop-10"></div>
-							</div>
-							<!-- Search -->
-							<div class="col-md-2 col-md-offset-4" style="padding-top: 3px;">
-								<a onClick="reloadP()" href="" class="btn btn-warning gxcpl-fw-700"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF</a>
-								<!-- javascript:stablePDF() -->
-							</div>
+							<div class="col-md-3 col-md-offset-7 col-xs-7 text-center" id="buttons"></div>
 						</div>
 					</div>
-					<div class="gxcpl-card-body tableFixHead" style="overflow-x: auto;">
-						<table class="gxcpl-table userTbl">
+					<div class="gxcpl-card-body tableFixHead gxcpl-padding-15" style="overflow-x: auto;">
+						<table class="display table table-bordered gxcpl-table-hover" id="example2" style="width: 100% !important;">
 							<thead>
 								<tr>
 									<th style="padding-left: 40px;">
@@ -55,7 +46,7 @@
 									<th>
 										Location
 									</th>
-									<th style="z-index: 99;">
+									<th width="150px;" style="z-index: 99;">
 										Remark
 									</th>
 									<th>
@@ -116,7 +107,7 @@
 											- NA -
 										</cms:if>
 									</td>
-									<td>
+									<td width="150px;">
 										<div id="remark" <cms:inline_edit 'remark' toolbar='custom' /> >
 											<cms:if remark >
 												<cms:set strip_text = "<cms:php>global $text;echo strip_tags('<cms:show remark />');</cms:php>" />
@@ -128,7 +119,7 @@
 									</td>
 									<td style="padding-left: 30px;">
 										<cms:popup_edit "interchange | today_yesterday |is_stabled | tr_name | loco | schedule | schedule_date | arrival_date | arrival_time | departure_time | signon_date | signon_time | raketype | load | load_unit | commodity | location | stn_to | stn_from |  to_ho | is_interchanged | today_interchange" link_text="<i class='fa fa-edit'></i>" />
-										<a href="<cms:add_querystring "<cms:route_link 'delete_ptic' rt_id=k_page_id />" "url=stable-train.php" />" class="gxcpl-fw-700" data-toggle="tooltip" data-placement="top" title="DELETE">
+										<a href="<cms:route_link 'delete_ptic' rt_id=k_page_id />&url=stable-train.php" class="gxcpl-fw-700" data-toggle="tooltip" data-placement="top" title="DELETE">
 											<i class="fa fa-trash"></i>
 										</a>
 									</td>
@@ -137,7 +128,7 @@
 							</tbody>
 						</table>
 					</div>
-					<div class="gxcpl-card-footer" style="line-height: 24px; text-align: left;">
+					<div class="gxcpl-card-body gxcpl-no-padding" style="line-height: 24px; text-align: left; margin-left: 10px;">
 						<strong>Total Stable Train:</strong> <cms:pages masterpage='pointwise-interchange.php' custom_field="is_stabled='1' | is_interchanged<>1 " order='asc' orderby='arrival_time' count_only='1' />
 					</div>
 				</div>
@@ -145,59 +136,6 @@
 			</div>
 		</div>
 	</div>
-	<cms:pages masterpage="pointwise-interchange.php" custom_field="is_stabled='1' | is_interchanged<>1" order='desc' orderby='arrival_date' >
-	<cms:set arri = "<cms:gpc 'arrival_date' method='get' />" scope='global'  />
-	<script type="text/javascript">
-		function stablePDF(){
-			var dd = {
-				pageSize:'A4',
-				pageOrientation:'potrait',
-				content: 
-				[
-					{text: 'Stable Trains', style: 'subheader' , alignment: 'center'},
-					'\n',
-					{ text: 'Date:- <cms:date arri format= "d/m/Y" />', style: 'subheader', alignment: 'center' },
-					'\n',
-					{
-					style: 'tableExample', fontSize: 8.3, border:0, margin: [75, 2],   
-					table: {
-						headerRows: 1,
-						widths: [25 , 70 , 50 , 50 , 40 , 40, '*' ],
-						// dontBreakRows: true,
-						// keepWithHeaderRows: 1,
-						body: [
-							[{text: 'Sr.No.', style: 'tableHeader', bold: true, fontSize: 9,}, 
-							 {text: 'Train', style: 'tableHeader', bold: true, fontSize: 9,},
-							 {text: 'Loco', style: 'tableHeader', bold: true, fontSize: 9,}, 
-							 {text: 'Arr Date', style: 'tableHeader', bold: true, fontSize: 9,},
-							 {text: 'Arr Time', style: 'tableHeader', bold: true, fontSize: 9,}, 
-							 {text: 'Location', style: 'tableHeader', bold: true, fontSize: 9,},
-							 {text: 'Remark', style: 'tableHeader', bold: true, fontSize: 9,}
-							 ],
-							
-							<cms:pages masterpage="pointwise-interchange.php" custom_field="is_stabled='1' | is_interchanged<>1" order='desc' orderby='arrival_date' show_future_entries='1' >
-								<cms:set tr_name_caps="<cms:php>echo strtoupper('<cms:show tr_name />');</cms:php>" />
-								<cms:set schedule_caps="<cms:php>echo strtoupper('<cms:show schedule />');</cms:php>" />
-							[
-								'<cms:show k_absolute_count />',
-								'<cms:show tr_name_caps />',
-								'<cms:show loco />',
-								'<cms:date arrival_date format='d-m-Y' />',
-								'<cms:date arrival_time format="H:i" />',
-								'<cms:related_pages 'location'><cms:show k_page_title /></cms:related_pages>',
-								'<cms:show remark />',
-							],
-							</cms:pages>				
-						]
-					}
-					},
-					{text: 'Total Stable Train: <cms:pages masterpage='pointwise-interchange.php' custom_field="is_stabled='1' | is_interchanged<>1 " order='asc' orderby='arrival_time' count_only='1' />', style: 'subheader' , bold: true, fontSize: 8.3, alignment: 'left', margin: [75, 2]},
-				]
-			}
-			pdfMake.createPdf(dd).open();
-		}
-	</script>
-</cms:pages>
 	<div class="gxcpl-ptop-50"></div>
 <cms:embed 'footer.html' />
 <?php COUCH::invoke( ); ?>

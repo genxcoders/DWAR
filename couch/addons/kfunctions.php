@@ -134,6 +134,8 @@ if( defined('K_ADMIN') ){
         $FUNCS->register_admin_menuitem( array('name'=>'_ncoal_', 'title'=>'Non Coal', 'is_header'=>'1', 'weight'=>'16') );
         
         $FUNCS->register_admin_menuitem( array('name'=>'_blck_', 'title'=>'Block II', 'is_header'=>'1', 'weight'=>'17') );
+
+        $FUNCS->register_admin_menuitem( array('name'=>'_test_', 'title'=>'Testing Templates (Delete Later)', 'is_header'=>'1', 'weight'=>'18') );        
     }
 }
 // Grouping in sidebar
@@ -237,3 +239,33 @@ function my_write_handler( $params, $node ){
           
     }  
 // Add Multiple Numbers
+
+// decimal precision for minutes
+// Make number_format actually format and not round.
+$FUNCS->add_event_listener( 'alter_tag_number_format_execute', 'precise_format');
+function precise_format( $tag_name, $params, $node, &$html ){
+    global $FUNCS;
+
+    if( count($node->children) ) {die("ERROR: Tag \"".$node->name."\" is a self closing tag");}
+
+    extract( $FUNCS->get_named_vars(
+                array(
+                      'number'=>'',
+                      'decimal_precision'=>'2', /* default 2 digit after decimal point */
+                      'decimal_character'=>'.', /* char used to denote decimal */
+                      'thousands_separator'=>','
+                      ),
+                $params)
+           );
+    $number = trim( $number );
+    $decimal_precision = trim( $decimal_precision );
+    if( !is_numeric($decimal_precision) ) $decimal_precision = 2;
+    $decimal_character = trim( $decimal_character );
+
+    // perform trimming
+    $number = floor( (float)$number ).substr( $number - floor($number), 1, $decimal_precision + 1);
+    // perform formatting
+    $html = number_format( (float)$number, $decimal_precision, $decimal_character, $thousands_separator );
+
+    return 1;
+}
