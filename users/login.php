@@ -64,7 +64,6 @@
 								</cms:if>   
 								<!-- Username -->
 								<div class="col-md-12">
-									<!-- <div class="gxcpl-br-2 gxcpl-shadow-2 gxcpl-bg-white"> -->
 									<div class="gxcpl-padding-15">
 										<div class="row">
 											<!-- Username -->
@@ -88,7 +87,6 @@
 											</div>
 										</div>
 									</div>
-									<!-- </div> -->
 								</div>
 								
 								<input type="hidden" name="k_cookie_test" value="1" />
@@ -112,8 +110,6 @@
 					</div>
 				</div>
 			</div>
-			<div class="gxcpl-ptop-50"></div>
-			<div class="gxcpl-ptop-30"></div>
 		</cms:if>
 		<cms:embed 'footer.html' />
 <?php COUCH::invoke(); ?>

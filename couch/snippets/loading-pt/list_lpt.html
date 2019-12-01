@@ -7,34 +7,36 @@
 						<!-- Card -->
 						<div class="gxcpl-card">
 							<!-- Body -->
-							<div class="gxcpl-card-body gxcpl-padding-15">
-								<table class="gxcpl-table ">
+							<div class="gxcpl-card-body tableFixHead gxcpl-padding-15" style="overflow-x: auto;">
+								<table class="display table table-bordered gxcpl-table-hover" id="pt-icp" style="width: 100% !important;">
 									<thead>
 										<tr>
 											<th>
 												Sr. No.
 											</th>
 											<th>
-												Area
+												Loading Commodity
 											</th>
 											<th>
 												Loading Point
 											</th>
 											<th>
+												Area
+											</th>
+											<th>
 												Daily Target
 											</th>
-											
-											<th class="text-center">
+											<th>
 												Action
 											</th>
 										</tr>
 									</thead>
 									<tbody>
-										<cms:pages masterpage=k_template_name show_future_entries="1" paginate='1' limit='10' order='asc' folder=k_folder_name >
+										<cms:pages masterpage=k_template_name show_future_entries="1" order='asc' folder=k_folder_name >
 										<cms:no_results>
 										<tr>
 											<cms:if k_user_access_level gt '7'>
-												<td colspan="4" class="text-center">
+												<td colspan="6" class="text-center">
 													- No Result -
 												</td>
 											</cms:if>
@@ -45,20 +47,33 @@
 												<cms:show k_absolute_count />
 											</td>
 											<td>
-												<cms:show k_page_foldertitle />
+												<cms:related_pages 'ld_cmdt' >
+													<cms:show k_page_title />
+												</cms:related_pages>
 											</td>
 											<td>
 												<cms:show k_page_title />
 											</td>
 											<td>
-												<cms:show daily_target />
+												<cms:if k_page_foldertitle >
+													<cms:show k_page_foldertitle />
+												<cms:else />
+													-NA-
+												</cms:if>
 											</td>
-											<td class="text-center">
-												<a href="<cms:route_link 'edit_lpt' rt_id=k_page_id />" class="btn btn-primary btn-xs gxcpl-fw-700" data-toggle="tooltip" data-placement="top" title="EDIT">
+											<td>
+												<cms:if daily_target>
+													<cms:show daily_target />
+												<cms:else />
+													-NA-
+												</cms:if>
+											</td>
+											<td>
+												<a href="<cms:route_link 'edit_lpt' rt_id=k_page_id />" class="btn btn-primary btn-xs gxcpl-fw-700" data-toggle="tooltip" data-placement="top" title="EDIT" style="margin-top: 5px;">
 													<i class="fa fa-edit"></i>
 												</a>
-													<a href="<cms:route_link 'delete_lpt' rt_id=k_page_id />" class="btn btn-danger btn-xs gxcpl-fw-700" data-toggle="tooltip" data-placement="top" title="DELETE">
-														<i class="fa fa-trash"></i>
+												<a href="<cms:route_link 'delete_lpt' rt_id=k_page_id />" class="btn btn-danger btn-xs gxcpl-fw-700" data-toggle="tooltip" data-placement="top" title="DELETE" style="margin-top: 5px;">
+													<i class="fa fa-trash"></i>
 												</a>
 											</td>
 										</tr>
@@ -67,17 +82,7 @@
 								</table>
 							</div>
 							<!-- Body -->
-							<!-- Pagination -->
-								<center>
-									<div class="btn-group gxcpl-fw-500" role="group">
-										<cms:pages show_future_entries="1" paginate='1' limit='10' >
-											<cms:paginator />
-										</cms:pages>
-									</div>
-								</center>
-								<!-- Pagination -->
 						</div>
 						<!-- Card -->
-						<div class="gxcpl-ptop-50"></div>
 					</div>
 					<!-- Table -->

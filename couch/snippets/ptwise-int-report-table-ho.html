@@ -6,46 +6,34 @@
 								</tr>
 								</cms:no_results>
 								<tr style='border-bottom: 1px solid rgba(0,0,0,0.2);'>
-									
+									<cms:if tr_name eq 'TA' || tr_name eq 'ta' || tr_name eq 'Ta' || tr_name eq 'tA' || tr_name eq 'LA' || tr_name eq 'la' || tr_name eq 'La' || tr_name eq 'lA'>
 									<td class="text-center 
-									<cms:if 
-									(tr_name eq 'TA' 
-									|| tr_name eq 'ta' 
-									|| tr_name eq 'Ta' 
-									|| tr_name eq 'tA' 
-									|| tr_name eq 'LA' 
-									|| tr_name eq 'la' 
-									|| tr_name eq 'La' 
-									|| tr_name eq 'lA') 
-									&& (is_interchanged eq '1') && (today_interchange eq '1') >
-									nosrintchge today_interchange
-									<cms:else_if 
-									(tr_name eq 'TA' 
-									|| tr_name eq 'ta' 
-									|| tr_name eq 'Ta' 
-									|| tr_name eq 'tA' 
-									|| tr_name eq 'LA' 
-									|| tr_name eq 'la' 
-									|| tr_name eq 'La' 
-									|| tr_name eq 'lA') 
-									&& (is_interchanged eq '1') />
-									nosrintchge
-									<cms:else_if ((is_interchanged eq '1') 
-									&& (today_interchange eq '1'))
-									 />srintchge today_interchange
-									 <cms:else_if today_interchange eq '1' />
-									 today_interchange
-									 <cms:else_if is_interchanged eq '1' />
-									srintchge</cms:if>">
+									<cms:if (tr_name eq 'TA' || tr_name eq 'ta' || tr_name eq 'Ta' || tr_name eq 'tA' || tr_name eq 'LA' || tr_name eq 'la' || tr_name eq 'La' || tr_name eq 'lA') && (is_interchanged eq '1') && (today_interchange eq '1') >
+										nosrintchge today_interchange
+									<cms:else_if (tr_name eq 'TA' || tr_name eq 'ta' || tr_name eq 'Ta' || tr_name eq 'tA' || tr_name eq 'LA' || tr_name eq 'la' || tr_name eq 'La' || tr_name eq 'lA') && (is_interchanged eq '1') />
+										nosrintchge
+									</cms:if>">
 									</td>
-									<td class="text-uppercase <cms:if is_stabled eq '1' >stable</cms:if> ">
+									<cms:else />
+									<td class="text-center number
+									
+										<cms:if ((is_interchanged eq '1') && (today_interchange eq '1'))>
+											srintchge today_interchange
+										<cms:else_if today_interchange eq '1' />
+											today_interchange
+										<cms:else_if is_interchanged eq '1' />
+										srintchge
+										</cms:if>">
+									</td>
+									</cms:if>
+									<td class="<cms:if is_stabled eq '1' >stable</cms:if> ">
 										<cms:if tr_name eq 'TA' || tr_name eq 'ta' || tr_name eq 'Ta' || tr_name eq 'tA'>
 											<cms:incr my_ho_ta_count '1' />
 										</cms:if>
 										<cms:if tr_name eq 'LA' || tr_name eq 'la' || tr_name eq 'La' || tr_name eq 'lA'>
 											<cms:incr my_ho_la_count '1' />
 										</cms:if>
-										<cms:show tr_name />
+										<cms:php>echo strtoupper('<cms:show tr_name />');</cms:php>
 									</td>
 
 									<td class="text-uppercase">

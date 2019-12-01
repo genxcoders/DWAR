@@ -11,24 +11,26 @@
 		</cms:reverse_related_pages>
 			<!-- Card -->
 			<div class="gxcpl-card">
-				<div class="gxcpl-card-header">
+				<div class="gxcpl-card-body  gxcpl-padding-15">
 					<div class="row">
-						<div class="col-md-12 col-sm-6">
-							<h4 class="gxcpl-no-margin text-center">LOADING SUMMARY DATEWISE REPORT</h4>
+						<div class="col-md-6 col-md-offset-1 col-xs-6 col-sm-6 text-center">
+							<div class="row">
+								<div class="col-md-12">
+									<cms:hide>
+										<cms:input type="datetime" name="tdate"/>
+									</cms:hide>
+									<input type="date" name="tdate" id="tdate" class="form-control" style="width: 100%; line-height: 1.42857143;"  value="<cms:date "<cms:gpc 'tdate' method='get' />" format='Y-m-d' />" />
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>
-				<div class="gxcpl-card-body">
-					<div class="row gxcpl-padding-15">
-						<div class="col-md-4 col-md-offset-2">
-							<div class="input-group">
-								<cms:hide>
-									<cms:input type="datetime" name="tdate"/>
-								</cms:hide>
-								<input type="date" name="tdate" id="tdate" class="form-control" style="width: 100%; line-height: 1.42857143;"  value="<cms:date "<cms:gpc 'tdate' method='get' />" format='Y-m-d' />" />
-								<span class="input-group-btn">
-									<cms:input class="btn btn-primary" id="notesave" type='submit' name='submit' value="SEARCH" />
-								</span>
+							
+						<div class="col-md-2 col-xs-6 col-sm-6 text-center">
+							<div class="row">
+								<div class="col-md-12">
+								  	<button class="btn btn-primary gxcpl-fw-700" type='submit' name='submit'>
+								  		<i class="fa fa-search"></i> SEARCH
+								  	</button>
+								</div>
 							</div>
 						</div>
 					</div>

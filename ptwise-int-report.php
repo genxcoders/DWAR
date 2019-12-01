@@ -10,6 +10,7 @@ set_time_limit(300);
 </cms:php>
 <cms:no_cache />
 <cms:embed 'header.html' />
+<cms:embed 'decimal_precision.html' />
 <cms:set arrival_date = "<cms:gpc 'del_arrival_date' method='get' />" scope="global" />
 <cms:set interchange = "<cms:gpc 'del_interchange' method='get' />" scope="global" />
 
@@ -309,7 +310,7 @@ set_time_limit(300);
 												<strong>AC</strong>
 											</td>
 											<td>
-												<cms:show my_to_ac_actual_count /> = <cms:show my_to_ac_count />
+												<cms:show int_to /> = <cms:show my_to_ac_count />
 											</td>
 										</tr>
 										<tr>
@@ -323,9 +324,13 @@ set_time_limit(300);
 									</tbody>
 								</table>
 							</div>
-							<div class="col-md-2 col-md-offset-6 col-xs-6 col-sm-6">
+							<div class="col-md-2 col-md-offset-5 col-xs-6 col-sm-6 text-right">
 								<cms:set avg_pdd = "<cms:div total_pdd int_to />" scope="global" />
-								<strong>Avg PDD:</strong><cms:number_format avg_pdd decimal_precision="2" />
+								<strong>Avg PDD:</strong>
+								<cms:set my_final_avg_pdd_final="<cms:div total_pdd int_to />" scope="global" /> 
+								<cms:set agv_pdd_hours="<cms:number_format "<cms:div my_final_avg_pdd_final '60' />" decimal_precision='0' />" /><cms:set avg_pdd_minutes="<cms:mod my_final_avg_pdd_final '60' />" />
+
+								<cms:if agv_pdd_hours eq '0'><cms:else /><cms:show agv_pdd_hours /> hr</cms:if> <cms:if avg_pdd_minutes eq '0'><cms:else /><cms:show avg_pdd_minutes /> m</cms:if>
 							</div>
 						</div>
 					</div>
@@ -486,35 +491,32 @@ set_time_limit(300);
 								<cms:set my_ho_la_count = '0' scope='global' />
 								<cms:set my_ho_la_loco_count = '0' scope='global' />
 
-								<!-- For Interchanged with today's interchange & Dep Time Without TA, LA-->
+								<!-- For Interchanged Dep Time Without TA, LA-->
 								<cms:pages masterpage='pointwise-interchange.php' custom_field="interchange=<cms:gpc 'interchange' method='get' /> | arrival_date=<cms:gpc 'arrival_date' method='get' /> | to_ho=1 | is_interchanged='1' | today_interchange='1' | tr_name<>TA | tr_name<>ta | tr_name<>Ta | tr_name<>tA | tr_name<>LA | tr_name<>la | tr_name<>La | tr_name<>lA " order='asc' orderby="departure_time">
 								<cms:ignore>Setting Sign On time to calculate if the row is changing color</cms:ignore>
 									<cms:embed 'overdue.html' />
 									<cms:set ho_dep_td_int ="<cms:show k_total_records />" scope='global' />
 									<cms:embed 'ptwise-int-report-table-ho.html' />
 							 	</cms:pages>
-							 	<!-- For Interchanged with today's interchange & Dep Time Without TA, LA -->
-
-							 	<!-- For Interchanged with today's interchange & Dep Time With TA, LA-->
-								<cms:pages masterpage='pointwise-interchange.php' custom_field="interchange=<cms:gpc 'interchange' method='get' /> | arrival_date=<cms:gpc 'arrival_date' method='get' /> | to_ho=1 | is_interchanged='1' | today_interchange='1' | tr_name=='TA','ta','Ta','tA','LA','la','La','lA'" order='asc' orderby="departure_time">
-								<cms:ignore>Setting Sign On time to calculate if the row is changing color</cms:ignore>
-									<cms:embed 'overdue.html' />
-									<cms:set ho_dep_td_int ="<cms:show k_total_records />" scope='global' />
-									<cms:if tr_name eq 'TA' || tr_name eq 'ta' || tr_name eq 'Ta' || tr_name eq 'tA' || tr_name eq 'LA' || tr_name eq 'la' || tr_name eq 'La' || tr_name eq 'lA'>
-									<cms:embed 'ptwise-int-report-table-ho.html' />
-									</cms:if>
-							 	</cms:pages>
-							 	<!-- For Interchanged with today's interchange & Dep Time With TA, LA -->
-
-							 	<!-- For Interchanged with not today's interchange but with Dep Time-->
-								<cms:pages masterpage='pointwise-interchange.php' custom_field="interchange=<cms:gpc 'interchange' method='get' /> | arrival_date=<cms:gpc 'arrival_date' method='get' /> | to_ho=1 | is_interchanged='1' | today_interchange<>'1' " order='asc' orderby="departure_time">
+							 	<!-- For Interchanged Dep Time Without TA, LA-->
+							 	<!-- For Interchanged with not today's interchange but with Dep Time Without TA, LA -->
+								<cms:pages masterpage='pointwise-interchange.php' custom_field="interchange=<cms:gpc 'interchange' method='get' /> | arrival_date=<cms:gpc 'arrival_date' method='get' /> | to_ho=1 | is_interchanged='1' | today_interchange<>'1'| tr_name<>TA | tr_name<>ta | tr_name<>Ta | tr_name<>tA | tr_name<>LA | tr_name<>la | tr_name<>La | tr_name<>lA " order='asc' orderby="departure_time">
 								<cms:ignore>Setting Sign On time to calculate if the row is changing color</cms:ignore>
 									<cms:embed 'overdue.html' />
 									<cms:set ho_dep_int ="<cms:show k_total_records />" scope='global' />
 									<cms:embed 'ptwise-int-report-table-ho.html' />
 							 	</cms:pages>
-							 	<!-- For Interchanged with not today's interchange but with Dep Time -->
-
+							 	<!-- For Interchanged with not today's interchange but with Dep Time Without TA, LA -->
+							 	<!-- For Interchanged with Dep Time With TA, LA-->
+								<cms:pages masterpage='pointwise-interchange.php' custom_field="interchange=<cms:gpc 'interchange' method='get' /> | arrival_date=<cms:gpc 'arrival_date' method='get' /> | to_ho=1 | is_interchanged='1' | tr_name=='TA','ta','Ta','tA','LA','la','La','lA'" order='asc' orderby="departure_time">
+								<cms:ignore>Setting Sign On time to calculate if the row is changing color</cms:ignore>
+									<cms:embed 'overdue.html' />
+									<cms:set ho_dep_td_la_ta_int ="<cms:show k_total_records />" scope='global' />
+									<cms:if tr_name eq 'TA' || tr_name eq 'ta' || tr_name eq 'Ta' || tr_name eq 'tA' || tr_name eq 'LA' || tr_name eq 'la' || tr_name eq 'La' || tr_name eq 'lA'>
+									<cms:embed 'ptwise-int-report-table-ho.html' />
+									</cms:if>
+							 	</cms:pages>
+							 	<!-- For Interchanged with Dep Time With TA, LA -->
 							 	<!-- Not Interchange with today's interchange & dep time-->
 								<cms:pages masterpage='pointwise-interchange.php' order='asc' orderby='departure_time' custom_field="is_interchanged<>1 | to_ho=1 | interchange=<cms:gpc 'interchange' method='get' /> | arrival_date=<cms:gpc 'arrival_date' method='get' /> | today_interchange=1 " show_future_entries='1'>
 									<cms:embed 'overdue.html' />	
@@ -522,7 +524,8 @@ set_time_limit(300);
 									<cms:embed 'ptwise-int-report-table-ho.html' />
 								</cms:pages>
 								<!-- Not Interchange with today's interchange & dep time-->
-							 	<!-- Carry forward data with today's interchange, not interchange -->
+
+								<!-- Carry forward data with today's interchange, not interchange -->
 							 	<cms:pages masterpage='pointwise-interchange.php' custom_field="interchange=<cms:gpc 'interchange' method='get' /> | to_ho=1 | is_interchanged<>'1' | arrival_date<=<cms:gpc 'arrival_date' method='get' /> | today_interchange=1 " order='asc' orderby="departure_time">
 								<cms:ignore>Setting Sign On time to calculate if the row is changing color</cms:ignore>
 									<cms:embed 'overdue.html' />
@@ -530,27 +533,26 @@ set_time_limit(300);
 									<cms:embed 'ptwise-int-report-table-ho.html' />
 							 	</cms:pages>
 							 	<!-- Carry forward data with today's interchange, not interchange -->
-
-								<!-- Carry forward data with not interchange & not today's interchange -->
+							 	<!-- Carry forward data with eq to arrival date but not interchange & not today's interchange -->
 								<cms:pages masterpage='pointwise-interchange.php' order='asc' orderby='departure_time' custom_field="is_interchanged<>1 | to_ho=1 | interchange=<cms:gpc 'interchange' method='get' /> | arrival_date=<cms:gpc 'arrival_date' method='get' /> | today_interchange<>1 " show_future_entries='1'>
 									<cms:embed 'overdue.html' />	
 									<cms:set ho_dep_nt_int ="<cms:show k_total_records />" scope='global' />
 									<cms:embed 'ptwise-int-report-table-ho.html' />
 								</cms:pages>
-								<!-- Carry forward data with not interchange & not today's interchange -->
-
+								<!-- Carry forward data with eq to arrival date but not interchange & not today's interchange -->
 								<!-- Carry forward data with not interchange & not today's interchange -->
 								<cms:pages masterpage='pointwise-interchange.php' order='asc' orderby='departure_time' custom_field="is_interchanged<>1 | to_ho=1 | interchange=<cms:gpc 'interchange' method='get' /> | arrival_date<=<cms:gpc 'arrival_date' method='get' /> | today_interchange<>1 " show_future_entries='1'>
 									<cms:embed 'overdue.html' />	
-									<cms:set ho_dep_nt_int ="<cms:show k_total_records />" scope='global' />
+									<cms:set ho_dep_nt_cr_int ="<cms:show k_total_records />" scope='global' />
 									<cms:embed 'ptwise-int-report-table-ho.html' />
 								</cms:pages>
 								<!-- Carry forward data with not interchange & not today's interchange -->
+
 							</tbody>
 						</table>
 					</div>
 					<div class="gxcpl-card-body gxcpl-padding-10" style="line-height: 24px; text-align: left;">
-						<cms:set ho_total_fc = "<cms:add ho_dep_td_int "<cms:add ho_no_dep_td_int "<cms:add ho_tdy_dep_int "<cms:add ho_tdy_no_dep_not_int ho_tdy_no_dep_int />" />" />" />" scope='global' />
+						<cms:set ho_total_fc = "<cms:add ho_dep_td_int "<cms:add ho_dep_td_la_ta_int "<cms:add ho_tdy_dep_int ho_tdy_no_dep_not_int  />" />" />" scope='global' />
 						
 						<cms:set ho_tr_name_total="<cms:add my_ho_ta_count my_ho_la_count />" scope="global" />	
 
@@ -570,7 +572,8 @@ set_time_limit(300);
 										<strong>Handed Over(HO)</strong>
 									</td>
 									<td width="200px;">
-										<cms:pages masterpage='pointwise-interchange.php' custom_field="interchange=<cms:gpc 'interchange' method='get' /> | arrival_date=<cms:gpc 'arrival_date' method='get' /> | <cms:gpc 'to_ho' method='get'  /> | to_ho=1 | is_interchanged=1 | tr_name<>TA | tr_name<>ta | tr_name<>Ta | tr_name<>tA | tr_name<>LA | tr_name<>la | tr_name<>La | tr_name<>lA" order='asc' orderby='departure_time' count_only='1' />
+										<cms:set int_ho = "<cms:pages masterpage="pointwise-interchange.php" custom_field="interchange=<cms:gpc 'interchange' method='get' /> | arrival_date=<cms:gpc 'arrival_date' method='get' /> | <cms:gpc 'to_ho' method='get'  /> | to_ho=1 | is_interchanged=1 | tr_name<>TA | tr_name<>ta | tr_name<>Ta | tr_name<>tA | tr_name<>LA | tr_name<>la | tr_name<>La | tr_name<>lA" order='asc' orderby='departure_time' count_only='1' />" scope='global' />
+										<cms:show int_ho />
 									</td>
 								</tr>
 								<tr>
@@ -578,7 +581,7 @@ set_time_limit(300);
 										<strong>Total</strong>
 									</td>
 									<td width="100px;">
-										<cms:show ho_abs_count_pdf />=<cms:show my_ho_live_count />+<cms:show my_ho_death_count />D
+										<cms:show int_ho />=<cms:show my_ho_live_count />+<cms:show my_ho_death_count />D
 									</td>
 								</tr>
 								<tr>
@@ -602,7 +605,7 @@ set_time_limit(300);
 										<strong>AC</strong>
 									</td>
 									<td width="100px;">
-										<cms:show my_ho_ac_actual_count /> = <cms:show my_ho_ac_count />
+										<cms:show int_ho /> = <cms:show my_ho_ac_count />
 									</td>
 								</tr>
 								<tr>
@@ -725,10 +728,10 @@ set_time_limit(300);
 											 ['', '', '', '', <cms:if my_icp eq 'NGP'>'','',<cms:else_if my_icp eq 'GCC' />'','',<cms:else />'',</cms:if> ],
 											 ['', '', '', '', <cms:if my_icp eq 'NGP'>'','',<cms:else_if my_icp eq 'GCC' />'','',<cms:else />'',</cms:if> ],
 
-											 ['', 'Total', '<cms:show to_abs_count_pdf />=<cms:show my_to_live_count />+<cms:show my_to_death_count />D', '', <cms:if my_icp eq 'NGP'>'','',<cms:else_if my_icp eq 'GCC' />'','',<cms:else />'',</cms:if> ], 
+											 ['', 'Total', '<cms:show int_to />=<cms:show my_to_live_count />+<cms:show my_to_death_count />D', '', <cms:if my_icp eq 'NGP'>'','',<cms:else_if my_icp eq 'GCC' />'','',<cms:else />'',</cms:if> ], 
 											['', '', 'TA <cms:show my_to_ta_count />=<cms:show my_to_ta_loco_count />', '', <cms:if my_icp eq 'NGP'>'','',<cms:else_if my_icp eq 'GCC' />'','',<cms:else />'',</cms:if> ],
 											 ['', '', 'LA <cms:show my_to_la_count />=<cms:show my_to_la_loco_count />', '', <cms:if my_icp eq 'NGP'>'','',<cms:else_if my_icp eq 'GCC' />'','',<cms:else />'',</cms:if> ],
-											 ['', '', 'AC <cms:show my_to_ac_actual_count />=<cms:show my_to_ac_count />', '', <cms:if my_icp eq 'NGP'>'','',<cms:else_if my_icp eq 'GCC' />'','',<cms:else />'',</cms:if> ],
+											 ['', '', 'AC <cms:show int_to />=<cms:show my_to_ac_count />', '', <cms:if my_icp eq 'NGP'>'','',<cms:else_if my_icp eq 'GCC' />'','',<cms:else />'',</cms:if> ],
 											 ['', '', 'DSL <cms:show my_to_dsl_actual_count />=<cms:show my_to_dsl_count />', '', <cms:if my_icp eq 'NGP'>'','',<cms:else_if my_icp eq 'GCC' />'','',<cms:else />'',</cms:if> ],
 
 											
@@ -755,7 +758,7 @@ set_time_limit(300);
 											 {text: 'Arr/Dep', style: 'tableHeader', bold: true, fontSize: 8,}, 
 											 </cms:if> ],
 
-											 <cms:pages masterpage='pointwise-interchange.php' custom_field="interchange=<cms:gpc 'interchange' method='get' /> | arrival_date=<cms:gpc 'arrival_date' method='get' /> | <cms:gpc 'to_ho' method='get'  /> | to_ho=1  | is_interchanged=1" order='asc' orderby='departure_time'>
+											 <cms:pages masterpage='pointwise-interchange.php' custom_field="interchange=<cms:gpc 'interchange' method='get' /> | arrival_date=<cms:gpc 'arrival_date' method='get' /> | <cms:gpc 'to_ho' method='get'  /> | to_ho=1  | is_interchanged=1 | tr_name<>TA | tr_name<>ta | tr_name<>Ta | tr_name<>tA | tr_name<>LA | tr_name<>la | tr_name<>La | tr_name<>lA" order='asc' orderby='departure_time'>
 											<cms:set tr_name_caps="<cms:php>echo strtoupper('<cms:show tr_name />');</cms:php>" />
 											<cms:set schedule_caps="<cms:php>echo strtoupper('<cms:show schedule />');</cms:php>" />
 
@@ -794,10 +797,10 @@ set_time_limit(300);
 
 											 ['', '', '', '', <cms:if my_icp eq 'NGP'>'','',<cms:else_if my_icp eq 'GCC' />'','',<cms:else />'',</cms:if> ],
 											 ['', '', '', '', <cms:if my_icp eq 'NGP'>'','',<cms:else_if my_icp eq 'GCC' />'','',<cms:else />'',</cms:if>  ],
-											 ['', 'Total', '<cms:show ho_abs_count_pdf />=<cms:show my_ho_live_count />+<cms:show my_ho_death_count />D', '', <cms:if my_icp eq 'NGP'>'','',<cms:else_if my_icp eq 'GCC' />'','',<cms:else />'',</cms:if> ], 
+											 ['', 'Total', '<cms:show int_ho />=<cms:show my_ho_live_count />+<cms:show my_ho_death_count />D', '', <cms:if my_icp eq 'NGP'>'','',<cms:else_if my_icp eq 'GCC' />'','',<cms:else />'',</cms:if> ], 
 											['', '', 'TA <cms:show my_ho_ta_count />=<cms:show my_ho_ta_loco_count />', '', <cms:if my_icp eq 'NGP'>'','',<cms:else_if my_icp eq 'GCC' />'','',<cms:else />'',</cms:if> ],
 											 ['', '', 'LA <cms:show my_ho_la_count />=<cms:show my_ho_la_loco_count />', '', <cms:if my_icp eq 'NGP'>'','',<cms:else_if my_icp eq 'GCC' />'','',<cms:else />'',</cms:if> ],
-											 ['', '', 'AC <cms:show my_ho_ac_actual_count />=<cms:show my_ho_ac_count />', '', <cms:if my_icp eq 'NGP'>'','',<cms:else_if my_icp eq 'GCC' />'','',<cms:else />'',</cms:if> ],
+											 ['', '', 'AC <cms:show int_ho />=<cms:show my_ho_ac_count />', '', <cms:if my_icp eq 'NGP'>'','',<cms:else_if my_icp eq 'GCC' />'','',<cms:else />'',</cms:if> ],
 											 ['', '', 'DSL <cms:show my_ho_dsl_actual_count />=<cms:show my_ho_dsl_count />', '', <cms:if my_icp eq 'NGP'>'','',<cms:else_if my_icp eq 'GCC' />'','',<cms:else />'',</cms:if> ],
 										]
 									},
@@ -817,8 +820,6 @@ set_time_limit(300);
 		}
 	</script>
 </cms:pages>
-
-<p>Page generated in: <cms:sub "<cms:php>echo $time_start = microtime(true); echo $DB->queries;</cms:php>" start /></p>
 
 <div class="gxcpl-ptop-50"></div>
 	<cms:embed "footer.html" />

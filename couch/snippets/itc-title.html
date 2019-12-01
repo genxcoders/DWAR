@@ -1,17 +1,44 @@
 					<div class="col-md-12">
 						<!-- List View -->
 						<cms:if k_matched_route='list_itc'>
-							<h4 class="gxcpl-no-margin">
-								INTERCHANGE<small class="pull-right gxcpl-fw-500" style="height: 21px; line-height: 21px;"><a class="btn btn-danger btn-xs gxcpl-shadow-2 gxcpl-fw-700" type="button" style="margin-left: 30px;" href="<cms:route_link 'create_itc' />"><i class="fa fa-plus"></i> ADD INTERCHANGE</a></small>
-							</h4>
+							<div class="row">
+								<div class="col-md-6 col-xs-9">
+									<h4 class="gxcpl-no-margin">
+										INTERCHANGE
+									</h4>
+								</div>
+								<div class="col-md-1 col-md-offset-5 col-xs-3 text-center" >
+									<a class="btn btn-danger gxcpl-shadow-2 gxcpl-fw-700" type="button" data-toggle="tooltip" data-placement="top" title="ADD INTERCHANGE" href="<cms:route_link 'create_itc' />">	
+										<i class="fa fa-plus"></i>
+									</a>
+								</div>
+							</div>
 						<cms:else_if k_matched_route='create_itc' />
-							<h4 class="gxcpl-no-margin">
-								INTERCHANGE: ADD
-							</h4>
+							<div class="row">
+								<div class="col-md-6 col-xs-9">
+									<h4 class="gxcpl-no-margin">
+										INTERCHANGE: ADD
+									</h4>
+								</div>
+								<div class="col-md-1 col-md-offset-5 col-xs-3 text-center" >
+									<a href="<cms:route_link 'list_itc' />" class="btn btn-danger" type="button" data-toggle="tooltip" data-placement="top" title="LIST VIEW" >
+										<i class="fa fa-list fa-lg" aria-hidden="true"></i>
+									</a>
+								</div>
+							</div>
 						<cms:else_if k_matched_route='edit_itc' />
-							<h4 class="gxcpl-no-margin">
-								INTERCHANGE: UPDATE
-							</h4>
+							<div class="row">
+								<div class="col-md-6 col-xs-9">
+									<h4 class="gxcpl-no-margin">
+										INTERCHANGE: UPDATE
+									</h4>
+								</div>
+								<div class="col-md-1 col-md-offset-5 col-xs-3 text-center" >
+									<a href="<cms:route_link 'list_itc' />" class="btn btn-danger" type="button" data-toggle="tooltip" data-placement="top" title="LIST VIEW" >
+										<i class="fa fa-list fa-lg" aria-hidden="true"></i>
+									</a>
+								</div>
+							</div>
 						<cms:else_if k_matched_route='delete_itc' />
 							<h4 class="gxcpl-no-margin">
 								INTERCHANGE: DELETE

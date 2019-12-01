@@ -7,8 +7,8 @@
 						<!-- Card -->
 						<div class="gxcpl-card">
 							<!-- Body -->
-							<div class="gxcpl-card-body gxcpl-padding-15">
-								<table class="gxcpl-table ">
+							<div class="gxcpl-card-body tableFixHead gxcpl-padding-15" style="overflow-x: auto;">
+								<table class="display table table-bordered gxcpl-table-hover" id="pt-icp" style="width: 100% !important;">
 									<thead>
 										<tr>
 											<th>
@@ -23,7 +23,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<cms:pages masterpage=k_template_name show_future_entries="1" paginate='1' limit='10' order='asc' >
+										<cms:pages masterpage=k_template_name show_future_entries="1" order='asc' >
 										<cms:no_results>
 										<tr>
 											<cms:if k_user_access_level gt '7'>
@@ -56,17 +56,7 @@
 								</table>
 							</div>
 							<!-- Body -->
-							<!-- Pagination -->
-								<center>
-									<div class="btn-group gxcpl-fw-500" role="group">
-										<cms:pages show_future_entries="1" paginate='1' limit='10' >
-											<cms:paginator />
-										</cms:pages>
-									</div>
-								</center>
-								<!-- Pagination -->
 						</div>
 						<!-- Card -->
-						<div class="gxcpl-ptop-50"></div>
 					</div>
 					<!-- Table -->

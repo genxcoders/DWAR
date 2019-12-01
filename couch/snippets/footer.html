@@ -12,20 +12,9 @@
 		<script src="<cms:show k_site_link />dist/sidenav.min.js"></script>
 		 <script>$('[data-sidenav]').sidenav();</script>
 		<script type="text/javascript" src="<cms:show k_site_link />assets/js/bootstrap.js"></script>
+		
 		<script type="text/javascript" src="<cms:show k_site_link />assets/DataTables/datatables.js"></script>
-		<cms:ignore>
-		<!-- For Open close nav -->
-		<!-- <script>
-			function openNav() {
-			  document.getElementById("mySidenav").style.width = "250px";
-			}
-
-			function closeNav() {
-			  document.getElementById("mySidenav").style.width = "0";
-			}
-		</script> -->
-		<!-- For Open close nav -->
-		</cms:ignore>
+		
 		<!-- Tooltip -->
 		<script type="text/javascript">
 			$(function () {
@@ -34,7 +23,7 @@
 			})
 		</script>
 		<!-- Tooltip -->
-		
+		<cms:if "<cms:not k_template_name=='coal-pdf-report.php' />" >
 		<script type="text/javascript">
 			$(document).ready(function(){
 			    $('#myselection').on('change', function(){
@@ -44,7 +33,6 @@
 			    });
 			});
 		</script>
-
 		<cms:ignore>Set dropdown value in textbox in pointwise interchange php file</cms:ignore>
 		<script type="text/javascript">
 			// document.getElementById("to_ho0").checked = false;
@@ -59,7 +47,7 @@
 			}
 			
 		</script>
-		
+
 		<script type="text/javascript">
 			$(function() {
 			  $(document).ready(function () {
@@ -81,6 +69,17 @@
 			  });
 			});
 		</script>
+		</cms:if>
+		<cms:if k_template_name=="pdd-avg-report.php" >
+		<script type="text/javascript">
+		$(function() {
+		    $('#interchange').on('change', function() {
+		        var $sels = $('#interchange option:selected[value="-"]');
+		        $("#Testing").attr("disabled", $sels.length > 0);
+		    }).change();
+		});
+		</script>
+		</cms:if>
 
 		<cms:if k_template_name=="breakup-loading.php" >
 			<script type="text/javascript">			
@@ -90,6 +89,7 @@
 	            // document.getElementById('brkdt').valueAsDate = new Date();
 	        </script>
 		</cms:if>
+
 		<cms:if k_template_name=="pointwise-interchange.php">
 			<!-- Refresh Iframe for CSV Importer -->
 			<script> 
@@ -119,6 +119,7 @@
 			</script>
 			<!-- CONDITIONAL FIELD -->
 		</cms:if>
+
 		<cms:if k_template_name=="coal.php">
 			<!-- Refresh Iframe for CSV Importer -->
 			<script> 
@@ -136,6 +137,7 @@
 			</script>
 			<!-- Refresh Iframe for CSV Importer -->
 		</cms:if>
+
 		<cms:if k_template_name=='mid-position.php'>
 			<!-- When value is > 0 then disable input -->
 			<script>
@@ -177,11 +179,13 @@
 			<cms:embed "total-sum.html" />
 			<!-- Real time Total -->
 		</cms:if>
+
 		<cms:if k_template_name=="ptwise-int-report.php" >
 			<!-- Show/ Hide Button -->
 			<cms:embed "show-hide-pt.html" />
 			<!-- Show/ Hide Button -->
 		</cms:if>
+
 		<cms:if k_template_name=="pointwise-interchange.php" >
 			<!-- Show/ Hide Button -->
 			<cms:embed "show-hide-pt-entry.html" />
@@ -206,10 +210,11 @@
 			// Generate PDF with fresh data
 		</script>
 		</cms:if>
+
 		<!-- DataTables  -->
 		<cms:embed "datatable-script.html" />
 		<!-- DataTables  -->
-
+		<cms:if "<cms:not k_template_name=='coal-pdf-report.php' />" >
 		<!-- Edit Popup -->
 		<script type="text/javascript">
 		$("button#view-emp").click(function(e) {
@@ -233,7 +238,7 @@
 		});
 		</script>
 		<!-- Edit Popup -->
-
+		</cms:if>
 	</body>
 
 </html>

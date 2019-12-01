@@ -1,7 +1,7 @@
-<!-- pt-icp -->
-<script type="text/javascript">
+
 	<cms:if k_template_name=="ptwise-int-report.php">
 	<cms:pages masterpage="ptwise-int-report.php" >
+	<script type="text/javascript">
 	$(document).ready(function() {
 		 var table = $('#to').DataTable({
 			scrollY: "60vh",
@@ -31,7 +31,8 @@
 		});	
 	 	table.buttons().container().appendTo($('#excel_to'));
 	});
-
+	</script>
+	<script type="text/javascript">
 	$(document).ready(function() {
 		 var table = $('#ho').DataTable( {
 			scrollY: "60vh",
@@ -60,23 +61,24 @@
 		});	
 		table.buttons().container().appendTo($('#excel_ho'));
 	});
+	</script>
 	</cms:pages>
-	</cms:if>
-	<cms:if k_template_name=="pointwise-dash.php">
-	$(document).ready(function() {
-		$.fn.DataTable.ext.pager.numbers_length = 5;
-			$('#pt-icp').DataTable({
-				"scrollY": "60vh",
-				"scrollCollapse": true,
-				"scrollX": true,
-				"paging": false,
-				"ordering": false,
-				"info": true,
+	<cms:else_if "<cms:not k_template_name=='pdd-avg-report.php' || k_template_name=='ptwise-int-report.php' || k_template_name=='pdd-report.php' || k_template_name=='stable-train.php' || k_template_name=='coal-report.php' || k_template_name=='transport-report.php' || k_template_name=='coal-pdf-report.php' || k_template_name=='index.php' />" />
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$.fn.DataTable.ext.pager.numbers_length = 5;
+				$('#pt-icp').DataTable({
+					scrollY: "60vh",
+					scrollCollapse: true,
+					scrollX: true,
+					paging: false,
+					ordering: false,
+					info: true,
+				});
 			});
-		});
+	</script>
 	</cms:if>
-</script>
-<cms:if k_template_name=="pdd-avg-report.php">
+	<cms:if k_template_name=="pdd-avg-report.php">
 	<script type="text/javascript">
 		$(document).ready(function() {
 			// $('#example1 tbody td[colspan]').wrapInner( '<span/>' ).append( '&nbsp;' );
@@ -95,6 +97,7 @@
 							info: true,
 							extend: 'pdfHtml5',
 							orientation: 'landscape',
+							download:'open',
 							text: '<i class="fa fa-file-pdf-o"></i> PDF',
 							title: $('h5').text(),
 							customize: function(doc) {
@@ -105,6 +108,30 @@
 										bold: true,
 										alignment: 'left'
 									},
+
+									//Test colspan
+									columnDefs = [
+										{
+											'targets': [0, 1, 2],
+											'orderable': false,
+											'searchable': false
+										}
+									];
+									createdRow = function(row, data, dataIndex){
+								        // If name is "Ashton Cox"
+								        if(data[0] === 'Total Avg. PDD:'){
+								            // Add COLSPAN attribute
+								            $('td:eq(0)', row).attr('colspan', 2);
+
+								            // Hide required number of columns
+								            // next to the cell with COLSPAN attribute
+								            $('td:eq(1)', row).css('display', 'none');
+
+								            // Update cell data
+								            this.cell($('td:eq(0)', row)).data('Total Avg. PDD:');
+								        }
+								    };
+									//test colspan
 
 
 									//pageMargins [left, top, right, bottom] 
@@ -120,6 +147,7 @@
 									doc.content[1].layout = objLayout;
 
 									// body.push([{text: 'header', colSpan: 2, alignment: 'center'}, {}]);
+
 							},  
 
 							footer: true
@@ -138,8 +166,8 @@
 			table.buttons().container().appendTo($('#buttons'));
 		});
 	</script>
-</cms:if>
-<cms:if k_template_name=="pdd-report.php">
+	</cms:if>
+	<cms:if k_template_name=="pdd-report.php">
 	<script type="text/javascript">
 		$(document).ready(function() {
 			// $('#example1 tbody td[colspan]').wrapInner( '<span/>' ).append( '&nbsp;' );
@@ -172,7 +200,7 @@
 									},
 
 									//pageMargins [left, top, right, bottom] 
-									doc.pageMargins = [ 20, 0, 0, 0 ];
+									doc.pageMargins = [ 20, 20, 0, 0 ];
 									doc.content[1].table.widths = [50, 90, 100, 60, 60, 60, 60, 60, 60, 120];
 									
 									doc.content[1].table.uppercase = true;
@@ -204,8 +232,8 @@
 			table.buttons().container().appendTo($('#buttons'));
 		});
 	</script>
-</cms:if>
-<cms:if k_template_name=="stable-train.php">
+	</cms:if>
+	<cms:if k_template_name=="stable-train.php">
 	<script type="text/javascript">
 		$(document).ready(function() {
 			// $('#example1 tbody td[colspan]').wrapInner( '<span/>' ).append( '&nbsp;' );
@@ -279,8 +307,8 @@
 			table.buttons().container().appendTo($('#buttons'));
 		});
 	</script>
-</cms:if>
-<cms:if k_template_name=="coal-report.php">
+	</cms:if>
+	<cms:if k_template_name=="coal-report.php">
 	<script type="text/javascript">
 		$(document).ready(function() {
 			// $('#example1 tbody td[colspan]').wrapInner( '<span/>' ).append( '&nbsp;' );
@@ -347,8 +375,8 @@
 			table.buttons().container().appendTo($('#buttons'));
 		});
 	</script>
-</cms:if>
-<cms:if k_template_name=="transport-report.php">
+	</cms:if>
+	<cms:if k_template_name=="transport-report.php">
 	<script type="text/javascript">
 		$(document).ready(function() {
 			// $('#example1 tbody td[colspan]').wrapInner( '<span/>' ).append( '&nbsp;' );
@@ -415,19 +443,56 @@
 			table.buttons().container().appendTo($('#buttons'));
 		});
 	</script>
-	
-</cms:if>
-<cms:if k_template_name=="pointwise-interchange.php" >
-<script type="text/javascript">
-	$(document).ready( function (){
-		$('#pt-icp').DataTable({
-			"scrollY": "60vh",
-			"scrollCollapse": true,
-			"scrollX": true,
-			"paging": false,
-			"ordering": false,
-			"info": true,
+	</cms:if>
+	<cms:if k_template_name=="coal-pdf-report.php">
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var table = $('#example5').DataTable( {
+				scrollY: "60vh",
+				scrollCollapse: true,
+				scrollX: true,
+				paging:  false,
+				ordering: false,
+				info: true,
+				dom: 'Bfrtip',
+					buttons: {
+						buttons: [{
+							extend: 'excel',
+							text: '<i class="fa fa-file-excel-o"></i> Excel',
+							title: $('h5').text(),
+							exportOptions: {
+								columns: ':not(.no-print)'
+							},
+							footer: true
+						},]
+					}
+			});
+			table.buttons().container().appendTo($('#buttons'));
 		});
-	});
-</script>
-</cms:if>
+	</script>
+	</cms:if>
+	<cms:if k_template_name=="transportation-pdf-report.php">
+	<script type="text/javascript">
+		$(document).ready(function() {
+		 $('#example6').DataTable( {
+				paging:  false,
+				ordering: false,
+				info: true,
+				dom: 'Bfrtip',
+					buttons: {
+						buttons: [{
+							extend: 'excel',
+							text: '<i class="fa fa-file-excel-o"></i> Excel',
+							title: $('h5').text(),
+						
+							exportOptions: {
+								columns: ':not(.no-print)'
+							},
+							footer: true
+						},]
+					}
+			});
+			
+		});
+	</script>
+	</cms:if>

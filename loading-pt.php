@@ -1,6 +1,7 @@
 <?php require_once( 'couch/cms.php' ); ?>
 <cms:template title="Loading Points" clonable='1' routable='1' parent='_lpt_' order='1' dynamic_folders='1' folder_masterpage='coal-area.php'>
-	<cms:editable name="daily_target" label="Daily Target" type="text" />
+	<cms:editable name="ld_cmdt" label="Loading Commodity" type='relation' masterpage="loading-commodity.php" has="one" order="1" />
+	<cms:editable name="daily_target" label="Daily Target" type="text" order="2" />
 	<!-- Loading Point: Custom Routes -->
 	<cms:route name='list_lpt' path='' />
 	<cms:route name='create_lpt' path='create' />
@@ -17,14 +18,6 @@
 	<!-- Content Here -->
 	<div class="container">
 		<div class="row">
-			<div class="gxcpl-ptop-30"></div>
-
-			<!-- Section Divider -->
-			<div class="gxcpl-ptop-10"></div>
-			<!-- <div class="gxcpl-divider-dark"></div> -->
-			<div class="gxcpl-ptop-10"></div>
-			<!-- Section Divider -->
-
 			<!-- Loading Point -->
 			<cms:match_route debug='0' />
 			<cms:embed "loading-pt/<cms:show k_matched_route />.html" />

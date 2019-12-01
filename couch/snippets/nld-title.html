@@ -1,17 +1,44 @@
 					<div class="col-md-12">
 						<!-- List View -->
 						<cms:if k_matched_route='list_nld'>
-							<h4 class="gxcpl-no-margin">
-								LOADING POINT<small class="pull-right gxcpl-fw-500" style="height: 21px; line-height: 21px;"><a class="btn btn-danger btn-xs gxcpl-shadow-2 gxcpl-fw-700" type="button" style="margin-left: 30px;" href="<cms:route_link 'create_nld' />"><i class="fa fa-plus"></i> ADD LOADING POINT</a></small>
-							</h4>
+							<div class="row">
+								<div class="col-md-6 col-xs-9">
+									<h4 class="gxcpl-no-margin">
+										LOADING POINT
+									</h4>
+								</div>
+								<div class="col-md-1 col-md-offset-5 col-xs-3 text-center" >
+									<a class="btn btn-danger gxcpl-shadow-2 gxcpl-fw-700" type="button" data-toggle="tooltip" data-placement="top" title="ADD LOADING POINT" href="<cms:route_link 'create_nld' />">	
+										<i class="fa fa-plus"></i>
+									</a>
+								</div>
+							</div>
 						<cms:else_if k_matched_route='create_nld' />
-							<h4 class="gxcpl-no-margin">
-								LOADING POINT: ADD
-							</h4>
+							<div class="row">
+								<div class="col-md-6 col-xs-9">
+									<h4 class="gxcpl-no-margin">
+										LOADING POINT: ADD
+									</h4>
+								</div>
+								<div class="col-md-1 col-md-offset-5 col-xs-3 text-center" >
+									<a href="<cms:route_link 'list_nld' />" class="btn btn-danger" type="button" data-toggle="tooltip" data-placement="top" title="LIST VIEW" >
+										<i class="fa fa-list fa-lg" aria-hidden="true"></i>
+									</a>
+								</div>
+							</div>
 						<cms:else_if k_matched_route='edit_nld' />
-							<h4 class="gxcpl-no-margin">
-								LOADING POINT: UPDATE
-							</h4>
+							<div class="row">
+								<div class="col-md-6 col-xs-9">
+									<h4 class="gxcpl-no-margin">
+										LOADING POINT: UPDATE
+									</h4>
+								</div>
+								<div class="col-md-1 col-md-offset-5 col-xs-3 text-center" >
+									<a href="<cms:route_link 'list_nld' />" class="btn btn-danger" type="button" data-toggle="tooltip" data-placement="top" title="LIST VIEW" >
+										<i class="fa fa-list fa-lg" aria-hidden="true"></i>
+									</a>
+								</div>
+							</div>
 						<cms:else_if k_matched_route='delete_nld' />
 							<h4 class="gxcpl-no-margin">
 								LOADING POINT: DELETE

@@ -2,7 +2,7 @@
 
 									<cms:set my_signon_time = "<cms:date signon_time format='H:i' />" scope="global" />
 
-									<cms:set my_dep_date = "<cms:date departure_date format='Y-m-d' />" scope="global" />
+									<cms:set my_dep_date = "<cms:if departure_date eq ''>-NA-<cms:else /><cms:date departure_date format='Y-m-d' /></cms:if>" scope="global" />
 
 									<cms:set my_signon_date = "<cms:date signon_date format='Y-m-d' />" scope="global" />
 
@@ -10,7 +10,7 @@
 
 									<cms:set my_aq_dep_time = "<cms:if aq_departure_time eq ''>-NA-<cms:else /><cms:date aq_departure_time format='H:i' /></cms:if>" scope="global" />
 
-									<cms:set my_gnq_dep_date = "<cms:date gnq_departure_date format='Y-m-d' />" scope="global" />
+									<cms:set my_gnq_dep_date = "<cms:if gnq_departure_date eq ''>-NA-<cms:else /><cms:date gnq_departure_date format='Y-m-d' /></cms:if>" scope="global" />
 
 									<cms:set my_gnq_dep_time = "<cms:if gnq_departure_time eq ''>-NA-<cms:else /><cms:date gnq_departure_time format='H:i' /></cms:if>" scope="global" />
 									<cms:ignore>
@@ -54,7 +54,8 @@
 									</cms:if> -->
 									</cms:ignore>
 									<cms:if my_icp eq 'NGP'>
-										<cms:php>
+									<cms:ignore>
+										<!-- <cms:php>
 										global $time, $time1 ;
 										$seconds = strtotime("<cms:show my_aq_dep_date /> <cms:show my_aq_dep_time />") - strtotime("<cms:show my_signon_date /> <cms:show my_signon_time />"); 
 
@@ -69,9 +70,24 @@
 										<cms:set minutes = "<cms:if my_aq_dep_time eq '-NA-'>-NA-<cms:else_if is_interchanged eq '1' /><cms:php>global $time; echo $time;</cms:php></cms:if>" scope="global" />
 
 										<cms:set no_hrs = "<cms:if my_aq_dep_time eq '-NA-'>-NA-<cms:else_if is_interchanged eq '1' /><cms:php>global $time1; echo $time1;</cms:php></cms:if>" scope="global" />
+										<cms:set total_pdd="<cms:add total_pdd minutes />" scope="global" /> -->
+									</cms:ignore>
+									<cms:php>
+										 	global $minutes;
+											$datetime1 = strtotime("<cms:show my_aq_dep_date /> <cms:show my_aq_dep_time />"); // Departure Time
+											$datetime2 = strtotime("<cms:show my_signon_date /> <cms:show my_signon_time />"); // Signon time
+											$interval  = abs($datetime2 - $datetime1);
+											$minutes   = round($interval / 60);
+										</cms:php>
+										<cms:set minutes="<cms:if my_aq_dep_time eq '-NA-'>-NA-<cms:else_if is_interchanged eq '1' /><cms:php>global $minutes; echo $minutes;</cms:php></cms:if>" scope="global" />
 										<cms:set total_pdd="<cms:add total_pdd minutes />" scope="global" />
+										<cms:set div_min = "<cms:div minutes '60' />" scope="global" />
+										<cms:set div_hour_value="<cms:number_format div_min decimal_precision='0' />" scope="global" />
+										<cms:set mod_min_value="<cms:mod minutes '60' />" scope="global" />
+										
 									<cms:else_if  my_icp eq 'GCC' />
-										<cms:php>
+									<cms:ignore>
+										<!-- <cms:php>
 										global $time, $time1 ;
 										$seconds = strtotime("<cms:show my_gnq_dep_date /> <cms:show my_gnq_dep_time />") - strtotime("<cms:show my_signon_date /> <cms:show my_signon_time />"); 
 
@@ -86,10 +102,23 @@
 										<cms:set minutes = "<cms:if my_gnq_dep_time eq '-NA-'>-NA-<cms:else_if is_interchanged eq '1' /><cms:php>global $time; echo $time;</cms:php></cms:if>" scope="global" />
 
 										<cms:set no_hrs = "<cms:if my_gnq_dep_time eq '-NA-'>-NA-<cms:else_if is_interchanged eq '1' /><cms:php>global $time1; echo $time1;</cms:php></cms:if>" scope="global" />
+										<cms:set total_pdd="<cms:add total_pdd minutes />" scope="global" /> -->
+									</cms:ignore>
+									<cms:php>
+										 	global $minutes;
+											$datetime1 = strtotime("<cms:show my_gnq_dep_date /> <cms:show my_gnq_dep_time />"); // Departure Time
+											$datetime2 = strtotime("<cms:show my_signon_date /> <cms:show my_signon_time />"); // Signon time
+											$interval  = abs($datetime2 - $datetime1);
+											$minutes   = round($interval / 60);
+										</cms:php>
+										<cms:set minutes="<cms:if my_gnq_dep_time eq '-NA-'>-NA-<cms:else_if is_interchanged eq '1' /><cms:php>global $minutes; echo $minutes;</cms:php></cms:if>" scope="global" />
 										<cms:set total_pdd="<cms:add total_pdd minutes />" scope="global" />
+										<cms:set div_min = "<cms:div minutes '60' />" scope="global" />
+										<cms:set div_hour_value="<cms:number_format div_min decimal_precision='0' />" scope="global" />
+										<cms:set mod_min_value="<cms:mod minutes '60' />" scope="global" />
 									<cms:else />
 										<cms:ignore>
-										<cms:php>
+										<!-- <cms:php>
 										global $time, $time1, $time2 ;
 										$seconds = strtotime("<cms:show my_dep_date /> <cms:show my_dep_time />") - strtotime("<cms:show my_signon_date /> <cms:show my_signon_time />"); 
 
@@ -108,10 +137,10 @@
 
 										<cms:set only_hrs = "<cms:if my_dep_time eq '-NA-'>-NA-<cms:else_if is_interchanged eq '1' /><cms:php>global $time2; echo $time2;</cms:php></cms:if>" scope="global" />
 
-										<cms:set total_pdd="<cms:add total_pdd minutes />" scope="global" />
+										<cms:set total_pdd="<cms:add total_pdd minutes />" scope="global" /> -->
 										</cms:ignore>
 
-										<!-- ET -->
+										<!-- Other than NGP & GCC -->
 										<cms:php>
 										 	global $minutes;
 											$datetime1 = strtotime("<cms:show my_dep_date /> <cms:show my_dep_time />"); // Departure Time
@@ -119,17 +148,12 @@
 											$interval  = abs($datetime2 - $datetime1);
 											$minutes   = round($interval / 60);
 										</cms:php>
-										<cms:if my_dep_time eq '-NA-'>
-											-NA-
-										<cms:else_if is_interchanged eq '1' />
-											<cms:set minutes="<cms:php>global $minutes; echo $minutes;</cms:php>" scope="global" />
-											<cms:set total_pdd="<cms:add total_pdd minutes />" scope="global" />
-										</cms:if>
+										<cms:set minutes="<cms:if my_dep_time eq '-NA-'>-NA-<cms:else_if is_interchanged eq '1' /><cms:php>global $minutes; echo $minutes;</cms:php></cms:if>" scope="global" />
+										<cms:set total_pdd="<cms:add total_pdd minutes />" scope="global" />
 										<cms:set div_min = "<cms:div minutes '60' />" scope="global" />
 										<cms:set div_hour_value="<cms:number_format div_min decimal_precision='0' />" scope="global" />
 										<cms:set mod_min_value="<cms:mod minutes '60' />" scope="global" />
-
-										<!-- ET -->
+										<!-- Other than NGP & GCC -->
 									</cms:if>
 									
 									

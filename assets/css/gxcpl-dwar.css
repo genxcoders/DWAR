@@ -338,8 +338,7 @@ img.gxcpl-login-logo {
 	/*padding: 2px 4px;*/
 	height: 24px;
 }
-
-
+	
 .gxcpl-input-text, #f_ncoal_stock {
 	border: 0px solid transparent;
 	border-bottom: 1px solid rgba(0,0,0,0.23);
@@ -356,7 +355,6 @@ img.gxcpl-login-logo {
 	transition: border-bottom 0.3s ease;
 	height: 24px;
 }
-
 .typeahead, .typeahead1 {
 	border: 0px solid transparent;
 	border-bottom: 1px solid rgba(0,0,0,0.23);
@@ -383,7 +381,8 @@ input.gxcpl-inline-text:focus + button.gxcpl-inline-btn {
 .gxcpl-input-select, #f_location, #f_raketype, 
 #f_commodity, #f_desti, #f_loading_point, #f_commodity_stock,
 #f_ncoal_cmdt, #f_machine, #f_machine_units2, #f_section, 
-#f_section_stname, #f_ho_interchange, #f_ipt_role, #f_k_page_folder_id, #f_siding{
+#f_section_stname, #f_ho_interchange, #f_ipt_role, #f_k_page_folder_id,
+#f_siding, #f_ld_cmdt{
 	border: 0px solid transparent;
 	border-bottom: 1px solid rgba(0,0,0,0.23);
 	transition: border-bottom 0.3s ease;
@@ -500,7 +499,17 @@ td.gxcpl-less-60{
 	background: #ffff69;
 }
 /* Auto number table rows */
-table#ho, table#to, table#pt-icp {
+table#ho, table#to, table#pt-icp  {
+  /* Set "my-sec-counter" to 0 */
+  counter-reset: my-sec-counter;
+}
+
+.number::before {
+  /* Increment "my-sec-counter" by 1 */
+  counter-increment: my-sec-counter;
+  content: "" counter(my-sec-counter) ". ";
+}
+/*table#ho, table#to, table#pt-icp {
 	counter-reset: rowNumber;
 }
 table#ho tbody tr, table#to tbody tr, table#pt-icp tbody tr {
@@ -510,7 +519,7 @@ table#ho tbody tr td:first-child::before, table#to tbody tr td:first-child::befo
 	content: counter(rowNumber);
 	min-width: 1em;
 	margin-right: 0.5em;
-}
+}*/
 .pagination {
 	margin: 0;
 }

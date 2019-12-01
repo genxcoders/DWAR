@@ -5,9 +5,11 @@
 			<cms:if k_success >
 				<cms:if frm_from_date != 'dd/mm/yyyy' >
 					<cms:set my_search_str="<cms:concat my_search_str ' tdate >= ' frm_from_date ' 00:00:00' />"  scope='global'/>
+					<cms:set my_from_date=frm_from_date scope="global" />
 				</cms:if>
 				<cms:if frm_to_date != 'dd/mm/yyyy' >
 					<cms:set my_search_str="<cms:concat my_search_str ' | tdate <= ' frm_to_date ' 00:00:00' />"  scope='global'/>
+					<cms:set my_to_date=frm_to_date scope="global" />
 				</cms:if>
 			</cms:if>
 			<!-- Card -->
@@ -48,41 +50,6 @@
 				</div>
 			</div>
 			<!-- Card -->
-			<cms:ignore>
-			<!-- Card -->
-			<!-- <div class="gxcpl-card">
-				<div class="gxcpl-card-header">
-					<div class="row">
-						<div class="col-md-5 col-md-offset-1 col-xs-6">
-							<h4 class="gxcpl-no-margin text-center">FROM DATE</h4>
-						</div>
-						<div class="col-md-4 col-xs-6">
-							<h4 class="gxcpl-no-margin text-center">TO DATE</h4>
-						</div>
-					</div>
-				</div>
-				<div class="gxcpl-ptop-20"></div>
-				<div class="gxcpl-card-body">
-					<div class="row">
-						<div class="col-md-3 col-md-offset-1 col-xs-5 col-xs-offset-1">
-							<cms:input type="date" name="from_date" class="gxcpl-input-text" style="width: auto; line-height: 1.42857143;" value="<cms:date "<cms:gpc 'from_date' method='get' />" format='Y-m-d' />" />
-							<div class="gxcpl-ptop-10"></div>
-						</div>
-						<div class="col-md-3 col-md-offset-1 col-xs-5">
-							<cms:input type="date" name="to_date" class="gxcpl-input-text" style="width: auto; line-height: 1.42857143;" value="<cms:date "<cms:gpc 'to_date' method='get' />" format='Y-m-d' />" />
-							<div class="gxcpl-ptop-10"></div>
-						</div>
-						<div class="col-md-2 col-md-offset-1 col-xs-4 col-xs-offset-5">
-							<span class="input-group-btn">
-								<cms:input class="btn btn-primary btn-xs" id="notesave" type='submit' name='submit' value="Search" />
-							</span>
-						</div>
-					</div>
-					<div class="gxcpl-ptop-20"></div>
-				</div>
-			</div> -->
-			<!-- Card -->
-			</cms:ignore>
 		</cms:form>
 	</cms:pages>
 </div>

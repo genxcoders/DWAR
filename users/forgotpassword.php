@@ -73,55 +73,51 @@
             </cms:if>
 		<div class="gxcpl-ptop-30"></div>
 		<div class="container">
-				<div class="row">
-					<div class="col-md-4 col-md-offset-4">
-						<div class="gxcpl-br-4 gxcpl-shadow-2 gxcpl-bg-white">
-							<!-- Login Title -->
-							<h3 class="gxcpl-no-margin text-center">
-								<div class="gxcpl-ptop-10"></div>
-								Password Reset
-								<div class="gxcpl-ptop-10"></div>
-							</h3>
-							<!-- Login Title -->
-							<!-- Username -->
-							<div class="col-md-12">
-								<!-- <div class="gxcpl-br-2 gxcpl-shadow-2 gxcpl-bg-white"> -->
-									<div class="gxcpl-padding-15">
+			<div class="row">
+				<div class="col-md-4 col-md-offset-4">
+					<div class="gxcpl-br-4 gxcpl-shadow-2 gxcpl-bg-white">
+						<!-- Login Title -->
+						<h3 class="gxcpl-no-margin text-center">
+							<div class="gxcpl-ptop-10"></div>
+							Password Reset
+							<div class="gxcpl-ptop-10"></div>
+						</h3>
+						<!-- Login Title -->
+						<!-- Username -->
+						<div class="col-md-12">
+							<div class="gxcpl-padding-15">
 
-										<div class="row">
-											<!-- Username -->
-											<div class="col-md-12">
-												<label>Email Id</label>
-												<cms:input name="k_user_name" type="text" class="gxcpl-input-text" aria-describedby="email" />
-												<div class="gxcpl-ptop-10"></div>
-											</div>
-											<!-- Username -->
-										</div>
+								<div class="row">
+									<!-- Username -->
+									<div class="col-md-12">
+										<label>Email Id</label>
+										<cms:input name="k_user_name" type="text" class="gxcpl-input-text" aria-describedby="email" />
+										<div class="gxcpl-ptop-10"></div>
 									</div>
-								<!-- </div> -->
+									<!-- Username -->
+								</div>
 							</div>
-							
-							<input type="hidden" name="" value="1" />
-
-							<center>
-								<button type="submit" class="btn btn-danger btn-sm gxcpl-fw-700 gxcpl-shadow-2">
-									<i class="fa fa-undo"></i> RESET PASSWORD
-								</button>
-							</center>
-							<div class="gxcpl-ptop-10"></div>
-							<div class="gxcpl-ptop-5"></div>
-
-							<div class="text-center">
-								Back to <a href="<cms:login_link />">Login Page</a>
-							</div>
-							<div class="gxcpl-ptop-10"></div>
-							<div class="gxcpl-ptop-5"></div>
 						</div>
+						
+						<input type="hidden" name="" value="1" />
+
+						<center>
+							<button type="submit" class="btn btn-danger btn-sm gxcpl-fw-700 gxcpl-shadow-2">
+								<i class="fa fa-undo"></i> RESET PASSWORD
+							</button>
+						</center>
+						<div class="gxcpl-ptop-10"></div>
+						<div class="gxcpl-ptop-5"></div>
+
+						<div class="text-center">
+							Back to <a href="<cms:login_link />">Login Page</a>
+						</div>
+						<div class="gxcpl-ptop-10"></div>
+						<div class="gxcpl-ptop-5"></div>
 					</div>
 				</div>
 			</div>
-			<div class="gxcpl-ptop-50"></div>
-			<div class="gxcpl-ptop-30"></div>
+		</div>
 		</cms:form>
 	</cms:if>
 </cms:if>

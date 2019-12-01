@@ -148,12 +148,8 @@
 		        name='manual-entry'
 		        id="to_ho_pt_icp_form"
 		    >
-		    	<!-- Set For Year is less than current year -->
-			    <cms:set my_dep_date = "<cms:date frm_departure_date format='Y-m-d' />" scope="global" />
-				<cms:set my_curr_date = "<cms:date format='Y-m-d' />" scope="global" />
-				<!-- Set For Year is less than current year -->
+		    
 		        <cms:if k_success >
-		        <cms:if my_dep_date le my_curr_date>
 		            <cms:db_persist_form
 		                _invalidate_cache='0'
 		                k_page_title="<cms:show frm_interchange />_<cms:show my_toho />_<cms:show frm_tr_name />_<cms:date frm_arrival_date format='Y-m-d' />"
@@ -162,8 +158,9 @@
 		                today_yesterday = "<cms:show my_today_yesterday />"
 		                entry_diff = "<cms:pages masterpage='settings.php' limit='1' ><cms:show diff /></cms:pages>"
 		                select_type = "Yes"
+		                tr_name = "<cms:php>echo strtoupper('<cms:show frm_tr_name />');</cms:php>"
+		                schedule = "<cms:php>echo strtoupper('<cms:show frm_schedule />');</cms:php>"
 		            />
-		        </cms:if>
 	              	<cms:if k_success >
 		                
 	              		<cms:if frm_select_type eq 'Yes'> 
@@ -180,7 +177,7 @@
 							    interchange				=	"<cms:pages masterpage='interchange.php' id="<cms:gpc 'f_ho_interchange' />" limit='1'><cms:show k_page_title /></cms:pages>"
 							    ho_interchange			=	"<cms:pages masterpage='interchange.php' id="<cms:gpc 'f_ho_interchange' />" limit='1'><cms:show k_page_id /></cms:pages>"
 							    today_yesterday			=	"<cms:show frm_today_yesterday />"
-							    tr_name					=	"<cms:show frm_tr_name />"
+							    tr_name					=	"<cms:php>echo strtoupper('<cms:show frm_tr_name />');</cms:php>"
 							    loco					=	"<cms:show frm_loco />"
 							    schedule_date			=	"<cms:date frm_schedule_date format='Y-m-d' />"
 							    schedule				=	"<cms:show frm_schedule />"

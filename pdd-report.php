@@ -2,6 +2,7 @@
 <cms:template title="PDD Report" parent='_ptic_' order="6" />
 <cms:no_cache />
 <cms:embed 'header.html' />
+<cms:embed 'decimal_precision.html' />
 <cms:set total_pdd='0' scope='global' />
 <div class="container-fluid">
 	<div class="row">
@@ -14,6 +15,7 @@
 			</h4>
 		</div>
 		<cms:embed 'searchpdd.html' />
+		<cms:show my_date />
 		<cms:if interchange!="<cms:show my_search_str />">
 		<cms:pages masterpage="pointwise-interchange.php" limit='1' custom_field="interchange=<cms:gpc 'interchange' method='get' /> "><cms:set pdf_name="<cms:show interchange />" scope="global" />
 			<cms:set pdd_interchange = "<cms:show interchange />" scope="global" /> 
@@ -39,7 +41,6 @@
 						</div>
 						<div class="gxcpl-ptop-10"></div>
 					</div>
-					
 					<div class="gxcpl-card-body tableFixHead gxcpl-padding-15">
 						<table class="display table table-bordered gxcpl-table-hover" id="example0" style="width: 100% !important;">
 							<thead>
@@ -78,11 +79,12 @@
 								</tr>
 								</cms:no_results>
 								<tr>
+
 									<td style="padding-left: 30px;">
 										<cms:show k_absolute_count />
 									</td>
-									<td class="text-uppercase">
-										<cms:show tr_name />
+									<td >
+										<cms:php>echo strtoupper('<cms:show tr_name />');</cms:php> [<a href="<cms:admin_link />" target="_blank" >admin</a>]
 									</td>
 									<td class="text-uppercase">
 										<cms:show loco />
@@ -155,7 +157,7 @@
 									</td>
 									<td>
 										<cms:if departure_time>
-											<cms:date departure_time format='H:i' /> <small><cms:date departure_date format="Y-m-d" /></small>
+											<cms:date departure_time format='H:i' /> 
 										<cms:else />
 											-NA-
 										</cms:if> 
@@ -163,15 +165,17 @@
 									</cms:if>
 									<td>
 										<cms:if signon_time>
-											<cms:date signon_time format='H:i' /> <small><cms:date signon_date format="Y-m-d" /></small>
+											<cms:date signon_time format='H:i' /> 
 										<cms:else />
 											-NA-
 										</cms:if>
 									</td>
 									<cms:embed 'pdd.html' />
 									<td width="10%" class="<cms:if (minutes ge '60') && (is_interchanged eq '1') ><cms:if (minutes ge '120') && (is_interchanged eq '1') >	gxcpl-over120<cms:else_if is_interchanged eq '1' />gxcpl-over60</cms:if><cms:else_if (minutes lt '60') && (is_interchanged eq '1') />gxcpl-less-60</cms:if>">
-										<cms:if is_interchanged eq '1'>
-											<cms:if div_hour_value eq '0'><cms:else /><cms:number_format "<cms:div minutes '60' />" decimal_precision='0' /> hr</cms:if> <cms:if mod_min_value eq '0'><cms:else /><cms:mod minutes '60' /> m</cms:if> [<cms:show minutes />]
+										<cms:if minutes eq '' || minutes eq '0' || minutes eq '-NA-' >
+										-NA-
+										<cms:else_if is_interchanged eq '1' />
+											<cms:if div_hour_value eq '0'><cms:else /><cms:number_format "<cms:div minutes '60' />" decimal_precision='0' /> hr</cms:if> <cms:if mod_min_value eq '0'><cms:else /><cms:mod minutes '60' /> m</cms:if>[<cms:show minutes />]
 										<cms:else />
 											-NA-
 										</cms:if>
@@ -190,7 +194,6 @@
 								</cms:pages>
 								<cms:if my_icp eq 'NGP' || my_icp eq 'GCC'>
 								<tr>
-									<cms:set avg_pdd = "<cms:div total_pdd div_factor_pdd />" scope="global" />
 									<td colspan="8" class="text-right">
 										<strong>Avg PDD:</strong>
 									</td>
@@ -203,7 +206,10 @@
 									<td style="display: none;"></td>
 									<td colspan="2">
 										<strong>
-											<cms:number_format avg_pdd decimal_precision="2" />
+											<cms:set my_final_avg_pdd_final="<cms:div total_pdd div_factor_pdd />" scope="global" /> 
+											<cms:set agv_pdd_hours="<cms:number_format "<cms:div my_final_avg_pdd_final '60' />" decimal_precision='0' />" /><cms:set avg_pdd_minutes="<cms:mod my_final_avg_pdd_final '60' />" />
+
+											<cms:if agv_pdd_hours eq '0'><cms:else /><cms:show agv_pdd_hours /> hr</cms:if> <cms:if avg_pdd_minutes eq '0'><cms:else /><cms:show avg_pdd_minutes /> m</cms:if>
 										</strong>
 									</td>
 									<td style="display: none;"></td>
@@ -220,7 +226,6 @@
 									<td style="display: none;"></td>
 									<td colspan="2">
 										<strong>
-											(<cms:show div_factor_pdd />)
 											<cms:set my_final_avg_pdd_final="<cms:div total_pdd div_factor_pdd />" scope="global" /> 
 											<cms:set agv_pdd_hours="<cms:number_format "<cms:div my_final_avg_pdd_final '60' />" decimal_precision='0' />" /><cms:set avg_pdd_minutes="<cms:mod my_final_avg_pdd_final '60' />" />
 

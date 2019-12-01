@@ -5,9 +5,11 @@
 			<cms:if k_success >
 				<cms:if frm_from_date != 'dd/mm/yyyy' >
 					<cms:set my_search_str="<cms:concat my_search_str ' transdate >= ' frm_from_date ' 00:00:00' />"  scope='global'/>
+					<cms:set my_from_date=frm_from_date scope="global" />
 				</cms:if>
 				<cms:if frm_to_date != 'dd/mm/yyyy' >
 					<cms:set my_search_str="<cms:concat my_search_str ' | transdate <= ' frm_to_date ' 00:00:00' />"  scope='global'/>
+					<cms:set my_to_date=frm_to_date scope="global" />
 				</cms:if>
 			</cms:if>
 			<!-- Card -->

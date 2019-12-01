@@ -1,9 +1,9 @@
 									<tr>
-										<td class="text-center <cms:if (to_ho eq '1')><cms:if ((is_interchanged eq '1') && (today_interchange eq '1')) >srintchge today_interchange<cms:else_if today_interchange eq '1' />today_interchange<cms:else_if is_interchanged eq '1' />srintchge</cms:if><cms:else_if (to_ho eq '0') /><cms:if is_interchanged eq '1'>srintchge</cms:if></cms:if> ">	
+										<td class="text-center number <cms:if (to_ho eq '1')><cms:if ((is_interchanged eq '1') && (today_interchange eq '1')) >srintchge today_interchange<cms:else_if today_interchange eq '1' />today_interchange<cms:else_if is_interchanged eq '1' />srintchge</cms:if><cms:else_if (to_ho eq '0') /><cms:if is_interchanged eq '1'>srintchge</cms:if></cms:if> ">	
 										</td>
-										<td class="text-uppercase <cms:if is_stabled eq '1' >stable</cms:if> ">
+										<td class="<cms:if is_stabled eq '1' >stable</cms:if> ">
 											<cms:if tr_name>
-												<cms:show tr_name />
+												<cms:php>echo strtoupper('<cms:show tr_name />');</cms:php>
 											<cms:else />
 												- NA -
 											</cms:if>
@@ -134,6 +134,17 @@
 											</cms:if>
 										</td>
 										<td width="200px;">
+											<div id="remark" <cms:inline_edit 'remark' toolbar='custom' /> >
+												<cms:if remark >
+													<cms:set strip_text = "<cms:php>global $text;echo strip_tags('<cms:show remark />');</cms:php>" />
+													<cms:show strip_text />
+												<cms:else />
+													-NA-
+												</cms:if>
+											</div>
+										</td>
+										<cms:ignore>
+										<td width="200px;">
 											<cms:set submit_success="<cms:get_flash 'submit_success' />" />
 										    <cms:form
 										        masterpage=k_template_name
@@ -188,6 +199,7 @@
 										    	</button>
 										    </cms:form>
 										</td>
+										</cms:ignore>
 										<td class="text-center">
 											<cms:popup_edit "interchange | today_yesterday |is_stabled | tr_name | loco | schedule | schedule_date | arrival_date | arrival_time | departure_date | departure_time | aq_arrival_date | aq_arrival_time | aq_departure_date | aq_departure_time | signon_date | signon_time | raketype | load | load_unit | commodity | location | stn_to | stn_from |  to_ho | is_interchanged | today_interchange | remark" link_text="<i class='fa fa-edit'></i>" />
 
@@ -310,6 +322,17 @@
 											</cms:if>
 										</td>
 										<td width="200px;">
+											<div id="remark" <cms:inline_edit 'remark' toolbar='custom' /> >
+												<cms:if remark >
+													<cms:set strip_text = "<cms:php>global $text;echo strip_tags('<cms:show remark />');</cms:php>" />
+													<cms:show strip_text />
+												<cms:else />
+													-NA-
+												</cms:if>
+											</div>
+										</td>
+										<cms:ignore>
+										<td width="200px;">
 											<cms:set submit_success="<cms:get_flash 'submit_success' />" />
 										    <cms:form
 										        masterpage=k_template_name
@@ -364,6 +387,7 @@
 										    	</button>
 										    </cms:form>
 										</td>
+										</cms:ignore>
 										<td class="text-center">
 											<cms:popup_edit "interchange | today_yesterday |is_stabled | tr_name | loco | schedule | schedule_date | arrival_date | arrival_time | departure_date | departure_time | gnq_arrival_date | gnq_arrival_time | gnq_departure_date | gnq_departure_time | signon_date | signon_time | raketype | load | load_unit | commodity | location | stn_to | stn_from |  to_ho | is_interchanged | today_interchange | remark" link_text="<i class='fa fa-edit'></i>" />
 
@@ -471,6 +495,17 @@
 											</cms:if>
 										</td>
 										<td width="200px;">
+											<div id="remark" <cms:inline_edit 'remark' toolbar='custom' /> >
+												<cms:if remark >
+													<cms:set strip_text = "<cms:php>global $text;echo strip_tags('<cms:show remark />');</cms:php>" />
+													<cms:show strip_text />
+												<cms:else />
+													-NA-
+												</cms:if>
+											</div>
+										</td>
+										<cms:ignore>
+										<td width="200px;">
 											<cms:set submit_success="<cms:get_flash 'submit_success' />" />
 										    <cms:form
 										        masterpage=k_template_name
@@ -525,6 +560,7 @@
 										    	</button>
 										    </cms:form>
 										</td>
+										</cms:ignore>
 										<td class="text-center">
 											<cms:popup_edit "interchange | today_yesterday |is_stabled | tr_name | loco | schedule | schedule_date | arrival_date | arrival_time | departure_time | signon_date | signon_time | raketype | load | load_unit | commodity | location | stn_to | stn_from |  to_ho | is_interchanged | today_interchange | remark" link_text="<i class='fa fa-edit'></i>" />
 
@@ -650,6 +686,17 @@
 											</cms:if>
 										</td>
 										<td width="200px;">
+											<div id="remark" <cms:inline_edit 'remark' toolbar='custom' /> >
+												<cms:if remark >
+													<cms:set strip_text = "<cms:php>global $text;echo strip_tags('<cms:show remark />');</cms:php>" />
+													<cms:show strip_text />
+												<cms:else />
+													-NA-
+												</cms:if>
+											</div>
+										</td>
+										<cms:ignore>
+										<td width="200px;">
 											<cms:set submit_success="<cms:get_flash 'submit_success' />" />
 										    <cms:form
 										        masterpage=k_template_name
@@ -704,6 +751,7 @@
 										    	</button>
 										    </cms:form>
 										</td>
+										</cms:ignore>
 										<td class="text-center">
 											<cms:popup_edit "interchange | today_yesterday |is_stabled | tr_name | loco | schedule | schedule_date | arrival_date | arrival_time | departure_date | departure_time | aq_arrival_date | aq_arrival_time | aq_departure_date | aq_departure_time | signon_date | signon_time | raketype | load | load_unit | commodity | location | stn_to | stn_from |  to_ho | is_interchanged | today_interchange | remark" link_text="<i class='fa fa-edit'></i>" />
 
@@ -826,6 +874,17 @@
 											</cms:if>
 										</td>
 										<td width="200px;">
+											<div id="remark" <cms:inline_edit 'remark' toolbar='custom' /> >
+												<cms:if remark >
+													<cms:set strip_text = "<cms:php>global $text;echo strip_tags('<cms:show remark />');</cms:php>" />
+													<cms:show strip_text />
+												<cms:else />
+													-NA-
+												</cms:if>
+											</div>
+										</td>
+										<cms:ignore>
+										<td width="200px;">
 											<cms:set submit_success="<cms:get_flash 'submit_success' />" />
 										    <cms:form
 										        masterpage=k_template_name
@@ -880,6 +939,7 @@
 										    	</button>
 										    </cms:form>
 										</td>
+										</cms:ignore>
 										<td class="text-center">
 											<cms:popup_edit "interchange | today_yesterday |is_stabled | tr_name | loco | schedule | schedule_date | arrival_date | arrival_time | departure_date | departure_time | gnq_arrival_date | gnq_arrival_time | gnq_departure_date | gnq_departure_time | signon_date | signon_time | raketype | load | load_unit | commodity | location | stn_to | stn_from |  to_ho | is_interchanged | today_interchange | remark" link_text="<i class='fa fa-edit'></i>" />
 
@@ -987,6 +1047,17 @@
 											</cms:if>
 										</td>
 										<td width="200px;">
+											<div id="remark" <cms:inline_edit 'remark' toolbar='custom' /> >
+												<cms:if remark >
+													<cms:set strip_text = "<cms:php>global $text;echo strip_tags('<cms:show remark />');</cms:php>" />
+													<cms:show strip_text />
+												<cms:else />
+													-NA-
+												</cms:if>
+											</div>
+										</td>
+										<cms:ignore>
+										<td width="200px;">
 											<cms:set submit_success="<cms:get_flash 'submit_success' />" />
 										    <cms:form
 										        masterpage=k_template_name
@@ -1041,6 +1112,7 @@
 										    	</button>
 										    </cms:form>
 										</td>
+										</cms:ignore>
 										<td class="text-center">
 											<cms:popup_edit "interchange | today_yesterday |is_stabled | tr_name | loco | schedule | schedule_date | arrival_date | arrival_time | departure_time | signon_date | signon_time | raketype | load | load_unit | commodity | location | stn_to | stn_from |  to_ho | is_interchanged | today_interchange | remark" link_text="<i class='fa fa-edit'></i>" />
 

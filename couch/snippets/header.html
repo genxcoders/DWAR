@@ -16,7 +16,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 		<cms:embed 'page-title.html' />
 		<!-- CSS -->
-		<cms:if "<cms:not k_template_name=='index.php' />">
+		<cms:if "<cms:not k_template_name=='index.php' || k_template_name=='coal-pdf-report.php' />">
 		<cms:load_edit />
 		</cms:if>
 		<link rel="stylesheet" type="text/css" href="<cms:show k_site_link />assets/css/bootstrap.css" />
@@ -33,15 +33,11 @@
         <script type="text/javascript" src="<cms:show k_admin_link/>addons/repeatable/jquery-ui.min.js?v=<cms:show k_cms_build />"></script>
         <script type="text/javascript" src="<cms:show k_admin_link/>addons/repeatable/tablegear/tablegear.js?v=<cms:show k_cms_build />"></script>
     	</cms:if>
-    	<cms:if k_template_name="coal-pdf-report.php">
-    	<script type="text/javascript" src="assets/js/jspdf.debug.js"></script>
-		<script type="text/javascript" src="assets/js/html2canvas.js"></script>
-    	</cms:if>
 
     	<link rel="stylesheet" type="text/css" href="<cms:show k_site_link />assets/DataTables/datatables.css"/>
 
-    	<cms:if k_template_name="ptwise-int-report.php" || k_template_name="stable-train.php" || k_template_name="coal-pdf.php" || k_template_name="transportation-pdf-report.php" || k_template_name="transportation-pdf.php" || k_template_name="pdd-report.php">
-    	<script src='build/pdfmake.min.js'></script>
+    	<cms:if k_template_name="ptwise-int-report.php" || k_template_name="coal-pdf-report.php" || k_template_name="pdf.php">
+    	<script src='build/pdfmake.js'></script>
 		<script src='build/vfs_fonts.js'></script>
 		<!-- <script src='pointwise-report.js'></script> -->
 		</cms:if>

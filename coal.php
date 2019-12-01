@@ -274,7 +274,7 @@
 					</div>
 					<!-- Body -->
 					<!-- Card Footer -->
-					<div class="gxcpl-card-footer gxcpl-no-padding" style="">
+					<div class="gxcpl-card-footer gxcpl-no-padding">
 						<button class="btn btn-danger btn-sm">
 							<i class="fa fa-floppy-o"></i> SAVE
 						</button>

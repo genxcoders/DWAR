@@ -69,9 +69,9 @@
 									<td style="padding-left: 50px;">
 										<cms:show k_absolute_count />
 									</td>
-									<td class="text-uppercase">
+									<td>
 										<cms:if tr_name>
-											<cms:show tr_name />
+											<cms:php>echo strtoupper('<cms:show tr_name />');</cms:php>
 										<cms:else />
 											- NA -
 										</cms:if>

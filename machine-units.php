@@ -17,14 +17,6 @@
 	<!-- Content Here -->
 	<div class="container">
 		<div class="row">
-			<div class="gxcpl-ptop-30"></div>
-
-			<!-- Section Divider -->
-			<div class="gxcpl-ptop-10"></div>
-			<!-- <div class="gxcpl-divider-dark"></div> -->
-			<div class="gxcpl-ptop-10"></div>
-			<!-- Section Divider -->
-
 			<cms:match_route debug='0' />
 			<cms:embed "machine-units/<cms:show k_matched_route />.html" />
 		</div>

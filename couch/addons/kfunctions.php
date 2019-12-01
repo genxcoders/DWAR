@@ -17,7 +17,7 @@ require_once( K_COUCH_DIR.'addons/data-bound-form/data-bound-form.php' );
 //Extended Users
 require_once( K_COUCH_DIR.'addons/html5-input-types/html5-input-types.php' );
 require_once( K_COUCH_DIR.'addons/routes/routes.php' );
-require_once( K_COUCH_DIR.'addons/access-control/access-control.php' );
+// require_once( K_COUCH_DIR.'addons/access-control/access-control.php' );
 
 $FUNCS->add_event_listener( 'alter_tag_date_execute', array('CustomTags', 'date_from_custom') );
 
@@ -239,33 +239,3 @@ function my_write_handler( $params, $node ){
           
     }  
 // Add Multiple Numbers
-
-// decimal precision for minutes
-// Make number_format actually format and not round.
-$FUNCS->add_event_listener( 'alter_tag_number_format_execute', 'precise_format');
-function precise_format( $tag_name, $params, $node, &$html ){
-    global $FUNCS;
-
-    if( count($node->children) ) {die("ERROR: Tag \"".$node->name."\" is a self closing tag");}
-
-    extract( $FUNCS->get_named_vars(
-                array(
-                      'number'=>'',
-                      'decimal_precision'=>'2', /* default 2 digit after decimal point */
-                      'decimal_character'=>'.', /* char used to denote decimal */
-                      'thousands_separator'=>','
-                      ),
-                $params)
-           );
-    $number = trim( $number );
-    $decimal_precision = trim( $decimal_precision );
-    if( !is_numeric($decimal_precision) ) $decimal_precision = 2;
-    $decimal_character = trim( $decimal_character );
-
-    // perform trimming
-    $number = floor( (float)$number ).substr( $number - floor($number), 1, $decimal_precision + 1);
-    // perform formatting
-    $html = number_format( (float)$number, $decimal_precision, $decimal_character, $thousands_separator );
-
-    return 1;
-}

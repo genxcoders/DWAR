@@ -9,7 +9,6 @@
 	<cms:config_list_view>
 	    <cms:field 'k_selector_checkbox' />
 	    <cms:field 'k_page_title' />
-	    <cms:field 'k_user_access_level' header='Access Level' />
 	    <cms:field 'k_comments_count' />
 	    <cms:field 'ipt_role' header='Role' />
 	    <cms:field 'k_page_date' />
@@ -17,14 +16,4 @@
 	</cms:config_list_view> 
 
 </cms:template>
-<cms:ignore>
-<cms:if ipt_account_role=='90'>
-	 <label for="f_admin_only_permissions11">
-        <input type="checkbox" name="f_admin_only_permissions[]" id="f_admin_only_permissions11" value="pointwise-interchange.php" checked="checked"><span class="ctrl-option"></span>Pointwise Interchange                
-    </label>
-    <label for="f_admin_only_permissions12">
-        <input type="checkbox" name="f_admin_only_permissions[]" id="f_admin_only_permissions12" value="interchange.php" checked="checked"><span class="ctrl-option"></span>Interchange                
-    </label>
-</cms:if>
-</cms:ignore>
 <?php COUCH::invoke(); ?>

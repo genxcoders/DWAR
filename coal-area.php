@@ -1,5 +1,5 @@
 <?php require_once( 'couch/cms.php' ); ?>
-<cms:template title='Coal Area' clonable='1' routable='1' parent='' order='1' >
+<cms:template title='Coal Area' clonable='1' routable='1' parent='_lpt_' order='3' >
 	<!-- Custom Routes -->
 	<cms:route name='list_carea' path='' />
 	<cms:route name='create_carea' path='create' />
@@ -15,14 +15,6 @@
 	<!-- Content Here -->
 	<div class="container">
 		<div class="row">
-			<!-- <div class="gxcpl-ptop-30"></div> -->
-
-			<!-- Section Divider -->
-			<div class="gxcpl-ptop-10"></div>
-			<!-- <div class="gxcpl-divider-dark"></div> -->
-			<div class="gxcpl-ptop-10"></div>
-			<!-- Section Divider -->
-
 			<!-- crud -->
 			<cms:match_route debug='0' />
 			<cms:embed "coal-area/<cms:show k_matched_route />.html" />
@@ -30,7 +22,6 @@
 		</div>
 	</div>
 	<!-- Content Here -->
-	<div class="gxcpl-ptop-50"></div>
-
+<div class="gxcpl-ptop-50"></div>
 <cms:embed 'footer.html' />
 <?php COUCH::invoke(); ?>

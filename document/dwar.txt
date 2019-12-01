@@ -1,0 +1,14 @@
+1) The code of the Uploading of XLS file is ready for you. You need to change          header format XLS sheet as per coding format requirement.
+
+2) It will take some time to generate the report as the report is being brought        from different pages.And I had talked with Jalali sir(25/06/2019) about the         report generation, then he had said that he would share his logic.So I am          waiting for his mail.
+
+3) In the other hand I am working on the Midnight position module, just work on its    delete view and list view.And remaining modules are already uploaded online.
+
+4) The report that was created before it was made manually in XLS Sheet, it would      take some time to create the code through it.
+
+5) Schedule a meeting for training when you have all your Employees present.
+
+
+
+
+

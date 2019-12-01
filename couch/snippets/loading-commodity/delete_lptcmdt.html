@@ -1,0 +1,45 @@
+					<!-- Section Title -->
+					<cms:embed 'lptcmdt-title.html' />
+					<!-- Section Title -->
+
+					<!-- Loading Commodity -->
+					<div class="container">
+						<div class="row">
+							<cms:pages id=rt_id limit='1' show_future_enteries='1'>
+							<cms:form 
+		                        masterpage=k_template_name
+		                        mode='edit'
+		                        page_id=k_page_id
+		                        method='post' 
+		                        anchor='0'
+		                    >
+		                    <cms:if k_success>
+		                        <cms:db_delete_form />
+		                        <cms:if k_success>
+		                            <cms:redirect url="<cms:route_link 'list_lptcmdt' />" /> 
+		                        </cms:if>
+		                    </cms:if>
+							<div class="col-md-12">
+								<div class="gxcpl-card">
+									<!-- Delete -->
+										<div class="gxcpl-card-body gxcpl-padding-10">
+		                                    <div class="text-center">
+		                                        Are you sure you want to delete <strong>"<cms:show k_page_title />"</strong> loading commodity ?
+		                                    </div>
+		                                </div>
+		                                <div class="gxcpl-card-footer gxcpl-no-padding">
+		                                    <button name='submit' type="submit" class="btn btn-danger btn-sm gxcpl-fw-700 gxcpl-shadow-2" >
+		                                    	<i class="fa fa-trash fa-lg"></i> CONFIRM DELETE
+		                                    </button>
+	                                        <button class="btn btn-default btn-sm gxcpl-fw-700 gxcpl-shadow-2" type="button" onclick="window.location.href='<cms:route_link 'list_lptcmdt' />';">
+	                                            <i class="fa fa-times fa-lg"></i> CANCEL
+	                                        </button>
+	                                    </div>
+									<!-- Delete -->
+								</div>
+							</div>
+							</cms:form>
+		                    </cms:pages>
+						</div>
+					</div>
+					<!-- Loading Commodity -->

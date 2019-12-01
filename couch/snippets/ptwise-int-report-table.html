@@ -6,18 +6,23 @@
 								</tr>
 								</cms:no_results>
 								<tr style='border-bottom: 1px solid rgba(0,0,0,0.2);'>
-									
-									<td class="text-center <cms:if (tr_name eq 'TA' || tr_name eq 'ta' || tr_name eq 'Ta' || tr_name eq 'tA' || tr_name eq 'LA' || tr_name eq 'la' || tr_name eq 'La' || tr_name eq 'lA') && (is_interchanged eq '1') >nosrintchge<cms:else_if is_interchanged eq '1' />srintchge</cms:if> ">
+									<cms:if tr_name eq 'TA' || tr_name eq 'ta' || tr_name eq 'Ta' || tr_name eq 'tA' || tr_name eq 'LA' || tr_name eq 'la' || tr_name eq 'La' || tr_name eq 'lA'>
+									<td class="text-center <cms:if (tr_name eq 'TA' || tr_name eq 'ta' || tr_name eq 'Ta' || tr_name eq 'tA' || tr_name eq 'LA' || tr_name eq 'la' || tr_name eq 'La' || tr_name eq 'lA') && (is_interchanged eq '1') >nosrintchge </cms:if>">
+										
+									</td> 
+									<cms:else />
+									<td class="text-center number <cms:if is_interchanged eq '1' >srintchge</cms:if> ">
 										
 									</td>
-									<td class="text-uppercase <cms:if is_stabled eq '1' >stable</cms:if> ">
+									</cms:if>
+									<td class="<cms:if is_stabled eq '1' >stable</cms:if> ">
 										<cms:if tr_name eq 'TA' || tr_name eq 'ta' || tr_name eq 'Ta' || tr_name eq 'tA'>
 											<cms:incr my_to_ta_count '1' />
 										</cms:if>
 										<cms:if tr_name eq 'LA' || tr_name eq 'la' || tr_name eq 'La' || tr_name eq 'lA'>
 											<cms:incr my_to_la_count '1' />
 										</cms:if>
-										<cms:show tr_name />
+										<cms:php>echo strtoupper('<cms:show tr_name />');</cms:php>
 									</td>
 									<td class="text-uppercase">
 										<cms:if loco>
@@ -148,10 +153,23 @@
 											-NA-
 										</cms:if>
 									</td>
-									<td class="<cms:if (minutes ge '60') && (is_interchanged eq '1') ><cms:if (minutes ge '120') && (is_interchanged eq '1') >gxcpl-over120<cms:else_if is_interchanged eq '1' />gxcpl-over60</cms:if><cms:else_if (minutes lt '60') && (is_interchanged eq '1') />gxcpl-less-60</cms:if>">
-										<cms:if is_interchanged eq '1'><cms:show minutes /><cms:else />-NA-</cms:if>
+									<td width="10%" class="<cms:if (minutes ge '60') && (is_interchanged eq '1') ><cms:if (minutes ge '120') && (is_interchanged eq '1') >	gxcpl-over120<cms:else_if is_interchanged eq '1' />gxcpl-over60</cms:if><cms:else_if (minutes lt '60') && (is_interchanged eq '1') />gxcpl-less-60</cms:if>">
+										<cms:if minutes eq '' || minutes eq '0' || minutes eq '-NA-' >
+										-NA-
+										<cms:else_if is_interchanged eq '1' />
+											<cms:if div_hour_value eq '0'>
+											<cms:else />
+												<cms:number_format "<cms:div minutes '60' />" decimal_precision='0' /> hr
+											</cms:if> 
+											<cms:if mod_min_value eq '0'>
+											<cms:else />
+												<cms:mod minutes '60' /> m
+											</cms:if>
+										<cms:else />
+											-NA-
+										</cms:if>
 									</td>
-									<td>
+									<td style="width: 200px !important;">
 										<cms:set submit_success="<cms:get_flash 'submit_success' />" />
 									    <cms:form
 									        masterpage=k_template_name
@@ -194,9 +212,9 @@
 									        <cms:if remark eq ''>
 									        	<cms:input type='bound' name='remark' placeholder='-NA-' class="gxcpl-inline-text" autocomplete="off" />
 									        <cms:else />
-									        	<cms:input type='bound' name='remark' class="gxcpl-inline-text"  autocomplete="off" />
+									        	<cms:input type='bound' name='remark' class="gxcpl-inline-text" autocomplete="off" />
 									    	</cms:if>
-									    	<button type="submit" class="btn btn-warning btn-xs gxcpl-inline-btn" onclick="alert('Success: Remark has been saved!')">
+									    	<button type="submit" class="btn btn-warning btn-xs gxcpl-inline-btn">
 									    		UPDATE
 									    	</button>
 									    </cms:form>
@@ -267,8 +285,21 @@
 											-NA-
 										</cms:if>
 									</td>
-									<td class="<cms:if (minutes ge '60') && (is_interchanged eq '1') ><cms:if (minutes ge '120') && (is_interchanged eq '1') >gxcpl-over120<cms:else_if is_interchanged eq '1' />gxcpl-over60</cms:if><cms:else_if (minutes lt '60') && (is_interchanged eq '1') />gxcpl-less-60</cms:if>">
-										<cms:if is_interchanged eq '1'><cms:show minutes /><cms:else />-NA-</cms:if>
+									<td width="10%" class="<cms:if (minutes ge '60') && (is_interchanged eq '1') ><cms:if (minutes ge '120') && (is_interchanged eq '1') >	gxcpl-over120<cms:else_if is_interchanged eq '1' />gxcpl-over60</cms:if><cms:else_if (minutes lt '60') && (is_interchanged eq '1') />gxcpl-less-60</cms:if>">
+										<cms:if minutes eq '' || minutes eq '0' || minutes eq '-NA-' >
+										-NA-
+										<cms:else_if is_interchanged eq '1' />
+											<cms:if div_hour_value eq '0'>
+											<cms:else />
+												<cms:number_format "<cms:div minutes '60' />" decimal_precision='0' /> hr
+											</cms:if> 
+											<cms:if mod_min_value eq '0'>
+											<cms:else />
+												<cms:mod minutes '60' /> m
+											</cms:if>
+										<cms:else />
+											-NA-
+										</cms:if>
 									</td>
 									<td>
 										<cms:set submit_success="<cms:get_flash 'submit_success' />" />
@@ -383,8 +414,21 @@
 											-NA-
 										</cms:if>
 									</td>
-									<td class="<cms:if (minutes ge '60') && (is_interchanged eq '1') ><cms:if (minutes ge '120') && (is_interchanged eq '1') >gxcpl-over120<cms:else_if is_interchanged eq '1' />gxcpl-over60</cms:if><cms:else_if (minutes lt '60') && (is_interchanged eq '1') />gxcpl-less-60</cms:if>">
-										<cms:if is_interchanged eq '1'><cms:show minutes /><cms:else />-NA-</cms:if>
+									<td width="10%" class="<cms:if (minutes ge '60') && (is_interchanged eq '1') ><cms:if (minutes ge '120') && (is_interchanged eq '1') >	gxcpl-over120<cms:else_if is_interchanged eq '1' />gxcpl-over60</cms:if><cms:else_if (minutes lt '60') && (is_interchanged eq '1') />gxcpl-less-60</cms:if>">
+										<cms:if minutes eq '' || minutes eq '0' || minutes eq '-NA-' >
+										-NA-
+										<cms:else_if is_interchanged eq '1' />
+											<cms:if div_hour_value eq '0'>
+											<cms:else />
+												<cms:number_format "<cms:div minutes '60' />" decimal_precision='0' /> hr
+											</cms:if> 
+											<cms:if mod_min_value eq '0'>
+											<cms:else />
+												<cms:mod minutes '60' /> m
+											</cms:if>
+										<cms:else />
+											-NA-
+										</cms:if>
 									</td>
 									<td>
 										<cms:set submit_success="<cms:get_flash 'submit_success' />" />

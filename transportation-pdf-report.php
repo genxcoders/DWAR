@@ -1,6 +1,15 @@
 <?php require_once( 'couch/cms.php' ); ?>
 <cms:template title="Transportation PDF Report" parent='_coal_' order='7' />
 <cms:embed 'header.html' />
+<div class="container-fluid">
+	<h4 class="gxcpl-no-margin">
+    	WCL TRANSPORTATION REPORT
+	</h4>
+	<!-- List View -->
+	<div class="gxcpl-ptop-10"></div>
+	<div class="gxcpl-divider-dark"></div>
+	<div class="gxcpl-ptop-10"></div>
+</div>
 <cms:embed 'searchtrans.html' />
 
 <cms:set my_transdate_cy = "<cms:gpc 'transdate' method='get' />" scope="global" />
@@ -9,51 +18,67 @@
 <cms:if my_search_str eq my_transdate_cy >
 
 <cms:else />
-
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
-                <div class="gxcpl-card">
-                	<div class="gxcpl-card-header">
-                		<div class="row">
-                			<div class="col-md-7">
-                				<h4 class="gxcpl-no-margin">WCL TRANSPORTATION ON DATE
-                				<strong><cms:date my_transdate_cy format="d-m-Y" /></strong>
-                				</h4>
-                			</div>
-                			<div class="col-md-3 col-md-offset-1">
-                				<div class="gxcpl-ptop-5"></div>
-                				<a href="javascript:transportPDF()" class="btn btn-warning gxcpl-fw-700 pull-right">
-                					<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-                					Generate PDF
-                				</a>
-                			</div>
-                		</div>
-                	</div>
-                	<div class="gxcpl-card-body">
-                		<div style="padding: 2%; overflow-x: auto;">
-                			<table width="100%" class="gxcpl-table-hover" border="1">
+	            <div class="gxcpl-card">
+	            	<div class="gxcpl-card-header">
+	            		<div class="row">
+	            			<div class="col-md-5 col-xs-12">
+	            				<h4 class="gxcpl-no-margin">WCL TRANSPORTATION ON DATE
+	            				<strong><cms:date my_transdate_cy format="d-m-Y" /></strong>
+	            				</h4>
+	            			</div>
+	            			<div class="col-md-2 col-md-offset-2 col-xs-5 text-center" id="excel"></div>
+	            			<div class="col-md-2 col-xs-7">
+	            				<div class="gxcpl-ptop-5"></div>
+	            				<a href="javascript:transportPDF()" class="btn btn-warning gxcpl-fw-700 pull-right">
+	            					<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+	            					Generate PDF
+	            				</a>
+	            			</div>
+	            		</div>
+	            	</div>
+	            	<div class="gxcpl-card-body">
+	            		<div style="padding: 2%; overflow-x: auto;">
+	            			<table width="100%" class="display gxcpl-table-hover" id="example6" border="1">
 								<thead>
 									<tr>
-										<th class="text-center" colspan="2" rowspan="3">Sidings</th>
+										<th class="text-center" rowspan="3">Head</th>
+										<th style="display: none;"></th>
+										<th style="display: none;"></th>
+										<th class="text-center" rowspan="3"></th>
+										<th style="display: none;"></th>
+										<th style="display: none;"></th>
 										<th class="text-center" rowspan="3">&nbsp;</th>
+										<th style="display: none;"></th>
+										<th style="display: none;"></th>
 										<th class="text-center" colspan="3">Day
 										</th>
+										<th style="display: none;"></th>
+										<th style="display: none;"></th>
 										<th class="text-center" colspan="3">Month Upto</th>
+										<th style="display: none;"></th>
+										<th style="display: none;"></th>
 										<th class="text-center" colspan="3">1<sup>st</sup> April to</th>
+										<th style="display: none;"></th>
+										<th style="display: none;"></th>
 									</tr>
 									<tr>
 										<th class="text-center" colspan="2">
 										    <cms:date my_transdate_cy format="d-m-Y" />
 										</th>
+										<th style="display: none;"></th>
 										<th class="text-center">Variation</th>
 										<th class="text-center" colspan="2">
 										    <cms:date my_transdate_cy format="d-m-Y" />
 										</th>
+										<th style="display: none;"></th>
 										<th class="text-center">Variation</th>
 										<th class="text-center" colspan="2">
 										    <cms:date my_transdate_cy format="d-m-Y" />
 										</th>
+										<th style="display: none;"></th>
 										<th class="text-center">Variation</th>
 									</tr>
 									<tr>
@@ -74,14 +99,15 @@
 									<cms:set wcl_cy_first_day = "<cms:date return='first day of this month' format='d' />" scope="global" />
 									<cms:set wcl_cy_day_range = "<cms:sub wcl_cy_current_day wcl_cy_first_day />" scope="global" />
 									<cms:set add_cy_range = "<cms:add wcl_cy_day_range '1' />" scope="global" />
-
 									<!-- This month Range -->
+
 									<!-- Last year month Range -->
 									<cms:set wcl_ly_current_day = "<cms:date my_transdate_ly format='d' />" scope="global" />
 									<cms:set wcl_ly_first_day = "<cms:date return='first day of this month last year' format='d' />" scope="global" />
-									<cms:set wcl_ly_day_range = "<cms:sub  wcl_ly_current_day  wcl_ly_first_day />" scope="global" />
+									<cms:set wcl_ly_day_range = "<cms:sub wcl_ly_current_day  wcl_ly_first_day />" scope="global" />
 									<cms:set add_ly_range = "<cms:add wcl_ly_day_range '1' />" scope="global" />
-									<!-- This month Range -->	
+									<!-- This month Range -->
+
 									<!-- This year Range from april to current month -->
 									<cms:set wcl_apr_cy = "<cms:date 'last day of march this year' format='Y-m-d' />" />
 									<cms:set wcl_cur_mtn_cy = "<cms:show my_transdate_cy />" />
@@ -106,22 +132,25 @@
 									</cms:php>
 									<!-- Last year Range from april to current month of last year -->
 									
-									<cms:set my_trans_count_folder="<cms:pages masterpage='siding.php' limit='1' count_only='1' />" scope="global" />
+									<cms:set my_trans_count_folder="<cms:pages masterpage='loading-pt.php' limit='1' count_only='1' />" scope="global" />
 
-									<cms:set my_trans_rowspan_folder="<cms:pages masterpage='siding.php' limit='1' count_only='1' />" scope="global" />
+									<cms:set my_trans_rowspan_folder="<cms:pages masterpage='loading-pt.php' limit='1' count_only='1' />" scope="global" />
 
-									<cms:folders masterpage='siding.php' orderby="weight">
+									<cms:folders masterpage='loading-pt.php' orderby="weight">
 
 									<cms:set my_trans_count="<cms:show k_folder_totalpagecount />" scope="global" />
-									<cms:set my_trans_rowspan="<cms:pages masterpage='siding.php' folder=k_folder_name limit='1'><cms:show k_folder_totalpagecount /></cms:pages>" scope="global" /> 
-									<cms:set my_trans_rowspan_total="<cms:pages masterpage='siding.php' folder=k_folder_name limit='1'><cms:show k_folder_totalpagecount /></cms:pages>" scope="global" />
-									<cms:pages masterpage='siding.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
+									<cms:set my_trans_rowspan="<cms:pages masterpage='loading-pt.php' folder=k_folder_name limit='1'><cms:show k_folder_totalpagecount /></cms:pages>" scope="global" /> 
+									<cms:set my_trans_rowspan_total="<cms:pages masterpage='loading-pt.php' folder=k_folder_name limit='1'><cms:show k_folder_totalpagecount /></cms:pages>" scope="global" />
+									<cms:pages masterpage='loading-pt.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
 								
 										<tr>
 											<cms:if my_trans_count_folder eq my_trans_rowspan_folder>
-											<td width="12%" rowspan="24" class="text-center">
+											<td width="12%" rowspan="<cms:show my_trans_rowspan_folder />" class="text-center">
 												WCL Transportation
 											</td>
+											<cms:repeat "<cms:sub my_trans_rowspan_folder '1' />" startcount="1" >
+												<td style="display: none;"></td>
+											</cms:repeat>
 											<cms:decr my_trans_count_folder />
 											</cms:if>
 
@@ -129,6 +158,9 @@
 											<td rowspan="<cms:add my_trans_rowspan '1' />" class="text-center">
 												<cms:show k_folder_title /> 
 											</td>
+											<cms:repeat "<cms:show my_trans_rowspan />" startcount="0" >
+												<td style="display: none;"></td>
+											</cms:repeat>
 											</cms:if>
 
 											<td class="text-center">
@@ -245,6 +277,53 @@
 										<cms:decr my_trans_count />
 										<cms:decr my_trans_rowspan_total />
 										<cms:if my_trans_rowspan_total eq '0'>
+										<cms:set wcl_cy_load_total = "0" scope="global" />
+										<cms:set wcl_ly_load_total = "0" scope="global" />
+										<cms:set wcl_cy_month_load_total = "0" scope="global" />
+										<cms:set wcl_avg_cy_month_load_total = "0" scope="global" />
+										<cms:set wcl_ly_month_load_total = "0" scope="global" />
+										<cms:set wcl_avg_ly_month_load_total = "0" scope="global" />
+										<cms:set wcl_cy_april_load_total = "0" scope="global" />
+										<cms:set wcl_avg_cy_april_load_total = "0" scope="global" />
+										<cms:set wcl_ly_april_load_total = "0" scope="global" />
+										<cms:set wcl_avg_ly_april_load_total = "0" scope="global" />
+										<cms:pages masterpage='loading-pt.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
+											<!-- Total Day CY -->
+											<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate=<cms:date my_transdate_cy format='Y-m-d' />">
+												<cms:set wcl_cy_load_total = "<cms:add wcl_cy_load_total tons />" scope="global" />
+											</cms:reverse_related_pages>
+											<!-- Total Day CY -->
+
+											<!-- Total Day LY -->
+											<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate=<cms:date my_transdate_ly format='Y-m-d' />">
+												<cms:set wcl_ly_load_total = "<cms:add wcl_ly_load_total tons />" scope="global" />
+											</cms:reverse_related_pages>
+											<!-- Total Day LY -->
+
+											<!-- Total Month CY -->
+											<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate >= <cms:date return='last day of last month' format='Y-m-d 23:59:00' /> | transdate < <cms:date my_transdate_cy format='Y-m-d 23:59:00' /> ">
+												<cms:set wcl_cy_month_load_total = "<cms:add wcl_cy_month_load_total tons />" scope="global" />
+											</cms:reverse_related_pages>
+											<!-- Total Month CY -->
+
+											<!-- Total Month LY -->
+											<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate >= <cms:date return='last day of last month last year' format='Y-m-d 23:59:00' /> | transdate < <cms:date my_transdate_ly format='Y-m-d 23:59:00' /> ">
+												<cms:set wcl_ly_month_load_total = "<cms:add wcl_ly_month_load_total tons />" scope="global" />
+											</cms:reverse_related_pages>
+											<!-- Total Month LY -->
+
+											<!-- 1 April to this year CY Total -->
+											<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate >= <cms:date 'last day of march this year' format='Y-m-d 23:59:00' /> | transdate < <cms:date my_transdate_cy format='Y-m-d 23:59:00' /> ">
+												<cms:set wcl_cy_april_load_total = "<cms:add wcl_cy_april_load_total tons />" scope="global" />
+											</cms:reverse_related_pages>
+											<!-- 1 April to this year CY Total -->
+
+											<!-- 1 April to this year LY Total -->
+											<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate >= <cms:date 'last day of march last year' format='Y-m-d 23:59:00' /> | transdate < <cms:date my_transdate_ly format='Y-m-d 23:59:00' /> ">
+												<cms:set wcl_ly_april_load_total = "<cms:add wcl_ly_april_load_total tons />" scope="global" />
+											</cms:reverse_related_pages>
+											<!-- 1 April to this year LY Total -->
+										</cms:pages>
 										<!-- TOTAL -->
 										<tr class="highlight">
 											<td class="text-center">
@@ -253,24 +332,12 @@
 
 											<!-- Total Day CY -->
 											<td class="text-center">
-												<cms:set wcl_cy_load_total = "0" scope="global" />
-												<cms:pages masterpage='siding.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
-													<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate=<cms:date my_transdate_cy format='Y-m-d' />">
-														<cms:set wcl_cy_load_total = "<cms:add wcl_cy_load_total tons />" scope="global" />
-													</cms:reverse_related_pages>
-												</cms:pages>
 												<strong><cms:number_format wcl_cy_load_total decimal_precision="0" /></strong>
 											</td>
 											<!-- Total Day CY -->
 
 											<!-- Total Day LY -->
 											<td class="text-center">
-												<cms:set wcl_ly_load_total = "0" scope="global" />
-												<cms:pages masterpage='siding.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
-													<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate=<cms:date my_transdate_ly format='Y-m-d' />">
-														<cms:set wcl_ly_load_total = "<cms:add wcl_ly_load_total tons />" scope="global" />
-													</cms:reverse_related_pages>
-												</cms:pages>
 												<strong><cms:number_format wcl_ly_load_total decimal_precision="0" /></strong>
 											</td>
 											<!-- Total Day LY -->
@@ -290,13 +357,6 @@
 
 											<!-- Total Month CY -->
 											<td class="text-center">
-												<cms:set wcl_cy_month_load_total = "0" scope="global" />
-												<cms:set wcl_avg_cy_month_load_total = "0" scope="global" />
-												<cms:pages masterpage='siding.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
-													<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate >= <cms:date return='last day of last month' format='Y-m-d 23:59:00' /> | transdate < <cms:date my_transdate_cy format='Y-m-d 23:59:00' /> ">
-														<cms:set wcl_cy_month_load_total = "<cms:add wcl_cy_month_load_total tons />" scope="global" />
-													</cms:reverse_related_pages>
-												</cms:pages>
 												<cms:set wcl_avg_cy_month_load_total = "<cms:div wcl_cy_month_load_total add_cy_range />" scope="global" />
 												<strong><cms:number_format wcl_avg_cy_month_load_total decimal_precision="0" /></strong>
 											</td>
@@ -304,13 +364,6 @@
 
 											<!-- Total Month LY -->
 											<td class="text-center">
-												<cms:set wcl_ly_month_load_total = "0" scope="global" />
-												<cms:set wcl_avg_ly_month_load_total = "0" scope="global" />
-												<cms:pages masterpage='siding.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
-													<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate >= <cms:date return='last day of last month last year' format='Y-m-d 23:59:00' /> | transdate < <cms:date my_transdate_ly format='Y-m-d 23:59:00' /> ">
-														<cms:set wcl_ly_month_load_total = "<cms:add wcl_ly_month_load_total tons />" scope="global" />
-													</cms:reverse_related_pages>
-												</cms:pages>
 												<cms:set wcl_avg_ly_month_load_total = "<cms:div wcl_ly_month_load_total add_ly_range />" scope="global" />
 												<strong><cms:number_format wcl_avg_ly_month_load_total decimal_precision="0" /></strong>
 											</td>
@@ -331,13 +384,6 @@
 
 											<!-- 1 April to this year CY Total -->
 											<td class="text-center">
-												<cms:set wcl_cy_april_load_total = "0" scope="global" />
-												<cms:set wcl_avg_cy_april_load_total = "0" scope="global" />
-												<cms:pages masterpage='siding.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
-													<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate >= <cms:date 'last day of march this year' format='Y-m-d 23:59:00' /> | transdate < <cms:date my_transdate_cy format='Y-m-d 23:59:00' /> ">
-														<cms:set wcl_cy_april_load_total = "<cms:add wcl_cy_april_load_total tons />" scope="global" />
-													</cms:reverse_related_pages>
-												</cms:pages>
 												<cms:set wcl_avg_cy_april_load_total = "<cms:div wcl_cy_april_load_total wcl_dayz_cy />" scope="global" />
 												<strong><cms:number_format wcl_avg_cy_april_load_total decimal_precision="0" /></strong>
 											</td>
@@ -345,13 +391,6 @@
 
 											<!-- 1 April to this year LY Total -->
 											<td class="text-center">
-												<cms:set wcl_ly_april_load_total = "0" scope="global" />
-												<cms:set wcl_avg_ly_april_load_total = "0" scope="global" />
-												<cms:pages masterpage='siding.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
-													<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate >= <cms:date 'last day of march last year' format='Y-m-d 23:59:00' /> | transdate < <cms:date my_transdate_ly format='Y-m-d 23:59:00' /> ">
-														<cms:set wcl_ly_april_load_total = "<cms:add wcl_ly_april_load_total tons />" scope="global" />
-													</cms:reverse_related_pages>
-												</cms:pages>
 												<cms:set wcl_avg_ly_april_load_total = "<cms:div wcl_ly_april_load_total wcl_dayz_ly />" scope="global" />
 												<strong><cms:number_format wcl_avg_ly_april_load_total decimal_precision="0" /></strong>
 											</td>
@@ -376,34 +415,82 @@
 									</cms:folders>
 
 									<!-- Grand Total -->
+									<cms:set wcl_cy_load_grand_total = "0" scope="global" />
+									<cms:set wcl_ly_load_grand_total = "0" scope="global" />
+									<cms:set wcl_cy_month_load_grand_total = "0" scope="global" />
+									<cms:set wcl_avg_cy_month_load_grand_total = "0" scope="global" />
+									<cms:set wcl_ly_month_load_grand_total = "0" scope="global" />
+									<cms:set wcl_avg_ly_month_load_grand_total = "0" scope="global" />
+									<cms:set wcl_cy_april_load_grand_total = "0" scope="global" />
+									<cms:set wcl_avg_cy_april_load_grand_total = "0" scope="global" />
+									<cms:set wcl_ly_april_load_grand_total = "0" scope="global" />
+									<cms:set wcl_avg_ly_april_load_grand_total = "0" scope="global" />
+			                    	<cms:folders masterpage='loading-pt.php' orderby="weight">
+										<cms:pages masterpage='loading-pt.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
+											<!-- Grand Total Day CY -->
+											<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate=<cms:date my_transdate_cy format='Y-m-d' />">
+												<cms:set wcl_cy_load_grand_total = "<cms:add wcl_cy_load_grand_total tons />" scope="global" />
+											</cms:reverse_related_pages>
+											<!-- Grand Total Day CY -->
+
+											<!-- Grand Total Day LY -->
+											<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate=<cms:date my_transdate_ly format='Y-m-d' />">
+												<cms:set wcl_ly_load_grand_total = "<cms:add wcl_ly_load_grand_total tons />" scope="global" />
+											</cms:reverse_related_pages>
+											<!-- Grand Total Day LY -->
+
+											<!-- Grand Total Month CY -->
+											<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate >= <cms:date return='last day of last month' format='Y-m-d 23:59:00' /> | transdate < <cms:date my_transdate_cy format='Y-m-d 23:59:00' /> ">
+												<cms:set wcl_cy_month_load_grand_total = "<cms:add wcl_cy_month_load_grand_total tons />" scope="global" />
+											</cms:reverse_related_pages>
+											<!-- Grand Total Month CY -->
+
+											<!-- Grand Total Month LY -->
+											<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate >= <cms:date return='last day of last month last year' format='Y-m-d 23:59:00' /> | transdate < <cms:date my_transdate_ly format='Y-m-d 23:59:00' /> ">
+												<cms:set wcl_ly_month_load_grand_total = "<cms:add wcl_ly_month_load_grand_total tons />" scope="global" />
+											</cms:reverse_related_pages>
+											<!-- Grand Total Month LY -->
+
+											<!-- 1 April to this year CY Grand Total -->
+											<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate >= <cms:date 'last day of march this year' format='Y-m-d 23:59:00' /> | transdate < <cms:date my_transdate_cy format='Y-m-d 23:59:00' /> ">
+												<cms:set wcl_cy_april_load_grand_total = "<cms:add wcl_cy_april_load_grand_total tons />" scope="global" />
+											</cms:reverse_related_pages>
+											<!-- 1 April to this year CY Grand Total -->
+
+											<!-- 1 April to this year LY Grand Total -->
+											<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate >= <cms:date 'last day of march last year' format='Y-m-d 23:59:00' /> | transdate < <cms:date my_transdate_ly format='Y-m-d 23:59:00' /> ">
+												<cms:set wcl_ly_april_load_grand_total = "<cms:add wcl_ly_april_load_grand_total tons />" scope="global" />
+											</cms:reverse_related_pages>
+											<!-- 1 April to this year LY Grand Total -->
+										</cms:pages>
+										<!-- Grand Total Month CY -->
+										<cms:set wcl_avg_cy_month_load_grand_total = "<cms:div wcl_cy_month_load_grand_total add_cy_range />" scope="global" />
+										<!-- Grand Total Month CY -->
+
+										<!-- Grand Total Month LY -->
+										<cms:set wcl_avg_ly_month_load_grand_total = "<cms:div wcl_ly_month_load_grand_total add_ly_range />" scope="global" />
+										<!-- Grand Total Month LY -->
+
+										<!-- 1 April to this year CY Grand Total -->
+										<cms:set wcl_avg_cy_april_load_grand_total = "<cms:div wcl_cy_april_load_grand_total wcl_dayz_cy />" scope="global" />
+										<!-- 1 April to this year CY Grand Total -->
+
+										<!-- 1 April to this year LY Grand Total -->
+										<cms:set wcl_avg_ly_april_load_grand_total = "<cms:div wcl_ly_april_load_grand_total wcl_dayz_ly />" scope="global" />
+										<!-- 1 April to this year LY Grand Total -->
+			                    	</cms:folders>
 									<tr class="highlight-total">
 										<td colspan="2" class="text-center" style="padding: 5px 10px;">
 					                    	<strong>G. TOTAL</strong>
 					                    </td>
 					                    <!-- Grand Total Day CY -->
 					                    <td class="text-center">
-					                    	<cms:set wcl_cy_load_grand_total = "0" scope="global" />
-					                    	<cms:folders masterpage='siding.php' orderby="weight">
-												<cms:pages masterpage='siding.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
-													<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate=<cms:date my_transdate_cy format='Y-m-d' />">
-														<cms:set wcl_cy_load_grand_total = "<cms:add wcl_cy_load_grand_total tons />" scope="global" />
-													</cms:reverse_related_pages>
-												</cms:pages>
-					                    	</cms:folders>
 					                    	<strong><cms:number_format wcl_cy_load_grand_total decimal_precision="0" /></strong>
 					                    </td>
 					                    <!-- Grand Total Day CY -->
 
 					                    <!-- Grand Total Day LY -->
 					                    <td class="text-center">
-					                    	<cms:set wcl_ly_load_grand_total = "0" scope="global" />
-					                    	<cms:folders masterpage='siding.php' orderby="weight">
-												<cms:pages masterpage='siding.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
-													<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate=<cms:date my_transdate_ly format='Y-m-d' />">
-														<cms:set wcl_ly_load_grand_total = "<cms:add wcl_ly_load_grand_total tons />" scope="global" />
-													</cms:reverse_related_pages>
-												</cms:pages>
-					                    	</cms:folders>
 					                    	<strong><cms:number_format wcl_ly_load_grand_total decimal_precision="0" /></strong>
 					                    </td>
 					                    <!-- Grand Total Day LY -->
@@ -423,16 +510,6 @@
 
 					                    <!-- Grand Total Month CY -->
 					                    <td class="text-center">
-					                    	<cms:set wcl_cy_month_load_grand_total = "0" scope="global" />
-											<cms:set wcl_avg_cy_month_load_grand_total = "0" scope="global" />
-					                    	<cms:folders masterpage='siding.php' orderby="weight">
-												<cms:pages masterpage='siding.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
-													<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate >= <cms:date return='last day of last month' format='Y-m-d 23:59:00' /> | transdate < <cms:date my_transdate_cy format='Y-m-d 23:59:00' /> ">
-														<cms:set wcl_cy_month_load_grand_total = "<cms:add wcl_cy_month_load_grand_total tons />" scope="global" />
-													</cms:reverse_related_pages>
-												</cms:pages>
-												<cms:set wcl_avg_cy_month_load_grand_total = "<cms:div wcl_cy_month_load_grand_total add_cy_range />" scope="global" />
-					                    	</cms:folders>
 					                    	<strong>
 												<cms:number_format wcl_avg_cy_month_load_grand_total decimal_precision="0" />
 											</strong>
@@ -441,16 +518,6 @@
 
 					                    <!-- Grand Total Month LY -->
 					                    <td class="text-center">
-											<cms:set wcl_ly_month_load_grand_total = "0" scope="global" />
-											<cms:set wcl_avg_ly_month_load_grand_total = "0" scope="global" />
-					                    	<cms:folders masterpage='siding.php' orderby="weight">
-												<cms:pages masterpage='siding.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
-													<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate >= <cms:date return='last day of last month last year' format='Y-m-d 23:59:00' /> | transdate < <cms:date my_transdate_ly format='Y-m-d 23:59:00' /> ">
-														<cms:set wcl_ly_month_load_grand_total = "<cms:add wcl_ly_month_load_grand_total tons />" scope="global" />
-													</cms:reverse_related_pages>
-												</cms:pages>
-												<cms:set wcl_avg_ly_month_load_grand_total = "<cms:div wcl_ly_month_load_grand_total add_ly_range />" scope="global" />
-					                    	</cms:folders>
 					                    	<strong>
 												<cms:number_format wcl_avg_ly_month_load_grand_total decimal_precision="0" />
 											</strong>
@@ -474,16 +541,6 @@
 
 					                    <!-- 1 April to this year CY Grand Total -->
 					                    <td class="text-center">
-											<cms:set wcl_cy_april_load_grand_total = "0" scope="global" />
-											<cms:set wcl_avg_cy_april_load_grand_total = "0" scope="global" />
-											<cms:folders masterpage='siding.php' orderby="weight">
-												<cms:pages masterpage='siding.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
-													<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate >= <cms:date 'last day of march this year' format='Y-m-d 23:59:00' /> | transdate < <cms:date my_transdate_cy format='Y-m-d 23:59:00' /> ">
-														<cms:set wcl_cy_april_load_grand_total = "<cms:add wcl_cy_april_load_grand_total tons />" scope="global" />
-													</cms:reverse_related_pages>
-												</cms:pages>
-												<cms:set wcl_avg_cy_april_load_grand_total = "<cms:div wcl_cy_april_load_grand_total wcl_dayz_cy />" scope="global" />
-											</cms:folders>
 											<strong>
 												<cms:number_format wcl_avg_cy_april_load_grand_total decimal_precision="0" />
 											</strong>
@@ -492,16 +549,6 @@
 
 					                    <!-- 1 April to this year LY Grand Total -->
 					                    <td class="text-center">
-					                    	<cms:set wcl_ly_april_load_grand_total = "0" scope="global" />
-											<cms:set wcl_avg_ly_april_load_grand_total = "0" scope="global" />
-					                    	<cms:folders masterpage='siding.php' orderby="weight">
-												<cms:pages masterpage='siding.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
-													<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate >= <cms:date 'last day of march last year' format='Y-m-d 23:59:00' /> | transdate < <cms:date my_transdate_ly format='Y-m-d 23:59:00' /> ">
-														<cms:set wcl_ly_april_load_grand_total = "<cms:add wcl_ly_april_load_grand_total tons />" scope="global" />
-													</cms:reverse_related_pages>
-												</cms:pages>
-												<cms:set wcl_avg_ly_april_load_grand_total = "<cms:div wcl_ly_april_load_grand_total wcl_dayz_ly />" scope="global" />
-					                		</cms:folders>
 					                		<strong>
 					                			<cms:number_format wcl_avg_ly_april_load_grand_total decimal_precision="0" />
 					                		</strong>
@@ -526,10 +573,10 @@
 									<!-- Grand Total -->
 								</tbody>
 							</table>
-                		</div>
-                	</div>
-                </div>
-                <div class="gxcpl-ptop-30"></div>
+	            		</div>
+	            	</div>
+	            </div>
+	            <div class="gxcpl-ptop-30"></div>
 			</div>
 		</div>
 	</div>
@@ -570,9 +617,9 @@
 	</cms:php>
 	<!-- Last year Range from april to current month of last year -->
 	
-	<cms:set my_trans_count_folder="<cms:pages masterpage='siding.php' limit='1' count_only='1' />" scope="global" />
+	<cms:set my_trans_count_folder="<cms:pages masterpage='loading-pt.php' limit='1' count_only='1' />" scope="global" />
 
-	<cms:set my_trans_rowspan_folder="<cms:pages masterpage='siding.php' limit='1' count_only='1' />" scope="global" />
+	<cms:set my_trans_rowspan_folder="<cms:pages masterpage='loading-pt.php' limit='1' count_only='1' />" scope="global" />
 	<script type="text/javascript">
 		function transportPDF() {
 			var dd = {
@@ -580,7 +627,7 @@
 				pageOrientation:'potrait',
 				content: [
 					{
-						text: 'WCL TRANSPORTATION ON DATE: <cms:date return="yesterday -1 days" format="d-m-Y" />',
+						text: 'WCL TRANSPORTATION ON DATE: <cms:date my_transdate_cy format="d-m-Y" />',
 						bold: true,
 						style: 'header'
 					},
@@ -722,16 +769,16 @@
 										text: '(%)',
 									}
 								],
-								<cms:folders masterpage='siding.php' orderby="weight">
+								<cms:folders masterpage='loading-pt.php' orderby="weight">
 
 								<cms:set my_trans_count="<cms:show k_folder_totalpagecount />" scope="global" />
-								<cms:set my_trans_rowspan="<cms:pages masterpage='siding.php' folder=k_folder_name limit='1'><cms:show k_folder_totalpagecount /></cms:pages>" scope="global" /> 
-								<cms:set my_trans_rowspan_total="<cms:pages masterpage='siding.php' folder=k_folder_name limit='1'><cms:show k_folder_totalpagecount /></cms:pages>" scope="global" />
-								<cms:pages masterpage='siding.php' folder=k_folder_name>
+								<cms:set my_trans_rowspan="<cms:pages masterpage='loading-pt.php' folder=k_folder_name limit='1'><cms:show k_folder_totalpagecount /></cms:pages>" scope="global" /> 
+								<cms:set my_trans_rowspan_total="<cms:pages masterpage='loading-pt.php' folder=k_folder_name limit='1'><cms:show k_folder_totalpagecount /></cms:pages>" scope="global" />
+								<cms:pages masterpage='loading-pt.php' folder=k_folder_name>
 								[
 									{
 										<cms:if my_trans_count_folder eq my_trans_rowspan_folder>
-											rowSpan: 24,
+											rowSpan: <cms:set trans_rsf="<cms:show my_trans_rowspan />" /><cms:show trans_rsf />,
 										style: 'textCenter',
 										margin: [0, 150, 0, 0],
 										text: 'WCL Transportation'
@@ -839,7 +886,7 @@
 									},
 									{
 										<cms:set wcl_cy_load_total = "0" scope="global" />
-										<cms:pages masterpage='siding.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
+										<cms:pages masterpage='loading-pt.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
 											<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate=<cms:date my_transdate_cy format='Y-m-d' />">
 												<cms:set wcl_cy_load_total = "<cms:add wcl_cy_load_total tons />" scope="global" />
 											</cms:reverse_related_pages>
@@ -851,7 +898,7 @@
 									},
 									{
 										<cms:set wcl_ly_load_total = "0" scope="global" />
-										<cms:pages masterpage='siding.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
+										<cms:pages masterpage='loading-pt.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
 											<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate=<cms:date my_transdate_ly format='Y-m-d' />">
 												<cms:set wcl_ly_load_total = "<cms:add wcl_ly_load_total tons />" scope="global" />
 											</cms:reverse_related_pages>
@@ -871,7 +918,7 @@
 									{
 										<cms:set wcl_cy_month_load_total = "0" scope="global" />
 										<cms:set wcl_avg_cy_month_load_total = "0" scope="global" />
-										<cms:pages masterpage='siding.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
+										<cms:pages masterpage='loading-pt.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
 											<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate >= <cms:date return='last day of last month' format='Y-m-d 23:59:00' /> | transdate < <cms:date my_transdate_cy format='Y-m-d 23:59:00' /> ">
 												<cms:set wcl_cy_month_load_total = "<cms:add wcl_cy_month_load_total tons />" scope="global" />
 											</cms:reverse_related_pages>
@@ -885,7 +932,7 @@
 									{
 										<cms:set wcl_ly_month_load_total = "0" scope="global" />
 										<cms:set wcl_avg_ly_month_load_total = "0" scope="global" />
-										<cms:pages masterpage='siding.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
+										<cms:pages masterpage='loading-pt.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
 											<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate >= <cms:date return='last day of last month last year' format='Y-m-d 23:59:00' /> | transdate < <cms:date my_transdate_ly format='Y-m-d 23:59:00' /> ">
 												<cms:set wcl_ly_month_load_total = "<cms:add wcl_ly_month_load_total tons />" scope="global" />
 											</cms:reverse_related_pages>
@@ -906,7 +953,7 @@
 									{
 										<cms:set wcl_cy_april_load_total = "0" scope="global" />
 										<cms:set wcl_avg_cy_april_load_total = "0" scope="global" />
-										<cms:pages masterpage='siding.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
+										<cms:pages masterpage='loading-pt.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
 											<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate >= <cms:date 'last day of march this year' format='Y-m-d 23:59:00' /> | transdate < <cms:date my_transdate_cy format='Y-m-d 23:59:00' /> ">
 												<cms:set wcl_cy_april_load_total = "<cms:add wcl_cy_april_load_total tons />" scope="global" />
 											</cms:reverse_related_pages>
@@ -920,7 +967,7 @@
 									{
 										<cms:set wcl_ly_april_load_total = "0" scope="global" />
 										<cms:set wcl_avg_ly_april_load_total = "0" scope="global" />
-										<cms:pages masterpage='siding.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
+										<cms:pages masterpage='loading-pt.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
 											<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate >= <cms:date 'last day of march last year' format='Y-m-d 23:59:00' /> | transdate < <cms:date my_transdate_ly format='Y-m-d 23:59:00' /> ">
 												<cms:set wcl_ly_april_load_total = "<cms:add wcl_ly_april_load_total tons />" scope="global" />
 											</cms:reverse_related_pages>
@@ -956,8 +1003,8 @@
 									{},
 									{
 										<cms:set wcl_cy_load_grand_total = "0" scope="global" />
-				                    	<cms:folders masterpage='siding.php' orderby="weight">
-											<cms:pages masterpage='siding.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
+				                    	<cms:folders masterpage='loading-pt.php' orderby="weight">
+											<cms:pages masterpage='loading-pt.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
 												<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate=<cms:date my_transdate_cy format='Y-m-d' />">
 													<cms:set wcl_cy_load_grand_total = "<cms:add wcl_cy_load_grand_total tons />" scope="global" />
 												</cms:reverse_related_pages>
@@ -971,8 +1018,8 @@
 									},
 									{
 										<cms:set wcl_ly_load_grand_total = "0" scope="global" />
-				                    	<cms:folders masterpage='siding.php' orderby="weight">
-											<cms:pages masterpage='siding.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
+				                    	<cms:folders masterpage='loading-pt.php' orderby="weight">
+											<cms:pages masterpage='loading-pt.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
 												<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate=<cms:date my_transdate_ly format='Y-m-d' />">
 													<cms:set wcl_ly_load_grand_total = "<cms:add wcl_ly_load_grand_total tons />" scope="global" />
 												</cms:reverse_related_pages>
@@ -995,8 +1042,8 @@
 									{
 										<cms:set wcl_cy_month_load_grand_total = "0" scope="global" />
 										<cms:set wcl_avg_cy_month_load_grand_total = "0" scope="global" />
-				                    	<cms:folders masterpage='siding.php' orderby="weight">
-											<cms:pages masterpage='siding.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
+				                    	<cms:folders masterpage='loading-pt.php' orderby="weight">
+											<cms:pages masterpage='loading-pt.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
 												<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate >= <cms:date return='last day of last month' format='Y-m-d 23:59:00' /> | transdate < <cms:date my_transdate_cy format='Y-m-d 23:59:00' /> ">
 													<cms:set wcl_cy_month_load_grand_total = "<cms:add wcl_cy_month_load_grand_total tons />" scope="global" />
 												</cms:reverse_related_pages>
@@ -1012,8 +1059,8 @@
 									{
 										<cms:set wcl_ly_month_load_grand_total = "0" scope="global" />
 										<cms:set wcl_avg_ly_month_load_grand_total = "0" scope="global" />
-				                    	<cms:folders masterpage='siding.php' orderby="weight">
-											<cms:pages masterpage='siding.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
+				                    	<cms:folders masterpage='loading-pt.php' orderby="weight">
+											<cms:pages masterpage='loading-pt.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
 												<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate >= <cms:date return='last day of last month last year' format='Y-m-d 23:59:00' /> | transdate < <cms:date my_transdate_ly format='Y-m-d 23:59:00' /> ">
 													<cms:set wcl_ly_month_load_grand_total = "<cms:add wcl_ly_month_load_grand_total tons />" scope="global" />
 												</cms:reverse_related_pages>
@@ -1037,8 +1084,8 @@
 									{
 										<cms:set wcl_cy_april_load_grand_total = "0" scope="global" />
 										<cms:set wcl_avg_cy_april_load_grand_total = "0" scope="global" />
-										<cms:folders masterpage='siding.php' orderby="weight">
-											<cms:pages masterpage='siding.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
+										<cms:folders masterpage='loading-pt.php' orderby="weight">
+											<cms:pages masterpage='loading-pt.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
 												<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate >= <cms:date 'last day of march this year' format='Y-m-d 23:59:00' /> | transdate < <cms:date my_transdate_cy format='Y-m-d 23:59:00' /> ">
 													<cms:set wcl_cy_april_load_grand_total = "<cms:add wcl_cy_april_load_grand_total tons />" scope="global" />
 												</cms:reverse_related_pages>
@@ -1054,8 +1101,8 @@
 									{
 										<cms:set wcl_ly_april_load_grand_total = "0" scope="global" />
 										<cms:set wcl_avg_ly_april_load_grand_total = "0" scope="global" />
-				                    	<cms:folders masterpage='siding.php' orderby="weight">
-											<cms:pages masterpage='siding.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
+				                    	<cms:folders masterpage='loading-pt.php' orderby="weight">
+											<cms:pages masterpage='loading-pt.php' folder=k_folder_name custom_field="<cms:show my_search_str />" >
 												<cms:reverse_related_pages 'siding' masterpage='transport.php' custom_field="transdate >= <cms:date 'last day of march last year' format='Y-m-d :23:59:00' /> | transdate < <cms:date my_transdate_ly format='Y-m-d 23:59:00' /> ">
 													<cms:set wcl_ly_april_load_grand_total = "<cms:add wcl_ly_april_load_grand_total tons />" scope="global" />
 												</cms:reverse_related_pages>

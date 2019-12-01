@@ -4,29 +4,22 @@
 			<!-- Content Here -->
 		<div class="container">
 			<div class="row">
-				<div class="gxcpl-ptop-30"></div>
-
 				<!-- Section Title -->
-				<div class="col-md-10">
+				<div class="col-md-10 col-xs-9">
 					<h4 class="gxcpl-no-margin">
 						ADD USERS
-						<div class="gxcpl-ptop-10"></div>
-						<div class="gxcpl-divider-dark"></div>
-						<div class="gxcpl-ptop-20"></div>
 					</h4>
 				</div>
-				<div class="col-md-2">
-					<button class="btn btn-warning btn-sm gxcpl-fw-700 gxcpl-shadow-2" type="button" onclick="window.location.href='<cms:show k_site_link />user-list.php';">
-						<i class="fa fa-eye"></i> VIEW USERS LIST
+				<div class="col-md-2 col-xs-2">
+					<button class="btn btn-danger btn-sm gxcpl-fw-700 gxcpl-shadow-2" type="button" onclick="window.location.href='<cms:show k_site_link />user-list.php';"data-toggle="tooltip" data-placement="top" title="LIST VIEW" >
+						<i class="fa fa-list fa-lg" aria-hidden="true"></i>
 					</button>
 				</div>
+			</div>
+			<div class="gxcpl-ptop-10"></div>
+			<div class="gxcpl-divider-dark"></div>
+			<div class="gxcpl-ptop-20"></div>
 				<!-- Section Title -->
-
-				<!-- Section Divider -->
-				<div class="gxcpl-ptop-10"></div>
-				<!-- <div class="gxcpl-divider-dark"></div> -->
-				<div class="gxcpl-ptop-10"></div>
-				<!-- Section Divider -->
 				<cms:set success_msg="<cms:get_flash 'success_msg' />" />
 				    <cms:if success_msg >
 				    	<div class="col-md-12 text-center">
@@ -56,30 +49,16 @@
 	                        k_page_name = "<cms:show frm_ipt_mobile_number />"
 	                    /> 
 	                    <cms:if k_success >
-	                        <cms:db_persist
-	                        	_masterpage=k_user_template
-	                        	_auto_title='0'
-	                        	_mode='edit'
-	                        	_page_id="<cms:show k_last_insert_id />"
-	                        	ipt_role="<cms:related_pages 'ipt_role'><cms:show k_page_title /></cms:related_pages>"
-	                        >
-	                        	<cms:if k_error>
-	                        		<cms:each k_error>
-	                        			<cms:show item /><br>
-	                        		</cms:each>
-	                        	<cms:else_if k_success />
-	                        		<cms:send_mail from="<cms:php>echo K_EMAIL_FROM;</cms:php>" to=frm_extended_user_email subject='New Account Confirmation' debug='1'>
-			                            Please click the following link to activate your account:
-			                            <cms:activation_link frm_extended_user_email />
+                    		<cms:send_mail from="<cms:php>echo K_EMAIL_FROM;</cms:php>" to=frm_extended_user_email subject='New Account Confirmation' debug='1'>
+	                            Please click the following link to activate your account:
+	                            <cms:activation_link frm_extended_user_email />
 
-			                            Thanks,
-			                            Website Name
-			                        </cms:send_mail>                        
-			                                                
-			                        <cms:set_flash name='success_msg' value='1' />
-			                        <cms:redirect k_page_link />
-	                        	</cms:if>
-	                    	</cms:db_persist>		                        
+	                            Thanks,
+	                            Website Name
+	                        </cms:send_mail>                        
+	                                                
+	                        <cms:set_flash name='success_msg' value='1' />
+	                        <cms:redirect k_page_link />	                        
 	                    </cms:if> 
 	                </cms:if>
 	                <cms:if k_error >
@@ -94,11 +73,10 @@
 							</cms:each>
 						</div>
 					</cms:if>
-						<cms:input class="gxcpl-input-text" name='access_level' type='text' value='7' />
 					<div class="row">               
 						<div class="col-md-12">
 							<div class="gxcpl-card ">
-								<div class="gxcpl-card-body gxcpl-padding-30">
+								<div class="gxcpl-card-body gxcpl-padding-15">
 									<div class="row">
 										<!-- First Name -->
 										<div class="col-md-6">
@@ -130,6 +108,7 @@
 											<div class="gxcpl-ptop-10"></div>
 										</div>
 										<!-- Designation -->
+
 										<!-- Role -->
 										<div class="col-md-3">
 											<label>Role*</label><br>
@@ -137,6 +116,7 @@
 											<div class="gxcpl-ptop-10"></div>
 										</div>
 										<!-- Role -->
+
 										<!-- Mobile No -->
 										<div class="col-md-3">
 											<label>Mobile No*</label>
@@ -144,20 +124,6 @@
 											<div class="gxcpl-ptop-10"></div>
 										</div>
 										<!-- Mobile No -->
-										<cms:ignore>
-										<!-- Mobile No -->
-										<div class="col-md-12">
-											<label>Permissions</label>
-											<cms:input class="gxcpl-input-text" type="bound" name="admin_only_permissions" />
-											<div class="gxcpl-ptop-10"></div>
-										</div>
-										<!-- Mobile No -->
-
-										<div class="col-md-12">
-											asd
-											<cms:templatelist name='admin_only_permissions' help='1' />
-										</div>
-										</cms:ignore>
 
 										<!-- Password -->
 										<div class="col-md-6">
@@ -166,6 +132,7 @@
 											<div class="gxcpl-ptop-10"></div>
 										</div>
 										<!-- Password -->
+
 										<!-- Repeat Password -->
 										<div class="col-md-6">
 											<label>Repeat Password*</label>
@@ -176,9 +143,9 @@
 									</div>
 								</div>
 								<!-- Footer -->
-								<div class="gxcpl-card-footer">			
+								<div class="gxcpl-card-footer gxcpl-no-padding">			
 									<button type="submit" class="btn btn-danger btn-sm gxcpl-fw-700">
-										<i class="fa fa-plus"></i> ADD USER
+										<i class="fa fa-plus fa-lg"></i> ADD USER
 									</button>
 								</div>
 								<!-- Footer -->
@@ -188,7 +155,6 @@
 				</cms:form>
 			</div>
 		</div>
-		<div class="gxcpl-ptop-50"></div>
 		<div class="gxcpl-ptop-50"></div>
 		<!-- Content Here -->
 	<cms:embed 'footer.html' />

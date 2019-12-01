@@ -20,7 +20,10 @@ set_time_limit(300);
 					<div class="gxcpl-card-header">
 						<div class="row">	
 							<!-- Legend -->
-							<div class="col-md-12 col-xs-12">
+							<div class="col-md-6 col-xs-6">
+								<h5>SEARCH TRAIN</h5>
+							</div>
+							<div class="col-md-6 col-xs-6">
 								<span class="col-md-1 pull-right" data-toggle="tooltip" data-placement="top" title="Table Legend">
 								    <cms:embed 'legend.html' />
 								</span>

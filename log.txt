@@ -348,3 +348,17 @@ Message:                             Please click the following link to activate
                         
 
 Delivery Failed
+
+=======================[2019-11-12 17:03:52]=======================
+From: contact@yourdomain.com
+To: test2@gmail.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Subject: New Account Confirmation
+Message: 	                            Please click the following link to activate your account:
+	                            
+	                            Thanks,
+	                            Website Name
+	                        
+
+Delivery Failed

@@ -1,5 +1,5 @@
 									<tr>
-										<td class="text-center <cms:if (to_ho eq '1')><cms:if ((is_interchanged eq '1') && (today_interchange eq '1')) >srintchge today_interchange<cms:else_if today_interchange eq '1' />today_interchange<cms:else_if is_interchanged eq '1' />srintchge</cms:if><cms:else_if (to_ho eq '0') /><cms:if is_interchanged eq '1'>srintchge</cms:if></cms:if> ">	
+										<td class="text-center number <cms:if (to_ho eq '1')><cms:if ((is_interchanged eq '1') && (today_interchange eq '1')) >srintchge today_interchange<cms:else_if today_interchange eq '1' />today_interchange<cms:else_if is_interchanged eq '1' />srintchge</cms:if><cms:else_if (to_ho eq '0') /><cms:if is_interchanged eq '1'>srintchge</cms:if></cms:if> ">	
 										</td>
 										<td>
 											<cms:show interchange />
@@ -34,25 +34,7 @@
 											</cms:if>
 										</td>
 										<td>
-											<cms:if arrival_time >
-												<cms:date arrival_time format="H:i" />
-											<cms:else />
-												- NA -
-											</cms:if>/<cms:if (to_ho eq '0')>
-												<cms:if departure_time >
-													<cms:date departure_time format="H:i" />
-												<cms:else />
-													- NA -
-												</cms:if>
-											<cms:else_if (to_ho eq '1') />
-												<cms:if (departure_date ne '') >
-													<cms:if (departure_time ne '') >
-														<cms:date departure_time format='H:i' />
-													<cms:else_if (departure_time eq '' ) />
-														-NA-
-													</cms:if>
-												</cms:if>
-											</cms:if>
+											<cms:if arrival_time ><cms:date arrival_time format="H:i" /><cms:else />- NA -</cms:if>/<cms:if (to_ho eq '0')><cms:if departure_time ><cms:date departure_time format="H:i" /><cms:else />- NA -</cms:if><cms:else_if (to_ho eq '1') /><cms:if (departure_date ne '') ><cms:if (departure_time ne '') ><cms:date departure_time format='H:i' /><cms:else_if (departure_time eq '' ) />-NA-</cms:if></cms:if></cms:if>
 										</td>
 										<cms:set sot = "<cms:date signon_time format='H:i' />" scope="global" />
 										<td width="6%" class="<cms:if (sot eq '00:00') || (loco eq 'NA') || (loco eq 'na') || (loco eq 'Na') || (loco eq 'nA') >
@@ -85,7 +67,7 @@
 												- NA -
 											</cms:if>
 										</td>
-										<td>
+										<td width="200px;">
 											<div id="remark" <cms:inline_edit 'remark' toolbar='custom' /> >
 												<cms:if remark >
 													<cms:set strip_text = "<cms:php>global $text;echo strip_tags('<cms:show remark />');</cms:php>" />

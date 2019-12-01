@@ -4,7 +4,6 @@
 </cms:template>
 <cms:embed 'header.html' />
 	<div class="container-fluid">
-		<div class="gxcpl-ptop-50"></div>
 		<!-- Section Divider -->
 		<h4 class="gxcpl-no-margin">
 			SETTINGS
@@ -46,7 +45,6 @@
 		        </cms:if>
 
 		        <cms:if k_error >
-		            <!-- <div class="row"> -->
 	        		<div class="col-md-4">
 	        			<div class="alert alert-danger">
 	            			<cms:each k_error >
@@ -54,31 +52,30 @@
 	            			</cms:each>
 	                    </div>
 	            	</div>  
-		            <!-- </div> -->
 		        </cms:if>
 		        <div class="col-md-12">
 		        	<div class="gxcpl-card">
 		        		<div class="gxcpl-card-header">
-		        			<h4>Pointwise Interchange Overdue (in hours)</h4>
+		        			<h4 class="gxcpl-no-margin">Pointwise Interchange Overdue (in hours)</h4>
 		        		</div>
-		        		<div class="gxcpl-card-body" style="padding: 5px 10px;">
+		        		<div class="gxcpl-card-body gxcpl-padding-10">
 		        			<div class="row">
-		        				<div class="col-md-2 text-center" style="height: 30px; line-height: 30px;">
+		        				<div class="col-md-2 text-center">
 		        					<label>Overdue Hours</label>
 		        				</div>
 		        				<div class="col-md-4">
-		        					<cms:input type="bound" name="diff" class="gxcpl-input-text" style="height: 30px; line-height: 30px;" />
+		        					<cms:input type="bound" name="diff" class="gxcpl-input-text" />
 		        					<div class="gxcpl-ptop-10"></div>
 		        				</div>
-		        				<div class="col-md-6 text-center" style="height: 30px; line-height: 30px;">
+		        				<div class="col-md-6 text-center">
 		        					<label>Current Overdue: <cms:pages limit='1' show_future_entries='1'><cms:show diff /></cms:pages> hrs</label>
 		        					<div class="gxcpl-ptop-10"></div>
 		        				</div>
 		        			</div>
 		        		</div>
-		        		<div class="gxcpl-card-footer">
-		        			<button class="btn btn-danger btn-sm" type="submit">
-								SAVE
+		        		<div class="gxcpl-card-footer gxcpl-no-padding">
+		        			<button class="btn btn-danger btn-sm gxcpl-fw-700" type="submit">
+								<i class="fa fa-save fa-lg"></i> SAVE
 							</button>
 		        		</div>
 		        	</div>

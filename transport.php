@@ -1,6 +1,6 @@
 <?php require_once( 'couch/cms.php' ); ?>
 <cms:template title="Transportation" clonable='1' searchable='1' routable='1' parent='_coal_' order='2' >
-	<cms:editable name="siding" label="Siding" type="relation" has="one" required="1" masterpage="siding.php" order="1" /> 
+	<cms:editable name="siding" label="Siding" type="relation" has="one" required="1" masterpage="loading-pt.php" order="1" /> 
 	<cms:editable name="tons" label="Tons" type="text" validator='non_negative_integer' order="2" />
 	<cms:editable name="transdate" label="Date" required="1" type="datetime" order="3" />
 	<cms:route name='delete_trans' path='{:id}/delete' >
@@ -27,7 +27,7 @@
 			<cms:form name='transport' masterpage="transport.php" mode='create' enctype='multipart/form-data' method='post' anchor='0' >
 				
 				<cms:set my_template_name = 'transport.php' />
-				<cms:set my_page_title="<cms:date frm_transdate format='Y-m-d' />_<cms:pages masterpage='siding.php' id="<cms:gpc 'f_siding_chk' />" limit='1'><cms:show k_page_title /></cms:pages>" />
+				<cms:set my_page_title="<cms:date frm_transdate format='Y-m-d' />_<cms:pages masterpage='loading-pt.php' id="<cms:gpc 'f_siding_chk' />" limit='1'><cms:show k_page_title /></cms:pages>" />
 				
 				<cms:php>
 					global $CTX, $FUNCS;
@@ -43,7 +43,7 @@
 				<cms:if my_page_id=''>
 					
 					<cms:if k_success >
-						<cms:db_persist_form _invalidate_cache='0' k_page_title="<cms:date frm_transdate format='Y-m-d' />_<cms:pages masterpage='siding.php' id="<cms:gpc 'f_siding_chk' />" limit='1'><cms:show k_page_title /></cms:pages>" k_page_name="<cms:show k_page_title />" />
+						<cms:db_persist_form _invalidate_cache='0' k_page_title="<cms:date frm_transdate format='Y-m-d' />_<cms:pages masterpage='loading-pt.php' id="<cms:gpc 'f_siding_chk' />" limit='1'><cms:show k_page_title /></cms:pages>" k_page_name="<cms:show k_page_title />" />
 						<cms:if k_success >
 							<cms:set_flash name='submit_success_transport' value='1' />
 							<cms:redirect url="<cms:route_link 'create_coal' />" />

@@ -25,10 +25,10 @@ Tomorrow noon: <cms:date 'tomorrow noon' format='j F, Y H:i' /><br/><br/>
 A minute before midnight: <cms:date 'midnight -1 minute' format='H:i' /><br/><br/>
 All days of my birthday:
 <cms:repeat '5' startcount='0' >
-   <br/><cms:date "2016-11-19 +<cms:show k_count /> years" format='l, j/n/Y' />
+   <br/><cms:date "2016-11-19 +<cms:show k_count /> month" format='l, j/n/Y' />
 </cms:repeat><br><br>
 Last year: <cms:date last year format='Y-m-d' /><br><br>
-
+Current Year Days <cms:date "count days in this year" /><br>
 <strong>Day Before Yesterday date :: <cms:date return='yesterday -1 days' format="Y-m-d" /></strong><br><br>
 <strong>Last Year Day Before Yesterday date :: <cms:date return='-367 days' format="Y-m-d" /></strong><br><br>
 <strong><cms:date return='last day of last month' format='d' /></strong>

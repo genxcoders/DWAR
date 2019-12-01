@@ -1,6 +1,6 @@
 <?php require_once( 'couch/cms.php' ); ?>
 <cms:template title="Role" clonable='1' routable='1' parent="_role_" order='3' >
-<!-- Role: Custom Routes -->
+	<!-- Role: Custom Routes -->
 	<cms:route name='list_role' path='' />
 	<cms:route name='create_role' path='create' />
     <cms:route name='edit_role' path='{:id}/edit' >
@@ -16,19 +16,10 @@
 	<!-- Content Here -->
 	<div class="container">
 		<div class="row">
-			<div class="gxcpl-ptop-30"></div>
-
-			<!-- Section Divider -->
-			<div class="gxcpl-ptop-10"></div>
-			<!-- <div class="gxcpl-divider-dark"></div> -->
-			<div class="gxcpl-ptop-10"></div>
-			<!-- Section Divider -->
-
 			<!-- Role -->
 			<cms:match_route debug='0' />
 			<cms:embed "role/<cms:show k_matched_route />.html" />
 			<!-- Role -->
-
 		</div>
 	</div>
 	<!-- Content Here -->

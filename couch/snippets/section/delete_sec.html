@@ -4,11 +4,6 @@
 
 					<div class="container">
 						<div class="row">
-							<!-- Section Divider -->
-							<div class="gxcpl-ptop-10"></div>
-							<!-- <div class="gxcpl-divider-dark"></div> -->
-							<div class="gxcpl-ptop-10"></div>
-							<!-- Section Divider -->
 							<cms:pages id=rt_id limit='1' show_future_enteries='1'>
 							<cms:form 
 		                        masterpage=k_template_name
@@ -23,30 +18,25 @@
 		                            <cms:redirect url="<cms:route_link 'list_sec' />" /> 
 		                        </cms:if>
 		                    </cms:if>
-		                    <!-- <div class="row"> -->
-								<div class="col-md-12">
-									<div class="gxcpl-card">
-										<div class="gxcpl-ptop-30"></div>
-										<!-- Delete -->
-											<div class="gxcpl-card-body">
-			                                    <div class="text-center">
-			                                        Are you sure you want to delete <strong>"<cms:show k_page_title />"</strong> Section?
-			                                        <div class="gxcpl-ptop-20"></div>
-			                                    </div>
-			                                </div>
-			                                <div class="gxcpl-card-footer">
-		                                    	<center>
-			                                    	<cms:input name='submit' type="submit" class="btn btn-danger btn-xs gxcpl-fw-700 gxcpl-shadow-2" value="CONFIRM DELETE" />
-			                                        <button class="btn btn-default btn-xs gxcpl-fw-700 gxcpl-shadow-2" type="button" onclick="window.location.href='<cms:route_link 'list_sec' />';">
-			                                            CANCEL
-			                                        </button>
-			                                    </center>
-			                                    <div class="gxcpl-ptop-5"></div>
-		                                    </div>
-										<!-- Delete -->
-									</div>
+							<div class="col-md-12">
+								<div class="gxcpl-card">
+									<!-- Delete -->
+									<div class="gxcpl-card-body gxcpl-padding-10">
+	                                    <div class="text-center">
+	                                        Are you sure you want to delete <strong>"<cms:show k_page_title />"</strong> Section?
+	                                    </div>
+	                                </div>
+	                                <div class="gxcpl-card-footer gxcpl-no-padding">
+                                    	<button name='submit' type="submit" class="btn btn-danger btn-sm gxcpl-fw-700 gxcpl-shadow-2">
+                                    		<i class="fa fa-trash fa-lg"></i> CONFIRM DELETE
+                                    	</button>
+                                        <button class="btn btn-default btn-sm gxcpl-fw-700 gxcpl-shadow-2" type="button" onclick="window.location.href='<cms:route_link 'list_sec' />';">
+                                            <i class="fa fa-times fa-lg"></i> CANCEL
+                                        </button>
+                                    </div>
+									<!-- Delete -->
 								</div>
-							<!-- </div> -->
+							</div>
 							</cms:form>
 		                    </cms:pages>
 						</div>
